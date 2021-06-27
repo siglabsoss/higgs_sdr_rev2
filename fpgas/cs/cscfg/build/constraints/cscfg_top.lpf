@@ -1,0 +1,279 @@
+
+COMMERCIAL ;
+BLOCK RESETPATHS ;
+BLOCK ASYNCPATHS ;
+BLOCK JTAGPATHS ;
+
+BANK 1 VCCIO 1.5 V;
+BANK 2 VCCIO 1.5 V;
+BANK 3 VCCIO 1.5 V;
+BANK 4 VCCIO 1.5 V;
+BANK 6 VCCIO 3.3 V;
+
+LOCATE VREF "BANK_2_VREF" SITE "J26" ;
+LOCATE VREF "BANK_7_VREF" SITE "J7" ;
+
+
+################################################################################
+#
+# CLOCKS & RESETS & STROBES
+#
+################################################################################
+
+IOBUF         PORT "GRAV_MIB_MASTER_RESET" PULLMODE=NONE IO_TYPE=LVCMOS33; 
+LOCATE        COMP "GRAV_MIB_MASTER_RESET" SITE "U2"; # MIB33I.S17
+MAXDELAY FROM PORT "GRAV_MIB_MASTER_RESET" TO CELL "clk125_resets/ext_arst_sync_flops[0]"  7.5 ns DATAPATH_ONLY; # I'M JUST TRYING TO PUT SOME SORT OF BOUND ON THIS DELAY
+MAXDELAY FROM PORT "GRAV_MIB_MASTER_RESET" TO CELL "clk12_5_resets/ext_arst_sync_flops[0]" 7.5 ns DATAPATH_ONLY; # I'M JUST TRYING TO PUT SOME SORT OF BOUND ON THIS DELAY
+
+IOBUF       PORT "GRAV_MIB_COUNTER_LOCK"  PULLMODE=NONE IO_TYPE=LVCMOS33;
+LOCATE      COMP "GRAV_MIB_COUNTER_LOCK" SITE "Y5"; # MIB33I.S25 
+INPUT_SETUP PORT "GRAV_MIB_COUNTER_LOCK" 1 ns HOLD 1 ns CLKPORT "CLK";
+
+# THESE EXCPLICITLY CALL OUT USING INPUT AND OUTPUT CELL FLIP FLOPS, SO I DON'T SPECIFY INPUT_SETUP AND CLOCK_TO_OUT CONSTRAINTS FOR THEM
+# THESE SIGNALS ARE ALSO ASSERTED FOR MANY 125MHz CLOCKS BY THE CFG FPGA ON GRAVITON
+IOBUF  PORT "CS_MIB_MASTER_RESET" IO_TYPE=LVCMOS15;
+LOCATE COMP "CS_MIB_MASTER_RESET" SITE "R27"; # MIB135.S0
+IOBUF  PORT "CS_MIB_COUNTER_LOCK" IO_TYPE=LVCMOS15;
+LOCATE COMP "CS_MIB_COUNTER_LOCK" SITE "R26"; # MIB135.S1
+
+# FREQUENCY PORT "clk54_ext_a" 100.000000 MHz ;
+# LOCATE    COMP "clk54_ext_a" SITE "A17" ;  #FMC Clock
+# IOBUF     PORT "clk54_ext_a" PULLMODE=NONE IO_TYPE=LVCMOS25 TERMINATION=OFF ;
+
+FREQUENCY PORT "CLK" 125 MHZ;
+LOCATE    COMP "CLK" SITE "A18" ;
+IOBUF     PORT "CLK" PULLMODE=NONE IO_TYPE=LVCMOS15 ;
+
+USE PRIMARY NET "sys_clk";
+USE PRIMARY NET "mib_clk";
+
+
+################################################################################
+# CDC SYSTEM CLOCK <---> MIB CLOCK
+################################################################################
+
+BLOCK PATH FROM CLKNET "sys_clk" TO CLKNET "mib_clk";
+BLOCK PATH FROM CLKNET "mib_clk" TO CLKNET "sys_clk";
+
+
+################################################################################
+# CDC INTERNAL OSCILLATOR <---> SYSTEM CLOCK
+################################################################################
+
+BLOCK PATH FROM CLKNET "int_osc_clk" TO CLKNET "sys_clk";
+BLOCK PATH FROM CLKNET "sys_clk"     TO CLKNET "int_osc_clk";
+
+################################################################################
+# CDC INTERNAL OSCILLATOR <---> MIB CLOCK
+################################################################################
+
+BLOCK PATH FROM CLKNET "int_osc_clk" TO CLKNET "mib_clk";
+BLOCK PATH FROM CLKNET "mib_clk"     TO CLKNET "int_osc_clk";
+
+
+################################################################################
+#
+# LEDS
+#
+################################################################################
+
+IOBUF  PORT "FPGA_LED" PULLMODE=NONE IO_TYPE=LVCMOS15;
+LOCATE COMP "FPGA_LED" SITE "A8";
+
+
+################################################################################
+#
+# SLAVE SERIAL PROGRAMMING
+#
+################################################################################
+
+DEFINE PORT GROUP "PROG_N_GRP" "PROG_N[*]";
+IOBUF       GROUP "PROG_N_GRP" IO_TYPE=LVCMOS15 ;
+
+LOCATE COMP "PROG_N[0]" SITE "F20" ;  //CFG00.PROG_N
+LOCATE COMP "PROG_N[1]" SITE "H30" ;  //CFG01.PROG_N
+LOCATE COMP "PROG_N[2]" SITE "D28" ;  //CFG02.PROG_N
+LOCATE COMP "PROG_N[3]" SITE "E30" ;  //CFG03.PROG_N
+LOCATE COMP "PROG_N[4]" SITE "F18" ;  //CFG10.PROG_N
+LOCATE COMP "PROG_N[5]" SITE "C31" ;  //CFG11.PROG_N
+LOCATE COMP "PROG_N[6]" SITE "K30" ;  //CFG12.PROG_N
+LOCATE COMP "PROG_N[7]" SITE "L29" ;  //CFG13.PROG_N
+LOCATE COMP "PROG_N[8]" SITE "AK28" ; //CFG20.PROG_N
+LOCATE COMP "PROG_N[9]" SITE "C32" ;  //CFG21.PROG_N
+LOCATE COMP "PROG_N[10]" SITE "H32" ; //CFG22.PROG_N
+LOCATE COMP "PROG_N[11]" SITE "N29" ; //CFG23.PROG_N
+LOCATE COMP "PROG_N[12]" SITE "AG28" ;//CFG30.PROG_N
+LOCATE COMP "PROG_N[13]" SITE "N26" ; //CFG31.PROG_N
+LOCATE COMP "PROG_N[14]" SITE "H5" ;  //CFG32.PROG_N
+LOCATE COMP "PROG_N[15]" SITE "K7" ;  //CFG33.PROG_N
+
+
+################################################################################
+#
+# GRAVITON MIB BUS
+#
+################################################################################
+
+
+DEFINE PORT GROUP "GRAV_MIB_AD_GRP" "GRAV_MIB_AD[*]";
+
+#
+#
+# ASSUMPTIONS:
+# SLAVE FPGA CLOCK-TO-OUT DELAY IS BETWEEN 1 TO 5 ns (SEE ECP5 FAMILY DATA SHEET AND MAKE SURE THAT ADC FPGA USED PIO OUTPUT REGISTERS)
+# BOARD TRACE DELAY + FPGA-TO-FPGA CLOCK SKEW <= 2 ns;
+# PLL CMD CLOCK SKEW BETWEEN FPGAS WORST CASE IS 8 ns (ASSUMING 125MHz SYSTEM CLOCK DIVIDED BY 5 TO PRODUCE 25MHz COMMAND CLOCK)
+#
+
+INPUT_SETUP GROUP "GRAV_MIB_AD_GRP"            1 ns HOLD 1 ns CLKPORT "CLK"; 
+INPUT_SETUP PORT  "GRAV_MIB_START"             1 ns HOLD 1 ns CLKPORT "CLK";
+INPUT_SETUP PORT  "GRAV_MIB_RD_WR_N"           1 ns HOLD 1 ns CLKPORT "CLK";
+INPUT_SETUP PORT  "GRAV_MIB_TBIT"              1 ns HOLD 1 ns CLKPORT "CLK";
+
+# TODO: NEED TO LOOK INTO WHY 5.5 ns WAS THE BEST I COULD DO FOR MAX CLOCK_TO_OUT DELAY (PROBABLY DUE TO THE FPGA BANK WE'RE USING)
+
+CLOCK_TO_OUT GROUP "GRAV_MIB_AD_GRP"    MAX 5.5 ns MIN 1 ns CLKPORT "CLK"; 
+CLOCK_TO_OUT PORT  "GRAV_MIB_SLAVE_ACK" MAX 5.5 ns MIN 1 ns CLKPORT "CLK"; 
+
+IOBUF GROUP "GRAV_MIB_AD_GRP"            PULLMODE=NONE IO_TYPE=LVCMOS33;
+IOBUF PORT  "GRAV_MIB_START"             PULLMODE=NONE IO_TYPE=LVCMOS33;
+IOBUF PORT  "GRAV_MIB_RD_WR_N"           PULLMODE=NONE IO_TYPE=LVCMOS33;
+IOBUF PORT  "GRAV_MIB_SLAVE_ACK"         PULLMODE=NONE IO_TYPE=LVCMOS33;
+IOBUF PORT  "GRAV_MIB_TBIT"              PULLMODE=NONE IO_TYPE=LVCMOS33;
+ 
+ 
+LOCATE COMP  "GRAV_MIB_AD[0]"     SITE "T7"; # MIB33I.S0 
+LOCATE COMP  "GRAV_MIB_AD[1]"     SITE "T5"; # MIB33I.S8
+LOCATE COMP  "GRAV_MIB_AD[2]"     SITE "T6"; # MIB33I.S2
+LOCATE COMP  "GRAV_MIB_AD[3]"     SITE "R6"; # MIB33I.S3
+LOCATE COMP  "GRAV_MIB_AD[4]"     SITE "R1"; # MIB33I.S21
+LOCATE COMP  "GRAV_MIB_AD[5]"     SITE "T4"; # MIB33I.S7
+LOCATE COMP  "GRAV_MIB_AD[6]"     SITE "U7"; # MIB33I.S4
+LOCATE COMP  "GRAV_MIB_AD[7]"     SITE "AB7"; # MIB33I.S29 (SERIAL RESISTOR)
+LOCATE COMP  "GRAV_MIB_AD[8]"     SITE "U6"; # MIB33I.S5
+LOCATE COMP  "GRAV_MIB_AD[9]"     SITE "T3"; # MIB33I.S12
+LOCATE COMP  "GRAV_MIB_AD[10]"    SITE "P4"; # MIB33I.S14
+LOCATE COMP  "GRAV_MIB_AD[11]"    SITE "P5"; # MIB33I.S15
+LOCATE COMP  "GRAV_MIB_AD[12]"    SITE "U3"; # MIB33I.S16
+LOCATE COMP  "GRAV_MIB_AD[13]"    SITE "R3"; # MIB33I.S13
+LOCATE COMP  "GRAV_MIB_AD[14]"    SITE "R4"; # MIB33I.S9
+LOCATE COMP  "GRAV_MIB_AD[15]"    SITE "U5"; # MIB33I.S6
+LOCATE COMP  "GRAV_MIB_RD_WR_N"   SITE "P3"; # MIB33I.S10
+LOCATE COMP  "GRAV_MIB_START"     SITE "P2"; # MIB33I.S11
+LOCATE COMP  "GRAV_MIB_TBIT"      SITE "Y7"; # MIB33I.S23 
+LOCATE COMP  "GRAV_MIB_SLAVE_ACK" SITE "Y6"; # MIB33I.S22
+
+
+################################################################################
+#
+# FMC 
+#
+################################################################################
+
+#IOBUF PORT "fmc_ne1" PULLMODE=NONE IO_TYPE=LVCMOS25 ;
+#IOBUF PORT "fmc_noe" PULLMODE=NONE IO_TYPE=LVCMOS25 ;
+#IOBUF PORT "fmc_nwe" PULLMODE=NONE IO_TYPE=LVCMOS25 ;
+#IOBUF PORT "fmc_nwait" IO_TYPE=LVCMOS25 ;
+#IOBUF PORT "ext_mcu_arst" PULLMODE=NONE IO_TYPE=LVCMOS25 ;
+#LOCATE COMP "fmc_a[0]" SITE "F11" ;
+#LOCATE COMP "fmc_a[1]" SITE "D11" ;
+#LOCATE COMP "fmc_a[2]" SITE "C11" ;
+#LOCATE COMP "fmc_a[3]" SITE "E10" ;
+#LOCATE COMP "fmc_a[4]" SITE "C10" ;
+#LOCATE COMP "fmc_a[5]" SITE "D10" ;
+#LOCATE COMP "fmc_a[6]" SITE "E11" ;
+#LOCATE COMP "fmc_a[7]" SITE "C9" ;
+#LOCATE COMP "fmc_a[8]" SITE "F9" ;
+#LOCATE COMP "fmc_a[9]" SITE "B8" ;
+#LOCATE COMP "fmc_a[10]" SITE "D8" ;
+#LOCATE COMP "fmc_a[11]" SITE "D9" ;
+#LOCATE COMP "fmc_a[12]" SITE "A13" ;
+#LOCATE COMP "fmc_a[13]" SITE "B14" ;
+#LOCATE COMP "fmc_a[14]" SITE "A14" ;
+#LOCATE COMP "fmc_a[15]" SITE "A15" ;
+#LOCATE COMP "fmc_a[16]" SITE "A10" ;
+#LOCATE COMP "fmc_a[17]" SITE "B11" ;
+#LOCATE COMP "fmc_a[18]" SITE "A11" ;
+#LOCATE COMP "fmc_a[19]" SITE "D15" ;
+#LOCATE COMP "fmc_a[20]" SITE "F14" ;
+#LOCATE COMP "fmc_a[21]" SITE "F13" ;
+#LOCATE COMP "fmc_a[22]" SITE "F10" ;
+#LOCATE COMP "fmc_a[23]" SITE "C14" ;
+#LOCATE COMP "fmc_a[24]" SITE "F16" ;
+#DEFINE PORT GROUP "fmc_a_GRP" "fmc_a[*]";
+#IOBUF GROUP "fmc_a_GRP" PULLMODE=NONE IO_TYPE=LVCMOS25 ;
+#LOCATE COMP "fmc_ne1" SITE "B17" ;
+#LOCATE COMP "fmc_noe" SITE "D16" ;
+#LOCATE COMP "fmc_nwe" SITE "C16" ;
+#LOCATE COMP "fmc_nwait" SITE "A16" ;
+#LOCATE COMP "fmc_d[0]" SITE "D13" ;
+#LOCATE COMP "fmc_d[1]" SITE "C13" ;
+#LOCATE COMP "fmc_d[2]" SITE "P1" ;
+#LOCATE COMP "fmc_d[3]" SITE "N1" ;
+#LOCATE COMP "fmc_d[4]" SITE "F8" ;
+#LOCATE COMP "fmc_d[5]" SITE "C8" ;
+#LOCATE COMP "fmc_d[6]" SITE "E8" ;
+#LOCATE COMP "fmc_d[7]" SITE "A2" ;
+#LOCATE COMP "fmc_d[8]" SITE "B7" ;
+#LOCATE COMP "fmc_d[9]" SITE "C7" ;
+#LOCATE COMP "fmc_d[10]" SITE "D7" ;
+#LOCATE COMP "fmc_d[11]" SITE "A5" ;
+#LOCATE COMP "fmc_d[12]" SITE "A4" ;
+#LOCATE COMP "fmc_d[13]" SITE "A7" ;
+#LOCATE COMP "fmc_d[14]" SITE "A9" ;
+#LOCATE COMP "fmc_d[15]" SITE "B10" ;
+#DEFINE PORT GROUP "fmc_d_GRP" "fmc_d[*]";
+#IOBUF GROUP "fmc_d_GRP" PULLMODE=NONE IO_TYPE=LVCMOS25 ;
+#LOCATE COMP "ext_mcu_arst" SITE "A3" ;// GPIO0 from ARM Pin No 91
+#// Refer to https://docs.google.com/spreadsheets/d/17zEHCXGzYKhF19Je8CbjWkgEnAgBPxMZ80zOep-ujB8/edit#gid=320611271
+#// for MIB NETS -- its same for every alternate rows.
+#// its something else for cFPGA though.
+#// LOCATTION --- PLEASE NOTE THIS IS ONLY FOR cfg FPGA
+#LOCATE COMP "cfg_mib_d[15]" SITE "R30" ;
+#LOCATE COMP "cfg_mib_d[14]" SITE "P30" ;
+#LOCATE COMP "cfg_mib_d[13]" SITE "T31" ;
+#LOCATE COMP "cfg_mib_d[12]" SITE "R32" ;
+#LOCATE COMP "cfg_mib_d[11]" SITE "N32" ;//
+#LOCATE COMP "cfg_mib_d[10]" SITE "T27" ;
+#LOCATE COMP "cfg_mib_d[9]" SITE "U31" ;
+#LOCATE COMP "cfg_mib_d[8]" SITE "AB26" ;
+#LOCATE COMP "cfg_mib_d[7]" SITE "U28" ;
+#LOCATE COMP "cfg_mib_d[6]" SITE "U27" ;
+#LOCATE COMP "cfg_mib_d[5]" SITE "W29" ;
+#LOCATE COMP "cfg_mib_d[4]" SITE "Y30" ;
+#LOCATE COMP "cfg_mib_d[3]" SITE "T30" ;
+#LOCATE COMP "cfg_mib_d[2]" SITE "Y28" ;
+#LOCATE COMP "cfg_mib_d[1]" SITE "R26" ;
+#LOCATE COMP "cfg_mib_d[0]" SITE "R27" ;
+#DEFINE PORT GROUP "cfg_mib_d_GRP" "cfg_mib_d[*]";
+#IOBUF GROUP "cfg_mib_d_GRP" PULLMODE=NONE IO_TYPE=LVCMOS15 ;
+// NETTIFY Command signals
+// S29 -> is the clock with in-series resistor, considering using this pins 
+// for driving clock.
+//
+//    output            cfg_mib_timeout,
+//    inout [15:0]      cfg_mib_d,   // The bus
+//    output            cfg_mib_start, // mib transaction initiator
+//    output            cfg_mib_rd_wr_n,
+//    input             cfg_mib_slave_ack,
+//    input             cfg_mib_slave,
+//    output            cfg_mib_ad_high_z
+//
+
+#//IOBUF PORT "cfg_mib_timeout" PULLMODE=NONE IO_TYPE=SSTL135_I ;
+#IOBUF PORT "cfg_mib_start" PULLMODE=NONE IO_TYPE=LVCMOS15;
+#IOBUF PORT "cfg_mib_rd_wr_n" PULLMODE=NONE IO_TYPE=LVCMOS15;
+#//IOBUF PORT "cfg_mib_slave_ack" PULLMODE=NONE IO_TYPE=LVCMOS15;
+#//IOBUF PORT "cfg_mib_ad_high_z" PULLMODE=NONE IO_TYPE=SSTL135_I ;
+#IOBUF PORT "o_clk_out" PULLMODE=NONE IO_TYPE=LVCMOS15 ;
+#IOBUF PORT "o_rst_out" PULLMODE=NONE IO_TYPE=LVCMOS15 ;
+#// MAP (S28-23)
+#//LOCATE COMP "cfg_mib_timeout" SITE "T28" ;
+#LOCATE COMP "cfg_mib_start" SITE "T29" ;
+#LOCATE COMP "cfg_mib_rd_wr_n" SITE "T26" ;
+#//LOCATE COMP "cfg_mib_slave_ack" SITE "Y26" ;
+#//LOCATE COMP "cfg_mib_ad_high_z" SITE "AC27" ;
+#// s29 clock pin
+#LOCATE COMP "o_clk_out" SITE "W30" ;
+#LOCATE COMP "o_rst_out" SITE "Y29" ;//s22
+#//SYSCONFIG CONFIG_IOVOLTAGE=1.5 ;

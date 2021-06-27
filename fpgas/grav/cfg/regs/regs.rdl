@@ -1,0 +1,157 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the ADC FPGA.
+Used in conjunction with Juniper's ordt tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA on Graviton this is by providing the three letter acronym as 3 ASCII bytes (e.g. \"CFG\")."; 
+            
+            field {
+                name="UID";
+                desc="The 3 ASCII characters corresponding to the FPGA's name."; 
+                hw=w; sw=r;
+                reset = 24'd0;
+            } uid[23:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+        
+        reg {
+            name="Software Master Reset";
+            desc="Software can write a 1 to this register to reset all FPGAs on Graviton and Copper Suicide.";
+            
+            field {
+                hw=r; sw=w;
+                singlepulse;
+                reset=1'b0;
+            } strb[0:0];
+        } soft_rst;
+        
+        reg {
+            name="Counter Lock";
+            desc="Software can write a 1 to this register to generate a strobe to all FPGAs on Graviton and Copper Suicide to lock counters in the various FPGAs so that their deltas can be read.";
+            
+            field {
+                hw=r; sw=w;
+                singlepulse;
+                reset=1'b0;
+            } strb[0:0];
+        } soft_cntr_lock;
+
+    } rf0 @0x00000;
+    
+    
+    regfile {
+    
+        reg {
+            name="ADC FPGA Programming Status";
+            desc="Contains the ADC FPGA slave serial programmer status outputs.";
+            
+            field {
+                desc="ADC slave serial programmer configuration status valid.  The other fields are invalid until this field is a 1.";
+                hw=w; sw=r;
+                reset=1'b0;
+            } stat_vld;
+            
+            field {
+                desc="ADC slave serial programmer configuration error.";
+                hw=w; sw=r;
+                reset=1'b0;
+            } err;
+            
+            field {
+                desc="ADC slave serial programmer configuration done (i.e. ADC FPGA is configured).";
+                hw=w; sw=r;
+                reset=1'b0;
+            } done;
+        } adc_cfg;
+
+
+        reg {
+            name="DAC FPGA Programming Status";
+            desc="Contains the DAC FPGA slave serial programmer status outputs.";
+            
+            field {
+                desc="DAC slave serial programmer configuration status valid.  The other fields are invalid until this field is a 1.";
+                hw=w; sw=r;
+                reset=1'b0;
+            } stat_vld;
+            
+            field {
+                desc="DAC slave serial programmer configuration error.";
+                hw=w; sw=r;
+                reset=1'b0;
+            } err;
+            
+            field {
+                desc="DAC slave serial programmer configuration done (i.e. DAC FPGA is configured).";
+                hw=w; sw=r;
+                reset=1'b0;
+            } done;
+        } dac_cfg;
+
+
+        reg {
+            name="ETH FPGA Programming Status";
+            desc="Contains the ETH FPGA slave serial programmer status outputs.";
+            
+            field {
+                desc="ETH slave serial programmer configuration status valid.  The other fields are invalid until this field is a 1.";
+                hw=w; sw=r;
+                reset=1'b0;
+            } stat_vld;
+            
+            field {
+                desc="ETH slave serial programmer configuration error.";
+                hw=w; sw=r;
+                reset=1'b0;
+            } err;
+            
+            field {
+                desc="ETH slave serial programmer configuration done (i.e. ETH FPGA is configured).";
+                hw=w; sw=r;
+                reset=1'b0;
+            } done;
+        } eth_cfg;
+        
+    } rf1 @0x10000;
+    
+    regfile {
+    
+        reg {
+            name="Change DAC module setting on the fly";
+            desc="Configures registers in dac module";
+            
+            field {
+                desc="8 bit address + 16 bit data";
+                hw=r; sw=w;
+                reset=24'b0;
+            } dac_cfg_setting[23:0];
+        } dac_cfg_setting;
+        
+    } rf2 @0x20000;
+
+} REGS;

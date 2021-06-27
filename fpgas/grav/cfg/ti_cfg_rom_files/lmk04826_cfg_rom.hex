@@ -1,0 +1,86 @@
+
+/*
+ * Power on config register settings for the TI LMK main clock chip on Graviton (LMK04826)
+ *
+ * THE ORDER OF THESE CONFIG WORDS MIGHT MATTER.  REFER TO THE DATASHEET IF UNSURE.
+ */
+ 
+000080 // reg000 - reset LMK clock chip (automatically clears)
+
+/* CLKOUT0_1 CONFIG REGS 
+ *
+ * CLKOUT0 = FPGATX-CLK - 125MHz LVPECL 2000mV
+ */
+010014 // reg100 - divide0_1 = 20
+010671 // reg106 - clk0_1 group powered on
+010706 // reg107 - clkout0 = LVPECL 2000mV, clkout1 = powered down
+
+/* CLKOUT2_3 CONFIG REGS 
+ *
+ * CLKOUT2 = FPGARX-CLK - 125MHz LVPECL 2000mV
+ */
+010814 // reg108 - divide2_3 = 20
+010e71 // reg10e - clk2_3 group powered on
+010f06 // reg10f - clkout2 = lvpecl 2000mV & clkout3 = powered down
+
+/* CLKOUT4_5 CONFIG REGS 
+ *
+ * CLKOUT4 = ADC-CLK - 250MHz LVPECL 1600mV
+*/
+01100a // reg110 - divide4_5 = 10
+011671 // reg116 - clk4_5 group powered on
+011705 // reg117 - clkout4 = lvpecl 1600mV & clkout5 = powered down
+
+/* CLKOUT6_7 CONFIG REGS 
+ *
+ * CLKOUT6 = DAC-CLK - 250MHz LVPECL 1600mV
+ */
+01180a // reg118 - divide6_7 = 10
+011e71 // reg11e - clk6_7 group powered on
+011f05 // reg11f - clkout6 = lvpecl 1600mV & clkout7 = powered down
+
+
+/* CLKOUT8_9 CONFIG REGS 
+ *
+ * CLKOUT8 = CFG-CLK - 125MHz LVPECL 2000mV
+ */
+012014 // reg120 - divide8_9 = 20
+012571 // reg126 - clk8_9 group powered on 
+012706 // reg127 - clkout8 = lvpecl 2000mV & clkout9 = powered down
+
+
+/* CLKOUT10_11 CONFIG REGS 
+ *
+ * CLKOUT10 = Client-Clk - 125MHz, LVPECL 2000mV
+ */
+012814 // reg128 - divide10_11 = 20
+012e71 // reg12e - clk10_11 group powered on
+012f06 // reg12f - clkout10 = lvpecl 2000mV & clkout11 = powered down
+
+
+/* CLKOUT12_13 CONFIG REGS 
+ *
+ * CLKOUT12 = FPGAETH-CLK - 125MHz LVPECL 2000mV
+ */
+013014 // reg130 - divide12_13 = 20
+013671 // reg136 - clk12_13 group powered on
+013706 // reg137 - clkout12 = lvpecl 2000mV & clkout13 = powered down
+
+/* OTHER CONFIG REGS */
+013825 // reg138 - vco_mux = vco1, oscout_mux = buffered oscin, oscout_fmt = lvpecl 2000mV
+013904 // reg139 - sysref_clkin0_mux = clkin0 direct, sysref_mux = normal sync
+014390 // reg143 - SYNC_MODE = 0
+01457f // reg145 - Always program to 127 (0x7f)
+015401 // reg154 - LSB of CLKin0_R, CLKin0_R = 1
+015601 // reg156 - LSB of CLKin1_R, CLKin1_R = 1
+015a0a // reg15a - LSB of PLL1_N, PLL1_N = 10
+015f0b // reg15f - LD1 pin = PLL1 Lock Detect, Output = push-pull
+016108 // reg161 - LSB of PLL2_R, PLL2_R = 8
+016250 // reg162 - PLL2_N_PRE = 2, OSCin_FREQ > 255MHz to 500MHz, PLL2_XTAL_EN = Osc Amp Disabled, PLL2_REF_2x_EN = Doubler Disabled
+016516 // reg165 - LSB PLL2_N_CAL, PLL2_N_CAL = 25
+016e13 // reg16e - LD2 pin = PLL2 Lock Detect, Output = push-pull
+0171aa // reg171 - Always program to 170 (0xAA)
+017202 // reg172 - Always program to 2
+017c18 // reg17c - OPT_REG_1 = 24 = LMK04826
+017d77 // reg17d - OPT_REG_2 = 119 = LMK04826
+016819 // reg168 - LSB PLL2_N, PLL2_N = 25

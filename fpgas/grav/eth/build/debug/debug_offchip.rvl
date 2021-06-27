@@ -1,0 +1,89 @@
+<Project ModBy="Inserter" SigType="1" Name="/home/xy/work/higgs_sdr_rev2/fpgas/grav/eth/build/debug/debug_offchip.rvl" Date="2019-04-20">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="eth_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="220741715" Name="eth_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="core_top/sys_clk" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="4096"/>
+            <Capture Mode="0" MinSamplesPerTrig="32"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_eth_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Bus Name="rr_arb_grant_mask">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_grant_mask[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_grant_mask[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_grant_mask[3]"/>
+                </Bus>
+                <Bus Name="rr_arb_req_Raw">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_req_raw[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_req_raw[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_req_raw[3]"/>
+                </Bus>
+                <Bus Name="rr_arb_src_idnex">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_src_index[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/rr_arb_src_index[1]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_circ_buf_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/icmp_pkt_fifo_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/ipv4_pkt_fifo_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_write"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/rdata_vld"/>
+                <Bus Name="cbuf_wr_fsm_state">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/snap_cbuf_wr_fsm_state[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/snap_cbuf_wr_fsm_state[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/snap_cbuf_rd_fsm_state[3]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/udp_pkt_fifo_overflow"/>
+                <Bus Name="udp_port_fifo_overflow">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/udp_port_fifo_overflow[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/udp_port_fifo_overflow[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/udp_port_fifo_overflow[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/udp_port_fifo_overflow[3]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/unsupported_dest_port"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/unsupported_eth_type_error"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/unsupported_ipv4_protocol"/>
+                <Sig Type="SIG" Name="adc_pktzr_data_byte_rd"/>
+                <Sig Type="SIG" Name="rx_in_ready"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_circ_buf_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_dout_vld"/>
+                <Bus Name="eth_frame_fifo_frame_cntr">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[7]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[8]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[9]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[10]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[11]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_frame_cntr[12]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_full"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_wren"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/ipv4_pkt_fifo_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/mac_tx_fifoavail"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/mac_tx_fifoempty"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/mac_tx_fifoeof"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/mac_tx_macread"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_tx_arbiter/tx_fifoeof_reg"/>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="fb_eq_split_0/t_ready_3,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_circ_buf_overflow,ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/icmp_pkt_fifo_overflow,ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/ipv4_pkt_fifo_overflow,"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/mac_rx_write,ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/mac_tx_macread,"/>
+                <TU Serialbits="0" Type="0" ID="4" Sig="ETH_MEGA_WRAPPER/mac_tx_arbiter/eth_frame_fifo_full,"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="4" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

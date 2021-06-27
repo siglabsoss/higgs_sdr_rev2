@@ -1,0 +1,5 @@
+`verilator_config
+tracing_off -file "../../../libs/q-engine/piston/*"
+tracing_off -file "../../../libs/q-engine/hdl/scalar_memory.v"
+tracing_off -file "../../../libs/datapath/rtl/muladdsub.v"
+`verilog

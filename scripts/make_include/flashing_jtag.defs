@@ -1,0 +1,838 @@
+# this tcl scripts uses env params to simplify passing things around
+#  PROGRAM_TCL_XCF_ARG
+#
+XCF_TCL_FILE=$(HIGGS_SCRIPTS)/flash_fpga.tcl
+
+XCF_INPUT_2=grav_selectable.m4
+XCF_OUTPUT_2=grav_selectable.xcf
+
+XCF_INPUT_3=cs_selectable.m4
+XCF_OUTPUT_3=cs_selectable.xcf
+
+ifeq ($(OS),Windows_NT)
+XCF_OUTPUT_2_MIXED=$(shell cygpath -m $(shell realpath $(HIGGS_ROOT))/$(XCF_OUTPUT_2) )
+XCF_OUTPUT_3_MIXED=$(shell cygpath -m $(shell realpath $(HIGGS_ROOT))/$(XCF_OUTPUT_3) )
+else
+XCF_OUTPUT_2_MIXED=$(shell realpath $(HIGGS_ROOT))/$(XCF_OUTPUT_2)
+XCF_OUTPUT_3_MIXED=$(shell realpath $(HIGGS_ROOT))/$(XCF_OUTPUT_3)
+endif
+
+##################
+# 
+#  what is going on here
+#
+# Each time we compile a XCF, we spawn a new instance of make.  When we spawn it, we passs
+# some targets like trigger_enable_flash_cs00 trigger_enable_flash_cs01
+# these variables, if defined, overwrite the value of FALSE to TRUE
+#
+# from here it's simply a matter of making a parent target which defines these sub-calls to make
+
+
+XCF_SELECT_ENABLE_CFG=FALSE
+XCF_SELECT_ENABLE_DAC=FALSE
+XCF_SELECT_ENABLE_ADC=FALSE
+XCF_SELECT_ENABLE_ETH=FALSE
+
+XCF_SELECT_ENABLE_CSCFG=FALSE
+XCF_SELECT_ENABLE_CS00=FALSE
+XCF_SELECT_ENABLE_CS01=FALSE
+XCF_SELECT_ENABLE_CS02=FALSE
+XCF_SELECT_ENABLE_CS03=FALSE
+XCF_SELECT_ENABLE_CS10=FALSE
+XCF_SELECT_ENABLE_CS11=FALSE
+XCF_SELECT_ENABLE_CS12=FALSE
+XCF_SELECT_ENABLE_CS13=FALSE
+XCF_SELECT_ENABLE_CS20=FALSE
+XCF_SELECT_ENABLE_CS21=FALSE
+XCF_SELECT_ENABLE_CS22=FALSE
+XCF_SELECT_ENABLE_CS23=FALSE
+XCF_SELECT_ENABLE_CS30=FALSE
+XCF_SELECT_ENABLE_CS31=FALSE
+XCF_SELECT_ENABLE_CS32=FALSE
+XCF_SELECT_ENABLE_CS33=FALSE
+
+M4_GRAV_ARGUMENTS_SIMPLE = \
+$(M4_DEFINES) \
+-DM4_XCF_TCK_CLOCK_DIVIDER=3
+
+
+M4_CS_ARGUMENTS_SIMPLE = \
+$(M4_CS_PATHS) \
+-DM4_XCF_TCK_CLOCK_DIVIDER=10
+
+# these are the source strings for what defines USB0 vs USB1
+JTAG_USB_0_A=FTUSB-0
+JTAG_USB_0_B="Lattice HW-USBN-2B Ch A Location 0000 Serial VER00001A"
+JTAG_USB_1_A=FTUSB-1
+JTAG_USB_1_B="Lattice HW-USBN-2B Ch A Location 0001 Serial VER00001A"
+
+#######
+# 
+# this ifdef creates two modes, "Switched", and "Normal"
+# The USB0, and USB1 identifiers used by Lattice Diamond Programmer are mapped into MK_SELECTABLE_USB_CS_[AB] and MK_SELECTABLE_USB_GRAV_[AB]
+#
+# If a scripts wishes to obey "Switched" vs "Normal" mode, use MK_SELECTABLE_USB_*
+# If a script does not wish to ob
+#
+# Just for reference:
+#
+# Normal:
+#   USB0: Graviton
+#   USB1: CS
+#
+# Switched:
+#   USB0: CS
+#   USB1: Graviton
+ifdef JTAG_PROGAMMERS_SWITCHED
+
+# Switched Mode
+JTAG_PROGAMMERS_SWITCHED_STRING="Switched"
+MK_SELECTABLE_USB_CS_A=$(JTAG_USB_0_A)
+MK_SELECTABLE_USB_CS_B=$(JTAG_USB_0_B)
+MK_SELECTABLE_USB_GRAV_A=$(JTAG_USB_1_A)
+MK_SELECTABLE_USB_GRAV_B=$(JTAG_USB_1_B)
+else
+
+# Normal Mode
+JTAG_PROGAMMERS_SWITCHED_STRING="Normal"
+MK_SELECTABLE_USB_CS_A=$(JTAG_USB_1_A)
+MK_SELECTABLE_USB_CS_B=$(JTAG_USB_1_B)
+MK_SELECTABLE_USB_GRAV_A=$(JTAG_USB_0_A)
+MK_SELECTABLE_USB_GRAV_B=$(JTAG_USB_0_B)
+endif
+
+# Final m4 argument string which results from choice of "Switched" or "Normal"
+M4_USB_ARGUMENTS_SELECTED_GRAV = \
+-DM4_USB_0=$(MK_SELECTABLE_USB_GRAV_A) \
+-DM4_USB_1=$(MK_SELECTABLE_USB_GRAV_B)
+
+M4_USB_ARGUMENTS_SELECTED_CS = \
+-DM4_USB_0=$(MK_SELECTABLE_USB_CS_A) \
+-DM4_USB_1=$(MK_SELECTABLE_USB_CS_B)
+
+
+
+
+
+
+
+
+# these triggers are used to during compiling selectable_xcf stuff
+# the triggers themselves are empty, but we use them to set variables during compilation
+ENABLE_GRAV_CS_TARGETS=$(addprefix trigger_enable_flash_,$(GRAV_FPGAS) $(CS_FPGAS))
+.PHONY: $(ENABLE_GRAV_CS_TARGETS) trigger_enable_erase_only
+$(ENABLE_GRAV_CS_TARGETS):
+trigger_enable_erase_only:
+
+# this section is found in enabledfpgas.defs
+# programhiggs:
+# 	make compile_selectable_grav $(addprefix trigger_enable_flash_,      cfg                                                                                          ) && make flash_selectable_grav
+# 	make compile_selectable_cs $(addprefix trigger_enable_flash_,        cscfg cs00 cs01 cs02 cs03 cs10 cs11 cs12 cs13 cs20 cs21 cs22 cs23 cs30 cs31 cs32 cs33        ) && make flash_selectable_cs
+# 	make compile_selectable_grav $(addprefix trigger_enable_flash_,      adc dac eth                                                                                  ) && make flash_selectable_grav
+ 
+ID_SCAN_TMP_BASENAME=chain_id_scan.xcf
+ID_SCAN_TMP_XCF=$(HIGGS_TMP)/$(ID_SCAN_TMP_BASENAME)
+ID_SCAN_TMP_XCF_MIXED=$(shell cygpath -m $(shell realpath $(HIGGS_TMP))/$(ID_SCAN_TMP_BASENAME) )
+
+
+ID_SCAN_OUTPUT=$(HIGGS_TMP)/id_scan_result.txt
+ID_SCAN_CS_INPUT=$(HIGGS_TEMPLATES)/cs_display_id.m4
+ID_SCAN_GRAV_INPUT=$(HIGGS_TEMPLATES)/grav_display_id.m4
+
+check_jtag:
+	mkdir -p $(HIGGS_TMP)
+	$(RM) $(ID_SCAN_OUTPUT)
+	touch $(ID_SCAN_OUTPUT)
+	@echo ""
+	@echo ""
+	@echo "      Please Wait.  This scan take about 40 seconds."
+	@echo "        Trying to determine which USB jtag programmer is connected to which board"
+	@echo ""
+	@echo ""
+	# Check if USB0: CS
+	m4 -DM4_USB_0=$(JTAG_USB_0_A) -DM4_USB_1=$(JTAG_USB_0_B) $(M4_CS_ARGUMENTS_SIMPLE) -P $(ID_SCAN_CS_INPUT) > $(ID_SCAN_TMP_XCF)
+	PROGRAM_TCL_XCF_ARG=$(ID_SCAN_TMP_XCF_MIXED) $(PNMAINC) $(XCF_TCL_FILE) && $(ECHO) "Switched ok (USB0 is CS)" >> $(ID_SCAN_OUTPUT); true
+
+	# Check if USB1: GRAV
+	m4 -DM4_USB_0=$(JTAG_USB_1_A) -DM4_USB_1=$(JTAG_USB_1_B) $(M4_GRAV_ARGUMENTS_SIMPLE) -P $(ID_SCAN_GRAV_INPUT) > $(ID_SCAN_TMP_XCF)
+	PROGRAM_TCL_XCF_ARG=$(ID_SCAN_TMP_XCF_MIXED) $(PNMAINC) $(XCF_TCL_FILE) && $(ECHO) "Switched ok (USB1 is GRAV)" >> $(ID_SCAN_OUTPUT); true
+
+	# Check if USB0: GRAV
+	m4 -DM4_USB_0=$(JTAG_USB_0_A) -DM4_USB_1=$(JTAG_USB_0_B) $(M4_GRAV_ARGUMENTS_SIMPLE) -P $(ID_SCAN_GRAV_INPUT) > $(ID_SCAN_TMP_XCF)
+	PROGRAM_TCL_XCF_ARG=$(ID_SCAN_TMP_XCF_MIXED) $(PNMAINC) $(XCF_TCL_FILE) && $(ECHO) "Normal ok (USB0 is GRAV)" >> $(ID_SCAN_OUTPUT); true
+
+	# Check if USB1: CS
+	m4 -DM4_USB_0=$(JTAG_USB_1_A) -DM4_USB_1=$(JTAG_USB_1_B) $(M4_CS_ARGUMENTS_SIMPLE) -P $(ID_SCAN_CS_INPUT) > $(ID_SCAN_TMP_XCF)
+	PROGRAM_TCL_XCF_ARG=$(ID_SCAN_TMP_XCF_MIXED) $(PNMAINC) $(XCF_TCL_FILE) && $(ECHO) "Normal ok (USB1 is CS)" >> $(ID_SCAN_OUTPUT); true
+
+	@echo ""
+	@echo ""
+	@echo ""
+	@echo ""
+	@echo "Done testing 4-way jtag-scan.  Please compare text between dashed lines:"
+	@echo ""
+	@echo "----"
+	@$(CAT) $(ID_SCAN_OUTPUT)
+	@echo "----"
+	@echo ""
+	@echo "In the above output, you should see two reports of 'Switched ok' or two reports of 'Normal ok'"
+	@echo "An empty section (no text between two lines of ----) means nothing worked"
+	@echo ""
+	@echo ""
+	@echo "Currently the build scripts are set to mode:"
+	@echo "   $(JTAG_PROGAMMERS_SWITCHED_STRING)"
+	@echo ""
+	@echo "If the build script mode does not match what is between ---- above, simply edit"
+	@echo "   $(HIGGS_MAKE_INCLUDE)/user_settings.defs"
+	@echo ""
+	@echo "Just for reference:"
+	@echo ""
+	@echo "Normal:"
+	@echo "  USB0: Graviton"
+	@echo "  USB1: CS"
+	@echo ""
+	@echo "Switched:"
+	@echo "  USB0: CS"
+	@echo "  USB1: Graviton"
+	@echo ""
+
+
+
+
+
+
+########## XCF Generation from m4 template (old gui based way) ##########
+# this is how this works
+# we make list of defines with -D attached
+# at this point they are just a bash variable
+# the contents of this total variable actually 
+ifeq ($(OS),Windows_NT)
+CS_XCF_BASE=$(shell cygpath -m $(shell cd $(CS_ROOT) && $(PWD)))
+GRAV_XCF_BASE=$(shell cygpath -m $(shell cd $(GRAV_ROOT) && $(PWD)))
+else
+CS_XCF_BASE=$(shell cd $(CS_ROOT) && $(PWD))
+GRAV_XCF_BASE=$(shell cd $(GRAV_ROOT) && $(PWD))
+endif
+
+#########
+#
+#   The old order. Remember it by "Come Down And Eat":
+#      cfg
+#      dac
+#      adc
+#      eth
+#
+#   The new order. Remember it by "Always Eat Cold Donuts"
+#      adc
+#      eth
+#      cfg
+#      dac
+#
+#   If you are changing grav jtag order, update this.  see user_settings.defs
+# this is a simple Makefile variable.  IT has MK_ to separate it from the vars a second
+
+ifdef GRAV_JTAG_USES_ADC_PORT
+
+MK_XCF_PATH_0=$(GRAV_XCF_BASE)/adc/build/adc_top.bit
+MK_XCF_PATH_1=$(GRAV_XCF_BASE)/eth/build/eth_top.bit
+MK_XCF_PATH_2=$(GRAV_XCF_BASE)/cfg/build/cfg_top.bit
+MK_XCF_PATH_3=$(GRAV_XCF_BASE)/dac/build/dac_top.bit
+
+else
+
+MK_XCF_PATH_0=$(GRAV_XCF_BASE)/cfg/build/cfg_top.bit
+MK_XCF_PATH_1=$(GRAV_XCF_BASE)/dac/build/dac_top.bit
+MK_XCF_PATH_2=$(GRAV_XCF_BASE)/adc/build/adc_top.bit
+MK_XCF_PATH_3=$(GRAV_XCF_BASE)/eth/build/eth_top.bit
+
+endif
+
+# this is created a list of variables that m4 will use.  The MK_ subscript is converted over to M4_.  this is done
+# to make it painfully obvious there are two domains here
+# they all get built together in a single string which we will pass to m4
+M4_DEFINES = \
+-DM4_XCF_PATH_0=$(MK_XCF_PATH_0) \
+-DM4_XCF_PATH_1=$(MK_XCF_PATH_1) \
+-DM4_XCF_PATH_2=$(MK_XCF_PATH_2) \
+-DM4_XCF_PATH_3=$(MK_XCF_PATH_3)
+
+
+
+
+
+MK_CS_XCF_PATH_0=C:/FPGA/higgs_sdr/fpgas/cs/
+
+
+
+########## (XCF) Paths of every CS FPGA ##########
+#
+# FIXME: fillin
+MK_CS_XCF_PATH_0=$(CS_XCF_BASE)/cscfg/build/cscfg_top.bit
+MK_CS_XCF_PATH_1=$(CS_XCF_BASE)/cs00/build/cs00_top.bit
+MK_CS_XCF_PATH_2=$(CS_XCF_BASE)/cs01/build/cs01_top.bit
+MK_CS_XCF_PATH_3=$(CS_XCF_BASE)/cs02/build/cs02_top.bit
+MK_CS_XCF_PATH_4=$(CS_XCF_BASE)/cs03/build/cs03_top.bit
+MK_CS_XCF_PATH_5=$(CS_XCF_BASE)/cs10/build/cs10_top.bit
+MK_CS_XCF_PATH_6=$(CS_XCF_BASE)/cs11/build/cs11_top.bit
+MK_CS_XCF_PATH_7=$(CS_XCF_BASE)/cs12/build/cs12_top.bit
+MK_CS_XCF_PATH_8=$(CS_XCF_BASE)/cs13/build/cs13_top.bit
+MK_CS_XCF_PATH_9=$(CS_XCF_BASE)/cs20/build/cs20_top.bit
+MK_CS_XCF_PATH_10=$(CS_XCF_BASE)/cs21/build/cs21_top.bit
+MK_CS_XCF_PATH_11=$(CS_XCF_BASE)/cs22/build/cs22_top.bit
+MK_CS_XCF_PATH_12=$(CS_XCF_BASE)/cs23/build/cs23_top.bit
+MK_CS_XCF_PATH_13=$(CS_XCF_BASE)/cs30/build/cs30_top.bit
+MK_CS_XCF_PATH_14=$(CS_XCF_BASE)/cs31/build/cs31_top.bit
+MK_CS_XCF_PATH_15=$(CS_XCF_BASE)/cs32/build/cs32_top.bit
+MK_CS_XCF_PATH_16=$(CS_XCF_BASE)/cs33/build/cs33_top.bit
+
+
+
+
+########## (XCF) Paths of every CS FPGA ##########
+# this is mapping the above to a -D on command line (could be a forloop)
+#
+# here mapping is sideways (not 1:1)
+M4_CS_PATHS = \
+-DM4_XCF_PATH_0=$(MK_CS_XCF_PATH_0) \
+-DM4_XCF_PATH_1=$(MK_CS_XCF_PATH_1) \
+-DM4_XCF_PATH_2=$(MK_CS_XCF_PATH_2) \
+-DM4_XCF_PATH_3=$(MK_CS_XCF_PATH_3) \
+-DM4_XCF_PATH_4=$(MK_CS_XCF_PATH_4) \
+-DM4_XCF_PATH_5=$(MK_CS_XCF_PATH_5) \
+-DM4_XCF_PATH_6=$(MK_CS_XCF_PATH_6) \
+-DM4_XCF_PATH_7=$(MK_CS_XCF_PATH_7) \
+-DM4_XCF_PATH_8=$(MK_CS_XCF_PATH_8) \
+-DM4_XCF_PATH_9=$(MK_CS_XCF_PATH_9) \
+-DM4_XCF_PATH_10=$(MK_CS_XCF_PATH_10) \
+-DM4_XCF_PATH_11=$(MK_CS_XCF_PATH_11) \
+-DM4_XCF_PATH_12=$(MK_CS_XCF_PATH_12) \
+-DM4_XCF_PATH_13=$(MK_CS_XCF_PATH_13) \
+-DM4_XCF_PATH_14=$(MK_CS_XCF_PATH_14) \
+-DM4_XCF_PATH_15=$(MK_CS_XCF_PATH_15) \
+-DM4_XCF_PATH_16=$(MK_CS_XCF_PATH_16)
+
+
+########## (XCF) USB options, TODO: fix this or allow differnet users or allow multiple xcf or whatever ##########
+#
+# here are some different verions of these variables I have found
+# maybe we can sniff these with a special target?
+#MK_USB_0=FTUSB-1
+#MK_USB_1="Lattice HW-USBN-2B Ch A Location 0001 Serial VER00001A"
+
+MK_USB_0=FTUSB-0
+MK_USB_1="Lattice HW-USBN-2B Ch A Location 0000 Serial VER00001A"
+
+
+########## (XCF) Final bunching of command line args before parsing ##########
+
+# vars as a command line argument
+M4_USB_ARGUMENTS = \
+-DM4_USB_0=$(MK_USB_0) \
+-DM4_USB_1=$(MK_USB_1)
+
+# command line args
+M4_GRAV_ARGUMENTS = \
+$(M4_DEFINES) \
+$(M4_USB_ARGUMENTS) \
+-DM4_XCF_TCK_CLOCK_DIVIDER=3
+
+
+M4_CS_ARGUMENTS = \
+$(M4_CS_PATHS) \
+$(M4_USB_ARGUMENTS) \
+-DM4_XCF_TCK_CLOCK_DIVIDER=10
+
+########## First filename ##########
+# this 0th file is graviton.
+XCF_INPUT_0=grav_only_xcf.m4
+XCF_OUTPUT_0=flash_grav_all.xcf
+
+.PHONY: xcfgrav xcfcs cleanxcf
+
+xcf: xcfgrav xcfcs
+
+xcfgrav: $(HIGGS_ROOT)/$(XCF_OUTPUT_0)
+
+$(HIGGS_ROOT)/$(XCF_OUTPUT_0): $(HIGGS_TEMPLATES)/$(XCF_INPUT_0) .deps_ok
+	@echo writing $(XCF_OUTPUT_0)
+	cd $(HIGGS_ROOT) && m4 $(M4_GRAV_ARGUMENTS) -P $(HIGGS_TEMPLATES)/$(XCF_INPUT_0) > $(HIGGS_ROOT)/$(XCF_OUTPUT_0)
+
+########## Second filename ##########
+# the 1st file is cs
+# input path is relative to templates dir
+# output path is relative to root
+XCF_INPUT_1=cs_all.m4
+XCF_OUTPUT_1=flash_cs_no_cfg.xcf
+
+xcfcs: $(HIGGS_ROOT)/$(XCF_OUTPUT_1)
+
+$(HIGGS_ROOT)/$(XCF_OUTPUT_1): $(HIGGS_TEMPLATES)/$(XCF_INPUT_1) .deps_ok
+	@echo writing $(XCF_OUTPUT_1)
+	cd $(HIGGS_ROOT) && m4 $(M4_CS_ARGUMENTS) -P $(HIGGS_TEMPLATES)/$(XCF_INPUT_1) > $(HIGGS_ROOT)/$(XCF_OUTPUT_1)
+
+cleanxcf:
+	$(RM) $(XCF_OUTPUT_0) $(XCF_OUTPUT_1) $(ID_SCAN_TMP_XCF)
+
+
+########## Path Manipulation ##########
+# this messes with the paths until we have something we can pass to the programmer
+# we combine the paths using linux logic (For ease)
+# and only at last minute do we convert over to mixed style path
+#
+
+# -w is windows style
+# -m is what lattice programmer users (windows but slashes other way)
+# these are expensive how to call them only once?
+HIGGS_ROOT_FULL_PATH=$(shell cd $(HIGGS_ROOT) && pwd)
+# HIGGS_ROOT_MIXED_PATH=$(shell cygpath -w $(HIGGS_ROOT_FULL_PATH))
+XCF_PATH_LIN = $(HIGGS_ROOT_FULL_PATH)/$(XCF_OUTPUT_0)
+
+XCF_PATH_1_LIN = $(HIGGS_ROOT_FULL_PATH)/$(XCF_OUTPUT_1)
+ifeq ($(OS),Windows_NT)
+XCF_PATH_MIXED = $(shell cygpath -m $(XCF_PATH_LIN) )
+XCF_PATH_1_MIXED = $(shell cygpath -m $(XCF_PATH_1_LIN) )
+else
+XCF_PATH_MIXED = $(XCF_PATH_LIN)
+XCF_PATH_1_MIXED = $(XCF_PATH_1_LIN)
+endif
+# xcf3:
+# 	echo $(XCF_PATH_LIN)
+# 	echo $(HIGGS_ROOT_FULL_PATH)
+# 	# echo $(HIGGS_ROOT_MIXED_PATH) 
+# 	echo $(OPTION)
+# xcf3:
+# 	echo $(XCF_PATH_MIXED)
+#	echo $(XCF_PATH_MIXED_DOUBLE)
+
+.PHONY: program programgrav programcs
+
+program: programgrav
+
+program_launch_message:
+	@echo "Please wait, launching Diamond Programmer in the background"
+	@echo ""
+
+# not sure why the /? makes it work
+# the final & means it should launch and leave us alone
+programgrav: xcfgrav program_launch_message
+	$(LATTICE_PROGRAMMER_LIN) $(XCF_PATH_MIXED) /? &
+
+
+programcs: xcfcs program_launch_message
+	$(LATTICE_PROGRAMMER_LIN) $(XCF_PATH_1_MIXED) /? &
+
+
+
+
+
+
+
+
+
+#################################
+#
+#   triggers
+#
+
+ENABLED_LIST_GRAV=
+ENABLED_LIST_CS=
+
+
+ifneq ($(filter trigger_enable_flash_cfg,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CFG=TRUE
+ENABLED_LIST_GRAV+=cfg
+endif
+ifneq ($(filter trigger_enable_flash_dac,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_DAC=TRUE
+ENABLED_LIST_GRAV+=dac
+endif
+ifneq ($(filter trigger_enable_flash_adc,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_ADC=TRUE
+ENABLED_LIST_GRAV+=adc
+endif
+ifneq ($(filter trigger_enable_flash_eth,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_ETH=TRUE
+ENABLED_LIST_GRAV+=eth
+endif
+ifneq ($(filter trigger_enable_flash_cscfg,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CSCFG=TRUE
+ENABLED_LIST_CS+=cscfg
+endif
+ifneq ($(filter trigger_enable_flash_cs00,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS00=TRUE
+ENABLED_LIST_CS+=cs00
+endif
+ifneq ($(filter trigger_enable_flash_cs01,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS01=TRUE
+ENABLED_LIST_CS+=cs01
+endif
+ifneq ($(filter trigger_enable_flash_cs02,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS02=TRUE
+ENABLED_LIST_CS+=cs02
+endif
+ifneq ($(filter trigger_enable_flash_cs03,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS03=TRUE
+ENABLED_LIST_CS+=cs03
+endif
+ifneq ($(filter trigger_enable_flash_cs10,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS10=TRUE
+ENABLED_LIST_CS+=cs10
+endif
+ifneq ($(filter trigger_enable_flash_cs11,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS11=TRUE
+ENABLED_LIST_CS+=cs11
+endif
+ifneq ($(filter trigger_enable_flash_cs12,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS12=TRUE
+ENABLED_LIST_CS+=cs12
+endif
+ifneq ($(filter trigger_enable_flash_cs13,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS13=TRUE
+ENABLED_LIST_CS+=cs13
+endif
+ifneq ($(filter trigger_enable_flash_cs20,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS20=TRUE
+ENABLED_LIST_CS+=cs20
+endif
+ifneq ($(filter trigger_enable_flash_cs21,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS21=TRUE
+ENABLED_LIST_CS+=cs21
+endif
+ifneq ($(filter trigger_enable_flash_cs22,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS22=TRUE
+ENABLED_LIST_CS+=cs22
+endif
+ifneq ($(filter trigger_enable_flash_cs23,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS23=TRUE
+ENABLED_LIST_CS+=cs23
+endif
+ifneq ($(filter trigger_enable_flash_cs30,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS30=TRUE
+ENABLED_LIST_CS+=cs30
+endif
+ifneq ($(filter trigger_enable_flash_cs31,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS31=TRUE
+ENABLED_LIST_CS+=cs31
+endif
+ifneq ($(filter trigger_enable_flash_cs32,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS32=TRUE
+ENABLED_LIST_CS+=cs32
+endif
+ifneq ($(filter trigger_enable_flash_cs33,$(MAKECMDGOALS)),$())
+XCF_SELECT_ENABLE_CS33=TRUE
+ENABLED_LIST_CS+=cs33
+endif
+
+
+#################################
+#
+#  Here we go through the giant if chain above and build paths which are then
+#  listed as dependency for the compile cs/grav below
+#
+define get_cs_bitfile_path
+$(HIGGS_ROOT)/fpgas/cs/$(1)/build/$(1)_top.bit 
+endef
+
+define get_grav_bitfile_path
+$(HIGGS_ROOT)/fpgas/grav/$(1)/build/$(1)_top.bit 
+endef
+
+ENABLED_FPGA_BITFILE_PATHS=
+ENABLED_FPGA_BITFILE_PATHS+=$(foreach fpga,$(ENABLED_LIST_CS),$(call get_cs_bitfile_path,$(fpga)))
+ENABLED_FPGA_BITFILE_PATHS+=$(foreach fpga,$(ENABLED_LIST_GRAV),$(call get_grav_bitfile_path,$(fpga)))
+
+
+
+
+
+
+
+
+
+.PHONY: flash_selectable_cs compile_selectable_cs flash_selectable_grav compile_selectable_grav
+
+flash_selectable_cs: $(HIGGS_ROOT)/$(XCF_OUTPUT_3)
+	PROGRAM_TCL_XCF_ARG=$(XCF_OUTPUT_3_MIXED) $(PNMAINC) $(XCF_TCL_FILE)
+
+compile_selectable_cs: $(HIGGS_TEMPLATES)/$(XCF_INPUT_3) $(ENABLED_FPGA_BITFILE_PATHS) scripts/make_include/flashing_jtag.defs
+	@echo writing $(XCF_OUTPUT_3)
+	m4 $(M4_SELECTABLE_CS_ARGUMENTS) $(M4_CS_ARGUMENTS_SIMPLE) $(M4_USB_ARGUMENTS_SELECTED_CS) -P $(HIGGS_TEMPLATES)/$(XCF_INPUT_3) > $(HIGGS_ROOT)/$(XCF_OUTPUT_3)
+	@echo ""
+	@echo "Enabled FPGAS for this Programming Round:"
+	@echo ""
+	@echo "CSCFG: $(XCF_SELECT_ENABLE_CSCFG)"
+	@echo "CS00: $(XCF_SELECT_ENABLE_CS00)"
+	@echo "CS01: $(XCF_SELECT_ENABLE_CS01)"
+	@echo "CS02: $(XCF_SELECT_ENABLE_CS02)"
+	@echo "CS03: $(XCF_SELECT_ENABLE_CS03)"
+	@echo "CS10: $(XCF_SELECT_ENABLE_CS10)"
+	@echo "CS11: $(XCF_SELECT_ENABLE_CS11)"
+	@echo "CS12: $(XCF_SELECT_ENABLE_CS12)"
+	@echo "CS13: $(XCF_SELECT_ENABLE_CS13)"
+	@echo "CS20: $(XCF_SELECT_ENABLE_CS20)"
+	@echo "CS21: $(XCF_SELECT_ENABLE_CS21)"
+	@echo "CS22: $(XCF_SELECT_ENABLE_CS22)"
+	@echo "CS23: $(XCF_SELECT_ENABLE_CS23)"
+	@echo "CS30: $(XCF_SELECT_ENABLE_CS30)"
+	@echo "CS31: $(XCF_SELECT_ENABLE_CS31)"
+	@echo "CS32: $(XCF_SELECT_ENABLE_CS32)"
+	@echo "CS33: $(XCF_SELECT_ENABLE_CS33)"
+	@echo ""
+
+
+flash_selectable_grav: $(HIGGS_ROOT)/$(XCF_OUTPUT_2)
+	PROGRAM_TCL_XCF_ARG=$(XCF_OUTPUT_2_MIXED) $(PNMAINC) $(XCF_TCL_FILE)
+
+########################
+#
+#  We have an issue where `make program_higgs` is failing because of missing bitfiles
+#  but the diamond programmer does not explicitly report that.
+#
+#  It might make more sense to fail in the flash_selectable_grav target and not the compile_selectable_grav
+#  target, however we do not have access to selected FPGAS during that make invocation.
+#
+#  So we build ENABLED_FPGA_BITFILE_PATHS and then use it as a dependency for this target
+#
+
+compile_selectable_grav: $(HIGGS_TEMPLATES)/$(XCF_INPUT_2) $(ENABLED_FPGA_BITFILE_PATHS) scripts/make_include/flashing_jtag.defs
+	@echo writing $(XCF_OUTPUT_2)
+	m4 $(M4_SELECTABLE_GRAV_ARGUMENTS) $(M4_GRAV_ARGUMENTS_SIMPLE) $(M4_USB_ARGUMENTS_SELECTED_GRAV) -P $(HIGGS_TEMPLATES)/$(XCF_INPUT_2) > $(HIGGS_ROOT)/$(XCF_OUTPUT_2)
+	@echo ""
+	@echo "Enabled FPGAS for this Programming Round:"
+	@echo ""
+	@echo "CFG: $(XCF_SELECT_ENABLE_CFG)"
+	@echo "DAC: $(XCF_SELECT_ENABLE_DAC)"
+	@echo "ADC: $(XCF_SELECT_ENABLE_ADC)"
+	@echo "ETH: $(XCF_SELECT_ENABLE_ETH)"
+	@echo ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#################################
+#
+#   More Triggers
+#
+
+# default is Fast Program so we don't have to edit enabledfpgas.defs
+# note that we are escaping this string with will get removed once this gets passed through the shell
+# (as arguments to m4)
+XCF_PROGRAM_MODE=Fast\ Program
+ifneq ($(filter trigger_enable_erase_only,$(MAKECMDGOALS)),$())
+XCF_PROGRAM_MODE=Erase\ Only
+endif
+
+##################################
+#
+#  M4_SELECTABLE_GRAV_ARGUMENTS is the final argument that's passed to the diamond
+#  programmer
+# 
+
+# TRUE or FALSE controls if fpga's are enabled
+#   If you are changing grav jtag order, update this
+# see user_settings.defs
+ifdef GRAV_JTAG_USES_ADC_PORT
+
+M4_SELECTABLE_GRAV_ARGUMENTS = \
+-DM4_OPERATION=$(XCF_PROGRAM_MODE) \
+-DM4_ENABLE_FPGA_0=$(XCF_SELECT_ENABLE_ADC) \
+-DM4_ENABLE_FPGA_1=$(XCF_SELECT_ENABLE_ETH) \
+-DM4_ENABLE_FPGA_2=$(XCF_SELECT_ENABLE_CFG) \
+-DM4_ENABLE_FPGA_3=$(XCF_SELECT_ENABLE_DAC) 
+
+else
+
+M4_SELECTABLE_GRAV_ARGUMENTS = \
+-DM4_OPERATION=$(XCF_PROGRAM_MODE) \
+-DM4_ENABLE_FPGA_0=$(XCF_SELECT_ENABLE_CFG) \
+-DM4_ENABLE_FPGA_1=$(XCF_SELECT_ENABLE_DAC) \
+-DM4_ENABLE_FPGA_2=$(XCF_SELECT_ENABLE_ADC) \
+-DM4_ENABLE_FPGA_3=$(XCF_SELECT_ENABLE_ETH) 
+
+endif
+
+# TRUE or FALSE controls if fpga's are enabled
+M4_SELECTABLE_CS_ARGUMENTS = \
+-DM4_OPERATION=$(XCF_PROGRAM_MODE) \
+-DM4_ENABLE_CSCFG=$(XCF_SELECT_ENABLE_CSCFG) \
+-DM4_ENABLE_CS00=$(XCF_SELECT_ENABLE_CS00) \
+-DM4_ENABLE_CS01=$(XCF_SELECT_ENABLE_CS01) \
+-DM4_ENABLE_CS02=$(XCF_SELECT_ENABLE_CS02) \
+-DM4_ENABLE_CS03=$(XCF_SELECT_ENABLE_CS03) \
+-DM4_ENABLE_CS10=$(XCF_SELECT_ENABLE_CS10) \
+-DM4_ENABLE_CS11=$(XCF_SELECT_ENABLE_CS11) \
+-DM4_ENABLE_CS12=$(XCF_SELECT_ENABLE_CS12) \
+-DM4_ENABLE_CS13=$(XCF_SELECT_ENABLE_CS13) \
+-DM4_ENABLE_CS20=$(XCF_SELECT_ENABLE_CS20) \
+-DM4_ENABLE_CS21=$(XCF_SELECT_ENABLE_CS21) \
+-DM4_ENABLE_CS22=$(XCF_SELECT_ENABLE_CS22) \
+-DM4_ENABLE_CS23=$(XCF_SELECT_ENABLE_CS23) \
+-DM4_ENABLE_CS30=$(XCF_SELECT_ENABLE_CS30) \
+-DM4_ENABLE_CS31=$(XCF_SELECT_ENABLE_CS31) \
+-DM4_ENABLE_CS32=$(XCF_SELECT_ENABLE_CS32) \
+-DM4_ENABLE_CS33=$(XCF_SELECT_ENABLE_CS33)
+
+
+
+
+
+copy_those_bitfiles:
+	cp official_builds/higgs_sdr_master/fpgas/grav/cfg/build/cfg_top.bit fpgas/grav/cfg/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/grav/dac/build/dac_top.bit fpgas/grav/dac/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/grav/adc/build/adc_top.bit fpgas/grav/adc/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/grav/eth/build/eth_top.bit fpgas/grav/eth/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cscfg/build/cscfg_top.bit fpgas/cs/cscfg/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs00/build/cs00_top.bit fpgas/cs/cs00/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs01/build/cs01_top.bit fpgas/cs/cs01/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs02/build/cs02_top.bit fpgas/cs/cs02/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs03/build/cs03_top.bit fpgas/cs/cs03/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs10/build/cs10_top.bit fpgas/cs/cs10/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs11/build/cs11_top.bit fpgas/cs/cs11/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs12/build/cs12_top.bit fpgas/cs/cs12/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs13/build/cs13_top.bit fpgas/cs/cs13/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs20/build/cs20_top.bit fpgas/cs/cs20/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs21/build/cs21_top.bit fpgas/cs/cs21/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs22/build/cs22_top.bit fpgas/cs/cs22/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs23/build/cs23_top.bit fpgas/cs/cs23/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs30/build/cs30_top.bit fpgas/cs/cs30/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs31/build/cs31_top.bit fpgas/cs/cs31/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs32/build/cs32_top.bit fpgas/cs/cs32/build/ ; true
+	cp official_builds/higgs_sdr_master/fpgas/cs/cs33/build/cs33_top.bit fpgas/cs/cs33/build/ ; true
+
+
+
+
+######################## Per FPGA Program  ########################
+#
+#  this section provides a full suite of targets for programming individual boards.  Some are:
+#
+#  program_dac programdac program_cs00 programcs00
+#
+
+PROGRAM_INDIVIDUAL_PREFIX=program_
+PROGRAM_INDIVIDUAL_CS_TARGETS=$(addprefix $(PROGRAM_INDIVIDUAL_PREFIX),$(CS_FPGAS))
+PROGRAM_INDIVIDUAL_GRAV_TARGETS=$(addprefix $(PROGRAM_INDIVIDUAL_PREFIX),$(GRAV_FPGAS))
+PROGRAM_INDIVIDUAL_TARGET_STRIPPED=$(@:$(PROGRAM_INDIVIDUAL_PREFIX)%=%)
+
+ifeq ($(OS),Windows_NT)
+
+$(PROGRAM_INDIVIDUAL_CS_TARGETS):
+	make compile_selectable_cs trigger_enable_flash_$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED) && make flash_selectable_cs
+
+$(PROGRAM_INDIVIDUAL_GRAV_TARGETS):
+	make compile_selectable_grav trigger_enable_flash_$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED) && make flash_selectable_grav
+
+else
+
+# must have the --freq and a number in mhz
+# 
+NEW_JTAG_FLASH_RATE=--freq 5E6
+
+$(PROGRAM_INDIVIDUAL_CS_TARGETS):
+	make -C fpgas/cs/$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED)/build svf
+	$(HIGGS_ROOT)/node_modules/.bin/svf2ftdi -n 1 -d 2 $(NEW_JTAG_FLASH_RATE) -f fpgas/cs/$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED)/build/$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED)_top.svf
+
+$(PROGRAM_INDIVIDUAL_GRAV_TARGETS):
+	make -C fpgas/grav/$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED)/build svf
+	$(HIGGS_ROOT)/node_modules/.bin/svf2ftdi -n 0 -d 2 $(NEW_JTAG_FLASH_RATE) -f fpgas/grav/$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED)/build/$(PROGRAM_INDIVIDUAL_TARGET_STRIPPED)_top.svf
+
+endif
+
+##### Below here is just making it so programcs00 and program_cs00 both work
+
+PROGRAM_INDIVIDUAL_PREFIX2=program
+PROGRAM_MIRROR_TARGETS=$(addprefix $(PROGRAM_INDIVIDUAL_PREFIX2),$(ALL_FPGAS))
+PROGRAM_INDIVIDUAL_TARGET2_STRIPPED=$(@:$(PROGRAM_INDIVIDUAL_PREFIX2)%=%)
+
+$(PROGRAM_MIRROR_TARGETS):
+	@$(MAKE) $(PROGRAM_INDIVIDUAL_PREFIX)$(PROGRAM_INDIVIDUAL_TARGET2_STRIPPED)
+
+
+######################## Per FPGA Erase ########################
+#
+#  this section provides a full suite of targets for erasting the board.  Some are:
+#
+
+
+erase_higgs:
+	make compile_selectable_cs trigger_enable_erase_only   $(addprefix trigger_enable_flash_,  cscfg cs00 cs01 cs02 cs03 cs10 cs11 cs12 cs13 cs20 cs21 cs22 cs23 cs30 cs31 cs32 cs33 ) && make flash_selectable_cs
+	make compile_selectable_grav trigger_enable_erase_only $(addprefix trigger_enable_flash_,  cfg eth adc dac ) && make flash_selectable_grav
+
+
+ERASE_INDIVIDUAL_PREFIX=erase_
+ERASE_INDIVIDUAL_CS_TARGETS=$(addprefix $(ERASE_INDIVIDUAL_PREFIX),$(CS_FPGAS))
+ERASE_INDIVIDUAL_GRAV_TARGETS=$(addprefix $(ERASE_INDIVIDUAL_PREFIX),$(GRAV_FPGAS))
+ERASE_INDIVIDUAL_TARGET_STRIPPED=$(@:$(ERASE_INDIVIDUAL_PREFIX)%=%)
+
+
+$(ERASE_INDIVIDUAL_CS_TARGETS):
+	make compile_selectable_cs trigger_enable_erase_only trigger_enable_flash_$(ERASE_INDIVIDUAL_TARGET_STRIPPED) && make flash_selectable_cs
+
+
+$(ERASE_INDIVIDUAL_GRAV_TARGETS):
+	make compile_selectable_grav trigger_enable_erase_only trigger_enable_flash_$(ERASE_INDIVIDUAL_TARGET_STRIPPED) && make flash_selectable_grav
+
+# Here are targets so erase_* and erase* both work
+ERASE_INDIVIDUAL_PREFIX2=erase
+ERASE_MIRROR_TARGETS=$(addprefix $(ERASE_INDIVIDUAL_PREFIX2),$(ALL_FPGAS))
+ERASE_INDIVIDUAL_TARGET2_STRIPPED=$(@:$(ERASE_INDIVIDUAL_PREFIX2)%=%)
+
+$(ERASE_MIRROR_TARGETS):
+	@$(MAKE) $(ERASE_INDIVIDUAL_PREFIX)$(ERASE_INDIVIDUAL_TARGET2_STRIPPED)
+
+
+
+
+
+
+
+
+
+
+
+
+#################################################3
+#
+#  New stuff for SVF flashing under linux
+#
+#
+
+.PHONY: allsvf all_svf
+
+allsvf: all_svf
+
+all_svf:
+	make -C fpgas/grav/adc/build svf
+	make -C fpgas/grav/cfg/build svf
+	make -C fpgas/grav/dac/build svf
+	make -C fpgas/grav/eth/build svf
+	make -C fpgas/cs/cscfg/build svf
+	make -C fpgas/cs/cs00/build svf
+	make -C fpgas/cs/cs01/build svf
+	make -C fpgas/cs/cs10/build svf
+	make -C fpgas/cs/cs11/build svf
+	make -C fpgas/cs/cs20/build svf
+	make -C fpgas/cs/cs21/build svf
+	make -C fpgas/cs/cs30/build svf
+	make -C fpgas/cs/cs31/build svf

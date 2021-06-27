@@ -1,0 +1,33 @@
+SCUBA, Version Diamond (64-bit) 3.9.0.99.2
+Tue Apr 04 20:40:51 2017
+  
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+  
+BEGIN SCUBA Module Synthesis
+  
+    Issued command   : C:\lscc\diamond\3.9_x64\ispfpga\bin\nt64\scuba.exe -w -n big_ass_fifo -lang verilog -synth synplify -bus_exp 7 -bb -arch sa5p00 -type ebfifo -sync_mode -depth 65536 -width 32 -no_enable -pe -1 -pf 64768 -sync_reset 
+    Circuit name     : big_ass_fifo
+    Module type      : fifoblk
+    Module Version   : 5.1
+    Ports            : 
+    Inputs       : Data[31:0], Clock, WrEn, RdEn, Reset
+    Outputs      : Q[31:0], Empty, Full, AlmostFull
+    I/O buffer       : not inserted
+    EDIF output      : big_ass_fifo.edn
+    Verilog output   : big_ass_fifo.v
+    Verilog template : big_ass_fifo_tmpl.v
+    Verilog testbench: tb_big_ass_fifo_tmpl.v
+    Verilog purpose  : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : big_ass_fifo.srp
+    Estimated Resource Usage:
+            LUT : 165
+            EBR : 128
+            Reg : 56
+  
+END   SCUBA Module Synthesis
+

@@ -1,0 +1,108 @@
+<Project ModBy="Inserter" Name="C:/FPGA/higgs_sdr_rev2/fpgas/cs/cs23/build/debug/cs23_top.rvl" Date="2019-04-05">
+    <Core Name="cs23_top_LA0">
+        <Setting>
+            <Capture SamplesPerTrig="0" NumTrigsCap=""/>
+            <Event EventCnt="" CntEnableRun=""/>
+            <TrigSetting PreTrgSamples="" AND_ALL="" PostTrgSamples="" TURadix="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/in_ringbus"/>
+                <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/out_ringbus"/>
+                <Bus Name="rb_read_data" Radix="0">
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[0]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[1]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[2]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[3]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[4]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[5]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[6]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[7]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[8]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[9]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[10]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[11]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[12]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[13]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[14]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[15]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[16]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[17]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[18]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[19]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[20]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[21]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[22]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[23]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[24]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[25]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[26]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[27]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[28]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[29]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[30]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_read_data[31]"/>
+                </Bus>
+                <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_done"/>
+                <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_en"/>
+                <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_ready"/>
+                <Bus Name="rb_write_addr" Radix="0">
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[0]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[1]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[2]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[3]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[4]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[5]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[6]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_addr[7]"/>
+                </Bus>
+                <Bus Name="rb_write_data" Radix="0">
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[0]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[1]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[2]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[3]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[4]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[5]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[6]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[7]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[8]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[9]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[10]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[11]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[12]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[13]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[14]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[15]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[16]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[17]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[18]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[19]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[20]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[21]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[22]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[23]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[24]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[25]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[26]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[27]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[28]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[29]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[30]"/>
+                    <Sig Name="vex_machine_top_inst/q_engine_inst/ring_bus_inst/ringbus_0_write_data[31]"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Operator="0" Name="TU1" ID="1" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU2" ID="2" Value="0" Radix="0"/>
+                <TU Operator="1" Name="TU3" ID="3" Value="00000000" Radix="3"/>
+                <TU Operator="0" Name="TU4" ID="4" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU5" ID="5" Value="0" Radix="0"/>
+                <TE Enable="1" Expression="TU1" Name="TE1" ID="1"/>
+                <TE Enable="1" Expression="TU2" Name="TE2" ID="2"/>
+                <TE Enable="1" Expression="TU3" Name="TE3" ID="3"/>
+                <TE Enable="1" Expression="TU4" Name="TE4" ID="4"/>
+                <TE Enable="1" Expression="TU5" Name="TE5" ID="5"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

@@ -1,0 +1,221 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the this FPGA.
+Used in conjunction with Juniper Network's ORDT tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA in this Copper Suicide array this is by providing the Row and Column as two hex nibbles.";
+            
+            field {
+                name="UID";
+                desc="The Row and Column of this FPGA in the Copper Suicide array.";
+                hw=w; sw=r;
+                reset = 8'b00000000;
+            } uid[7:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } dword[31:0];
+        } sw_scratch;
+           
+        reg {
+            name="ADC In System Parity Error Counter";
+            desc="Contains the number of UDP command byte parity errors encountered since the last reset.";
+            
+            field {
+                hw=na; sw=r; counter;
+                reset=32'd0;
+            } dword[31:0];
+        } sys_bit_perrs; 
+
+    } rf0 @0x00000;
+    
+    regfile {
+        
+        reg {
+            name="RX Turnstile Window Target";
+            desc="Sets when the RX Turnstile counters rollover.  Hardware is notified by a hardware strobe.";
+            
+            field {
+                hw=r; sw=w;
+                reset=32'd0;
+                swmod;
+            } dword[31:0];
+        } rxt_window_target; 
+        
+        reg {
+            name="Aligned Sample Count";
+            desc="Contains the counter of the Aligned Sample Counter";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } dword[31:0];
+        } rxt_aligned_sample_counter; 
+        
+        reg {
+            name="Aligned Frame Count";
+            desc="Contains the counter of the Aligned Frame Counter";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } dword[31:0];
+        } rxt_aligned_frame_counter; 
+        
+        reg {
+            name="Unaligned Sample Count";
+            desc="Contains the counter of the Unaligned Sample Counter";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } dword[31:0];
+        } rxt_unaligned_sample_counter; 
+        
+        reg {
+            name="Unaligned Frame Count";
+            desc="Contains the counter of the Unaligned Sample Counter";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } dword[31:0];
+        } rxt_unaligned_frame_counter; 
+        
+        reg {
+            name="Trigger Target Frame";
+            desc="Sets when the Rx Tursnstile should schedule Trigger target Frame";
+            
+            field {
+                hw=r; sw=w;
+                reset=32'd0;
+            } dword[31:0];
+        } rxt_trigger_target_frame;
+        
+        reg {
+            name="Trigger Target Sample";
+            desc="Sets when the Rx Tursnstile should schedule Trigger target Sample.  Hardware is notified by a hardware strobe so set Trigger Target Frame first.";
+            
+            field {
+                hw=r; sw=w;
+                reset=32'd0;
+                swmod;
+            } dword[31:0];
+        } rxt_trigger_target_sample;
+
+        reg {
+            name="Debug Lower Bits Sample Count";
+            desc="Contains the Lower 16-bits of the Unaligned and Aligned Counters Respectively/";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } dword[31:0];
+        } rxt_dbg_sample_counter;         
+        
+
+    } rf1 @0x10000;
+    
+    regfile {
+     
+        reg {
+            name="Polyphase Filter Gain";
+            desc="Controls gain of the polyphase filter output.  Gain = 2^(decimal value of this register).";
+            
+            field {
+                hw=r; sw=w;
+                reset=4'd0;
+            } pow2[3:0];
+        } ppf_gain;
+
+        reg {
+            name="Polyphase Filter Output Saturated";
+            desc="When set, indicates that the output of the Polyphase Filter has saturated, indicating that software might want to reduce the gain.";
+            
+            field {
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } happened;
+        } ppf_out_sat;
+
+        reg {
+            name="FFT Reorderer Overflow";
+            desc="When set, indicates that the Reorderer block feeding the FFT experienced an overflow.";
+
+            field {
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } happened;
+        } fft_reorderer_overflow;
+        
+        reg {
+            name="FFT Rounding Schedule.";
+            desc="Every two bits controls whether to round down by 0, 1, 2, or 3 bits at each stage of the FFT.  Bits [1:0] control the first stage, [3:2] the second stage, etc.";
+            
+            field {
+                hw=r; sw=w;
+                reset=20'b00000000001010101010;  
+            } schedudle[19:0];
+        } fft_rounding;
+        
+        reg {
+            name="FFT Underflow";
+            desc="When set, indicates that the FFT experienced an underflow on its input.";
+            
+            field {
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } happened;
+        } fft_underflow;
+
+        reg {
+            name="FFT Overflow";
+            desc="When set, indicates that the FFT experienced an overflow on its input.";
+            
+            field {
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } happened;
+        } fft_overflow;
+
+        reg {
+            name="FFT Stage Saturation";
+            desc="When set, indicates that the FFT stage saturated and that software may want to increase the rounding schedule.  The addresses of these registers ascend with increasing FFT stage so the lowest address corresponds to the first FFT stage.";
+            
+            field {
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } happened;
+        } fft_stage_sat[10];
+        
+    
+    } rf2 @0x20000;
+    
+} REGS;

@@ -1,0 +1,124 @@
+<Project ModBy="Inserter" SigType="1" Name="/home/xy/insidework/software_parent_repo/higgs_sdr_rev2/fpgas/grav/eth/build/debug/eth_to_cs_cmd.rvl" Date="2018-06-21">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="eth_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="162232296" Name="eth_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/eth_mac_rx_clk" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="2048"/>
+            <Capture Mode="0" MinSamplesPerTrig="32"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_eth_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/un1_i_rx_write_c1"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_wren"/>
+                <Bus Name="cbuf_wr_fsm_state">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_wr_fsm_state[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_wr_fsm_state[1]"/>
+                </Bus>
+                <Bus Name="cbuf_rd_fsm_state">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[7]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[8]"/>
+                </Bus>
+                <Bus Name="cbuf_head">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[7]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[8]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[9]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[10]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[11]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[12]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[13]"/>
+                </Bus>
+                <Bus Name="cbuf_tail">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[7]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[8]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[9]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[10]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[11]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[12]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[13]"/>
+                </Bus>
+                <Bus Name="cbuf_raddr">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[7]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[8]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[9]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[10]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[11]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[12]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[13]"/>
+                </Bus>
+                <Bus Name="cbuf_waddr">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[7]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[8]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[9]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[10]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[11]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[12]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[13]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/o_eth_frame_circ_buf_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/o_ipv4_pkt_fifo_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/o_arp_pkt_fifo_overflow"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_rx_write"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/mac_rx_eof"/>
+                <Bus Name="mac_rx_fifodata_aka_i_rx_dbout">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[7]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/arp_pkt_fifo_afull"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ipv4_pkt_fifo_afull"/>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/o_eth_frame_circ_buf_overflow,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/mac_rx_eof,"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_write,"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

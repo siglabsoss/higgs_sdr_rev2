@@ -1,0 +1,5 @@
+#Start recording tcl command: 3/7/2017 12:04:31
+#Project Location: C:/FPGA/sys-builds/graviton_sdr/fpgas/eth/ip/lattice/eth_mac/gbit_mac/ts_mac_eval/gbit_mac/impl/synplify; Project name: gbit_mac_core_only_eval
+prj_project open "C:/FPGA/sys-builds/graviton_sdr/fpgas/eth/ip/lattice/eth_mac/gbit_mac/ts_mac_eval/gbit_mac/impl/synplify/gbit_mac_core_only_eval.ldf"
+prj_project close
+#Stop recording: 3/7/2017 12:04:44

@@ -1,0 +1,151 @@
+<Project ModBy="Inserter" Name="/home/xy/insidework/software_parent_repo/higgs_sdr_rev2/fpgas/cs/cs20/build/debug/cs20_top.rvl" Date="2019-04-08">
+    <Core Name="cs20_top_LA0">
+        <Setting>
+            <Capture SamplesPerTrig="1" NumTrigsCap=""/>
+            <Event EventCnt="" CntEnableRun=""/>
+            <TrigSetting PreTrgSamples="" AND_ALL="" PostTrgSamples="" TURadix="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Name="vex_machine_top_inst/temp_valid"/>
+                <Bus Name="temp_data" Radix="0">
+                    <Sig Name="vex_machine_top_inst/temp_data[0]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[1]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[2]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[3]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[4]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[5]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[6]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[7]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[8]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[9]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[10]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[11]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[12]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[13]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[14]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[15]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[16]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[17]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[18]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[19]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[20]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[21]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[22]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[23]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[24]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[25]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[26]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[27]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[28]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[29]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[30]"/>
+                    <Sig Name="vex_machine_top_inst/temp_data[31]"/>
+                </Bus>
+                <Sig Name="vex_machine_top_inst/riscv_in_valid"/>
+                <Bus Name="riscv_in_data3" Radix="0">
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[0]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[1]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[2]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[3]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[4]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[5]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[6]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[7]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[8]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[9]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[10]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[11]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[12]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[13]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[14]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[15]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[16]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[17]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[18]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[19]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[20]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[21]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[22]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[23]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[24]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[25]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[26]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[27]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[28]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[29]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[30]"/>
+                    <Sig Name="vex_machine_top_inst/riscv_in_data[31]"/>
+                </Bus>
+                <Sig Name="vex_machine_top_inst/half_clock"/>
+                <Sig Name="vex_machine_top_inst/conv_i0_valid"/>
+                <Sig Name="vex_machine_top_inst/conv_i0_ready"/>
+                <Bus Name="conv_data" Radix="0">
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[0]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[1]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[2]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[3]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[4]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[5]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[6]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[7]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[8]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[9]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[10]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[11]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[12]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[13]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[14]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[15]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[16]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[17]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[18]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[19]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[20]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[21]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[22]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[23]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[24]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[25]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[26]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[27]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[28]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[29]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[30]"/>
+                    <Sig Name="vex_machine_top_inst/conv_i0_data[31]"/>
+                </Bus>
+                <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/afull_n_8"/>
+                <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/conv_i0_ready"/>
+                <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/conv_i0_valid"/>
+                <Bus Name="fillcount" Radix="0">
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[0]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[1]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[2]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[3]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[4]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[5]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[6]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[7]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[8]"/>
+                    <Sig Name="vex_machine_top_inst/genblk1.in_buffer/le_fifo_sc/un1_fillcountf[9]"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Operator="0" Name="TU2" ID="1" Value="0" Radix="2"/>
+                <TU Operator="1" Name="TU3" ID="2" Value="0" Radix="0"/>
+                <TU Operator="1" Name="TU4" ID="3" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU5" ID="4" Value="0000000000" Radix="0"/>
+                <TU Operator="1" Name="TU6" ID="5" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU7" ID="6" Value="0" Radix="0"/>
+                <TU Operator="1" Name="TU8" ID="7" Value="0" Radix="0"/>
+                <TE Enable="1" Expression="TU2" Name="TE2" ID="1"/>
+                <TE Enable="1" Expression="TU3" Name="TE3" ID="2"/>
+                <TE Enable="1" Expression="TU4" Name="TE4" ID="3"/>
+                <TE Enable="1" Expression="TU5" Name="TE5" ID="4"/>
+                <TE Enable="1" Expression="TU6" Name="TE6" ID="5"/>
+                <TE Enable="1" Expression="TU7" Name="TE7" ID="6"/>
+                <TE Enable="1" Expression="TU8" Name="TE8" ID="7"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

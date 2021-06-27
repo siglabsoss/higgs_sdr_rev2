@@ -1,0 +1,27 @@
+/-----------\
+| Eth Mac   |
+\----+--+---/
+
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     
+   /---------=--\                         /----------------------------\                             |                                        /--------------------------\        |                                                 
+   | FB to PC   +--------*----------------| fifo_dc_adc  1/4           +-----------------------------|--------------------------------------> +  udp_packetizer_VC       +------> |                                                    
+   \---------=--/                         +----------------------------+                             |     i_vc_pktzr_start                   |                          |        |                                                  
+                                          | * capacity 1024            |                             |     o_vc_pktzr_start_ack               |                          |        |                                                                     
+                                          | * afull 367                |                             |     o_vc_pktzr_done                    |                          |        |                                                                
+                                          | * pmi_fifo                 |                             |     i_vc_pktzr_data_byte_vld           |                          |        |                                                                         
+                                          \----------------------------/                             |     i_vc_pktzr_data_byte               \--------------------------/        |                                                                     
+                                 split_fb_valid   |  adc_pktzr_data_byte_rd                          |     o_vc_pktzr_data_byte_rd                        |  tx_src_byte_vld[2]   |                                                                  
+                                 split_fb_data    :  adc_pktzr_data_byte                             |                                                    :  tx_src_last_byte[2]  |                                            
+                                 fifo_dc_adc_full |  adc_pktzr_data_byte_vld                         |                                                    |  tx_src_byte[2]       |                                            
+                                                  |                                                  |                                                    |  tx_src_byte_rd[2]    |                                                                           
+                                                                                                     |                                                                            |                      
+                                                                                                     |                                                                            |                          
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     
+                                                                                                     |                                                                            |                     

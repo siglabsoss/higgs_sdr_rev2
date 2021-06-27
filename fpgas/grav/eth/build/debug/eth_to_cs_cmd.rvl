@@ -1,0 +1,213 @@
+<Project ModBy="Inserter" SigType="1" Name="C:/FPGA/higgs_sdr_rev2/fpgas/grav/eth/build/debug/eth_to_cs_cmd.rvl" Date="2019-03-13">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="eth_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="215695799" Name="eth_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="sys_clk" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="512"/>
+            <Capture Mode="0" MinSamplesPerTrig="32"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_eth_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Bus Name="riscv_in_data">
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[0]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[1]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[2]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[3]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[4]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[5]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[6]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[7]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[8]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[9]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[10]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[11]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[12]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[13]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[14]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[15]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[16]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[17]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[18]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[19]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[20]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[21]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[22]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[23]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[24]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[25]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[26]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[27]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[28]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[29]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[30]"/>
+                    <Sig Type="SIG" Name="q_engine_inst/riscv_in_data[31]"/>
+                </Bus>
+                <Bus Name="riscv_out_data">
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[0]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[1]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[2]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[3]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[4]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[5]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[6]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[7]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[8]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[9]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[10]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[11]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[12]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[13]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[14]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[15]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[16]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[17]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[18]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[19]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[20]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[21]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[22]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[23]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[24]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[25]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[26]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[27]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[28]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[29]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[30]"/>
+                    <Sig Type="SIG" Name="fifo_dc_rb/riscv_out_data[31]"/>
+                </Bus>
+                <Sig Type="SIG" Name="riscv_in_valid"/>
+                <Sig Type="SIG" Name="o_ringbus"/>
+                <Bus Name="eth_o_data">
+                    <Sig Type="SIG" Name="eth_o_data[0]"/>
+                    <Sig Type="SIG" Name="eth_o_data[1]"/>
+                    <Sig Type="SIG" Name="eth_o_data[2]"/>
+                    <Sig Type="SIG" Name="eth_o_data[3]"/>
+                    <Sig Type="SIG" Name="eth_o_data[4]"/>
+                    <Sig Type="SIG" Name="eth_o_data[5]"/>
+                    <Sig Type="SIG" Name="eth_o_data[6]"/>
+                    <Sig Type="SIG" Name="eth_o_data[7]"/>
+                    <Sig Type="SIG" Name="eth_o_data[8]"/>
+                    <Sig Type="SIG" Name="eth_o_data[9]"/>
+                    <Sig Type="SIG" Name="eth_o_data[10]"/>
+                    <Sig Type="SIG" Name="eth_o_data[11]"/>
+                    <Sig Type="SIG" Name="eth_o_data[12]"/>
+                    <Sig Type="SIG" Name="eth_o_data[13]"/>
+                    <Sig Type="SIG" Name="eth_o_data[14]"/>
+                    <Sig Type="SIG" Name="eth_o_data[15]"/>
+                    <Sig Type="SIG" Name="eth_o_data[16]"/>
+                    <Sig Type="SIG" Name="eth_o_data[17]"/>
+                    <Sig Type="SIG" Name="eth_o_data[18]"/>
+                    <Sig Type="SIG" Name="eth_o_data[19]"/>
+                    <Sig Type="SIG" Name="eth_o_data[20]"/>
+                    <Sig Type="SIG" Name="eth_o_data[21]"/>
+                    <Sig Type="SIG" Name="eth_o_data[22]"/>
+                    <Sig Type="SIG" Name="eth_o_data[23]"/>
+                    <Sig Type="SIG" Name="eth_o_data[24]"/>
+                    <Sig Type="SIG" Name="eth_o_data[25]"/>
+                    <Sig Type="SIG" Name="eth_o_data[26]"/>
+                    <Sig Type="SIG" Name="eth_o_data[27]"/>
+                    <Sig Type="SIG" Name="eth_o_data[28]"/>
+                    <Sig Type="SIG" Name="eth_o_data[29]"/>
+                    <Sig Type="SIG" Name="eth_o_data[30]"/>
+                    <Sig Type="SIG" Name="eth_o_data[31]"/>
+                </Bus>
+                <Sig Type="SIG" Name="eth_o_data_vld"/>
+                <Bus Name="cs30_data_in">
+                    <Sig Type="SIG" Name="cs30_data_in[0]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[1]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[2]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[3]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[4]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[5]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[6]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[7]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[8]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[9]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[10]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[11]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[12]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[13]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[14]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[15]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[16]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[17]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[18]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[19]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[20]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[21]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[22]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[23]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[24]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[25]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[26]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[27]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[28]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[29]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[30]"/>
+                    <Sig Type="SIG" Name="cs30_data_in[31]"/>
+                </Bus>
+                <Bus Name="mac_tx_fifodata">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_fifodata[7]"/>
+                </Bus>
+                <Bus Name="mac_rx_fifodata">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_fifodata[7]"/>
+                </Bus>
+                <Bus Name="arp_fsm_state">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/arp_reply/arp_fsm_state[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/arp_reply/arp_fsm_state[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/arp_reply/arp_fsm_state[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/arp_reply/arp_fsm_state[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/arp_reply/arp_fsm_state[4]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte_vld"/>
+                <Bus Name="arp_pkt_byte">
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[0]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[1]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[2]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[3]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[4]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[5]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[6]"/>
+                    <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[7]"/>
+                </Bus>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_macread"/>
+                <Sig Type="SIG" Name="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_write"/>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="riscv_in_valid,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="eth_o_data_vld,"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="cs30_data_in[0],cs30_data_in[1],cs30_data_in[2],cs30_data_in[3],cs30_data_in[4],cs30_data_in[5],cs30_data_in[6],cs30_data_in[7],cs30_data_in[8],cs30_data_in[9],cs30_data_in[10],cs30_data_in[11],cs30_data_in[12],cs30_data_in[13],cs30_data_in[14],cs30_data_in[15],cs30_data_in[16],cs30_data_in[17],cs30_data_in[18],cs30_data_in[19],cs30_data_in[20],cs30_data_in[21],cs30_data_in[22],cs30_data_in[23],cs30_data_in[24],cs30_data_in[25],cs30_data_in[26],cs30_data_in[27],cs30_data_in[28],cs30_data_in[29],cs30_data_in[30],cs30_data_in[31],"/>
+                <TU Serialbits="0" Type="0" ID="4" Sig="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte_vld,"/>
+                <TU Serialbits="0" Type="0" ID="5" Sig="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[0],ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[1],ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[2],ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[3],ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[4],ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[5],ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[6],ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ARP_PKT_FIFO/arp_pkt_byte[7],"/>
+                <TU Serialbits="0" Type="0" ID="6" Sig="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_rx_write,"/>
+                <TU Serialbits="0" Type="0" ID="7" Sig="ETH_MEGA_WRAPPER/ETH_MAC_WRAPPER/eth_mac/mac_tx_macread,"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="4" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="5" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="6" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="7" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

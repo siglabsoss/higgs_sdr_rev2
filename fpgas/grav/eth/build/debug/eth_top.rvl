@@ -1,0 +1,291 @@
+<Project ModBy="Inserter" SigType="1" Name="C:/FPGA/higgs_sdr_rev2-ryan/fpgas/grav/eth/build/debug/eth_top.rvl" Date="2017-11-09">
+    <IP Version="1_5_062609"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="eth_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="114505714" Name="cmd_mib_LA" ID="0">
+        <Setting>
+            <Clock SampleClk="clk12_5" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="2048"/>
+            <Capture Mode="0" MinSamplesPerTrig="32"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_eth_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="cmd_mib.ack"/>
+                <Sig Type="SIG" Name="cmd_mib.rd_wr_n"/>
+                <Sig Type="SIG" Name="cmd_mib.sel"/>
+                <Bus Name="cmd_mib_byte_addr">
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[0]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[1]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[2]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[3]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[4]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[5]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[6]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[7]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[8]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[9]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[10]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[11]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[12]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[13]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[14]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[15]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[16]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[17]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[18]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[19]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[20]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[21]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[22]"/>
+                    <Sig Type="SIG" Name="cmd_mib.byte_addr[23]"/>
+                </Bus>
+                <Bus Name="cmd_mib_wdata">
+                    <Sig Type="SIG" Name="cmd_mib.wdata[0]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[1]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[2]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[3]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[4]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[5]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[6]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[7]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[8]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[9]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[10]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[11]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[12]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[13]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[14]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[15]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[16]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[17]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[18]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[19]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[20]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[21]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[22]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[23]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[24]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[25]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[26]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[27]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[28]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[29]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[30]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[31]"/>
+                </Bus>
+                <Bus Name="cmd_mib_rdata">
+                    <Sig Type="SIG" Name="cmd_mib.rdata[0]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[1]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[2]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[3]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[4]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[5]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[6]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[7]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[8]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[9]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[10]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[11]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[12]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[13]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[14]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[15]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[16]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[17]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[18]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[19]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[20]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[21]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[22]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[23]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[24]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[25]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[26]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[27]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[28]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[29]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[30]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[31]"/>
+                </Bus>
+                <Sig Type="SIG" Name="mib_master/mib_slave_ack_reg"/>
+                <Bus Name="mib_ad_reg">
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[0]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[1]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[2]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[3]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[4]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[5]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[6]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[7]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[8]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[9]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[10]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[11]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[12]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[13]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[14]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_reg[15]"/>
+                </Bus>
+                <Sig Type="SIG" Name="mib_master/mib_ad_int_high_z"/>
+                <Sig Type="SIG" Name="mib_master/mib_ack_timeout_flag"/>
+                <Bus Name="mib_ad_int">
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[0]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[1]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[2]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[3]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[4]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[5]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[6]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[7]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[8]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[9]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[10]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[11]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[12]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[13]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[14]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_ad_int[15]"/>
+                </Bus>
+                <Bus Name="mib_master_fsm_state">
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[0]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[1]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[2]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[3]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[4]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[5]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[6]"/>
+                    <Sig Type="SIG" Name="mib_master/mib_master_fsm_state[7]"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="cmd_mib.sel,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="cmd_mib.ack,"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="cmd_mib.byte_addr[0],cmd_mib.byte_addr[1],cmd_mib.byte_addr[2],cmd_mib.byte_addr[3],cmd_mib.byte_addr[4],cmd_mib.byte_addr[5],cmd_mib.byte_addr[6],cmd_mib.byte_addr[7],cmd_mib.byte_addr[8],cmd_mib.byte_addr[9],cmd_mib.byte_addr[10],cmd_mib.byte_addr[11],cmd_mib.byte_addr[12],cmd_mib.byte_addr[13],cmd_mib.byte_addr[14],cmd_mib.byte_addr[15],cmd_mib.byte_addr[16],cmd_mib.byte_addr[17],cmd_mib.byte_addr[18],cmd_mib.byte_addr[19],cmd_mib.byte_addr[20],cmd_mib.byte_addr[21],cmd_mib.byte_addr[22],cmd_mib.byte_addr[23],"/>
+                <TE MaxSequence="1" MaxEvnCnt="1" ID="1" Resource="1"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="114505715" Name="cmd_eth_LA" ID="1">
+        <Setting>
+            <Clock SampleClk="clk125" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="2048"/>
+            <Capture Mode="0" MinSamplesPerTrig="8"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_eth_top_LA1_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="cmd_eth[1].ack"/>
+                <Sig Type="SIG" Name="cmd_eth[1].sel"/>
+                <Sig Type="SIG" Name="cmd_eth[0].rd_wr_n"/>
+                <Bus Name="cmd_eth1_rdata">
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[0]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[1]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[2]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[3]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[4]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[5]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[6]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[7]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[8]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[9]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[10]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[11]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[12]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[13]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[14]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[15]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[16]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[17]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[18]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[19]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[20]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[21]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[22]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[23]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[24]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[25]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[26]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[27]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[28]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[29]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[30]"/>
+                    <Sig Type="SIG" Name="cmd_eth[1].rdata[31]"/>
+                </Bus>
+                <Bus Name="cmd_eth1_wdata">
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[0]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[1]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[2]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[3]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[4]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[5]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[6]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[7]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[8]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[9]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[10]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[11]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[12]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[13]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[14]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[15]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[16]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[17]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[18]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[19]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[20]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[21]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[22]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[23]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[24]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[25]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[26]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[27]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[28]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[29]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[30]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].wdata[31]"/>
+                </Bus>
+                <Bus Name="cmd_eth1_byte_addr">
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[0]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[1]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[2]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[3]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[4]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[5]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[6]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[7]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[8]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[9]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[10]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[11]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[12]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[13]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[14]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[15]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[16]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[17]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[18]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[19]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[20]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[21]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[22]"/>
+                    <Sig Type="SIG" Name="cmd_eth[0].byte_addr[23]"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="cmd_eth[1].sel,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="cmd_eth[1].ack,"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="cmd_eth[0].byte_addr[0],cmd_eth[0].byte_addr[1],cmd_eth[0].byte_addr[2],cmd_eth[0].byte_addr[3],cmd_eth[0].byte_addr[4],cmd_eth[0].byte_addr[5],cmd_eth[0].byte_addr[6],cmd_eth[0].byte_addr[7],cmd_eth[0].byte_addr[8],cmd_eth[0].byte_addr[9],cmd_eth[0].byte_addr[10],cmd_eth[0].byte_addr[11],cmd_eth[0].byte_addr[12],cmd_eth[0].byte_addr[13],cmd_eth[0].byte_addr[14],cmd_eth[0].byte_addr[15],cmd_eth[0].byte_addr[16],cmd_eth[0].byte_addr[17],cmd_eth[0].byte_addr[18],cmd_eth[0].byte_addr[19],cmd_eth[0].byte_addr[20],cmd_eth[0].byte_addr[21],cmd_eth[0].byte_addr[22],cmd_eth[0].byte_addr[23],"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

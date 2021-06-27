@@ -1,0 +1,37 @@
+[Device]
+Family=sa5p00
+PartType=LFE5U-85F
+PartName=LFE5U-85F-8BG756C
+SpeedGrade=8
+Package=CABGA756
+OperatingCondition=COM
+Status=S
+
+[IP]
+VendorName=Lattice Semiconductor Corporation
+CoreType=IPCFG
+CoreStatus=Demo
+CoreName=Tri-Speed Ethernet MAC
+CoreRevision=4.1
+ModuleName=gbit_mac
+SourceFormat=verilog
+ParameterFileVersion=1.0
+Date=03/01/2017
+Time=15:46:23
+
+[Parameters]
+MIIM=No
+MODE=Gbit MAC
+MODS_TOOL=1
+ALDC_TOOL=1
+MULT_WB=NO
+LOOPBACK=NO
+STAT_REGS=NO
+CORE_SYNP=1
+
+[Files]
+Synthesis=
+Simulation=
+Logical=
+Physical=
+Misc=

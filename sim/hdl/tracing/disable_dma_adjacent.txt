@@ -1,0 +1,5 @@
+`verilator_config
+tracing_off -file "../../../fpgas/common/modules/demapper/demapper.sv"
+tracing_off -file "../../../libs/q-engine/hdl/slicer.v"
+tracing_off -file "../../../libs/q-engine/hdl/nco/*.v"
+`verilog

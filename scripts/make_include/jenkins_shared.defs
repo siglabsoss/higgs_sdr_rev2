@@ -1,0 +1,44 @@
+# included by both root makefile and per fpga file (comes first)
+
+
+JENKINS_JOB_NAME=ben_try2
+JENKINS_SERVER=FIXME:8080
+#JENKINS_URL=http://jenkins.siglabs:8080
+JENKINS_API_USER=FIXME
+JENKINS_API_TOKEN=FIXME
+BUILD_REMOTE=FIXME
+
+jenkins_add_remote:
+	git remote add buildrepo $(BUILD_REMOTE)
+
+
+# normal git remote show
+jenkins_see_remote:
+	git remote -v
+
+
+# HIGGS_ROOT  = set outside this file
+# JENKINS_LOCAL=.jenkins
+# JENKINS_LOCAL_ROOT:=$(HIGGS_ROOT)/fpgas/cs/$(FPGA_NAME)/build/$(JENKINS_LOCAL)
+# JENKINS_LOCAL_GIT:=$(JENKINS_LOCAL_ROOT)/gitroot
+# JENKINS_COOKIE_FILE0:=.jenkins_remote_build_cookie
+# JENKINS_COOKIE_FILE1:=.jenkins_remote_build_cookie_hash
+# JENKINS_COOKIE_CONTENTS=$(shell cat .jenkins_remote_build_cookie_hash)
+
+
+
+
+# load order from a subfpga is
+# makefile in a fpga folder
+#
+#  below is indented for which Makefile includes the other, in order
+#
+#######################3
+#   include this_fgpa
+#   include Makefile_fpga
+#     include higgs_core.defs
+#       include user_settings
+#     include jenkins_shared
+#     include jenkins_fpga
+
+

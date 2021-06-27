@@ -1,0 +1,29 @@
+SCUBA, Version Diamond (64-bit) 3.9.1.119
+Thu Nov 02 22:54:44 2017
+  
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+  
+BEGIN SCUBA Module Synthesis
+  
+    Issued command   : C:\lscc\diamond\3.9_x64\ispfpga\bin\nt64\scuba.exe -w -n dac_tx_2x_ddr -lang verilog -synth synplify -bus_exp 7 -bb -arch sa5p00 -type iol -mode Transmit -io_type LVDS -width 17 -freq_in 250 -gear 4 -del -1 -pll 125 
+    Circuit name     : dac_tx_2x_ddr
+    Module type      : iol
+    Module Version   : 5.8
+    Ports            : 
+    Inputs       : pll_reset, refclk, sync_clk, sync_reset, data[67:0]
+    Outputs      : clkout, ready, sclk, dout[16:0]
+    I/O buffer       : not inserted
+    EDIF output      : dac_tx_2x_ddr.edn
+    Verilog output   : dac_tx_2x_ddr.v
+    Verilog template : dac_tx_2x_ddr_tmpl.v
+    Verilog purpose  : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : dac_tx_2x_ddr.srp
+    Estimated Resource Usage:
+  
+END   SCUBA Module Synthesis
+

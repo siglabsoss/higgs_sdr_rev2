@@ -1,0 +1,29 @@
+<Project ModBy="Inserter" SigType="1" Name="/home/janson/higgs_sdr_rev2/fpgas/grav/dac/build/debug/dac_top.rvl" Date="2018-03-28">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="dac_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="150535529" Name="dac_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="sys_clk" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="8192"/>
+            <Capture Mode="0" MinSamplesPerTrig="32"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_dac_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Bus Name="dac_sample">
+                    <Sig Type="SIG" Name="dac_sample_cdc_fifo_wdata[1]"/>
+                </Bus>
+                <Sig Type="SIG" Name="TX_3V3_A_c"/>
+                <Sig Type="SIG" Name="TX_3V3_B_c"/>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="TX_3V3_A_c,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="TX_3V3_B_c,"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

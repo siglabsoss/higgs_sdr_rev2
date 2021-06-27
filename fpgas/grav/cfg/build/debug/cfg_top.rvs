@@ -1,0 +1,27 @@
+<Project ModBy="Inserter" Name="/home/janson/higgs_sdr_rev2/fpgas/grav/cfg/build/debug/cfg_top.rvl" Date="2018-03-19">
+    <Core Name="cfg_top_LA0">
+        <Setting>
+            <Capture SamplesPerTrig="1" NumTrigsCap=""/>
+            <Event EventCnt="" CntEnableRun=""/>
+            <TrigSetting PreTrgSamples="" AND_ALL="" PostTrgSamples="" TURadix="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Name="MIB_AD_c[17]"/>
+                <Sig Name="MIB_AD_c[18]"/>
+                <Sig Name="MIB_AD_c[19]"/>
+                <Sig Name="MIB_AD_c[20]"/>
+            </Trace>
+            <Trigger>
+                <TU Operator="0" Name="TU1" ID="1" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU2" ID="2" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU3" ID="3" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU4" ID="4" Value="0" Radix="0"/>
+                <TE Enable="1" Expression="TU1" Name="TE1" ID="1"/>
+                <TE Enable="1" Expression="TU2" Name="TE2" ID="2"/>
+                <TE Enable="1" Expression="TU3" Name="TE3" ID="3"/>
+                <TE Enable="1" Expression="TU4" Name="TE4" ID="4"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

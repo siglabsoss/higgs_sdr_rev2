@@ -1,0 +1,76 @@
+
+
+
+
+##############
+#
+#    reveal stuff
+#
+#
+
+
+
+
+
+
+
+.PHONY: reveal_print_add_bus
+
+
+###########
+# this requires that a few things be added
+#
+#
+#   RVA_ARG_BUS_NAME
+#   RVA_ARG_BUS_
+#   RVA_ARG_SIG_NAME
+#   RVA_ARG_SIG_COUNT
+
+
+# RVA_ARG_BUS_NAME=counter1
+# RVA_ARG_SIG_COUNT=31
+# RVA_ARG_SIG_NAME=dummy_gen_inst/counter1
+
+
+# RVA_ARG_BUS_NAME=pat2
+# RVA_ARG_SIG_COUNT=31
+# RVA_ARG_SIG_NAME=regs/d2l_rf1_pattern_w
+
+RVA_ARG_BUS_NAME=stratch_reg
+RVA_ARG_SIG_COUNT=31
+RVA_ARG_SIG_NAME=regs/l2d_rf0_sw_scratch_r
+
+
+
+RPAS:=$(shell seq 0 ${RVA_ARG_SIG_COUNT})
+
+help4:
+	echo $(RPAS)
+
+reveal_print_add_signals:
+	@$(ECHO) ""
+	@$(ECHO) -n "rvl_trace add_sig "
+	@$(ECHO) -n "{"
+	@$(foreach INCVAR, $(RPAS),$(ECHO) -n "{$(RVA_ARG_SIG_NAME)[$(INCVAR)]} ";)
+	@$(ECHO) -n "}"
+	@$(ECHO) ""
+
+
+reveal_print_add_bus:
+	@$(ECHO) ""
+	@$(ECHO) -n "rvl_trace group -bus $(RVA_ARG_BUS_NAME) "
+	@$(ECHO) -n "{"
+	@$(foreach INCVAR, $(RPAS),$(ECHO) -n "{$(RVA_ARG_SIG_NAME)[$(INCVAR)]} ";)
+	@$(ECHO) -n "}"
+	@$(ECHO) ""
+
+
+reveal_sugar:
+	@make --silent reveal_print_add_signals
+	@make --silent reveal_print_add_bus
+
+
+
+# graveyard
+#
+#  Starting: "rvl_trace move_sig -move_to .end. {data_inph}"

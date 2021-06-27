@@ -1,0 +1,98 @@
+<Project ModBy="Inserter" SigType="1" Name="E:/higgs_sdr_rev2_master/fpgas/cs/cs11/build/debug/cs11_top.rvl" Date="2018-04-19">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="cs11_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="153563929" Name="cs00_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="sys_clk" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="4096"/>
+            <Capture Mode="0" MinSamplesPerTrig="16"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_cs00_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Bus Name="riscv_in_data">
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[0]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[1]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[2]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[3]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[4]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[5]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[6]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[7]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[8]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[9]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[10]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[11]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[12]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[13]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[14]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[15]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[16]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[17]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[18]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[19]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[20]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[21]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[22]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[23]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[24]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[25]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[26]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[27]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[28]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[29]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[30]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_data[31]"/>
+                </Bus>
+                <Sig Type="SIG" Name="vex_machine_top_inst/riscv_in_ready"/>
+                <Bus Name="riscv_out_data">
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[0]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[1]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[2]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[3]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[4]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[5]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[6]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[7]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[8]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[9]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[10]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[11]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[12]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[13]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[14]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[15]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[16]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[17]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[18]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[19]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[20]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[21]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[22]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[23]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[24]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[25]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[26]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[27]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[28]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[29]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[30]"/>
+                    <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_data[31]"/>
+                </Bus>
+                <Sig Type="SIG" Name="vex_machine_top_inst/riscv_out_valid"/>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="vex_machine_top_inst/riscv_out_valid,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="vex_machine_top_inst/riscv_out_data[0],vex_machine_top_inst/riscv_out_data[1],vex_machine_top_inst/riscv_out_data[2],vex_machine_top_inst/riscv_out_data[3],vex_machine_top_inst/riscv_out_data[4],vex_machine_top_inst/riscv_out_data[5],vex_machine_top_inst/riscv_out_data[6],vex_machine_top_inst/riscv_out_data[7],vex_machine_top_inst/riscv_out_data[8],vex_machine_top_inst/riscv_out_data[9],vex_machine_top_inst/riscv_out_data[10],vex_machine_top_inst/riscv_out_data[11],vex_machine_top_inst/riscv_out_data[12],vex_machine_top_inst/riscv_out_data[13],vex_machine_top_inst/riscv_out_data[14],vex_machine_top_inst/riscv_out_data[15],vex_machine_top_inst/riscv_out_data[16],vex_machine_top_inst/riscv_out_data[17],vex_machine_top_inst/riscv_out_data[18],vex_machine_top_inst/riscv_out_data[19],vex_machine_top_inst/riscv_out_data[20],vex_machine_top_inst/riscv_out_data[21],vex_machine_top_inst/riscv_out_data[22],vex_machine_top_inst/riscv_out_data[23],vex_machine_top_inst/riscv_out_data[24],vex_machine_top_inst/riscv_out_data[25],vex_machine_top_inst/riscv_out_data[26],vex_machine_top_inst/riscv_out_data[27],vex_machine_top_inst/riscv_out_data[28],vex_machine_top_inst/riscv_out_data[29],vex_machine_top_inst/riscv_out_data[30],vex_machine_top_inst/riscv_out_data[31],"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="vex_machine_top_inst/riscv_in_ready,"/>
+                <TU Serialbits="0" Type="0" ID="4" Sig="vex_machine_top_inst/riscv_in_data[0],vex_machine_top_inst/riscv_in_data[1],vex_machine_top_inst/riscv_in_data[2],vex_machine_top_inst/riscv_in_data[3],vex_machine_top_inst/riscv_in_data[4],vex_machine_top_inst/riscv_in_data[5],vex_machine_top_inst/riscv_in_data[6],vex_machine_top_inst/riscv_in_data[7],vex_machine_top_inst/riscv_in_data[8],vex_machine_top_inst/riscv_in_data[9],vex_machine_top_inst/riscv_in_data[10],vex_machine_top_inst/riscv_in_data[11],vex_machine_top_inst/riscv_in_data[12],vex_machine_top_inst/riscv_in_data[13],vex_machine_top_inst/riscv_in_data[14],vex_machine_top_inst/riscv_in_data[15],vex_machine_top_inst/riscv_in_data[16],vex_machine_top_inst/riscv_in_data[17],vex_machine_top_inst/riscv_in_data[18],vex_machine_top_inst/riscv_in_data[19],vex_machine_top_inst/riscv_in_data[20],vex_machine_top_inst/riscv_in_data[21],vex_machine_top_inst/riscv_in_data[22],vex_machine_top_inst/riscv_in_data[23],vex_machine_top_inst/riscv_in_data[24],vex_machine_top_inst/riscv_in_data[25],vex_machine_top_inst/riscv_in_data[26],vex_machine_top_inst/riscv_in_data[27],vex_machine_top_inst/riscv_in_data[28],vex_machine_top_inst/riscv_in_data[29],vex_machine_top_inst/riscv_in_data[30],vex_machine_top_inst/riscv_in_data[31],"/>
+                <TE MaxSequence="1" MaxEvnCnt="1" ID="1" Resource="1"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="4" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

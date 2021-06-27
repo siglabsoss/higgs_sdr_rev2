@@ -1,0 +1,166 @@
+##################
+#
+#  This is the main "Per FPGA" makefile.
+#
+#  therefore targets available to developers while in a build/ folder for a specific fpga are found here
+#
+#
+
+# due to an oversight, these are required to be defined twice, once here and once in Makefile.
+CS_FPGAS := cs00 cs01 cs02 cs03 cs10 cs11 cs12 cs13 cs20 cs21 cs22 cs23 cs30 cs31 cs32 cs33 cscfg
+GRAV_FPGAS := adc cfg dac eth
+ALL_FPGAS := $(CS_FPGAS) $(GRAV_FPGAS)
+
+
+
+# must come before higgs_core.defs
+# because this_fpga doesn't define any targets, we can put this "all" target after it
+
+
+
+
+
+ifdef FPGA_HAS_Q_ENGINE
+all: make_tmp_dir copy_eth_mif mif bitfile svf
+else
+all: make_tmp_dir copy_eth_mif bitfile svf
+# Disabled for grav3
+# all950: make_tmp_dir copy_eth_mif bitfile950 svf cfg_950_post
+endif
+
+
+
+C_BUILD_DIR=../c
+BUILD_TMP=build/tmp
+MIF_OUT_TARGETS=$(BUILD_TMP)/scalar0.mif $(BUILD_TMP)/scalar1.mif $(BUILD_TMP)/scalar2.mif $(BUILD_TMP)/scalar3.mif
+
+.PHONY: copy_eth_mif make_tmp_dir
+
+make_tmp_dir:
+	mkdir -p tmp
+
+copy_eth_mif:
+	ls ../../../common/modules/mapper_mover/*mif; true
+	cp ../../../common/modules/mapper_mover/*mif tmp/; true
+
+mif: $(BUILD_TMP)/scalar0.mif
+
+$(BUILD_TMP)/scalar0.mif:
+	$(MAKE) -C $(C_BUILD_DIR) clean all
+
+
+.PHONY: clean all bitfile rdl cleanrdl mif svf
+
+
+include $(HIGGS_ROOT)/scripts/make_include/higgs_core.defs
+
+include $(HIGGS_ROOT)/scripts/make_include/jenkins_shared.defs
+include $(HIGGS_ROOT)/scripts/make_include/jenkins_fpga.defs
+
+include $(HIGGS_ROOT)/scripts/make_include/reveal_additions.defs
+
+
+# inputs
+# ../regs/regs.rdl
+# ordt_parms.txt
+# 
+# outputs
+# ../regs/regs.txt
+# ../regs/regs.xml
+# ../hdl/regs.sv
+../hdl/regs.sv: ../../../../ordt/ordt_parms.txt ../regs/regs.rdl
+	$(RM) -f ../hdl/regs.sv
+	$(JAVA) -jar ../../../../ordt/Ordt.jar -parms ../../../../ordt/ordt_parms.txt -xml ../regs/$(FPGA_NAME).xml -reglist ../regs/regs.txt -systemverilog ../hdl/regs.sv ../regs/regs.rdl
+
+rdl: ../hdl/regs.sv
+
+ifndef itr
+itr=1
+endif
+
+seed?=1
+
+bitfile: rdl
+	$(LATTICE_VARS) BUILD_SEED=$(seed) BUILD_ITERATIONS=$(itr) $(BASH) build.sh
+
+#bitfile950: rdl
+#	$(LATTICE_VARS) GRAV2_ENABLE_950=1 BUILD_SEED=$(seed) BUILD_ITERATIONS=$(itr) $(BASH) build.sh
+
+.PHONY: bitfile2
+bitfile2: rdl
+	$(LATTICE_VARS) $(BASH) build.sh
+
+.PHONY: syn
+syn: rdl
+	$(LATTICE_VARS) TCL_STOP_AFTER_SYN=1 $(BASH) build.sh
+
+.PHONY: debug0
+# for now this automatically does an "insert debug"
+debug0: rdl
+	$(LATTICE_VARS) TCL_DEBUG_STEP_0=1 $(BASH) build.sh
+
+.PHONY: gui
+gui:
+	$(LATTICE_VARS) pnmain ./$(FPGA_NAME)_top.ldf
+
+
+cleanrdl:
+	$(RM) -f ../hdl/regs.sv
+	$(RM) -f ../regs/regs.txt
+	$(RM) -f ../regs/regs.xml
+	$(RM) ../regs/${FPGA_NAME}.xml
+
+# clean, why are these using {} ?
+clean: cleanrdl
+	$(RM) -rf tmp
+	$(RM) -rf syn
+	$(RM) -f build.log
+	$(RM) -rf reports/*
+	$(RM) -f ${FPGA_NAME}_top.ldf
+	$(RM) -f ${FPGA_NAME}_top.bit
+	$(RM) -f ${FPGA_NAME}_top.edf
+	$(RM) -f ${FPGA_NAME}_top1.sty
+	$(RM) -f ${FPGA_NAME}_top.xcf 
+	$(RM) -f ${FPGA_NAME}_top.svf
+
+.PHONY: hash
+
+#hash:
+#	cat $(FPGA_NAME)_top.bit | hexdump | tail -n +17 | md5sum
+
+hash:
+	cat $(FPGA_NAME)_top.bit | tail -c +260 | md5sum
+
+# this means if you are in cs33 you can do `make cs33` even though traditionally you could only do that from the root
+$(FPGA_NAME): all
+
+$(filter-out $(FPGA_NAME),$(ALL_FPGAS)):
+	@$(ECHO) ""
+	@$(ECHO) "You are in the wrong directory to make $(@)"
+
+
+ifneq ($(filter $(FPGA_NAME),$(GRAV_FPGAS)),)
+HIGGS_MODE=grav
+else
+HIGGS_MODE=cs
+endif
+
+svf: $(FPGA_NAME)_top.svf
+
+# Lattice tool will fail to run if home directory folder is not made (the log writes there)
+# the error is something like
+#   ERROR - Failed to set log file /home/builduser/.config/LatticeSemi/deployment_tool.log
+$(FPGA_NAME)_top.svf: $(FPGA_NAME)_top.bit
+	@echo "Higgs mode:"
+	@echo $(HIGGS_MODE)
+	@echo $(LATTICE_VARS)
+	make -C ../../../../ compile_selectable_$(HIGGS_MODE) $(addprefix trigger_enable_flash_, $(FPGA_NAME))
+	mv ../../../../$(HIGGS_MODE)_selectable.xcf ./$(FPGA_NAME)_top.xcf
+	mkdir -p ~/.config/LatticeSemi/
+	$(LATTICE_VARS) ddtcmd -oft -svfchain -if ./$(FPGA_NAME)_top.xcf -of $(FPGA_NAME)_top.svf
+
+#cfg_950_post:
+#	@echo "cfg_950_post"
+#	mkdir -p ../../cfg_950/build/
+#	mv cfg_top.bit ../../cfg_950/build/cfg_950_top.bit
+#	mv cfg_top.svf ../../cfg_950/build/cfg_950_top.svf

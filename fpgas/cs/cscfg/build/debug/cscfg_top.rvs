@@ -1,0 +1,95 @@
+<Project ModBy="Analyzer" Name="C:/FPGA/higgs_sdr_rev2-ryan/fpgas/cs/cscfg/build/debug/cscfg_top.rvs" Date="2017-11-13">
+ <Core Name="cscfg_top_LA0">
+  <Setting>
+   <Capture SamplesPerTrig="4096" NumTrigsCap="1"/>
+   <Event EventCnt="0" CntEnableRun="0"/>
+   <TrigSetting PreTrgSamples="" AND_ALL="0" PostTrgSamples="" TURadix="0"/>
+  </Setting>
+  <Dataset Name="Base">
+   <Trace>
+    <Sig Name="GRAV_MIB_COUNTER_LOCK_c"/>
+    <Sig Name="GRAV_MIB_MASTER_RESET_c"/>
+    <Sig Name="cmd_mib.ack"/>
+    <Sig Name="cmd_mib.byte_addr[2]"/>
+    <Sig Name="cmd_mib.rd_wr_n"/>
+    <Sig Name="cmd_mib.sel"/>
+    <Bus Name="cmd_mib_rdata" Radix="0">
+     <Sig Name="cmd_mib.rdata[0]"/>
+     <Sig Name="cmd_mib.rdata[1]"/>
+     <Sig Name="cmd_mib.rdata[2]"/>
+     <Sig Name="cmd_mib.rdata[3]"/>
+     <Sig Name="cmd_mib.rdata[4]"/>
+     <Sig Name="cmd_mib.rdata[5]"/>
+     <Sig Name="cmd_mib.rdata[6]"/>
+     <Sig Name="cmd_mib.rdata[7]"/>
+     <Sig Name="cmd_mib.rdata[8]"/>
+     <Sig Name="cmd_mib.rdata[9]"/>
+     <Sig Name="cmd_mib.rdata[10]"/>
+     <Sig Name="cmd_mib.rdata[11]"/>
+     <Sig Name="cmd_mib.rdata[12]"/>
+     <Sig Name="cmd_mib.rdata[13]"/>
+     <Sig Name="cmd_mib.rdata[14]"/>
+     <Sig Name="cmd_mib.rdata[15]"/>
+     <Sig Name="cmd_mib.rdata[16]"/>
+     <Sig Name="cmd_mib.rdata[17]"/>
+     <Sig Name="cmd_mib.rdata[18]"/>
+     <Sig Name="cmd_mib.rdata[19]"/>
+     <Sig Name="cmd_mib.rdata[20]"/>
+     <Sig Name="cmd_mib.rdata[21]"/>
+     <Sig Name="cmd_mib.rdata[22]"/>
+     <Sig Name="cmd_mib.rdata[23]"/>
+     <Sig Name="cmd_mib.rdata[24]"/>
+     <Sig Name="cmd_mib.rdata[25]"/>
+     <Sig Name="cmd_mib.rdata[26]"/>
+     <Sig Name="cmd_mib.rdata[27]"/>
+     <Sig Name="cmd_mib.rdata[28]"/>
+     <Sig Name="cmd_mib.rdata[29]"/>
+     <Sig Name="cmd_mib.rdata[30]"/>
+     <Sig Name="cmd_mib.rdata[31]"/>
+    </Bus>
+    <Bus Name="cmd_mib_wdata" Radix="0">
+     <Sig Name="cmd_mib.wdata[0]"/>
+     <Sig Name="cmd_mib.wdata[1]"/>
+     <Sig Name="cmd_mib.wdata[2]"/>
+     <Sig Name="cmd_mib.wdata[3]"/>
+     <Sig Name="cmd_mib.wdata[4]"/>
+     <Sig Name="cmd_mib.wdata[5]"/>
+     <Sig Name="cmd_mib.wdata[6]"/>
+     <Sig Name="cmd_mib.wdata[7]"/>
+     <Sig Name="cmd_mib.wdata[8]"/>
+     <Sig Name="cmd_mib.wdata[9]"/>
+     <Sig Name="cmd_mib.wdata[10]"/>
+     <Sig Name="cmd_mib.wdata[11]"/>
+     <Sig Name="cmd_mib.wdata[12]"/>
+     <Sig Name="cmd_mib.wdata[13]"/>
+     <Sig Name="cmd_mib.wdata[14]"/>
+     <Sig Name="cmd_mib.wdata[15]"/>
+     <Sig Name="cmd_mib.wdata[16]"/>
+     <Sig Name="cmd_mib.wdata[17]"/>
+     <Sig Name="cmd_mib.wdata[18]"/>
+     <Sig Name="cmd_mib.wdata[19]"/>
+     <Sig Name="cmd_mib.wdata[20]"/>
+     <Sig Name="cmd_mib.wdata[21]"/>
+     <Sig Name="cmd_mib.wdata[22]"/>
+     <Sig Name="cmd_mib.wdata[23]"/>
+     <Sig Name="cmd_mib.wdata[24]"/>
+     <Sig Name="cmd_mib.wdata[25]"/>
+     <Sig Name="cmd_mib.wdata[26]"/>
+     <Sig Name="cmd_mib.wdata[27]"/>
+     <Sig Name="cmd_mib.wdata[28]"/>
+     <Sig Name="cmd_mib.wdata[29]"/>
+     <Sig Name="cmd_mib.wdata[30]"/>
+     <Sig Name="cmd_mib.wdata[31]"/>
+    </Bus>
+   </Trace>
+   <Trigger>
+    <TU Operator="0" Name="TU1" ID="1" Value="0" Radix="0"/>
+    <TU Operator="0" Name="TU2" ID="2" Value="1" Radix="0"/>
+    <TU Operator="0" Name="TU3" ID="3" Value="0" Radix="0"/>
+    <TE Enable="0" Expression="TU1" Name="TE1" ID="1"/>
+    <TE Enable="1" Expression="TU2" Name="TE2" ID="2"/>
+    <TE Enable="0" Expression="TU3" Name="TE3" ID="3"/>
+   </Trigger>
+  </Dataset>
+ </Core>
+</Project>

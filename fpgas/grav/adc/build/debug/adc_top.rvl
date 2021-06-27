@@ -1,0 +1,126 @@
+<Project ModBy="Inserter" SigType="1" Name="/home/janson/higgs_sdr_rev2/fpgas/grav/adc/build/debug/adc_top.rvl" Date="2018-05-11">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="adc_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="156686228" Name="adc_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="sys_clk" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="2048"/>
+            <Capture Mode="0" MinSamplesPerTrig="32"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_adc_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="gpio_enable"/>
+                <Sig Type="SIG" Name="downconv_valid"/>
+                <Sig Type="SIG" Name="cs00_ready"/>
+                <Bus Name="adc_counter">
+                    <Sig Type="SIG" Name="adc_counter[0]"/>
+                    <Sig Type="SIG" Name="adc_counter[1]"/>
+                    <Sig Type="SIG" Name="adc_counter[2]"/>
+                    <Sig Type="SIG" Name="adc_counter[3]"/>
+                    <Sig Type="SIG" Name="adc_counter[4]"/>
+                    <Sig Type="SIG" Name="adc_counter[5]"/>
+                    <Sig Type="SIG" Name="adc_counter[6]"/>
+                    <Sig Type="SIG" Name="adc_counter[7]"/>
+                    <Sig Type="SIG" Name="adc_counter[8]"/>
+                    <Sig Type="SIG" Name="adc_counter[9]"/>
+                    <Sig Type="SIG" Name="adc_counter[10]"/>
+                    <Sig Type="SIG" Name="adc_counter[11]"/>
+                    <Sig Type="SIG" Name="adc_counter[12]"/>
+                    <Sig Type="SIG" Name="adc_counter[13]"/>
+                    <Sig Type="SIG" Name="adc_counter[14]"/>
+                    <Sig Type="SIG" Name="adc_counter[15]"/>
+                    <Sig Type="SIG" Name="adc_counter[16]"/>
+                    <Sig Type="SIG" Name="adc_counter[17]"/>
+                    <Sig Type="SIG" Name="adc_counter[18]"/>
+                    <Sig Type="SIG" Name="adc_counter[19]"/>
+                    <Sig Type="SIG" Name="adc_counter[20]"/>
+                    <Sig Type="SIG" Name="adc_counter[21]"/>
+                    <Sig Type="SIG" Name="adc_counter[22]"/>
+                    <Sig Type="SIG" Name="adc_counter[23]"/>
+                    <Sig Type="SIG" Name="adc_counter[24]"/>
+                    <Sig Type="SIG" Name="adc_counter[25]"/>
+                    <Sig Type="SIG" Name="adc_counter[26]"/>
+                    <Sig Type="SIG" Name="adc_counter[27]"/>
+                    <Sig Type="SIG" Name="adc_counter[28]"/>
+                    <Sig Type="SIG" Name="adc_counter[29]"/>
+                    <Sig Type="SIG" Name="adc_counter[30]"/>
+                    <Sig Type="SIG" Name="adc_counter[31]"/>
+                </Bus>
+                <Bus Name="downconv_inph">
+                    <Sig Type="SIG" Name="downconv_inph[0]"/>
+                    <Sig Type="SIG" Name="downconv_inph[1]"/>
+                    <Sig Type="SIG" Name="downconv_inph[2]"/>
+                    <Sig Type="SIG" Name="downconv_inph[3]"/>
+                    <Sig Type="SIG" Name="downconv_inph[4]"/>
+                    <Sig Type="SIG" Name="downconv_inph[5]"/>
+                    <Sig Type="SIG" Name="downconv_inph[6]"/>
+                    <Sig Type="SIG" Name="downconv_inph[7]"/>
+                    <Sig Type="SIG" Name="downconv_inph[8]"/>
+                    <Sig Type="SIG" Name="downconv_inph[9]"/>
+                    <Sig Type="SIG" Name="downconv_inph[10]"/>
+                    <Sig Type="SIG" Name="downconv_inph[11]"/>
+                    <Sig Type="SIG" Name="downconv_inph[12]"/>
+                    <Sig Type="SIG" Name="downconv_inph[13]"/>
+                    <Sig Type="SIG" Name="downconv_inph[14]"/>
+                    <Sig Type="SIG" Name="downconv_inph[15]"/>
+                </Bus>
+                <Bus Name="downconv_quad">
+                    <Sig Type="SIG" Name="downconv_quad[0]"/>
+                    <Sig Type="SIG" Name="downconv_quad[1]"/>
+                    <Sig Type="SIG" Name="downconv_quad[2]"/>
+                    <Sig Type="SIG" Name="downconv_quad[3]"/>
+                    <Sig Type="SIG" Name="downconv_quad[4]"/>
+                    <Sig Type="SIG" Name="downconv_quad[5]"/>
+                    <Sig Type="SIG" Name="downconv_quad[6]"/>
+                    <Sig Type="SIG" Name="downconv_quad[7]"/>
+                    <Sig Type="SIG" Name="downconv_quad[8]"/>
+                    <Sig Type="SIG" Name="downconv_quad[9]"/>
+                    <Sig Type="SIG" Name="downconv_quad[10]"/>
+                    <Sig Type="SIG" Name="downconv_quad[11]"/>
+                    <Sig Type="SIG" Name="downconv_quad[12]"/>
+                    <Sig Type="SIG" Name="downconv_quad[13]"/>
+                    <Sig Type="SIG" Name="downconv_quad[14]"/>
+                    <Sig Type="SIG" Name="downconv_quad[15]"/>
+                </Bus>
+                <Bus Name="vga_ctrl_a">
+                    <Sig Type="SIG" Name="VGA_CTRL_A_c[0]"/>
+                    <Sig Type="SIG" Name="VGA_CTRL_A_c[1]"/>
+                    <Sig Type="SIG" Name="VGA_CTRL_A_c[2]"/>
+                </Bus>
+                <Bus Name="vga_ctrl_b">
+                    <Sig Type="SIG" Name="VGA_CTRL_B_c[0]"/>
+                    <Sig Type="SIG" Name="VGA_CTRL_B_c[1]"/>
+                    <Sig Type="SIG" Name="VGA_CTRL_B_c[2]"/>
+                </Bus>
+                <Bus Name="dsa_crtl_a">
+                    <Sig Type="SIG" Name="DSA_CTRL_A_c[1]"/>
+                    <Sig Type="SIG" Name="DSA_CTRL_A_c[2]"/>
+                    <Sig Type="SIG" Name="DSA_CTRL_A_c[3]"/>
+                    <Sig Type="SIG" Name="DSA_CTRL_A_c[4]"/>
+                    <Sig Type="SIG" Name="DSA_CTRL_A_c[5]"/>
+                </Bus>
+                <Bus Name="dsa_ctrl_b">
+                    <Sig Type="SIG" Name="DSA_CTRL_B_c[2]"/>
+                    <Sig Type="SIG" Name="DSA_CTRL_B_c[3]"/>
+                    <Sig Type="SIG" Name="DSA_CTRL_B_c[4]"/>
+                    <Sig Type="SIG" Name="DSA_CTRL_B_c[5]"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="gpio_enable,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="cs00_ready,"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="downconv_valid,"/>
+                <TU Serialbits="0" Type="0" ID="4" Sig="DSA_CTRL_A_c[1],DSA_CTRL_A_c[2],DSA_CTRL_A_c[3],DSA_CTRL_A_c[4],DSA_CTRL_A_c[5],"/>
+                <TU Serialbits="0" Type="0" ID="5" Sig="DSA_CTRL_B_c[2],DSA_CTRL_B_c[3],DSA_CTRL_B_c[4],DSA_CTRL_B_c[5],"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="4" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="5" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

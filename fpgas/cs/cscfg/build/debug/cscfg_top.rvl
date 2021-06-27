@@ -1,0 +1,100 @@
+<Project ModBy="Inserter" SigType="0" Name="C:/FPGA/higgs_sdr_rev2-ryan/fpgas/cs/cscfg/build/cscfg_top.rvl" Date="2017-11-13">
+    <IP Version="1_5_062609"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="cscfg_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="115018253" Name="cscfg_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="clk12_5" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="4096"/>
+            <Capture Mode="0" MinSamplesPerTrig="16"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_cscfg_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="GRAV_MIB_COUNTER_LOCK_c"/>
+                <Sig Type="SIG" Name="GRAV_MIB_MASTER_RESET_c"/>
+                <Sig Type="SIG" Name="cmd_mib.ack"/>
+                <Sig Type="SIG" Name="cmd_mib.byte_addr[2]"/>
+                <Sig Type="SIG" Name="cmd_mib.rd_wr_n"/>
+                <Sig Type="SIG" Name="cmd_mib.sel"/>
+                <Bus Name="cmd_mib_rdata">
+                    <Sig Type="SIG" Name="cmd_mib.rdata[0]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[1]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[2]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[3]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[4]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[5]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[6]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[7]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[8]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[9]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[10]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[11]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[12]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[13]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[14]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[15]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[16]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[17]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[18]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[19]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[20]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[21]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[22]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[23]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[24]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[25]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[26]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[27]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[28]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[29]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[30]"/>
+                    <Sig Type="SIG" Name="cmd_mib.rdata[31]"/>
+                </Bus>
+                <Bus Name="cmd_mib_wdata">
+                    <Sig Type="SIG" Name="cmd_mib.wdata[0]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[1]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[2]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[3]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[4]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[5]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[6]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[7]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[8]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[9]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[10]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[11]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[12]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[13]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[14]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[15]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[16]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[17]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[18]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[19]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[20]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[21]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[22]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[23]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[24]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[25]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[26]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[27]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[28]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[29]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[30]"/>
+                    <Sig Type="SIG" Name="cmd_mib.wdata[31]"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="cmd_mib.sel,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="GRAV_MIB_COUNTER_LOCK_c,"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="GRAV_MIB_MASTER_RESET_c,"/>
+                <TE MaxSequence="1" MaxEvnCnt="1" ID="1" Resource="1"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

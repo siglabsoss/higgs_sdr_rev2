@@ -1,0 +1,59 @@
+  /-------------------------\
+  | New Mac Header Format   |
+  \-------------------------/
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              
+              One OFDM frame  (40 words per OFDM frame)                        One OFDM frame  (20 words per OFDM frame)      
+                                                                                                                              
+                 +----+                                                           +----+                                      
+          w      | 0  |                                                    w      | 0  |                                      
+          o      | 1  |                                                    o      | 1  |                                      
+          r      | 2  |                                                    r      | 2  |                                      
+          d      | 3  |                                                    d      | 3  |                                      
+          s      | 4  |                                                    s      +----+                                      
+                 | 5  |                                                           +....+                                      
+         (40)    | 6  |                                                   (20)    +----+                                      
+                 | 7  |                                                           | 17 |                                      
+                 | 8  |                                                    |      | 18 |                                      
+                 +----+                                                    v      | 19 |                                      
+                 +....+                                                           +----+                                      
+                 +----+                                                                                                       
+                 | 37 |                                                                                                       
+          |      | 38 |                                                                                                       
+          v      | 39 |                                                                                                       
+                 +----+                                                                                                       
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              
+                Instructions for packing:                                                                                     
+                In both 20/40 word frames. Pack the 64 bits of information into 2, 32 bit words.                              
+                Lets call these two words, U and L for upper and lower.                                                       
+                                                                                                                              
+                For each frame, simply pack the words U/L/U/L                                                                 
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              
+     (Note uint12_t / uint20_t is not a real type, but it represents an unsigned 12/20 bit number in this diagram)            
++----------------------------+------------------------------+                                                                 
+| Members                    + Length                       +                                                                 
++----------------------------+------------------------------+                                                                 
+| * Length                   | * uint20_t                   |                                                                 
+| * Packet Sequence Number   | * uint16_t                   |                                                                 
+| * From                     | * uint8_t                    |                                                                 
+| * Flags                    | * uint8_t                    |                                                                 
+| * Checksum                 | * uint12_t                   |                                                                 
+\----------------------------+------------------------------/                                                                 
+                                                                                                                              
+                             +------------------------------+                                                                 
+                             + Total: 64 bits               +                                                                 
+                             +------------------------------+                                                                 
+                                                                                                                              
+                                                                                                                              
+   Length is in words, and is the length of the Siglabs Mac Body                                                              
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              

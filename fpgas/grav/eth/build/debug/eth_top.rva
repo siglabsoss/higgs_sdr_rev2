@@ -1,0 +1,102 @@
+<!DOCTYPE ispTLA>
+<ispTLA>
+ <CreationDate>Fri Feb 9 20:32:57 2018</CreationDate>
+ <XCFFileName>eth_top.xcf</XCFFileName>
+ <CableSetting>
+  <IsTRSTConnected val="false"/>
+  <TRSTSetting val="0"/>
+  <IsBSCANConnected val="false"/>
+  <BSCANSetting val="0"/>
+  <CableType val="USB2"/>
+  <PortAddress val="0"/>
+  <PortSetting val="0"/>
+  <TCKDelay val="1"/>
+ </CableSetting>
+ <DeviceCount>4</DeviceCount>
+ <Device>
+  <DeviceIndex>3</DeviceIndex>
+  <DeviceName>4. LFE5U-85F</DeviceName>
+  <DeviceID>0x41113043</DeviceID>
+  <HasIspTRACY>true</HasIspTRACY>
+  <HasJTAG2WB>false</HasJTAG2WB>
+  <SERDES/>
+  <IRBypassLen>8</IRBypassLen>
+  <RVLFileName>eth_to_cs_cmd.rvl</RVLFileName>
+  <RVSFileName>eth_to_cs_cmd.rvs</RVSFileName>
+  <LACoreCount>2</LACoreCount>
+  <WinUI CoreIndex="0">
+   <TraceSigTreeData>
+    <TraceSignal IsHidden="false" Name="eth_o_data_vld" NodeType="0" PortIndex="0"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data" NodeType="1" PortIndex="1">
+     <BusRadix Radix="2"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="eth_o_data[0]" NodeType="2" PortIndex="1"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[1]" NodeType="2" PortIndex="2"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[2]" NodeType="2" PortIndex="3"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[3]" NodeType="2" PortIndex="4"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[4]" NodeType="2" PortIndex="5"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[5]" NodeType="2" PortIndex="6"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[6]" NodeType="2" PortIndex="7"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[7]" NodeType="2" PortIndex="8"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[8]" NodeType="2" PortIndex="9"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[9]" NodeType="2" PortIndex="10"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[10]" NodeType="2" PortIndex="11"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[11]" NodeType="2" PortIndex="12"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[12]" NodeType="2" PortIndex="13"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[13]" NodeType="2" PortIndex="14"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[14]" NodeType="2" PortIndex="15"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[15]" NodeType="2" PortIndex="16"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[16]" NodeType="2" PortIndex="17"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[17]" NodeType="2" PortIndex="18"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[18]" NodeType="2" PortIndex="19"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[19]" NodeType="2" PortIndex="20"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[20]" NodeType="2" PortIndex="21"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[21]" NodeType="2" PortIndex="22"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[22]" NodeType="2" PortIndex="23"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[23]" NodeType="2" PortIndex="24"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[24]" NodeType="2" PortIndex="25"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[25]" NodeType="2" PortIndex="26"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[26]" NodeType="2" PortIndex="27"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[27]" NodeType="2" PortIndex="28"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[28]" NodeType="2" PortIndex="29"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[29]" NodeType="2" PortIndex="30"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[30]" NodeType="2" PortIndex="31"/>
+    <TraceSignal IsHidden="false" Name="eth_o_data[31]" NodeType="2" PortIndex="32"/>
+    <TraceSignal IsHidden="false" Name="sys_clk_srst" NodeType="0" PortIndex="33"/>
+    <TraceSignal IsHidden="false" Name="sys_pll_locked" NodeType="0" PortIndex="34"/>
+    <TraceSignal IsHidden="false" Name="eth_cfg_done" NodeType="0" PortIndex="35"/>
+    <TraceSignal IsHidden="false" Name="eth_gbit_mode" NodeType="0" PortIndex="36"/>
+    <TraceSignal IsHidden="false" Name="eth_mac_rx_srst_3" NodeType="0" PortIndex="37"/>
+    <TraceSignal IsHidden="false" Name="clk125_srst" NodeType="0" PortIndex="38"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" PreSelectType="0" PreSelect="1" UserSelectPos="0"/>
+   <CoreRun Run="true"/>
+   <CoreWndUIData>
+    <ClockFrequency Unit="ns" Frequency="-1.0"/>
+   </CoreWndUIData>
+  </WinUI>
+  <WinUI CoreIndex="1">
+   <TraceSigTreeData>
+    <TraceSignal IsHidden="false" Name="fpg_cntr" NodeType="1" PortIndex="0">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[0]" NodeType="2" PortIndex="0"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[1]" NodeType="2" PortIndex="1"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[2]" NodeType="2" PortIndex="2"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[3]" NodeType="2" PortIndex="3"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[4]" NodeType="2" PortIndex="4"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[5]" NodeType="2" PortIndex="5"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[6]" NodeType="2" PortIndex="6"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_cntr_3[7]" NodeType="2" PortIndex="7"/>
+    <TraceSignal IsHidden="false" Name="fpga_int_clk_srst_3" NodeType="0" PortIndex="8"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" PreSelectType="0" PreSelect="1" UserSelectPos="0"/>
+   <CoreRun Run="false"/>
+   <CoreWndUIData>
+    <ClockFrequency Unit="ns" Frequency="-1.0"/>
+   </CoreWndUIData>
+  </WinUI>
+ </Device>
+</ispTLA>

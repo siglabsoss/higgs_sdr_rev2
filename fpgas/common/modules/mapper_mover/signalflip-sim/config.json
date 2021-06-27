@@ -1,0 +1,18 @@
+{
+    "dut_file": "../qam8_mapper.sv",
+    "dut_name": "qam8_mapper",
+
+    "probe": [ "sig1", "sig2", "sig3"],
+    "sources": [ 
+      		 "cppsrc/main.cpp",
+		 "cppsrc/signals.cpp",
+		 "obj_dir/Vqam8_mapper.cpp",
+		 "obj_dir/Vqam8_mapper__Syms.cpp",
+		 "obj_dir/Vqam8_mapper__Trace.cpp",
+		 "obj_dir/Vqam8_mapper__Trace__Slow.cpp"
+    ],
+    "libraries": [ "/usr/local/share/verilator/include",
+		   "./obj_dir"
+		   ]
+
+}

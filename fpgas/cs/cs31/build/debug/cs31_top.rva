@@ -1,0 +1,113 @@
+<!DOCTYPE ispTLA>
+<ispTLA>
+ <CreationDate>Wed Apr 25 19:02:50 2018</CreationDate>
+ <XCFFileName>cs31_top.xcf</XCFFileName>
+ <CableSetting>
+  <IsTRSTConnected val="false"/>
+  <TRSTSetting val="0"/>
+  <IsBSCANConnected val="false"/>
+  <BSCANSetting val="0"/>
+  <CableType val="USB2"/>
+  <PortAddress val="1"/>
+  <PortSetting val="0"/>
+  <TCKDelay val="4"/>
+ </CableSetting>
+ <DeviceCount>17</DeviceCount>
+ <Device>
+  <DeviceIndex>14</DeviceIndex>
+  <DeviceName>15. LFE5U-85F</DeviceName>
+  <DeviceID>0x41113043</DeviceID>
+  <HasIspTRACY>true</HasIspTRACY>
+  <HasJTAG2WB>false</HasJTAG2WB>
+  <SERDES/>
+  <IRBypassLen>8</IRBypassLen>
+  <RVLFileName>cs31_top.rvl</RVLFileName>
+  <RVSFileName>cs31_top.rvs</RVSFileName>
+  <LACoreCount>1</LACoreCount>
+  <WinUI CoreIndex="0">
+   <TraceSigTreeData>
+    <TraceSignal IsHidden="false" Name="riscv_in_data" NodeType="1" PortIndex="0">
+     <BusRadix Radix="2"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[0]" NodeType="2" PortIndex="0"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[1]" NodeType="2" PortIndex="1"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[2]" NodeType="2" PortIndex="2"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[3]" NodeType="2" PortIndex="3"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[4]" NodeType="2" PortIndex="4"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[5]" NodeType="2" PortIndex="5"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[6]" NodeType="2" PortIndex="6"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[7]" NodeType="2" PortIndex="7"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[8]" NodeType="2" PortIndex="8"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[9]" NodeType="2" PortIndex="9"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[10]" NodeType="2" PortIndex="10"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[11]" NodeType="2" PortIndex="11"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[12]" NodeType="2" PortIndex="12"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[13]" NodeType="2" PortIndex="13"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[14]" NodeType="2" PortIndex="14"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[15]" NodeType="2" PortIndex="15"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[16]" NodeType="2" PortIndex="16"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[17]" NodeType="2" PortIndex="17"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[18]" NodeType="2" PortIndex="18"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[19]" NodeType="2" PortIndex="19"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[20]" NodeType="2" PortIndex="20"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[21]" NodeType="2" PortIndex="21"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[22]" NodeType="2" PortIndex="22"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[23]" NodeType="2" PortIndex="23"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[24]" NodeType="2" PortIndex="24"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[25]" NodeType="2" PortIndex="25"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[26]" NodeType="2" PortIndex="26"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[27]" NodeType="2" PortIndex="27"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[28]" NodeType="2" PortIndex="28"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[29]" NodeType="2" PortIndex="29"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[30]" NodeType="2" PortIndex="30"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_data[31]" NodeType="2" PortIndex="31"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_valid" NodeType="0" PortIndex="32"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_in_ready" NodeType="0" PortIndex="33"/>
+    <TraceSignal IsHidden="false" Name="riscv_out_data" NodeType="1" PortIndex="34">
+     <BusRadix Radix="2"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[0]" NodeType="2" PortIndex="34"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[1]" NodeType="2" PortIndex="35"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[2]" NodeType="2" PortIndex="36"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[3]" NodeType="2" PortIndex="37"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[4]" NodeType="2" PortIndex="38"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[5]" NodeType="2" PortIndex="39"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[6]" NodeType="2" PortIndex="40"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[7]" NodeType="2" PortIndex="41"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[8]" NodeType="2" PortIndex="42"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[9]" NodeType="2" PortIndex="43"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[10]" NodeType="2" PortIndex="44"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[11]" NodeType="2" PortIndex="45"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[12]" NodeType="2" PortIndex="46"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[13]" NodeType="2" PortIndex="47"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[14]" NodeType="2" PortIndex="48"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[15]" NodeType="2" PortIndex="49"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[16]" NodeType="2" PortIndex="50"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[17]" NodeType="2" PortIndex="51"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[18]" NodeType="2" PortIndex="52"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[19]" NodeType="2" PortIndex="53"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[20]" NodeType="2" PortIndex="54"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[21]" NodeType="2" PortIndex="55"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[22]" NodeType="2" PortIndex="56"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[23]" NodeType="2" PortIndex="57"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[24]" NodeType="2" PortIndex="58"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[25]" NodeType="2" PortIndex="59"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[26]" NodeType="2" PortIndex="60"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[27]" NodeType="2" PortIndex="61"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[28]" NodeType="2" PortIndex="62"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[29]" NodeType="2" PortIndex="63"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[30]" NodeType="2" PortIndex="64"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_data[31]" NodeType="2" PortIndex="65"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_valid" NodeType="0" PortIndex="66"/>
+    <TraceSignal IsHidden="false" Name="vex_machine_top_inst/riscv_out_ready" NodeType="0" PortIndex="67"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" PreSelectType="0" PreSelect="1" UserSelectPos="0"/>
+   <CoreRun Run="true"/>
+   <CoreWndUIData>
+    <ClockFrequency Unit="ns" Frequency="-1.0"/>
+   </CoreWndUIData>
+  </WinUI>
+ </Device>
+</ispTLA>

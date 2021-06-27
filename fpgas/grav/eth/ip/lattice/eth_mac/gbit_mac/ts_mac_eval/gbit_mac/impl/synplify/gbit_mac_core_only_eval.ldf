@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="gbit_mac_core_only_eval" device="LFE5U-85F-8BG756C" synthesis="synplify" default_implementation="impl">
+    <Implementation title="impl" dir="impl" description="impl" default_strategy="gbit_mac_core_only_eval_setting">
+        <Options>
+            <Option name="HDL type" value="Verilog"></Option>
+            <Option name="def_top" value="ts_mac_core_only_top"></Option>
+        </Options>
+        <Source name="../../../../gbit_mac_bb.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/top/ts_mac_core_only_top.v" type="Verilog"></Source>
+        <Source name="gbit_mac_core_only_eval.lpf" type="Logic Preference"></Source>
+    </Implementation>
+    <Strategy name="gbit_mac_core_only_eval_setting" file="gbit_mac_core_only_eval_setting.sty"></Strategy>
+</BaliProject>

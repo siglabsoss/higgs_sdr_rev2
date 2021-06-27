@@ -1,0 +1,261 @@
+<!DOCTYPE ispTLA>
+<ispTLA>
+ <CreationDate>Thu Nov 9 14:40:20 2017</CreationDate>
+ <XCFFileName>adc_top.xcf</XCFFileName>
+ <CableSetting>
+  <IsTRSTConnected val="false"/>
+  <TRSTSetting val="0"/>
+  <IsBSCANConnected val="false"/>
+  <BSCANSetting val="0"/>
+  <CableType val="USB2"/>
+  <PortAddress val="1"/>
+  <PortSetting val="0"/>
+  <TCKDelay val="3"/>
+ </CableSetting>
+ <DeviceCount>4</DeviceCount>
+ <Device>
+  <DeviceIndex>2</DeviceIndex>
+  <DeviceName>3. LFE5U-85F</DeviceName>
+  <DeviceID>0x41113043</DeviceID>
+  <HasIspTRACY>true</HasIspTRACY>
+  <HasJTAG2WB>false</HasJTAG2WB>
+  <SERDES/>
+  <IRBypassLen>8</IRBypassLen>
+  <RVLFileName>adc_top.rvl</RVLFileName>
+  <RVSFileName>adc_top.rvs</RVSFileName>
+  <LACoreCount>2</LACoreCount>
+  <WinUI CoreIndex="0">
+   <TraceSigTreeData>
+    <TraceSignal IsHidden="false" Name="gpio_enable" NodeType="0" PortIndex="0"/>
+    <TraceSignal IsHidden="false" Name="downconv_valid" NodeType="0" PortIndex="1"/>
+    <TraceSignal IsHidden="false" Name="cs00_ready" NodeType="0" PortIndex="2"/>
+    <TraceSignal IsHidden="false" Name="adc_counter" NodeType="1" PortIndex="3">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="adc_counter[0]" NodeType="2" PortIndex="3"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[1]" NodeType="2" PortIndex="4"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[2]" NodeType="2" PortIndex="5"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[3]" NodeType="2" PortIndex="6"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[4]" NodeType="2" PortIndex="7"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[5]" NodeType="2" PortIndex="8"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[6]" NodeType="2" PortIndex="9"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[7]" NodeType="2" PortIndex="10"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[8]" NodeType="2" PortIndex="11"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[9]" NodeType="2" PortIndex="12"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[10]" NodeType="2" PortIndex="13"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[11]" NodeType="2" PortIndex="14"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[12]" NodeType="2" PortIndex="15"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[13]" NodeType="2" PortIndex="16"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[14]" NodeType="2" PortIndex="17"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[15]" NodeType="2" PortIndex="18"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[16]" NodeType="2" PortIndex="19"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[17]" NodeType="2" PortIndex="20"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[18]" NodeType="2" PortIndex="21"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[19]" NodeType="2" PortIndex="22"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[20]" NodeType="2" PortIndex="23"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[21]" NodeType="2" PortIndex="24"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[22]" NodeType="2" PortIndex="25"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[23]" NodeType="2" PortIndex="26"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[24]" NodeType="2" PortIndex="27"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[25]" NodeType="2" PortIndex="28"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[26]" NodeType="2" PortIndex="29"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[27]" NodeType="2" PortIndex="30"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[28]" NodeType="2" PortIndex="31"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[29]" NodeType="2" PortIndex="32"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[30]" NodeType="2" PortIndex="33"/>
+    <TraceSignal IsHidden="false" Name="adc_counter[31]" NodeType="2" PortIndex="34"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph" NodeType="1" PortIndex="35">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="downconv_inph[0]" NodeType="2" PortIndex="35"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[1]" NodeType="2" PortIndex="36"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[2]" NodeType="2" PortIndex="37"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[3]" NodeType="2" PortIndex="38"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[4]" NodeType="2" PortIndex="39"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[5]" NodeType="2" PortIndex="40"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[6]" NodeType="2" PortIndex="41"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[7]" NodeType="2" PortIndex="42"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[8]" NodeType="2" PortIndex="43"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[9]" NodeType="2" PortIndex="44"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[10]" NodeType="2" PortIndex="45"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[11]" NodeType="2" PortIndex="46"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[12]" NodeType="2" PortIndex="47"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[13]" NodeType="2" PortIndex="48"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[14]" NodeType="2" PortIndex="49"/>
+    <TraceSignal IsHidden="false" Name="downconv_inph[15]" NodeType="2" PortIndex="50"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad" NodeType="1" PortIndex="51">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="downconv_quad[0]" NodeType="2" PortIndex="51"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[1]" NodeType="2" PortIndex="52"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[2]" NodeType="2" PortIndex="53"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[3]" NodeType="2" PortIndex="54"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[4]" NodeType="2" PortIndex="55"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[5]" NodeType="2" PortIndex="56"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[6]" NodeType="2" PortIndex="57"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[7]" NodeType="2" PortIndex="58"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[8]" NodeType="2" PortIndex="59"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[9]" NodeType="2" PortIndex="60"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[10]" NodeType="2" PortIndex="61"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[11]" NodeType="2" PortIndex="62"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[12]" NodeType="2" PortIndex="63"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[13]" NodeType="2" PortIndex="64"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[14]" NodeType="2" PortIndex="65"/>
+    <TraceSignal IsHidden="false" Name="downconv_quad[15]" NodeType="2" PortIndex="66"/>
+    <TraceSignal IsHidden="false" Name="vga_ctrl_a" NodeType="1" PortIndex="67">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="VGA_CTRL_A_c[0]" NodeType="2" PortIndex="67"/>
+    <TraceSignal IsHidden="false" Name="VGA_CTRL_A_c[1]" NodeType="2" PortIndex="68"/>
+    <TraceSignal IsHidden="false" Name="VGA_CTRL_A_c[2]" NodeType="2" PortIndex="69"/>
+    <TraceSignal IsHidden="false" Name="vga_ctrl_b" NodeType="1" PortIndex="70">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="VGA_CTRL_B_c[0]" NodeType="2" PortIndex="70"/>
+    <TraceSignal IsHidden="false" Name="VGA_CTRL_B_c[1]" NodeType="2" PortIndex="71"/>
+    <TraceSignal IsHidden="false" Name="VGA_CTRL_B_c[2]" NodeType="2" PortIndex="72"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" PreSelectType="0" PreSelect="1" UserSelectPos="0"/>
+   <CoreRun Run="true"/>
+   <CoreWndUIData>
+    <ClockFrequency Unit="ns" Frequency="-1.0"/>
+   </CoreWndUIData>
+  </WinUI>
+  <WinUI CoreIndex="1">
+   <TraceSigTreeData>
+    <TraceSignal IsHidden="false" Name="cmd_mib.ack" NodeType="0" PortIndex="0"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rd_wr_n" NodeType="0" PortIndex="1"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.sel" NodeType="0" PortIndex="2"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib_addr" NodeType="1" PortIndex="3">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[0]" NodeType="2" PortIndex="3"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[1]" NodeType="2" PortIndex="4"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[2]" NodeType="2" PortIndex="5"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[3]" NodeType="2" PortIndex="6"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[4]" NodeType="2" PortIndex="7"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[5]" NodeType="2" PortIndex="8"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[6]" NodeType="2" PortIndex="9"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[7]" NodeType="2" PortIndex="10"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[8]" NodeType="2" PortIndex="11"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[9]" NodeType="2" PortIndex="12"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[10]" NodeType="2" PortIndex="13"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[11]" NodeType="2" PortIndex="14"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[12]" NodeType="2" PortIndex="15"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[13]" NodeType="2" PortIndex="16"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[14]" NodeType="2" PortIndex="17"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[15]" NodeType="2" PortIndex="18"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[16]" NodeType="2" PortIndex="19"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[17]" NodeType="2" PortIndex="20"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[18]" NodeType="2" PortIndex="21"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[19]" NodeType="2" PortIndex="22"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib_wdata" NodeType="1" PortIndex="23">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[0]" NodeType="2" PortIndex="23"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[1]" NodeType="2" PortIndex="24"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[2]" NodeType="2" PortIndex="25"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[3]" NodeType="2" PortIndex="26"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[4]" NodeType="2" PortIndex="27"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[5]" NodeType="2" PortIndex="28"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[6]" NodeType="2" PortIndex="29"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[7]" NodeType="2" PortIndex="30"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[8]" NodeType="2" PortIndex="31"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[9]" NodeType="2" PortIndex="32"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[10]" NodeType="2" PortIndex="33"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[11]" NodeType="2" PortIndex="34"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[12]" NodeType="2" PortIndex="35"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[13]" NodeType="2" PortIndex="36"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[14]" NodeType="2" PortIndex="37"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[15]" NodeType="2" PortIndex="38"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[16]" NodeType="2" PortIndex="39"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[17]" NodeType="2" PortIndex="40"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[18]" NodeType="2" PortIndex="41"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[19]" NodeType="2" PortIndex="42"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[20]" NodeType="2" PortIndex="43"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[21]" NodeType="2" PortIndex="44"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[22]" NodeType="2" PortIndex="45"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[23]" NodeType="2" PortIndex="46"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[24]" NodeType="2" PortIndex="47"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[25]" NodeType="2" PortIndex="48"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[26]" NodeType="2" PortIndex="49"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[27]" NodeType="2" PortIndex="50"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[28]" NodeType="2" PortIndex="51"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[29]" NodeType="2" PortIndex="52"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[30]" NodeType="2" PortIndex="53"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[31]" NodeType="2" PortIndex="54"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib_rdata" NodeType="1" PortIndex="55">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[0]" NodeType="2" PortIndex="55"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[1]" NodeType="2" PortIndex="56"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[2]" NodeType="2" PortIndex="57"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[3]" NodeType="2" PortIndex="58"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[4]" NodeType="2" PortIndex="59"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[5]" NodeType="2" PortIndex="60"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[6]" NodeType="2" PortIndex="61"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[7]" NodeType="2" PortIndex="62"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[8]" NodeType="2" PortIndex="63"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[9]" NodeType="2" PortIndex="64"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[10]" NodeType="2" PortIndex="65"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[11]" NodeType="2" PortIndex="66"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[12]" NodeType="2" PortIndex="67"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[13]" NodeType="2" PortIndex="68"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[14]" NodeType="2" PortIndex="69"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[15]" NodeType="2" PortIndex="70"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[16]" NodeType="2" PortIndex="71"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[17]" NodeType="2" PortIndex="72"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[18]" NodeType="2" PortIndex="73"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[19]" NodeType="2" PortIndex="74"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[20]" NodeType="2" PortIndex="75"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[21]" NodeType="2" PortIndex="76"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[22]" NodeType="2" PortIndex="77"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[23]" NodeType="2" PortIndex="78"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[24]" NodeType="2" PortIndex="79"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[25]" NodeType="2" PortIndex="80"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[26]" NodeType="2" PortIndex="81"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[27]" NodeType="2" PortIndex="82"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[28]" NodeType="2" PortIndex="83"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[29]" NodeType="2" PortIndex="84"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[30]" NodeType="2" PortIndex="85"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[31]" NodeType="2" PortIndex="86"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int_high_z" NodeType="0" PortIndex="87"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int" NodeType="1" PortIndex="88">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[0]" NodeType="2" PortIndex="88"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[1]" NodeType="2" PortIndex="89"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[2]" NodeType="2" PortIndex="90"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[3]" NodeType="2" PortIndex="91"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[4]" NodeType="2" PortIndex="92"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[5]" NodeType="2" PortIndex="93"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[6]" NodeType="2" PortIndex="94"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[7]" NodeType="2" PortIndex="95"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[8]" NodeType="2" PortIndex="96"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[9]" NodeType="2" PortIndex="97"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[10]" NodeType="2" PortIndex="98"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[11]" NodeType="2" PortIndex="99"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[12]" NodeType="2" PortIndex="100"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[13]" NodeType="2" PortIndex="101"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[14]" NodeType="2" PortIndex="102"/>
+    <TraceSignal IsHidden="false" Name="mib_ad_int[15]" NodeType="2" PortIndex="103"/>
+    <TraceSignal IsHidden="false" Name="mib_ack_int" NodeType="0" PortIndex="104"/>
+    <TraceSignal IsHidden="false" Name="mib_ack_int_high_z" NodeType="0" PortIndex="105"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" PreSelectType="0" PreSelect="1" UserSelectPos="0"/>
+   <CoreRun Run="true"/>
+   <CoreWndUIData>
+    <ClockFrequency Unit="ns" Frequency="-1.0"/>
+   </CoreWndUIData>
+  </WinUI>
+ </Device>
+</ispTLA>

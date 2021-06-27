@@ -1,0 +1,124 @@
+########################
+#
+#  This file contains the special targets `jenkins_automated_build` and `jenkins_final_target` and `jenkins_automated_build_single`
+#  These targets are called by Jenkins.  (These targets are ONLY run by the remote jenkins and never run by the user's computer)
+#    The reason jenkins_final_target isn't just called to the end of jenkins_automated_build
+#    is that: making the build system call a new/different target (and start a new make instance) allows it to always run no matter what happens with the build.
+#
+#  See https://github.com/siglabsoss/sig-documentation/blob/master/docs/jenkins.md
+
+# this is the target for a  "Remote Build"
+# 
+# we force true on the end here so that the build will go on after a failure
+# this is because we always want the git target to run so that the computer gets the files back
+jenkins_automated_build_single:
+	$(MAKE) $${FPGA_NAME}; true
+	$(MAKE) buildstatus_nocolor; true
+	cd fpgas/$${FPGA_BOARD_NAME}/$${FPGA_NAME}/build && $(MAKE) jenkins_commit_build_results
+
+
+
+# this is the target for a   "Fixed Branch Build"
+#	$(MAKE) -j 14 adc dac eth cscfg cs01 cs02 cs03 cs11 cs12 cs20 cs21 cs22 cs31 cs32
+#	cp fpgas/grav/dac/build/dac_top.bit fpgas/cs/cs00/build/cs00_top.bit
+#	cp fpgas/grav/eth/build/eth_top.bit fpgas/cs/cs10/build/cs10_top.bit
+#	cp fpgas/grav/adc/build/adc_top.bit fpgas/cs/cs30/build/cs30_top.bit
+#	make -C fpgas/cs/cs00/build/ svf
+#	make -C fpgas/cs/cs10/build/ svf
+#	make -C fpgas/cs/cs30/build/ svf
+# 	make -C fpgas/grav/cfg/build all950 # used for grav2 to make 950 build
+jenkins_automated_build:
+	$(MAKE) -j 14 adc dac eth cscfg cs01 cs02 cs03 cs11 cs12 cs20 cs21 cs22 cs31 cs32
+	$(MAKE) buildstatus_nocolor
+	cp fpgas/grav/dac/build/dac_top.bit fpgas/cs/cs00/build/cs00_top.bit
+	cp fpgas/grav/eth/build/eth_top.bit fpgas/cs/cs10/build/cs10_top.bit
+	cp fpgas/grav/adc/build/adc_top.bit fpgas/cs/cs30/build/cs30_top.bit
+	make -C fpgas/cs/cs00/build/ svf
+	make -C fpgas/cs/cs10/build/ svf
+	make -C fpgas/cs/cs30/build/ svf
+
+
+jenkins_automated_build_q_engine:
+	$(MAKE) cs30
+	$(MAKE) buildstatus_nocolor
+
+## golden images with multiple p&r iterations
+jenkins_golden_build:
+	@echo "Building golden images. This will take some time for reals, bruh"
+	$(MAKE) -j9 cs00gold cs01gold cs10gold cs11gold cs20gold cs21gold cs30gold cs31gold cs33gold cscfggold adcgold cfggold dacgold ethgold
+	$(MAKE) buildstatus_nocolor
+
+
+# see jekins.defs
+# do nothing for now that gets called by jenkins, gives a final build status
+jenkins_final_target:
+	@echo "Placeholder, jenkins should call this after build is done"
+	@echo ""
+	@echo ""
+	$(MAKE) buildstatus_nocolor
+
+
+
+############# New section for testing stuff #############
+
+jenkins_automated_test:
+	# new test target doesn't auto clean, because we wanna go fast
+	# so force jenkins to do it here
+	$(MAKE) -C sim/verilator clean
+	$(MAKE) -C sim/verilator test
+
+jenkins_automated_randomized_test:
+	$(MAKE) -C sim/verilator test_random_multi
+
+jenkins_automated_randomized_test_seeds:
+	$(MAKE) -C sim/verilator test_seeds
+
+jenkins_automated_test_final_target:
+	@echo "In jenkins_automated_test_final_target"
+	@echo "Done with Testing"
+
+.PHONY: jenkins_automated_test jenkins_automated_test_final_target jenkins_automated_randomized_test_seeds
+
+########################
+#
+# alias, and phony junk
+#
+#
+
+# settings for not remote jenkins builds (old style)
+.PHONY: jenkins_automated_build jenkins_final_target jenkins_automated_build_debug jenkins_debug_workload ben_target1 ben_target2
+
+
+
+jenkins_automated_build_debug:
+	$(MAKE) jenkins_debug_workload
+	$(MAKE) buildstatus_nocolor
+	cd fpgas/cs/cs22/build && $(MAKE) jenkins_commit_build_results
+
+# testing for remote build
+jenkins_debug_workload:
+	touch fpgas/cs/cs22/build/bendummybuild.txt
+	date >> fpgas/cs/cs22/build/bendummybuild.txt
+
+
+# Hello? Yes this is dog
+ben_target1:
+	echo "Yes this is target 1"
+
+ben_target2:
+	echo "Yes this is target 2"
+
+
+
+
+
+########################
+#
+# s-modem testing
+#
+
+.PHONY: jenkins_test_smodem
+
+jenkins_test_smodem:
+	mkdir -p libs/s-modem/soapy/build
+	cd libs/s-modem/soapy/build; cmake .. -DBUILD_EXTRA=on; make test_all

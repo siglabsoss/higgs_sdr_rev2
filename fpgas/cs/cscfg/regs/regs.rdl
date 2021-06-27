@@ -1,0 +1,44 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the ADC FPGA.
+Used in conjunction with Juniper's ordt tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA on Graviton this is by providing the four letter acronym as 4 ASCII bytes (e.g. \"CCFG\")."; 
+            
+            field {
+                name="UID";
+                desc="The 4 ASCII characters corresponding to the FPGA's name.  \"CCFG = CS CFG FPGA\"  This is done because the CFG FPGA on CS is treated as part of the Graviton MIB Bus rather than the CS MIB bus."; 
+                hw=w; sw=r;
+                reset = 32'd0;
+            } uid[31:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+        
+    } rf0 @0x00000;
+    
+} REGS;
