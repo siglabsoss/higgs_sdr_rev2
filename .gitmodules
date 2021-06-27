@@ -1,0 +1,21 @@
+[submodule "libs/burbulator"]
+	path = libs/burbulator
+	url = git@github.com:siglabsoss/burbulator.git
+[submodule "libs/d-engine"]
+	path = libs/d-engine
+	url = git@github.com:siglabsoss/d-engine.git
+[submodule "libs/datapath"]
+	path = libs/datapath
+	url = git@github.com:siglabsoss/datapath.git
+[submodule "libs/ip-library"]
+	path = libs/ip-library
+	url = git@github.com:siglabsoss/ip-library-core.git
+[submodule "libs/ip-verification"]
+	path = libs/ip-verification
+	url = git@github.com:siglabsoss/ip-verification.git
+[submodule "libs/q-engine"]
+	path = libs/q-engine
+	url = git@github.com:siglabsoss/q-engine.git
+[submodule "libs/riscv-baseband"]
+	path = libs/riscv-baseband
+	url = git@github.com:siglabsoss/riscv-baseband.git
