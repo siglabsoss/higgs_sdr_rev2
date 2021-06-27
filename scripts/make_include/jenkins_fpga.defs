@@ -1,0 +1,352 @@
+# this files gets included in the fpga only
+
+
+# HIGGS_ROOT  = set outside this file
+# FPGA_NAME   = set by an include in this folder
+
+FPGA_BOARD_NAME = $(notdir $(shell realpath ../../))
+JENKINS_FOLDER:=.jenkins
+# this is the folder under which fpga specific builds do stuff
+#   if we want to do grouped commits, having this be fpga specific doesn't make sense
+JENKINS_LOCAL=$(HIGGS_ROOT)/$(JENKINS_FOLDER)/$(FPGA_NAME)
+JENKINS_LOCAL_GIT:=$(JENKINS_LOCAL)/gitroot
+JENKINS_LOCAL_GIT_PATH:=$(shell realpath $(JENKINS_LOCAL_GIT))
+# these vars deal with a 1 time, per computer, hash
+JENKINS_COOKIE_FILE0:=$(JENKINS_LOCAL)/.jenkins_remote_build_cookie
+JENKINS_COOKIE_FILE1:=$(JENKINS_LOCAL)/.jenkins_remote_build_cookie_hash
+JENKINS_COOKIE_FILE3:=jenkins_build_output_suffix
+JENKINS_COOKIE_FILE4:=jenkins_build_output_branch
+JENKINS_COOKIE_FILE5:=$(JENKINS_LOCAL_GIT)/jenkins_build_new_files
+JENKINS_COOKIE1_CONTENTS=$(shell cat $(JENKINS_COOKIE_FILE1))
+JENKINS_COOKIE3_CONTENTS=$(shell cat $(JENKINS_COOKIE_FILE3))
+JENKINS_COOKIE4_CONTENTS=$(shell cat $(JENKINS_COOKIE_FILE4))
+JENKINS_COOKIE5_CONTENTS=$(shell cat $(JENKINS_COOKIE_FILE5_PATH))
+# this needs a full path during final copy step
+JENKINS_COOKIE_FILE5_PATH=$(shell realpath $(JENKINS_COOKIE_FILE5))
+
+# this _DEFAULT variable should not be used in script targets
+JENKINS_BRANCH_PREFIX_DEFAULT:=$(shell $(ECHO) $${USER})
+
+
+# this allows JENKINS_BRANCH_PREFIX to be defined in user_defs, and if not
+# we use a default value (System username)
+ifdef JENKINS_BRANCH_PREFIX
+else
+JENKINS_BRANCH_PREFIX=$(JENKINS_BRANCH_PREFIX_DEFAULT)
+endif
+
+# only this var should be used below
+JENKINS_BRANCH_PREFIX_FOLDER=$(JENKINS_BRANCH_PREFIX)/
+
+neb1:
+	@$(ECHO) "using as":
+	@$(ECHO) $(JENKINS_BRANCH_PREFIX)
+	$(ECHO) git checkout $(JENKINS_BRANCH_PREFIX)$(JENKINS_COOKIE4_CONTENTS)
+	$(ECHO) $(JENKINS_BRANCH_PREFIX_FOLDER)
+
+MY_DATE_TIMESTAMP=@date '+%a, %b %e, %G %l:%M:%S %P'
+
+neb2:
+	cat $(JENKINS_COOKIE_FILE0)
+	cat $(JENKINS_COOKIE_FILE1)
+	cat $(JENKINS_COOKIE_FILE3)
+	cat $(JENKINS_COOKIE_FILE4)
+	cat $(JENKINS_COOKIE_FILE5)
+	$(ECHO) $(JENKINS_COOKIE_FILE5_PATH)
+
+neb3:
+	$(MY_DATE_TIMESTAMP)
+	$(ECHO) $(shell realpath $(FPGA_BOARD_NAME))
+	$(ECHO) $(FPGA_BOARD_NAME)
+#########
+# 
+# Jenkins Git section
+#  
+#    (targets that RUN ON BUILDSERVER)  
+#
+# this target is what the build server does to return files to us
+# this step is run so that jenkins can add and commit files back to git.
+# it's our job to do everything except for push.
+# infact, the push is sort of weird, jenkins shows
+#
+#  "C:\Program Files\Git\cmd\git.exe" push git@github.com:siglabsoss/jenkins-pusher.git HEAD:branch_name
+# 
+# because of how things operate, we end up in detached head.  without the git checkout -b command below
+# the above push does not work.  Therefor we need to know the output branch name on disk.  One method is to let jenkins handle it
+# by moving this into the job.  the other way to do this would be to write this variable to disk as part of the commit
+# instead we just grab it from the environment with the $$ notation to pass through and be a bash variable (single $ is make var)
+# 
+# We can use environment variables from the jenkins
+# TODO write a file or cat a file with job #etc
+# see https://stackoverflow.com/questions/10765946/ssh-use-known-hosts-other-than-home-ssh-known-hosts
+GIT_PUSH_PATH=$(shell realpath $(HIGGS_SCRIPTS)/deploy/deploy_id)
+jenkins_commit_build_results:
+	#git status
+	git checkout -b $${OUTPUT_BRANCH}
+	git config --global user.email "FIXME"
+	git config --global user.name "Jenkins Build Server"
+	$(MAKE) jenkins_write_job_file
+	git add ..
+	git add .
+	git commit -am "built"
+	chmod 600 $(GIT_PUSH_PATH)
+	GIT_SSH_COMMAND="ssh -i scripts/deploy/deploy_id -o UserKnownHostsFile=scripts/deploy/known_hosts" git push origin HEAD:$${OUTPUT_BRANCH}
+	#git status
+	#git branch -avv
+	#git diff @~..@
+
+# because this is in jenkins_fpga, a relative path here will result in it getting written inside the bulid of each fpga
+JENKINS_JOB_OUTPUT_FILE=jenkins_job_file.txt
+
+
+# this deletes the file
+jenkins_clean_job_file:
+	$(RM) $(JENKINS_JOB_OUTPUT_FILE)
+
+# also indended to be run on build server only
+# this writes some env vars to a file
+#
+# BUILD_ID
+# BUILD_TAG
+# BUILD_URL
+# NODE_NAME
+jenkins_write_job_file:
+	$(RM) $(JENKINS_JOB_OUTPUT_FILE)
+	$(ECHO) $${NODE_NAME} >> $(JENKINS_JOB_OUTPUT_FILE)
+	$(ECHO) $${BUILD_URL}console >> $(JENKINS_JOB_OUTPUT_FILE)
+	$(ECHO) $${OUTPUT_BRANCH} >> $(JENKINS_JOB_OUTPUT_FILE)
+
+
+
+#############
+#
+# User Local Makefile Section
+#
+#   These run on the user's machine.  Some of the targets below will cause jenkins to look at code
+#   and eventually execute targets above in the "Jenkins Git section"
+#
+
+jenkins_build:
+	$(MAKE) jenkins_checkout_branch
+	$(MAKE) jenkins_prepare_build
+	$(MAKE) jenkins_commit_build
+	$(MAKE) jenkins_trigger_build
+	$(MAKE) jenkins_wait_build
+
+
+# fixme this only needs to run when it's not a repo
+# here we are hinging on the description file, I'm afraid that if this files updates, we will re-run the target
+# is git?
+$(JENKINS_LOCAL_GIT)/.git/description:
+	mkdir -p $(JENKINS_LOCAL_GIT)
+	cd $(JENKINS_LOCAL) && git clone -b master --single-branch git@github.com:siglabsoss/jenkins-pusher.git gitroot
+	$(MAKE) jenkins_checkout_branch
+
+
+# $(JENKINS_COOKIE_FILE2):
+# 	@$(ECHO) "..."
+
+jenkins_checkout_branch: $(JENKINS_COOKIE_FILE1)
+	$(ECHO) $(JENKINS_COOKIE1_CONTENTS)
+	cd $(JENKINS_LOCAL_GIT) && mkdir -p fpgas/$(FPGA_BOARD_NAME)/$(FPGA_NAME)
+	cd $(JENKINS_LOCAL_GIT) && git branch -D $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE1_CONTENTS); true
+	cd $(JENKINS_LOCAL_GIT) && git checkout --orphan $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE1_CONTENTS); true
+# at this point decide if we are doing an orpan checkout or doing an existing one
+
+# assumes directory exists, is a git repo, and is on OUR branch in some state.
+#cd $(HIGGS_ROOT) && cp -R $(ADD_LIST) $(JENKINS_LOCAL_ROOT_FULL)/gitroot
+jenkins_prepare_build: $(JENKINS_LOCAL_GIT)/.git/description
+	@$(ECHO) ""
+	@$(ECHO) "   Prepare Build Started:"
+	@$(ECHO) ""
+	$(MY_DATE_TIMESTAMP)
+	@$(ECHO) ""
+	cd $(JENKINS_LOCAL_GIT) && git checkout $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE1_CONTENTS); true
+	#### make folders
+	cd $(HIGGS_ROOT) && $(RM) -r $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot/* && mkdir -p $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot
+	cd $(JENKINS_LOCAL_GIT) && mkdir -p fpgas/$(FPGA_BOARD_NAME)/$(FPGA_NAME)
+	cd $(JENKINS_LOCAL_GIT) && mkdir -p libs
+	#### Fancy things with Make
+	# Choose the output branch now, (creates the cookie4 file)
+	$(MAKE) jenkins_pick_build_output_branch
+	# Delete the jenkins_job file from the current directory. during the build this will be missing, and only come back with the fresh one.  we DO NOT WANT jenkins to have this file when build starts
+	$(MAKE) jenkins_clean_job_file
+	#### Copy files with cp.  this puts source in, which will catch files from previous line
+	cd $(HIGGS_ROOT) && cp -R scripts Makefile ordt *.defs $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot
+	cd $(HIGGS_ROOT) && cp -R fpgas/common $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot/fpgas
+	cd $(HIGGS_ROOT) && cp -R fpgas/packages $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot/fpgas
+	cd $(HIGGS_ROOT) && cp -R fpgas/$(FPGA_BOARD_NAME)/$(FPGA_NAME) $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot/fpgas/$(FPGA_BOARD_NAME)
+	cd $(HIGGS_ROOT) && cp -R libs/ip-library $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot/libs && $(RM) -r $(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot/libs/ip-library/.git
+	cd $(HIGGS_ROOT)/$(JENKINS_FOLDER)/$(FPGA_NAME)/gitroot/libs && find . | grep \/sim\/ | xargs rm -rf
+	# we could have done a make clean up above, however this way we only clean files that we submit to jenkins
+	cd $(JENKINS_LOCAL_GIT)/fpgas/$(FPGA_BOARD_NAME)/$(FPGA_NAME)/build && make clean
+	@$(ECHO) "   Prepare Build Ended:"
+	@$(ECHO) ""
+	$(MY_DATE_TIMESTAMP)
+	@$(ECHO) ""
+# find . | grep \.qpg | xargs rm
+
+
+
+jenkins_commit_build:
+	cd $(JENKINS_LOCAL_GIT) && git add . && git commit -am "x" ; true
+	cd $(JENKINS_LOCAL_GIT) && git push origin -f $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE1_CONTENTS):$(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE1_CONTENTS)
+
+
+# picks a branch name for this build, this is an identifier
+# JENKINS_COOKIE_FILE3 is the current time.  this serves as a unique identifier for this build
+# JENKINS_COOKIE_FILE4 is the full branch name
+jenkins_pick_build_output_branch: $(JENKINS_COOKIE_FILE1)
+	$(RM) $(JENKINS_COOKIE_FILE3)
+	$(RM) $(JENKINS_COOKIE_FILE4)
+	TZ="US/Pacific" date '+%m_%d_%H_%M_%S' | sed -e 's/ /_/g' | sed -e 's/:/_/g' | tr -d '\r\n' > $(JENKINS_COOKIE_FILE3)
+	cat $(JENKINS_COOKIE_FILE1) >> $(JENKINS_COOKIE_FILE4)
+	cat $(JENKINS_COOKIE_FILE3) >> $(JENKINS_COOKIE_FILE4)
+
+
+# https://stackoverflow.com/questions/38137760/jenkins-rest-api-create-job
+# CRUMB=$(curl -s 'http://$(JENKINS_API_USER):$(JENKINS_API_TOKEN)@localhost:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
+JENKINS_REMOTE_TARGET=jenkins_automated_build_single
+JENKINS_REMOTE_SOURCE_BRANCH=$(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE1_CONTENTS)
+JENKINS_REMOTE_OUTPUT_BRANCH=$(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS)
+jenkins_trigger_build: $(JENKINS_COOKIE_FILE1)
+	CRUMB=`curl -s 'http://$(JENKINS_API_USER):$(JENKINS_API_TOKEN)@$(JENKINS_SERVER)/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'` && curl -X POST -H "$$CRUMB" http://$(JENKINS_SERVER)/job/$(JENKINS_JOB_NAME)/build --user siglabs:33819019193ba8e71af6719ca1175fba --data-urlencode json='{"parameter": [{"name":"TARGET_NAME", "value":"$(JENKINS_REMOTE_TARGET)"}, {"name":"OUTPUT_BRANCH", "value":"$(JENKINS_REMOTE_OUTPUT_BRANCH)"}, {"name":"SOURCE_BRANCH", "value":"$(JENKINS_REMOTE_SOURCE_BRANCH)"}, {"name":"FPGA_NAME", "value":"$(FPGA_NAME)"}, {"name":"FPGA_BOARD_NAME", "value":"$(FPGA_BOARD_NAME)"}]}'
+	@$(ECHO) ""
+	@$(ECHO) ""
+	@$(ECHO) "   Triggered Jenkins Build at:"
+	@$(ECHO) ""
+	$(MY_DATE_TIMESTAMP)
+	@$(ECHO) ""
+#CRUMB=`curl -s 'http://$(JENKINS_API_USER):$(JENKINS_API_TOKEN)@jenkins.siglabs:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'` && echo "$$CRUMB" && curl -X POST -H "$$CRUMB" $(JENKINS_URL)/job/$(JENKINS_JOB_NAME)/build --user $(JENKINS_API_USER):$(JENKINS_API_TOKEN) --data-urlencode json='{"parameter": [{"name":"TARGET_NAME", "value":"ben_target1"}, {"name":"OUTPUT_BRANCH", "value":""}, {"name":"SOURCE_BRANCH", "value":""}]}'
+
+#CRUMB=`curl -s 'http://$(JENKINS_API_USER):$(JENKINS_API_TOKEN)@jenkins.siglabs:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'` && echo $$CRUMB
+
+##CRUMB=$(curl -s 'http://$(JENKINS_API_USER):$(JENKINS_API_TOKEN)@jenkins.siglabs:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)') && curl -X POST -H "$$CRUMB" $(JENKINS_URL)/job/$(JENKINS_JOB_NAME)/build --user $(JENKINS_API_USER):$(JENKINS_API_TOKEN) --data-urlencode json='{"parameter": [{"name":"TARGET_NAME", "value":"ben_target1"}, {"name":"OUTPUT_BRANCH", "value":""}, {"name":"SOURCE_BRANCH", "value":""}]}'
+
+# https://askubuntu.com/questions/476041/how-do-i-make-rsync-delete-files-that-have-been-deleted-from-the-source-folder
+# rsync -avh source/ dest/ --delete
+
+# calls jenkins_fetch_build_branch, jenkins_checkout_output_branch, jenkins_copy_files
+jenkins_wait_build:
+	$(HIGGS_SCRIPTS)/wait_jenkins_build.sh
+
+jenkins_fetch_build_branch2:
+	cd $(JENKINS_LOCAL_GIT) && git fetch origin $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS)z:refs/remotes/origin/$(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS)z
+
+jenkins_fetch_build_branch:
+	cd $(JENKINS_LOCAL_GIT) && git fetch origin $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS):refs/remotes/origin/$(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS)
+	cd $(JENKINS_LOCAL_GIT) && git branch -avv
+
+
+# jenkins_pull_all
+
+jenkins_checkout_output_branch:
+	cd $(JENKINS_LOCAL_GIT) && git checkout -b $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS) refs/remotes/origin/$(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS)
+
+
+# note that we dont try and copy back the .recovery as this has prolbems
+# on anurags computer this probably means we will have problems with any file that starts with .
+jenkins_copy_files:
+	$(RM) $(JENKINS_COOKIE_FILE5_PATH)
+	cd $(JENKINS_LOCAL_GIT) && git diff-tree --no-commit-id --name-only -r $(JENKINS_BRANCH_PREFIX_FOLDER)$(JENKINS_COOKIE4_CONTENTS) | grep -v .recovery > $(JENKINS_COOKIE_FILE5_PATH)
+	@$(ECHO) ""
+	@$(ECHO) ""
+	@$(ECHO) "These files were added during the build process:"
+	@$(ECHO) ""
+	@cat $(JENKINS_COOKIE_FILE5_PATH)
+	cd $(HIGGS_ROOT) && cat $(JENKINS_COOKIE_FILE5_PATH) | sed -e 's/[^\/]*$$//g' | xargs mkdir -p
+	cd $(HIGGS_ROOT) && cat $(JENKINS_COOKIE_FILE5_PATH) | xargs -I '{}' cp $(JENKINS_LOCAL_GIT_PATH)/{} {}
+	@$(ECHO) ""
+	@$(ECHO) ""
+	@$(ECHO) "   File Copy finished at:"
+	@$(ECHO) ""
+	$(MY_DATE_TIMESTAMP)
+	@$(ECHO) ""
+
+#cd $(HIGGS_ROOT) && cat $(JENKINS_COOKIE_FILE5_PATH) | xargs -I '{}' cp $(JENKINS_LOCAL_GIT)/{} {}
+#cd $(HIGGS_ROOT) && cat $(JENKINS_COOKIE_FILE5_PATH) | xargs -I '{}' cp /home/x/software_parent_repo/higgs_sdr_rev2/.jenkins/$(FPGA_NAME)/gitroot/{} {}
+#cd $(HIGGS_ROOT) && cat $(JENKINS_COOKIE_FILE5_PATH) | sed -e 's/[^\/]*$$//g' | xargs mkdir -p
+#| xargs -I '{}' taskkill /F /PID {}
+# cat jenkins_build_new_files | sed -e 's/[^\/]*\///g' 
+# cat jenkins_build_new_files | sed -e 's/[^\/]*$//g'
+# cat $(JENKINS_LOCAL_GIT)/$(JENKINS_COOKIE_FILE5) | xargs -I '{}' cp $(JENKINS_LOCAL_GIT)/{} .
+
+
+
+jenkins_clean:
+	$(RM) $(JENKINS_COOKIE_FILE0)
+	$(RM) $(JENKINS_COOKIE_FILE1)
+	$(RM) $(JENKINS_COOKIE_FILE3)
+	$(RM) $(JENKINS_COOKIE_FILE4)
+	$(RM) $(JENKINS_COOKIE_FILE5)
+	$(RM) -r $(JENKINS_LOCAL_GIT)
+
+jenkins_path:
+	$(ECHO) $(JENKINS_LOCAL)
+	$(ECHO) $(JENKINS_LOCAL_ROOT)
+	$(ECHO) $(JENKINS_LOCAL_GIT)
+	cd $(JENKINS_LOCAL_GIT) && pwd
+
+
+
+
+ben4:
+	$(ECHO) "hi"
+	$(ECHO) $(JENKINS_COOKIE_FILE0)
+	$(ECHO) ""
+	$(ECHO) $(JENKINS_COOKIE1_CONTENTS)
+	pwd
+	cd $(HIGGS_ROOT) && $(ECHO) $(wildcard $(ADD_LIST))
+
+jenkins_cookie: $(JENKINS_COOKIE_FILE1) 
+
+# put this file as deps
+# this cookie file also has the fpga name, as part of the hash.  The hash is also reduced to the first 6 characters
+$(JENKINS_COOKIE_FILE1): $(JENKINS_COOKIE_FILE0)
+	$(ECHO) -n "$(FPGA_NAME)_" > $(JENKINS_COOKIE_FILE1)
+	cat $(JENKINS_COOKIE_FILE0) | $(MD5) | cut -d " " -f1,1 | tr -d '\r\n' | sed -e 's/\(.\)\{24\}$$//g' | tr -d '\r\n' >> $(JENKINS_COOKIE_FILE1) 
+	$(ECHO) -n "_" >> $(JENKINS_COOKIE_FILE1)
+
+# relies on this folder
+
+JENKINS_COOKIE_FILE0_PATH=$(shell realpath $(JENKINS_COOKIE_FILE0))
+
+$(JENKINS_COOKIE_FILE0): Makefile $(USER_SETTINGS_FILE)
+	@$(ECHO) will be writing to $(JENKINS_COOKIE_FILE0_PATH)
+	@cd $(HIGGS_ROOT) && $(ECHO) `pwd` > $(JENKINS_COOKIE_FILE0_PATH) && $(ECHO) $(JENKINS_BRANCH_PREFIX_FOLDER) >> $(JENKINS_COOKIE_FILE0_PATH)
+	@$(ECHO) $$USER >> $(JENKINS_COOKIE_FILE0)
+
+
+#ADD_LIST=scripts Makefile ordt jenkins.defs fpgas/cs/cs22
+#ADD_LIST=scripts Makefile ordt jenkins.defs
+
+# jenkins_check_git: $(JENKINS_COOKIE_FILE1) jenkins_check1
+# 	echo $(JENKINS_COOKIE1_CONTENTS)
+# 	git branch -D jenkins_7716c6a36b305f383c030b83d3845aec
+# 	git checkout --orphan jenkins_7716c6a36b305f383c030b83d3845aec
+# 	cd $(HIGGS_ROOT) && git rm --cache -r . && git add scripts Makefile fpgas/cs/cs22 jenkins.defs ordt
+
+
+# worse way to push   git push -f -u buildrepo jenkins_7716c6a36b305f383c030b83d3845aec
+# above should be changed to NOT orphan.
+# need a better way to get back.. copying everything to a subfolder is NOT A BAD WAY TO GO
+
+ben5: $(JENKINS_COOKIE_FILE1)
+	$(ECHO) "running ben5"
+	touch ben5
+
+
+# load order from a subfpga is
+# makefile in a fpga folder
+#
+#  below is indented for which Makefile includes the other, in order
+#
+#######################3
+#   include this_fgpa
+#   include Makefile_fpga
+#     include higgs_core.defs
+#       include user_settings
+#     include jenkins_shared
+#     include jenkins_fpga
+
+

@@ -1,0 +1,59 @@
+# put your settings in here
+OPTIONAL_THING_1 = /some/filasdlkfasdklfj
+
+
+# If you would like jenkins remote builds to have a different prefix than your username on the computer
+# simply change this line.
+# JENKINS_BRANCH_PREFIX=machinename
+
+
+#######
+#
+#  if your sigdata is mounted custom place, change it here.  Do not put a trailing slash
+#  Windows paths should look like:
+#       /cygdrive/z
+#
+#  see: sigdata_fetch.defs, higgs_core.defs
+#
+#SIGDATA_LOCATION_MAC=
+#SIGDATA_LOCATION_WIN=
+SIGDATA_LOCATION_LINUX=/run/user/1000/gvfs/smb-share:server=sigdata,share=sigdata
+
+
+#######
+#
+#  Switched jtag programmer settings
+#
+# if your jtag programmers are "switched", or if you don't know what to set for this value, simply run
+#
+#  make check_jtag
+#
+# Uncomment this line to put the build scripts into "Switched" mode for jtag
+# JTAG_PROGAMMERS_SWITCHED=1
+# 
+# DO NOT set this value to zero and expect it to be disabled, you must comment this line to disable (making the var undefined)
+
+
+
+
+#######
+#
+#  Grav JTAG programming port
+#  
+#  every FPGA has it's own JTAG, we used to program grav on the CFG jtag (near cfg and far away from where cs is programmend)
+#  and now we are programming grav from the ADC jtag (near borad edge, ner where cs is programmed)
+#
+#   The old order. Remember it by "Come Down And Eat":
+#      cfg
+#      dac
+#      adc
+#      eth
+#
+#   The new order. Remember it by "Always Eat Cold Donuts"
+#      adc
+#      eth
+#      cfg
+#      dac
+#
+# uncomment this line to use the new order/new programming location
+# GRAV_JTAG_USES_ADC_PORT=1

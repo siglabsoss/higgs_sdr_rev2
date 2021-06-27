@@ -1,0 +1,203 @@
+# meant to be included only from root of project
+
+#######################
+#
+#    Pre compiled bitfiles
+#
+#    This file contains targets and variables to fetch the latest "Fixed Branch Build" files that are stored on SigData.
+#    See readme
+
+
+
+#SIGDATA_LOCATION_ACTIVE = set by higgs core
+FETCH_OFFICIAL_PATH=$(SIGDATA_LOCATION_ACTIVE)/$${FETCH_OFFICIAL_BITFILE_TARGET_PATH}
+BUILD_FOLDERS=$(wildcard $(FETCH_OFFICIAL_PATH)/*)
+
+MOST_RECENT_BUILD_FOLDER=$(shell ls $(FETCH_OFFICIAL_PATH) | tail -1 | tr -d '\r\n')
+
+ifdef rev
+  MOST_RECENT_BUILD_FOLDER=$(shell ls $(FETCH_OFFICIAL_PATH) | grep -e '^$(rev)-' | tail -1 | tr -d '\r\n')
+endif
+
+ifdef hash
+  # MOST_RECENT_BUILD_FOLDER=$(shell ls $(FETCH_OFFICIAL_PATH) | grep -e '$(hash)' | tail -1 | tr -d '\r\n')
+  # first we make the hash lower case, then we search anywhere in the string for it.
+  MOST_RECENT_BUILD_FOLDER=$(shell ls $(FETCH_OFFICIAL_PATH) | grep -e '$(shell echo $(hash) | tr A-Z a-z)' | tail -1 | tr -d '\r\n')
+endif
+
+# old method
+OFFICIAL_DIR=official_builds
+LOCAL_OFFICIAL_PATH=$(realpath $(OFFICIAL_DIR))
+
+# new named based method
+OFFICIAL_SUBDIR=$(shell echo $${FETCH_OFFICIAL_BITFILE_TARGET_PATH})
+LOCAL_OFFICIAL_SUBDIR=$(realpath $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR))
+
+.PHONY: ls_sigdata sigdata_debug fetch_cstest fetch_dev fetch_clean fetch_assert
+
+
+# x:
+# 	echo $(OFFICIAL_SUBDIR)
+# 	echo $(LOCAL_OFFICIAL_SUBDIR)
+
+sigdata_debug:
+	pwd
+	#cd $(SIGDATA_LOCATION_ACTIVE) && ls
+	cd $(FETCH_OFFICIAL_PATH) && ls
+	echo $(FETCH_OFFICIAL_PATH)
+	echo $(MOST_RECENT_BUILD_FOLDER)
+	echo $(LOCAL_OFFICIAL_PATH)
+	echo $(FETCH_OFFICIAL_PATH)/$(MOST_RECENT_BUILD_FOLDER)
+
+
+
+fetch_master:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_master $(MAKE) fetch_official_bitfiles
+fetch_deng:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_deng $(MAKE) fetch_official_bitfiles
+fetch_cstest:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=bitfile_cs_test_tx_rx $(MAKE) fetch_official_bitfiles
+fetch_dev:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_rev2_dev $(MAKE) fetch_official_bitfiles
+fetch_dev2:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_dev2 $(MAKE) fetch_official_bitfiles
+fetch_ben_bootloader:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_ben_bootloader $(MAKE) fetch_official_bitfiles
+fetch_ben_fft:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_ben_fft $(MAKE) fetch_official_bitfiles
+fetch_ameet_build:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_ameet_dev_buildallfpgas $(MAKE) fetch_official_bitfiles
+fetch_gold:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_golden_images $(MAKE) fetch_official_bitfiles
+fetch_fix_master:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=fix_higgs_sdr $(MAKE) fetch_official_bitfiles
+fetch_fix_master_2:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=fix_master_2 $(MAKE) fetch_official_bitfiles
+fetch_ben_master:
+	FETCH_OFFICIAL_BITFILE_TARGET_PATH=higgs_sdr_ben_master $(MAKE) fetch_official_bitfiles
+
+
+fetch_golden: fetch_gold
+
+fetch_clean:
+	$(RM) -r $(OFFICIAL_DIR)/*
+
+fetch_assert:
+	@echo ""
+	@echo "For failures edit user_settings.defs"
+	@echo ""
+	@echo "  If this fails, sigdata is not mounted or misconfigured:  $(SIGDATA_LOCATION_ACTIVE)" && echo "" && cd $(SIGDATA_LOCATION_ACTIVE) && echo "ok" && echo ""
+	@echo "  If this fails, we couldn't find the fixed branch build folder:  $(FETCH_OFFICIAL_PATH)/" && echo "" && cd $(FETCH_OFFICIAL_PATH)/ && echo "ok" && echo ""
+	@echo "  If this fails, we couldn't find the latest build or something else went wrong:  $(FETCH_OFFICIAL_PATH)/$(MOST_RECENT_BUILD_FOLDER)/fpgas" && echo "" && cd $(FETCH_OFFICIAL_PATH)/$(MOST_RECENT_BUILD_FOLDER)/fpgas && echo "ok" && echo ""
+
+
+# do not run the target directly, it requires env variables,
+# instead run one of the targets above
+# this target will copy all the bitfiles, and then also copy the buildscripts of THIS branch.  aka buildscripts are not
+# tied to version (is this a problem?)
+# in addition we delete the sigdata_fetch.defs file, so that a use does not accidentally fetch from inside a fetched dir
+fetch_official_bitfiles: fetch_assert
+	$(MAKE) fetch_offical_brute_dirs
+	$(MAKE) -j22 $(COPY_OFFICIAL_CS_TARGETS) $(COPY_OFFICIAL_GRAV_TARGETS)
+	cp Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/
+	cp *defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/
+	cp -r scripts $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/
+	cp .deps_ok $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/ ; true
+	$(RM) $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/scripts/make_include/sigdata_fetch.defs
+	cp fpgas/grav/eth/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/eth/build/
+	cp fpgas/grav/eth/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/eth/build/
+	cp fpgas/grav/cfg/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/cfg/build/
+	cp fpgas/grav/cfg/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/cfg/build/
+	cp fpgas/grav/dac/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/dac/build/
+	cp fpgas/grav/dac/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/dac/build/
+	cp fpgas/grav/adc/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/adc/build/
+	cp fpgas/grav/adc/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/adc/build/
+	cp fpgas/cs/cs00/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs00/build/
+	cp fpgas/cs/cs00/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs00/build/
+	cp fpgas/cs/cs01/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs01/build/
+	cp fpgas/cs/cs01/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs01/build/
+	cp fpgas/cs/cs10/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs10/build/
+	cp fpgas/cs/cs10/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs10/build/
+	cp fpgas/cs/cs11/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs11/build/
+	cp fpgas/cs/cs11/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs11/build/
+	cp fpgas/cs/cs20/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs20/build/
+	cp fpgas/cs/cs20/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs20/build/
+	cp fpgas/cs/cs21/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs21/build/
+	cp fpgas/cs/cs21/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs21/build/
+	cp fpgas/cs/cs30/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs30/build/
+	cp fpgas/cs/cs30/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs30/build/
+	cp fpgas/cs/cs31/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs31/build/
+	cp fpgas/cs/cs31/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs31/build/
+	cp fpgas/cs/cs33/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs33/build/
+	cp fpgas/cs/cs33/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs33/build/
+	cp fpgas/cs/cscfg/build/Makefile $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cscfg/build/
+	cp fpgas/cs/cscfg/build/this_fpga.defs $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cscfg/build/
+	mkdir node_modules ; true
+	cp -R node_modules $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/
+	@$(ECHO) "$(FETCH_OFFICIAL_PATH)/$(MOST_RECENT_BUILD_FOLDER)" > $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/bitfile_source.txt
+
+	# Make XCF files in official folder
+	# cd $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR) && $(MAKE) xcf
+
+	@$(ECHO) ""
+	@$(ECHO) ""
+	@$(ECHO) "  Please see the '$(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/' directory for the bitfiles I just copied"
+	@$(ECHO) ""
+	@$(ECHO) "  This is the Build Name for these files:"
+	@$(ECHO) "     $${FETCH_OFFICIAL_BITFILE_TARGET_PATH}"
+	@$(ECHO) ""
+	@$(ECHO) "  They were copied from:"
+	@$(ECHO) "     $(FETCH_OFFICIAL_PATH)/$(MOST_RECENT_BUILD_FOLDER)"
+	@$(ECHO) ""
+	@$(ECHO) "  You can:"
+	@$(ECHO) "     cd $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/"
+	@$(ECHO) "     make program_higgs"
+	@$(ECHO) ""
+	@$(ECHO) ""
+
+
+.PHONY: fetch_offical_brute_dirs fetch_official_bitfiles $(COPY_OFFICIAL_CS_TARGETS) $(COPY_OFFICIAL_GRAV_TARGETS)
+
+
+# runs before anything to create output dirs
+fetch_offical_brute_dirs:
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs00/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs01/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs02/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs03/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs10/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs11/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs12/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs13/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs20/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs21/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs22/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs23/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs30/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs31/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs32/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cs33/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/cs/cscfg/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/adc/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/cfg/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/dac/build
+	@mkdir -p $(OFFICIAL_DIR)/$(OFFICIAL_SUBDIR)/fpgas/grav/eth/build
+
+
+# this is a list of variables that has the words copy_official_  prefixed
+# to all of the cs00, cs01
+COPY_OFFICIAL_CS_TARGETS=$(addprefix copy_official_,$(CS_FPGAS))
+COPY_OFFICIAL_GRAV_TARGETS=$(addprefix copy_official_,$(GRAV_FPGAS))
+
+# because we use add prefix, we HAVE to strip it off
+# this replases $(@) for guys with a prefix, so we can access the base variable inside the loop below
+COPY_TARGET_FPGA_NAME=$(@:copy_official_%=%)
+
+# this evaluates out to targets named:
+#   copy_official_cs00, copy_official_cs01 etc
+$(COPY_OFFICIAL_CS_TARGETS):
+	cd $(FETCH_OFFICIAL_PATH)/$(MOST_RECENT_BUILD_FOLDER)/fpgas/cs/$(COPY_TARGET_FPGA_NAME)/build && cp *bit $(LOCAL_OFFICIAL_SUBDIR)/fpgas/cs/$(COPY_TARGET_FPGA_NAME)/build && cp -rf debug $(LOCAL_OFFICIAL_SUBDIR)/fpgas/cs/$(COPY_TARGET_FPGA_NAME)/build/; true
+
+$(COPY_OFFICIAL_GRAV_TARGETS):
+	cd $(FETCH_OFFICIAL_PATH)/$(MOST_RECENT_BUILD_FOLDER)/fpgas/grav/$(COPY_TARGET_FPGA_NAME)/build && cp *bit $(LOCAL_OFFICIAL_SUBDIR)/fpgas/grav/$(COPY_TARGET_FPGA_NAME)/build && cp -rf debug $(LOCAL_OFFICIAL_SUBDIR)/fpgas/grav/$(COPY_TARGET_FPGA_NAME)/build/; true
+

@@ -1,0 +1,322 @@
+########################
+#
+# Common definitons.  you must set HIGGS_ROOT before including this file
+# if you are including this file from higgs_sdr (Aka the root of the git project), use this
+# 
+# no trailing slash
+# HIGGS_ROOT = .
+# include $(HIGGS_ROOT)/scripts/make_include/higgs_core.defs
+
+
+# Configs (might not be the same for everyone)
+LATTICE_PROGRAMMER_LIN = programmer.exe
+
+
+
+
+# HIGGS_ROOT  = set outside this file
+HIGGS_SCRIPTS = $(HIGGS_ROOT)/scripts
+HIGGS_MAKE_INCLUDE = $(HIGGS_ROOT)/scripts/make_include
+HIGGS_CORE_DEFS_FILE =  $(HIGGS_MAKE_INCLUDE)/higgs_core.defs
+CS_ROOT = $(HIGGS_ROOT)/fpgas/cs
+GRAV_ROOT = $(HIGGS_ROOT)/fpgas/grav
+HIGGS_TEMPLATES = $(HIGGS_ROOT)/scripts/templates
+HIGGS_TMP=$(HIGGS_ROOT)/tmp
+
+PYTHON=python
+PYTHON2=python2
+PYTHON3=python3
+JAVA=java
+M4=/usr/bin/m4
+POWSCRIPT=scripts/powscript
+BASH=/bin/bash
+RM=rm -f
+CAT=cat
+GREP=grep
+SED=sed
+ECHO=/bin/echo
+CD=cd
+PWD=pwd
+PRINTF=printf
+TOUCH=touch
+CHMOD=chmod
+CUT=cut
+MD5=md5sum
+PNMAINC=pnmainc
+
+
+
+########################
+#
+#  This is a Platform Specific if statement where we can add quirks  (thanks Steve)
+#
+#  see https://stackoverflow.com/questions/714100/os-detecting-makefile
+# 
+ifeq ($(OS),Windows_NT)
+	# Windows specific here
+else
+    UNAME_S := $(shell uname -s)
+    UNAME_P := $(shell uname -p)
+    ifeq ($(UNAME_S),Linux)
+        # Linux Specific here
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        # Mac Specific here
+        MD5=md5
+    endif
+endif
+
+
+########################
+#
+#  Set these here
+#  let user defs override
+#  Then do platform specific and merge down to single variable
+#  see sigdata_fetch.defs
+#
+#    please DO NOT PUT trailing slash
+#
+SIGDATA_LOCATION_MAC=unset
+SIGDATA_LOCATION_WIN=/cygdrive/z
+SIGDATA_LOCATION_LINUX=unset
+SIGDATA_JENKINS_FOLDER_PATH=jenkins
+
+
+
+
+USER_SETTINGS_FILE=$(HIGGS_MAKE_INCLUDE)/user_settings.defs
+
+# Override with user settings
+include $(USER_SETTINGS_FILE)
+
+
+
+
+
+
+# Merge into SIGDATA_LOCATION_ACTIVE
+# only use SIGDATA_LOCATION_ACTIVE in the script
+ifeq ($(OS),Windows_NT)
+	# Windows specific here
+	SIGDATA_LOCATION_ACTIVE_MERGE=$(SIGDATA_LOCATION_WIN)
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        # Linux Specific here
+        SIGDATA_LOCATION_ACTIVE_MERGE=$(SIGDATA_LOCATION_LINUX)
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        # Mac Specific here
+        SIGDATA_LOCATION_ACTIVE_MERGE=$(SIGDATA_LOCATION_MAC)
+    endif
+endif
+
+SIGDATA_LOCATION_ACTIVE=$(SIGDATA_LOCATION_ACTIVE_MERGE)/$(SIGDATA_JENKINS_FOLDER_PATH)
+
+
+
+
+ifeq ($(OS),Windows_NT)
+    # Windows specific here
+    LATTICE_VARS=
+    PYTHON3=python
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        # Linux Specific here
+        # HIGGS_PLATFORM="Linux"
+        PLAT_S:=$(shell cat /proc/version)
+
+        bindir=/usr/local/diamond/3.10_x64/bin/lin64
+        fpgadir=$(bindir)/../../ispfpga
+        # this is set and export by the set_lattice_vars.sh
+        # but it works without it, leaving incase we need to add to LATTICE_VARS
+        TCL_LIBRARY="$(bindir)/../../tcltk/lib/tcl8.5"
+        fpgabindir=$(fpgadir)/bin/lin64
+        LATTICE_PATH="$(bindir):$(fpgabindir):$${PATH}"
+        LD_LIBRARY_PATH="$(bindir):$(fpgabindir):/usr/lib64"
+        LM_LICENSE_FILE="${bindir}/../../license/license.dat"
+        LATTICE_VARS=LM_LICENSE_FILE=$(LM_LICENSE_FILE) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) PATH=$(LATTICE_PATH) TCL_LIBRARY=$(TCL_LIBRARY)
+        
+        ifeq (SUSE,$(findstring SUSE,$(PLAT_S)))
+            PLAT_C := "Got Suse"
+        endif
+        ifeq (Ubuntu,$(findstring Ubuntu,$(PLAT_S)))
+            PLAT_C := "Got Ubuntu"
+        endif
+
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        # HIGGS_PLATFORM="Mac"
+        LATTICE_VARS=
+    endif
+endif
+
+
+# echo $(findstring Ubuntu,$(PLAT_S))
+# echo $(PLAT_S)
+# echo $(findstring SUSE,$(PLAT_S))
+# echo $(HIGGS_PLATFORM)
+# echo $(PLAT_S)
+debug_platform:
+	@echo $(PLAT_C)
+	@echo $(BBB)
+
+
+
+# https://stackoverflow.com/questions/7324204/how-to-check-if-a-variable-is-equal-to-one-of-two-values-using-the-if-or-and-fun
+# check_equal = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
+
+
+.PHONY: list listshared debug_path showhashes showthisfpga buildstatus buildstatus_nocolor build_status build_status_nocolor
+
+
+# Makefile intentionally does not have path as to be local
+list:
+	@$(PRINTF) "\nA list of most targets in this file:\n\n"
+	@$(CAT) Makefile | $(GREP) -i '^\w*:' | $(GREP) -v -i '# ' | $(GREP) -v PHONY | $(GREP) -v 'scripts.*sh' | $(CUT) -d: -f1,1 | $(SED) -e 's/^/   /'
+	@$(CAT) $(HIGGS_CORE_DEFS_FILE) | $(GREP) -i '^\w*:' | $(GREP) -v -i '# ' | $(GREP) -v PHONY | $(GREP) -v 'scripts.*sh' | $(CUT) -d: -f1,1 | $(SED) -e 's/^/   /'
+
+listshared:
+	@$(PRINTF) "\nA list shared Makefile targets include:\n\n"
+	@$(CAT) $(HIGGS_CORE_DEFS_FILE) | $(GREP) -i '^\w*:' | $(GREP) -v -i '# ' | $(GREP) -v PHONY | $(GREP) -v 'scripts.*sh' | $(CUT) -d: -f1,1 | $(SED) -e 's/^/   /'
+
+debug_path:
+	@echo "higgs relative to cwd":
+	@echo $(HIGGS_ROOT)
+	@echo "we in scripts?"
+	@cd $(HIGGS_ROOT)/scripts && $(PWD)
+	@echo "we in root?"
+	@cd $(HIGGS_ROOT) && $(PWD)
+	@echo "we in cs00?"
+	@cd $(HIGGS_ROOT)/fpgas/cs/cs00 && $(PWD)
+
+showhashes:
+	chmod +x scripts/hashes_of_make.sh
+	chmod +x scripts/hashes_of_buildsh.sh
+	@echo "Hash of every Makefile"
+	@echo ""
+	@cd $(HIGGS_ROOT) && scripts/hashes_of_make.sh
+	@echo ""
+	@echo ""
+	@echo "Hash of every build.sh Script"
+	@echo ""
+	@cd $(HIGGS_ROOT) && scripts/hashes_of_buildsh.sh
+
+#@$(CAT) $(CS_ROOT)/*/build/this_fpga.def
+# can't think of a better way to do this?
+showthisfpga:
+	# A lame way to show, but if you cross reference, each one should be correct
+	@echo ./fpgas/cs/*/build/this_fpga.defs | $(SED) -e 's/ /\n/g'
+	@$(CAT) ./fpgas/cs/*/build/this_fpga.defs
+
+build_status: buildstatus
+build_status_nocolor: buildstatus_nocolor
+
+buildstatus:
+	@echo $(PYTHON3) scripts/buildstatus.py
+	@cd $(HIGGS_ROOT) && $(PYTHON3) scripts/buildstatus.py
+
+buildstatus_nocolor:
+	@echo $(PYTHON3) scripts/buildstatus.py
+	@cd $(HIGGS_ROOT) && USE_COLOR=no $(PYTHON3) scripts/buildstatus.py
+
+
+
+# a fun bug	
+# has to do with the fact that we can only build the deps file from the root
+# but we would still like to depend on it here
+# first use magic string to notify jenkins
+../../../../.deps_ok:
+	@echo "BUILD FAILED!"
+	@echo " ERROR: Please run this command (from the root directory):"
+	@echo "    make checksystem"
+	@echo ""
+	@echo ""
+	exit 1
+
+cdcs:
+	@echo cd $(HIGGS_ROOT)/fpgas/cs
+
+cdcs00:
+	@echo cd $(HIGGS_ROOT)/fpgas/cs/cs00/build 
+
+cdroot:
+	@echo cd $(HIGGS_ROOT)	
+
+# copy makefile from 00 to all
+# cp 
+
+
+# copy many to a new place
+# cp fpgas/cs/cs00/build/{Makefile,build.sh,make.include}
+
+
+# git mv fpgas/cs/cs00/build/make.include fpgas/cs/cs00/build/this_fpga.defs
+# git mv fpgas/cs/cs01/build/make.include fpgas/cs/cs01/build/this_fpga.defs
+# git mv fpgas/cs/cs02/build/make.include fpgas/cs/cs02/build/this_fpga.defs
+# git mv fpgas/cs/cs03/build/make.include fpgas/cs/cs03/build/this_fpga.defs
+# git mv fpgas/cs/cs10/build/make.include fpgas/cs/cs10/build/this_fpga.defs
+# git mv fpgas/cs/cs11/build/make.include fpgas/cs/cs11/build/this_fpga.defs
+# git mv fpgas/cs/cs12/build/make.include fpgas/cs/cs12/build/this_fpga.defs
+# git mv fpgas/cs/cs13/build/make.include fpgas/cs/cs13/build/this_fpga.defs
+# git mv fpgas/cs/cs20/build/make.include fpgas/cs/cs20/build/this_fpga.defs
+# git mv fpgas/cs/cs21/build/make.include fpgas/cs/cs21/build/this_fpga.defs
+# git mv fpgas/cs/cs22/build/make.include fpgas/cs/cs22/build/this_fpga.defs
+# git mv fpgas/cs/cs23/build/make.include fpgas/cs/cs23/build/this_fpga.defs
+# git mv fpgas/cs/cs30/build/make.include fpgas/cs/cs30/build/this_fpga.defs
+# git mv fpgas/cs/cs31/build/make.include fpgas/cs/cs31/build/this_fpga.defs
+# git mv fpgas/cs/cs32/build/make.include fpgas/cs/cs32/build/this_fpga.defs
+# git mv fpgas/cs/cs33/build/make.include fpgas/cs/cs33/build/this_fpga.defs
+
+#
+
+# cs00
+# cs01
+# cs02
+# cs03
+# cs10
+# cs11
+# cs12
+# cs13
+# cs20
+# cs21
+# cs22
+# cs23
+# cs30
+# cs31
+# cs32
+# cs33
+# adc
+# cfg
+# dac
+# eth
+
+
+
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs00/build/  ### SELF dont want
+
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs01/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs02/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs03/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs10/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs11/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs12/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs13/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs20/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs21/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs22/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs23/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs30/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs31/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs32/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cs33/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/cs/cscfg/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/grav/adc/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/grav/cfg/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/grav/dac/build/
+# cp fpgas/cs/cs00/build/Makefile fpgas/grav/eth/build/
+
+
+# copy 3 files at once
+# cp fpgas/grav/adc/build/{Makefile,this_fpga.defs,build.sh} fpgas/grav/cfg/build
