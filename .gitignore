@@ -1,0 +1,158 @@
+### build scripts ###
+.deps_ok
+scripts/checksystem.sh
+/tmp/
+
+
+### Tmp flashing Files ###
+cs_selectable.xcf
+grav_selectable.xcf
+
+### Igore compiled output (now that we have make buildstatus) ###
+fpgas/*/*/regs/regs.txt
+fpgas/*/*/hdl/regs.sv
+fpgas/*/*/regs/*xml
+
+# ignore all outputs (cept bitfiles)
+fpgas/*/*/build/build.log
+fpgas/*/*/build/*edf
+fpgas/*/*/build/*ldf
+fpgas/*/*/build/*sty
+fpgas/*/*/build/*html
+fpgas/*/*/build/.recovery
+fpgas/*/*/build/*_top_tcr.dir/
+fpgas/*/*/build/*xcf
+
+# riscv ignore
+fpgas/*/*/c/build
+
+# ignore output folders
+fpgas/*/*/build/tmp/
+fpgas/*/*/build/syn/
+fpgas/*/*/build/reports/
+
+# ignore lattice gui outputs
+fpgas/*/*/build/.run_manager.ini
+fpgas/*/*/build/promote.xml
+fpgas/*/*/build/reportview.xml
+
+
+
+### Official Fetch ###
+/official_builds/
+
+
+### Remote Build Scripts ###
+/.jenkins
+jenkins_build_output_branch
+jenkins_build_output_suffix
+.jenkins_remote_build_cookie
+.jenkins_remote_build_cookie_hash
+
+
+
+### Outputs ###
+/flash_grav_all.xcf
+/flash_cs_no_cfg.xcf
+*.svf
+*.bit
+*.vcd
+
+
+
+
+### editors ###
+.project
+.svproject
+# eclipse sv plugin
+sve.f
+
+
+
+
+
+
+
+
+
+# Created by https://www.gitignore.io/api/osx
+
+### OSX ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# End of https://www.gitignore.io/api/osx
+
+
+
+
+
+
+
+
+
+
+# Created by https://www.gitignore.io/api/pycharm
+
+### PyCharm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/vcs.xml
+
+# Gradle:
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Mongo Explorer plugin:
+.idea/**/mongoSettings.xml
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
+
+# python
+*.pyc
+
+
+# Node:
+package-lock.json
+node_modules/
