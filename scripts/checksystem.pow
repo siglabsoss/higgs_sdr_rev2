@@ -1,0 +1,49 @@
+
+# This file runs with a CWD of project root
+# FIXME: this program currently has THREE single quotes in weird positions in COMMENTS which is not allowed
+
+needed={}
+needed["/usr/bin/xxd"]=1
+needed["/usr/bin/dos2unix"]=1
+needed["/usr/bin/bash"]=1
+#needed["/usr/bin/cmake"]=1
+needed["/usr/bin/wget"]=1
+needed["/usr/bin/git"]=1
+#needed["/usr/bin/patch"]=1
+needed["/usr/bin/make"]=1
+needed["/usr/bin/m4"]=1
+needed["/usr/bin/sed"]=1
+
+
+
+# this if was tricky to get working
+# it didn't like it inside the for loop (error was two fi's)
+check_single(path)
+  echo -ne $path
+  echo -ne " "
+  if  ! -f $path
+    echo "not found!"
+    g_errors=1
+  else
+    echo " OK"
+  # fi   # bug, don't install use this here
+
+
+
+
+########################  Main ########################
+echo ""
+
+for k,v in needed
+  check_single $k
+
+if isset $g_errors
+	echo ""
+	echo ""
+	echo "-------------------------------------------------------------"
+	echo "-----------------------  Missing deps -----------------------"
+	echo "-------------------------------------------------------------"
+	echo ""
+	echo "BUILD FAILED!"
+	exit 1
+fi
