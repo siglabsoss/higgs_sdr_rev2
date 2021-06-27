@@ -1,0 +1,38 @@
+
+global {
+
+min_data_size=32
+allow_unordered_addresses=false
+suppress_alignment_warnings=false
+
+}
+
+input rdl {
+
+default_rw_hw_access=false
+
+}
+
+output xml {
+
+include_field_hw_info=true
+
+}
+
+output systemverilog {
+
+root_decoder_interface=parallel
+secondary_decoder_interface=none
+use_gated_logic_clock=false
+suppress_no_reset_warnings=false
+write_enable_size=0
+
+}
+
+output reglist {
+
+display_external_regs=true
+show_reg_type=true
+show_fields=true
+
+}
