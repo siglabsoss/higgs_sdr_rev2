@@ -1,0 +1,71 @@
+########################
+#
+#  This file contains the special target `enabledfpga` which is tells developers which FPGA's are enabled in this design
+#  The idea is that if your design adds another fpga, you must come here and update this target
+#
+#
+enabledfpga: cfg eth cscfg cs00 cs10 cs20 cs30 cs01 cs11 cs21 cs31 cs33
+# adc dac
+
+# cs33 has a "global reset" which will reset all the other fpgas. we program it last to have a global reset across the board
+# this way no matter how long different programing attempts take we have a solid way to make sure everything is in before doing the reset
+
+ifeq ($(OS),Windows_NT)
+########################
+#
+#  This section defines the order for programming the FPGAS
+#  If there is a mismatch here with enabledfpga's above, that is up to the developers to sort out
+#  
+#  In order understand what is going on here, you should understand that each line is flashing either Graviton or CS
+#  You can determine which fpga is being programmed by the (compile_selectable_grav, flash_selectable_grav) found in the line
+#  You also need to define which FPGA's should be done during each pass
+#
+#  Note: you cannot use any of: allfpga, allcs, allgrav with this target.
+#
+#
+#             cs or grav                                                                   space separated list of fpgas                                               cs or grav, must match start of line
+#                 -                                                                                      -                                                                            -
+#                 -                                                                                      -                                                                            -
+#                 v                                                                                      v                                                                            v
+programhiggs:
+	make remove_xcf
+	make compile_selectable_grav $(addprefix trigger_enable_flash_,      cfg                                                                 ) && make flash_selectable_grav
+	make compile_selectable_cs $(addprefix trigger_enable_flash_,        cscfg cs00 cs10 cs20 cs01 cs30 cs11 cs21 cs31                       ) && make flash_selectable_cs
+	make compile_selectable_grav $(addprefix trigger_enable_flash_,      eth adc                                                         ) && make flash_selectable_grav
+	make compile_selectable_cs $(addprefix trigger_enable_flash_,        cs33                                                                ) && make flash_selectable_cs
+	make compile_selectable_grav $(addprefix trigger_enable_flash_,      dac                                                         ) && make flash_selectable_grav
+else
+
+programhiggs:
+	make program_cfg program_cscfg program_cs00 program_cs10 program_cs20 program_cs01 program_cs30 program_cs11 program_cs21 program_cs31 program_eth program_adc program_cs33 program_dac
+
+
+endif
+#########################
+#
+#  Program just FPGA's in the RX chain, this should only be run after program_higgs has completed
+#  because it assumes that cfg is already programmed
+#
+program_rx_chain:
+	make compile_selectable_cs $(addprefix trigger_enable_flash_,        cs00 cs01 cs30 cs11 cs21 cs31                       ) && make flash_selectable_cs
+	make compile_selectable_grav $(addprefix trigger_enable_flash_,      eth                                                         ) && make flash_selectable_grav
+
+
+# make compile_selectable_cs $(addprefix trigger_enable_flash_,        cscfg cs00 cs01 cs02 cs03 cs10 cs11 cs12 cs13 cs20 cs21 cs22 cs23 cs30 cs31 cs32 cs33        ) && make flash_selectable_cs
+# make compile_selectable_grav $(addprefix trigger_enable_flash_,      adc dac eth                                                                                  ) && make flash_selectable_grav
+
+
+
+########################
+#
+# alias, and phony
+#
+
+.PHONY: enabledfpga enabledfpgas programhiggs program_higgs
+
+enabledfpgas: enabledfpga
+
+program_higgs: programhiggs
+
+remove_xcf:
+	rm -f cs_selectable.xcf grav_selectable.xcf
