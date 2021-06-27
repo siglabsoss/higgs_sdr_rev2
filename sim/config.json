@@ -1,0 +1,17 @@
+{
+    "dut_file": "/home/qubits/proj/higgs_sdr_rev2/sim/hdl/tb_higgs_top.sv",
+    "dut_name": "tb_higgs_top",
+
+    "probe": [ "sig1", "sig2", "sig3"],
+    "sources": [ 
+         "cppsrc/main.cpp",
+		 "cppsrc/signals.cpp"
+    ],
+    "libraries": [
+    		"/usr/local/share/verilator/include",
+    		"/usr/local/share/verilator/include/vltstd",
+		   "./obj_dir",
+		   "verilator/test_signalflip_1/obj_dir"
+		   ]
+
+}
