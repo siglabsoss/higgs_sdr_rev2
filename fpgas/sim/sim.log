@@ -1,0 +1,342 @@
+ELBREAD: Elaboration process.
+ELBREAD: Error: ELBREAD_0081 cs00_pll.v (23): Design unit VHI instantiated in work.cs00_pll not found in searched libraries: work.
+ELBREAD: Error: Elaboration process completed with errors.
+VSIM: Error: Simulation initialization failed.
+dosim.do(1) Script: Break at line 1.
+exit
+ELBREAD: Elaboration process.
+ELBREAD: Warning: Library pmi_work not found.
+ELBREAD: Warning: Library pmi_work not found.
+ELBREAD: Warning: Module 'cs00_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs01_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs02_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs30_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'resetter' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'lfsr' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'validator' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_slave_wrapper' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs00_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_slave' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs01_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs02_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_master_wrapper' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs30_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_master' does not have a `timescale directive, but previous modules do.
+ELBREAD: Elaboration time 0.0 [s].
+KERNEL: Main thread initiated.
+KERNEL: Kernel process initialization phase.
+KERNEL: Time resolution set to 10fs.
+ELAB2: Elaboration final pass...
+ELAB2: Create instances ...
+ELAB2: Create instances complete.
+SLP: Started
+SLP: Elaboration phase ...
+SLP: Warning: lfsr.sv (30): Index of part-select contains 'x' or 'z' bits.
+SLP: Elaboration phase ... done : 0.1 [s]
+SLP: Generation phase ...
+SLP: Generation phase ... done : 1.2 [s]
+SLP: Finished : 1.3 [s]
+SLP: 104 (14.46%) primitives and 610 (84.84%) other processes in SLP
+SLP: 2263 (99.12%) signals in SLP and 20 (0.88%) interface signals
+ELAB2: Elaboration final pass complete - time: 1.7 [s].
+KERNEL: SLP loading done - time: 0.0 [s].
+KERNEL: Warning: You are using the Active-HDL Lattice Edition. The performance of simulation is running at a reduced rate.
+KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+KERNEL: SLP simulation initialization done - time: 0.0 [s].
+KERNEL: Kernel process initialization done.
+Allocation: Simulator allocated 6437 kB (elbread=1281 elab2=4972 kernel=183 sdf=0)
+KERNEL: ASDB file was created in location C:\cygwin64\home\Daniel\FPGA\higgs_sdr\fpgas\sim\wave.asdb
+trace -rec *
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+VSIMSA: 608 signal(s) traced.
+run -all
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: MIB S0 WRITE-TO-WRITE
+KERNEL: CMD BUS WRITE: ADDR = 0x000004, DATA = 0x01010200
+KERNEL: CMD BUS WRITE: ADDR = 0x100004, DATA = 0x01010201
+KERNEL: CMD BUS WRITE: ADDR = 0x200004, DATA = 0x01010202
+KERNEL: CMD BUS WRITE: ADDR = 0xc00004, DATA = 0x01010230
+KERNEL: CMD BUS READ: ADDR = 0x000000, DATA = 0x00000100
+KERNEL: CMD BUS READ: ADDR = 0x100000, DATA = 0x00000101
+KERNEL: CMD BUS READ: ADDR = 0x200000, DATA = 0x00000102
+KERNEL: CMD BUS READ: ADDR = 0x000004, DATA = 0x01010200
+KERNEL: CMD BUS READ: ADDR = 0x000008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0x100004, DATA = 0x01010201
+KERNEL: CMD BUS READ: ADDR = 0x100008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0x200004, DATA = 0x01010202
+KERNEL: CMD BUS READ: ADDR = 0x200008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0xc00000, DATA = 0x00000130
+KERNEL: CMD BUS READ: ADDR = 0xc00004, DATA = 0x01010230
+KERNEL: CMD BUS READ: ADDR = 0xc00008, DATA = 0xdeadbeef
+RUNTIME: RUNTIME_0068 cs30_top.sv (247): $finish called.
+KERNEL: Time: 312250 ps,  Iteration: 10,  Instance: /tb_sys/_cs30_top,  Process: @INITIAL#222_16@.
+KERNEL: stopped at time: 312250 ps
+VSIM: Simulation has finished. There are no more test vectors to simulate.
+# asdb2vcd wave.asdb wave.vcd
+exit
+VSIM: Simulation has finished.
+ELBREAD: Elaboration process.
+ELBREAD: Warning: Library pmi_work not found.
+ELBREAD: Warning: Library pmi_work not found.
+ELBREAD: Warning: Module 'cs00_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs01_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs02_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs30_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'resetter' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'lfsr' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'validator' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_slave_wrapper' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs00_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_slave' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs01_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs02_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_master_wrapper' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs30_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_master' does not have a `timescale directive, but previous modules do.
+ELBREAD: Elaboration time 0.0 [s].
+KERNEL: Main thread initiated.
+KERNEL: Kernel process initialization phase.
+KERNEL: Time resolution set to 10fs.
+ELAB2: Elaboration final pass...
+ELAB2: Create instances ...
+ELAB2: Create instances complete.
+SLP: Started
+SLP: Elaboration phase ...
+SLP: Warning: lfsr.sv (30): Index of part-select contains 'x' or 'z' bits.
+SLP: Elaboration phase ... done : 0.1 [s]
+SLP: Generation phase ...
+SLP: Generation phase ... done : 0.8 [s]
+SLP: Finished : 1.0 [s]
+SLP: 104 (14.46%) primitives and 610 (84.84%) other processes in SLP
+SLP: 2263 (99.12%) signals in SLP and 20 (0.88%) interface signals
+ELAB2: Elaboration final pass complete - time: 1.0 [s].
+KERNEL: SLP loading done - time: 0.0 [s].
+KERNEL: Warning: You are using the Active-HDL Lattice Edition. The performance of simulation is running at a reduced rate.
+KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+KERNEL: SLP simulation initialization done - time: 0.0 [s].
+KERNEL: Kernel process initialization done.
+Allocation: Simulator allocated 6437 kB (elbread=1281 elab2=4972 kernel=183 sdf=0)
+KERNEL: ASDB file was created in location C:\cygwin64\home\Daniel\FPGA\higgs_sdr\fpgas\sim\wave.asdb
+trace -rec *
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+VSIMSA: 608 signal(s) traced.
+run -all
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: MIB S0 WRITE-TO-WRITE
+KERNEL: CMD BUS WRITE: ADDR = 0x000004, DATA = 0x01010200
+KERNEL: CMD BUS WRITE: ADDR = 0x100004, DATA = 0x01010201
+KERNEL: CMD BUS WRITE: ADDR = 0x200004, DATA = 0x01010202
+KERNEL: CMD BUS WRITE: ADDR = 0xc00004, DATA = 0x01010230
+KERNEL: CMD BUS READ: ADDR = 0x000000, DATA = 0x00000100
+KERNEL: CMD BUS READ: ADDR = 0x100000, DATA = 0x00000101
+KERNEL: CMD BUS READ: ADDR = 0x200000, DATA = 0x00000102
+KERNEL: CMD BUS READ: ADDR = 0x000004, DATA = 0x01010200
+KERNEL: CMD BUS READ: ADDR = 0x000008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0x100004, DATA = 0x01010201
+KERNEL: CMD BUS READ: ADDR = 0x100008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0x200004, DATA = 0x01010202
+KERNEL: CMD BUS READ: ADDR = 0x200008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0xc00000, DATA = 0x00000130
+KERNEL: CMD BUS READ: ADDR = 0xc00004, DATA = 0x01010230
+KERNEL: CMD BUS READ: ADDR = 0xc00008, DATA = 0xdeadbeef
+RUNTIME: RUNTIME_0068 cs30_top.sv (247): $finish called.
+KERNEL: Time: 312250 ps,  Iteration: 10,  Instance: /tb_sys/_cs30_top,  Process: @INITIAL#222_16@.
+KERNEL: stopped at time: 312250 ps
+VSIM: Simulation has finished. There are no more test vectors to simulate.
+# asdb2vcd wave.asdb wave.vcd
+exit
+VSIM: Simulation has finished.
+ELBREAD: Elaboration process.
+ELBREAD: Warning: Library pmi_work not found.
+ELBREAD: Warning: Library pmi_work not found.
+ELBREAD: Warning: Module 'cs00_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs01_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs02_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs20_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs30_top' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'resetter' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'lfsr' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'validator' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_slave_wrapper' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs00_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_slave' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs01_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs02_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs20_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_master_wrapper' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'cs30_cmd' does not have a `timescale directive, but previous modules do.
+ELBREAD: Warning: Module 'mib_master' does not have a `timescale directive, but previous modules do.
+ELBREAD: Elaboration time 0.0 [s].
+KERNEL: Main thread initiated.
+KERNEL: Kernel process initialization phase.
+KERNEL: Time resolution set to 10fs.
+ELAB2: Elaboration final pass...
+ELAB2: Create instances ...
+ELAB2: Create instances complete.
+SLP: Started
+SLP: Elaboration phase ...
+SLP: Warning: lfsr.sv (30): Index of part-select contains 'x' or 'z' bits.
+SLP: Elaboration phase ... done : 0.1 [s]
+SLP: Generation phase ...
+SLP: Generation phase ... done : 0.8 [s]
+SLP: Finished : 0.9 [s]
+SLP: 130 (14.49%) primitives and 761 (84.84%) other processes in SLP
+SLP: 2815 (99.15%) signals in SLP and 24 (0.85%) interface signals
+ELAB2: Elaboration final pass complete - time: 1.0 [s].
+KERNEL: SLP loading done - time: 0.0 [s].
+KERNEL: Warning: You are using the Active-HDL Lattice Edition. The performance of simulation is running at a reduced rate.
+KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+KERNEL: SLP simulation initialization done - time: 0.0 [s].
+KERNEL: Kernel process initialization done.
+Allocation: Simulator allocated 6489 kB (elbread=1281 elab2=5014 kernel=192 sdf=0)
+KERNEL: ASDB file was created in location C:\cygwin64\home\Daniel\FPGA\higgs_sdr\fpgas\sim\wave.asdb
+trace -rec *
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+KERNEL: Warning: KERNEL_0203 Tracing SystemVerilog interface is not supported in this release. Please contact Aldec Support to receive the latest status.
+VSIMSA: 745 signal(s) traced.
+run -all
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_mfgout2_sel
+KERNEL: illegal mc1_mfgout1_sel
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: illegal mc1_sel_fbk codes
+KERNEL: illegal mc1_sel_ref2 codes
+KERNEL: illegal mc1_sel_ref1 codes
+KERNEL: MIB S0 WRITE-TO-WRITE
+KERNEL: CMD BUS WRITE: ADDR = 0x000004, DATA = 0x01010200
+KERNEL: CMD BUS WRITE: ADDR = 0x100004, DATA = 0x01010201
+KERNEL: CMD BUS WRITE: ADDR = 0x200004, DATA = 0x01010202
+KERNEL: CMD BUS WRITE: ADDR = 0xc00004, DATA = 0x01010230
+KERNEL: CMD BUS WRITE: ADDR = 0x800004, DATA = 0x01010238
+KERNEL: CMD BUS READ: ADDR = 0x000000, DATA = 0x00000100
+KERNEL: CMD BUS READ: ADDR = 0x100000, DATA = 0x00000101
+KERNEL: CMD BUS READ: ADDR = 0x200000, DATA = 0x00000102
+KERNEL: CMD BUS READ: ADDR = 0x800000, DATA = 0x00000120
+KERNEL: CMD BUS READ: ADDR = 0xc00000, DATA = 0x00000130
+KERNEL: CMD BUS READ: ADDR = 0x000004, DATA = 0x01010200
+KERNEL: CMD BUS READ: ADDR = 0x000008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0x100004, DATA = 0x01010201
+KERNEL: CMD BUS READ: ADDR = 0x100008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0x200004, DATA = 0x01010202
+KERNEL: CMD BUS READ: ADDR = 0x200008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0x800004, DATA = 0x01010238
+KERNEL: CMD BUS READ: ADDR = 0x800008, DATA = 0xdeadbeef
+KERNEL: CMD BUS READ: ADDR = 0xc00004, DATA = 0x01010230
+KERNEL: CMD BUS READ: ADDR = 0xc00008, DATA = 0xdeadbeef
+RUNTIME: RUNTIME_0068 cs30_top.sv (254): $finish called.
+KERNEL: Time: 341450 ps,  Iteration: 10,  Instance: /tb_sys/_cs30_top,  Process: @INITIAL#223_16@.
+KERNEL: stopped at time: 341450 ps
+VSIM: Simulation has finished. There are no more test vectors to simulate.
+# asdb2vcd wave.asdb wave.vcd
+exit
+VSIM: Simulation has finished.
