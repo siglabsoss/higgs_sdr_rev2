@@ -1,0 +1,32 @@
+<Project ModBy="Inserter" SigType="1" Name="/home/janson/higgs_sdr_rev2/fpgas/grav/cfg/build/debug/cfg_top.rvl" Date="2018-03-19">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="cfg_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="149338986" Name="cfg_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="sys_clk" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="4096"/>
+            <Capture Mode="0" MinSamplesPerTrig="64"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_cfg_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="MIB_AD_c[17]"/>
+                <Sig Type="SIG" Name="MIB_AD_c[18]"/>
+                <Sig Type="SIG" Name="MIB_AD_c[19]"/>
+                <Sig Type="SIG" Name="MIB_AD_c[20]"/>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="MIB_AD_c[17],"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="MIB_AD_c[18],"/>
+                <TU Serialbits="0" Type="0" ID="3" Sig="MIB_AD_c[19],"/>
+                <TU Serialbits="0" Type="0" ID="4" Sig="MIB_AD_c[20],"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="3" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="4" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

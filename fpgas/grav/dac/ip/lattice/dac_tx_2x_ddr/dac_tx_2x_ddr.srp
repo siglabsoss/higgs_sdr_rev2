@@ -1,0 +1,30 @@
+SCUBA, Version Diamond (64-bit) 3.9.1.119
+Thu Nov 02 22:54:47 2017
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+
+    Issued command   : C:\lscc\diamond\3.9_x64\ispfpga\bin\nt64\scuba.exe -w -n dac_tx_2x_ddr -lang verilog -synth synplify -bus_exp 7 -bb -arch sa5p00 -type iol -mode Transmit -io_type LVDS -width 17 -freq_in 250 -gear 4 -del -1 -pll 125 -fdc C:/FPGA/higgs_sdr_rev2-ryan/fpgas/grav/dac/ip/lattice/dac_tx_2x_ddr/dac_tx_2x_ddr.fdc 
+    Circuit name     : dac_tx_2x_ddr
+    Module type      : iol
+    Module Version   : 5.8
+    Ports            : 
+	Inputs       : pll_reset, refclk, sync_clk, sync_reset, data[67:0]
+	Outputs      : clkout, ready, sclk, dout[16:0]
+    I/O buffer       : not inserted
+    EDIF output      : dac_tx_2x_ddr.edn
+    Verilog output   : dac_tx_2x_ddr.v
+    Verilog template : dac_tx_2x_ddr_tmpl.v
+    Verilog purpose  : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : dac_tx_2x_ddr.srp
+    Element Usage    :
+        EHXPLLL : 1
+             OB : 18
+        ODDRX2F : 18
+        CLKDIVF : 1
+      ECLKSYNCB : 1
+    Estimated Resource Usage:

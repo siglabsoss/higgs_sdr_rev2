@@ -1,0 +1,18 @@
+
+/*
+ * Power on config register settings for the TI ADC on Graviton (ADS42LB69)
+ *
+ * THE ORDER OF THESE CONFIG WORDS MIGHT MATTER.  REFER TO THE DATASHEET IF UNSURE.
+ */
+
+0680 // reg6  - clock divider bypass
+1501 // reg15 - DDR LVDS output mode
+2001 // reg20 - CTRL1 and CTRL2 function as overrange indicators for channels A & B respectively
+
+/*
+ * REGISTERS FOR TESTING/DEBUG OF FPGA <---> ADC INTERFACE
+ *
+ * COMMENT OUT WHEN NOT TESTING/DEBUGGING!
+ *
+ */
+0f00 // reg0f - CHA & CHB test patterns (see data sheet)

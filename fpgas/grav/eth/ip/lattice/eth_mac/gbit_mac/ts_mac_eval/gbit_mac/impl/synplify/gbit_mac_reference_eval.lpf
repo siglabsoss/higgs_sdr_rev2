@@ -1,0 +1,71 @@
+COMMERCIAL ;
+# Period Constraints
+FREQUENCY NET "hclk_c"        100.00 MHz PAR_ADJ 20;
+FREQUENCY NET  "txmac_clk_c" 125.00 MHz PAR_ADJ 20;
+FREQUENCY NET  "rxmac_clk_c" 125.00 MHz PAR_ADJ 20;
+FREQUENCY NET  "pc_clk_mux"   50.00 MHz ;
+USE PRIMARY PURE NET "txmac_clk_c";
+
+BLOCK ASYNCPATHS ;
+BLOCK INTERCLOCKDOMAIN PATHS ;
+
+#Begin multicycle path from constraints
+MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_gmii/sync_rxd_m*"           2.000000 X ;
+#MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_gmii/sync_rxer_m*"          2.000000 X ;
+#MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_gmii/sync_rxdv_m*"          2.000000 X ;
+#MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_gmii/sync_nibdrib_m*"       2.000000 X ;
+MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_gmii/ipg_shrink_m*"         2.000000 X ;
+MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_gmii/nib_alig*"             2.000000 X ;
+#MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_gmii/enable_sfd_alig*"      2.000000 X ;
+#MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/rd_ptr*" 2.000000 X ;
+#MULTICYCLE FROM CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/rd_ptr*" 2.000000 X ;
+#MULTICYCLE   TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/wr_ptr*" 2.000000 X ;
+#MULTICYCLE FROM CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/wr_ptr*" 2.000000 X ;
+#End multicycle path from constraints
+
+#Begin false path from constraints
+BLOCK PATH FROM CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_cpu_if*" TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_tx_mac*" ;
+BLOCK PATH FROM CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_cpu_if*" TO CELL "U1_ts_mac_core*U1_LSC_ts_mac_core/U1_rx_mac*" ;
+#BLOCK NET "pkt_loop_clksel_ri" ;
+#BLOCK NET "gbit_en_wire" ;
+#End false path from constraints
+
+# GMII input signals
+# Input setup and hold
+# set these values according to your specific design requirements
+#DEFINE PORT GROUP "TSU_GRP" "rx_dv" 
+#                            "rx_er" 
+#                            "rxd*";
+#INPUT_SETUP GROUP "TSU_GRP" 3.500000 ns HOLD 0.000000 ns CLKPORT "rx_clk" ;
+# GMII output signals
+# Output Clock to Out
+# set these values according to your specific design requirements
+#DEFINE PORT GROUP "TCO_GRP" "tx_en" 
+#                            "rx_er" 
+#                            "txd*";
+#CLOCK_TO_OUT GROUP "TCO_GRP" MAX 5.000000 ns MIN 1.000000 ns CLKNET "txmac_clk_c" CLKOUT PORT "gtx_clk" ;
+
+# If I/O timing for these pins is a problem add these
+#PRIORITIZE NET "rxd_c_0" 100;
+#PRIORITIZE NET "rxd_c_1" 100;
+#PRIORITIZE NET "rxd_c_2" 100;
+#PRIORITIZE NET "rxd_c_3" 100;
+#PRIORITIZE NET "rxd_c_4" 100;
+#PRIORITIZE NET "rxd_c_5" 100;
+#PRIORITIZE NET "rxd_c_6" 100;
+#PRIORITIZE NET "rxd_c_7" 100;
+#PRIORITIZE NET "rx_dv_c" 100;
+#PRIORITIZE NET "rx_er_c" 100;
+#PRIORITIZE NET "rx_clk_c" 80;
+#PRIORITIZE NET "tx_clk_c" 40;
+
+#MAXDELAY NET "rxd_c_0" 1.5 ns;
+#MAXDELAY NET "rxd_c_1" 1.5 ns;
+#MAXDELAY NET "rxd_c_2" 1.5 ns;
+#MAXDELAY NET "rxd_c_3" 1.5 ns;
+#MAXDELAY NET "rxd_c_4" 1.5 ns;
+#MAXDELAY NET "rxd_c_5" 1.5 ns;
+#MAXDELAY NET "rxd_c_6" 1.5 ns;
+#MAXDELAY NET "rxd_c_7" 1.5 ns;
+#MAXDELAY NET "rx_dv_c" 1.5 ns;
+#MAXDELAY NET "rx_er_c" 1.5 ns;

@@ -1,0 +1,121 @@
+<Project ModBy="Inserter" Name="/home/janson/higgs_sdr_rev2/fpgas/grav/adc/build/debug/adc_top.rvl" Date="2018-05-11">
+    <Core Name="adc_top_LA0">
+        <Setting>
+            <Capture SamplesPerTrig="2048" NumTrigsCap="1"/>
+            <Event EventCnt="0" CntEnableRun="0"/>
+            <TrigSetting PreTrgSamples="" AND_ALL="0" PostTrgSamples="" TURadix="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Name="gpio_enable"/>
+                <Sig Name="downconv_valid"/>
+                <Sig Name="cs00_ready"/>
+                <Bus Name="adc_counter" Radix="0">
+                    <Sig Name="adc_counter[0]"/>
+                    <Sig Name="adc_counter[1]"/>
+                    <Sig Name="adc_counter[2]"/>
+                    <Sig Name="adc_counter[3]"/>
+                    <Sig Name="adc_counter[4]"/>
+                    <Sig Name="adc_counter[5]"/>
+                    <Sig Name="adc_counter[6]"/>
+                    <Sig Name="adc_counter[7]"/>
+                    <Sig Name="adc_counter[8]"/>
+                    <Sig Name="adc_counter[9]"/>
+                    <Sig Name="adc_counter[10]"/>
+                    <Sig Name="adc_counter[11]"/>
+                    <Sig Name="adc_counter[12]"/>
+                    <Sig Name="adc_counter[13]"/>
+                    <Sig Name="adc_counter[14]"/>
+                    <Sig Name="adc_counter[15]"/>
+                    <Sig Name="adc_counter[16]"/>
+                    <Sig Name="adc_counter[17]"/>
+                    <Sig Name="adc_counter[18]"/>
+                    <Sig Name="adc_counter[19]"/>
+                    <Sig Name="adc_counter[20]"/>
+                    <Sig Name="adc_counter[21]"/>
+                    <Sig Name="adc_counter[22]"/>
+                    <Sig Name="adc_counter[23]"/>
+                    <Sig Name="adc_counter[24]"/>
+                    <Sig Name="adc_counter[25]"/>
+                    <Sig Name="adc_counter[26]"/>
+                    <Sig Name="adc_counter[27]"/>
+                    <Sig Name="adc_counter[28]"/>
+                    <Sig Name="adc_counter[29]"/>
+                    <Sig Name="adc_counter[30]"/>
+                    <Sig Name="adc_counter[31]"/>
+                </Bus>
+                <Bus Name="downconv_inph" Radix="0">
+                    <Sig Name="downconv_inph[0]"/>
+                    <Sig Name="downconv_inph[1]"/>
+                    <Sig Name="downconv_inph[2]"/>
+                    <Sig Name="downconv_inph[3]"/>
+                    <Sig Name="downconv_inph[4]"/>
+                    <Sig Name="downconv_inph[5]"/>
+                    <Sig Name="downconv_inph[6]"/>
+                    <Sig Name="downconv_inph[7]"/>
+                    <Sig Name="downconv_inph[8]"/>
+                    <Sig Name="downconv_inph[9]"/>
+                    <Sig Name="downconv_inph[10]"/>
+                    <Sig Name="downconv_inph[11]"/>
+                    <Sig Name="downconv_inph[12]"/>
+                    <Sig Name="downconv_inph[13]"/>
+                    <Sig Name="downconv_inph[14]"/>
+                    <Sig Name="downconv_inph[15]"/>
+                </Bus>
+                <Bus Name="downconv_quad" Radix="0">
+                    <Sig Name="downconv_quad[0]"/>
+                    <Sig Name="downconv_quad[1]"/>
+                    <Sig Name="downconv_quad[2]"/>
+                    <Sig Name="downconv_quad[3]"/>
+                    <Sig Name="downconv_quad[4]"/>
+                    <Sig Name="downconv_quad[5]"/>
+                    <Sig Name="downconv_quad[6]"/>
+                    <Sig Name="downconv_quad[7]"/>
+                    <Sig Name="downconv_quad[8]"/>
+                    <Sig Name="downconv_quad[9]"/>
+                    <Sig Name="downconv_quad[10]"/>
+                    <Sig Name="downconv_quad[11]"/>
+                    <Sig Name="downconv_quad[12]"/>
+                    <Sig Name="downconv_quad[13]"/>
+                    <Sig Name="downconv_quad[14]"/>
+                    <Sig Name="downconv_quad[15]"/>
+                </Bus>
+                <Bus Name="vga_ctrl_a" Radix="0">
+                    <Sig Name="VGA_CTRL_A_c[0]"/>
+                    <Sig Name="VGA_CTRL_A_c[1]"/>
+                    <Sig Name="VGA_CTRL_A_c[2]"/>
+                </Bus>
+                <Bus Name="vga_ctrl_b" Radix="0">
+                    <Sig Name="VGA_CTRL_B_c[0]"/>
+                    <Sig Name="VGA_CTRL_B_c[1]"/>
+                    <Sig Name="VGA_CTRL_B_c[2]"/>
+                </Bus>
+                <Bus Name="dsa_crtl_a" Radix="0">
+                    <Sig Name="DSA_CTRL_A_c[1]"/>
+                    <Sig Name="DSA_CTRL_A_c[2]"/>
+                    <Sig Name="DSA_CTRL_A_c[3]"/>
+                    <Sig Name="DSA_CTRL_A_c[4]"/>
+                    <Sig Name="DSA_CTRL_A_c[5]"/>
+                </Bus>
+                <Bus Name="dsa_ctrl_b" Radix="0">
+                    <Sig Name="DSA_CTRL_B_c[2]"/>
+                    <Sig Name="DSA_CTRL_B_c[3]"/>
+                    <Sig Name="DSA_CTRL_B_c[4]"/>
+                    <Sig Name="DSA_CTRL_B_c[5]"/>
+                </Bus>
+            </Trace>
+            <Trigger>
+                <TU Operator="0" Name="TU1" ID="1" Value="1" Radix="0"/>
+                <TU Operator="0" Name="TU2" ID="2" Value="1" Radix="0"/>
+                <TU Operator="0" Name="TU3" ID="3" Value="1" Radix="0"/>
+                <TU Operator="0" Name="TU4" ID="4" Value="00000" Radix="0"/>
+                <TU Operator="0" Name="TU5" ID="5" Value="0000" Radix="0"/>
+                <TE Enable="1" Expression="TU1" Name="TE1" ID="1"/>
+                <TE Enable="1" Expression="TU2" Name="TE2" ID="2"/>
+                <TE Enable="1" Expression="TU3 &amp; TU2 &amp; TU1" Name="TE3" ID="3"/>
+                <TE Enable="1" Expression="TU4" Name="TE4" ID="4"/>
+                <TE Enable="1" Expression="TU5" Name="TE5" ID="5"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

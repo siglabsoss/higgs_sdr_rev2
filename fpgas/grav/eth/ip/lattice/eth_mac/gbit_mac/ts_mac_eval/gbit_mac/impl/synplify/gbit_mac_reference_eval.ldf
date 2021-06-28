@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="gbit_mac_reference_eval" device="LFE5U-85F-8BG756C" synthesis="synplify" default_implementation="impl">
+    <Implementation title="impl" dir="impl" description="impl" default_strategy="gbit_mac_reference_eval_setting">
+        <Options>
+            <Option name="HDL type" value="Verilog"></Option>
+            <Option name="def_top" value="ts_mac_top"></Option>
+            <Option name="top" value="ts_mac_top"></Option>
+        </Options>
+        <Source name="../../../models/ecp5u/JTAG_ECP5U.v" type="Verilog"></Source>
+        <Source name="C:/lscc/diamond/3.9_x64/cae_library/simulation/verilog/pmi/pmi_ram_dp.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/template/tst_logic.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/template/reg_intf.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/template/orcastra.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/template/fifo_512_ctl.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/template/fifo_2048x9.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/template/rx_loopbk.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/template/oddrx_soft.v" type="Verilog"></Source>
+        <Source name="../../../models/ecp5u/rxmac_clk_pll.v" type="Verilog"></Source>
+        <Source name="../../../models/ecp5u/txmac_clk_pll.v" type="Verilog"></Source>
+        <Source name="../../../../gbit_mac_bb.v" type="Verilog"></Source>
+        <Source name="../../src/rtl/top/ts_mac_top.v" type="Verilog"></Source>
+        <Source name="gbit_mac_reference_eval.lpf" type="Logic Preference"></Source>
+    </Implementation>
+    <Strategy name="gbit_mac_reference_eval_setting" file="gbit_mac_reference_eval_setting.sty"></Strategy>
+</BaliProject>

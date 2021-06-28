@@ -1,0 +1,6 @@
+work/
+*.vcd
+*.asdb
+library.cfg
+sim.log
+ddc_sincos.mif

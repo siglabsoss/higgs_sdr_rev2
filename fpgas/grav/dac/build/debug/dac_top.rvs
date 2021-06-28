@@ -1,0 +1,24 @@
+<Project ModBy="Inserter" Name="/home/janson/higgs_sdr_rev2/fpgas/grav/dac/build/debug/dac_top.rvl" Date="2018-03-28">
+    <Core Name="dac_top_LA0">
+        <Setting>
+            <Capture SamplesPerTrig="1" NumTrigsCap=""/>
+            <Event EventCnt="" CntEnableRun=""/>
+            <TrigSetting PreTrgSamples="" AND_ALL="" PostTrgSamples="" TURadix="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Bus Name="dac_sample" Radix="0">
+                    <Sig Name="dac_sample_cdc_fifo_wdata[1]"/>
+                </Bus>
+                <Sig Name="TX_3V3_A_c"/>
+                <Sig Name="TX_3V3_B_c"/>
+            </Trace>
+            <Trigger>
+                <TU Operator="0" Name="TU1" ID="1" Value="0" Radix="0"/>
+                <TU Operator="0" Name="TU2" ID="2" Value="0" Radix="0"/>
+                <TE Enable="1" Expression="TU1" Name="TE1" ID="1"/>
+                <TE Enable="1" Expression="TU2" Name="TE2" ID="2"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

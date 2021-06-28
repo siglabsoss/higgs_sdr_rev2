@@ -1,0 +1,66 @@
+[Device]
+Family=ecp5u
+PartType=LFE5U-85F
+PartName=LFE5U-85F-8BG756C
+SpeedGrade=8
+Package=CABGA756
+OperatingCondition=COM
+Status=S
+
+[IP]
+VendorName=Lattice Semiconductor Corporation
+CoreType=LPM
+CoreStatus=Demo
+CoreName=DDR_GENERIC
+CoreRevision=6.0
+ModuleName=ddr_input
+SourceFormat=verilog
+ParameterFileVersion=1.0
+Date=03/01/2017
+Time=20:37:59
+
+[Parameters]
+Verilog=1
+VHDL=0
+EDIF=1
+Destination=Synplicity
+Expression=BusA(0 to 7)
+Order=Big Endian [MSB:LSB]
+IO=0
+mode=Receive
+trioddr=0
+io_type=LVCMOS33
+width=5
+freq_in=125
+bandwidth=1250
+aligned=Centered
+pre-configuration=ENABLED
+mode2=Receive
+trioddr2=0
+io_type2=LVCMOS33
+freq_in2=125
+gear=2:1
+aligned2=Centered
+width2=5
+DataLane=By Time
+EnECLK=0
+Interface=GDDRX1_RX.SCLK.Centered
+Delay=Static Default
+DelVal=
+EnInEdge=
+NumEdge=BOTH
+EnDynamic=0
+GenPll=0
+Freq=
+AFreq=
+Reference=0
+IOBUF=
+ReceiverSync=0
+EnDynamicAlign=
+DynamicAlign=
+MIPIFilter=0
+enClkIBuf=0
+ClkIBuf=LVDS
+
+[Command]
+cmd_line= -w -n ddr_input -lang verilog -synth synplify -bus_exp 7 -bb -arch sa5p00 -type iol -mode Receive -io_type LVCMOS33 -width 5 -freq_in 125 -gear 2 -del 128

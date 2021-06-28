@@ -1,0 +1,182 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the ADC FPGA.
+Used in conjunction with Juniper's ordt tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA in this Copper Suicide array this is by providing the Row and Column as two hex nibbles.";
+            
+            field {
+                name="UID";
+                desc="The 3 ASCII characters corresponding to the FPGA's name.";
+                hw=w; sw=r;
+                reset = 24'd0;
+            } uid[23:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+
+    } rf0 @0x00000;
+
+
+    regfile {
+
+        reg {
+            name="Host MAC LSW";
+            desc="Host PC's MAC address bits 31:0";
+
+            field {
+                name="MAC Address 31:0";
+                hw=w; sw=r;
+                reset=32'd0;
+            } mac_lsw[31:0];
+        } host_mac_lsw;
+       
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+
+        reg {
+            name="Host MAC MSW";
+            desc="Host PC's MAC address bits 47:32";
+
+            field {
+                name="MAC Address 47:32";
+                hw=w; sw=r;
+                reset=16'd0;
+            } mac_msw[15:0];
+        } host_mac_msw;
+    
+        reg { 
+            name="RF Rx Parity Errors";
+            desc="Number of parity errors encountered since the last reset in the UDP packet bytes containing RF Rx data coming from Copper Suicide.";
+            
+            field {
+                name="Parity Errors";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_errors[31:0];
+        
+        } rf_rx_parity_errors; 
+        
+        reg {
+            name="RF Rx Overflow";
+            desc="Indicates that an overflow occurred in the FIFO buffering UDP packet bytes containing RF Rx data coming from Copper Suicide.";
+            
+            field {
+                name="Overflow";
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } overflow_occurred[0:0];
+        } rf_rx_overflow;
+        
+        reg {
+            name="UDP Cmd Response Parity Errors";
+            desc="Number of parity errors encountered since the last reset in the UDP packet bytes containing Command responses coming from Copper Suicide.";
+
+            field {
+                name="Parity Errors";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_errors[31:0];
+        } udp_cmd_rx_parity_errors;
+        
+        reg {
+            name="Eth Rx CRC Errors";
+            desc="Number of Ethernet frames received with CRC errors since reset.";
+
+            field {
+                name="CRC Errors";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_errors[31:0];
+        } eth_rx_crc_errors;
+
+        reg {
+            name="Eth Rx OK Count";
+            desc="Number of correctly received Ethernet frames since reset.";
+            
+            field {
+                name="Rx OK";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_rx_ok[31:0];
+        } eth_rx_ok_cnt;
+
+        reg {
+            name="UDP Unsupported Dest Port Errors";
+            desc="Number of UDP datagrams received since reset that target an unsupported port.";
+            
+            field {
+                name="Unsupported Dest Port Errors";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_errors[31:0];
+        } udp_udest_port_errors;
+
+        reg {
+            name="DAC Data FIFO Overflow";
+            desc="Number of times the DAC Data FIFO has overflowed since reset.";
+            
+            field {
+                name="Overflows";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_overflows[31:0];
+        } dac_data_fifo_overflows;
+
+        reg {
+            name="DAC Data FIFO Underflow";
+            desc="Number of times the DAC Data FIFO has underflowed since reset.";
+            
+            field {
+                name="Underflows";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_underflows[31:0];
+        } dac_data_fifo_underflows;
+
+        reg {
+            name="DAC Data Sequence Number Errors";
+            desc="Number of times DAC Data UDP Datagrams have been received with the incorrect sequence number.";
+            
+            field {
+                name="Sequence Number Errors";
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_errors[31:0];
+        } dac_udp_seq_num_errors;
+
+    } rf1 @0x10000;
+    
+} REGS;

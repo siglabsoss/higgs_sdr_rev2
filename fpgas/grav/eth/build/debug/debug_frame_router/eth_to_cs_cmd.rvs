@@ -1,0 +1,119 @@
+<Project ModBy="Inserter" Name="/home/xy/insidework/software_parent_repo/higgs_sdr_rev2/fpgas/grav/eth/build/debug/eth_to_cs_cmd.rvl" Date="2018-06-21">
+    <Core Name="eth_top_LA0">
+        <Setting>
+            <Capture SamplesPerTrig="1" NumTrigsCap=""/>
+            <Event EventCnt="" CntEnableRun=""/>
+            <TrigSetting PreTrgSamples="" AND_ALL="" PostTrgSamples="" TURadix="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/un1_i_rx_write_c1"/>
+                <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_wren"/>
+                <Bus Name="cbuf_wr_fsm_state" Radix="0">
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_wr_fsm_state[0]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_wr_fsm_state[1]"/>
+                </Bus>
+                <Bus Name="cbuf_rd_fsm_state" Radix="0">
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[0]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[1]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[2]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[3]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[4]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[5]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[6]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[7]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_rd_fsm_state[8]"/>
+                </Bus>
+                <Bus Name="cbuf_head" Radix="0">
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[0]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[1]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[2]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[3]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[4]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[5]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[6]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[7]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[8]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[9]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[10]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[11]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[12]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_head[13]"/>
+                </Bus>
+                <Bus Name="cbuf_tail" Radix="0">
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[0]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[1]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[2]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[3]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[4]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[5]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[6]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[7]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[8]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[9]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[10]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[11]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[12]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_tail[13]"/>
+                </Bus>
+                <Bus Name="cbuf_raddr" Radix="0">
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[0]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[1]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[2]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[3]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[4]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[5]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[6]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[7]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[8]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[9]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[10]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[11]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[12]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_raddr[13]"/>
+                </Bus>
+                <Bus Name="cbuf_waddr" Radix="0">
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[0]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[1]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[2]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[3]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[4]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[5]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[6]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[7]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[8]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[9]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[10]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[11]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[12]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/cbuf_waddr[13]"/>
+                </Bus>
+                <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/o_eth_frame_circ_buf_overflow"/>
+                <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/o_ipv4_pkt_fifo_overflow"/>
+                <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/o_arp_pkt_fifo_overflow"/>
+                <Sig Name="ETH_MEGA_WRAPPER/mac_rx_write"/>
+                <Sig Name="ETH_MEGA_WRAPPER/mac_rx_eof"/>
+                <Bus Name="mac_rx_fifodata_aka_i_rx_dbout" Radix="0">
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[0]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[1]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[2]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[3]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[4]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[5]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[6]"/>
+                    <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/mac_rx_fifodata[7]"/>
+                </Bus>
+                <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/arp_pkt_fifo_afull"/>
+                <Sig Name="ETH_MEGA_WRAPPER/ETH_RX_WRAPPER/eth_frame_router/ipv4_pkt_fifo_afull"/>
+            </Trace>
+            <Trigger>
+                <TU Operator="1" Name="TU2" ID="1" Value="0" Radix="0"/>
+                <TU Operator="1" Name="TU4" ID="2" Value="0" Radix="0"/>
+                <TU Operator="1" Name="TU1" ID="3" Value="0" Radix="0"/>
+                <TE Enable="1" Expression="TU2" Name="TE2" ID="1"/>
+                <TE Enable="1" Expression="TU4" Name="TE4" ID="2"/>
+                <TE Enable="1" Expression="TU1" Name="TE1" ID="3"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

@@ -1,0 +1,26 @@
+SCUBA, Version Diamond (64-bit) 3.8.0.115.3
+Thu Feb 23 15:19:17 2017
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2016 Lattice Semiconductor Corporation,  All rights reserved.
+
+    Issued command   : C:\lscc\diamond\3.8_x64\ispfpga\bin\nt64\scuba.exe -w -n my_pll -lang verilog -synth lse -bus_exp 7 -bb -arch sa5p00 -type pll -fin 125 -fclkop 250 -fclkop_tol 0.0 -phase_cntl STATIC -lock -fb_mode 1 -fdc C:/FPGA/gravitinolink/experiments/lattice_sucks/my_pll/my_pll.fdc 
+    Circuit name     : my_pll
+    Module type      : pll
+    Module Version   : 5.7
+    Ports            : 
+	Inputs       : CLKI
+	Outputs      : CLKOP, LOCK
+    I/O buffer       : not inserted
+    EDIF output      : my_pll.edn
+    Verilog output   : my_pll.v
+    Verilog template : my_pll_tmpl.v
+    Verilog purpose  : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : my_pll.srp
+    Element Usage    :
+        EHXPLLL : 1
+    Estimated Resource Usage:

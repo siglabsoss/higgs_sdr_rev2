@@ -1,0 +1,124 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the ADC FPGA.
+Used in conjunction with Juniper's ordt tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA on Graviton this is by providing the three letter acronym as 3 ASCII bytes (e.g. \"ADC\")."; 
+            
+            field {
+                name="UID";
+                desc="The 3 ASCII characters corresponding to the FPGA's name."; 
+                hw=w; sw=r;
+                reset = 24'd0;
+            } uid[23:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+        
+        
+        reg {
+            name="MIB Counter Lock Test Count";
+            desc="Used to test resetting of Graviton & CS FPGAs and the locking of counters in various FPGAs.  Software should issue a MIB master reset followed by a MIB counter lock and then read these counters in the ADC, DAC, and applicable CS FPGAs and compare their count values (hopefully they're the same).";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } mib_cntr_lock_test;            
+
+    } rf0 @0x00000;
+
+
+    regfile {
+    
+        reg { 
+            name="First Amp";
+            desc="Sets the attenuation of the PE43713 Digital Step Attenuators (DSA) in the Channel A and B RF Rx paths";
+            
+            field {
+                name="DSA Attenuation";
+                desc="Sets D6-D1 of the PE43713 Digital Step Attenuator.  Attenuation decimal value of this field x 0.5 dB";
+                hw=r; sw=w;
+                reset = 6'b000000;
+            } dsa_atten [5:0];
+        
+        } first_amp; 
+
+    } rf1 @0x10000;
+    
+    regfile {
+    
+        reg {
+            name="Second Amp";
+            desc="Sets the Gain Control Register of the LMH6401IRMZT Variable Gain Amplifiers (VGA) in Channel A and B RF Rx paths";
+            
+            field {
+                name="VGA SPI Busy";
+                desc="When 1 it indicates that the VGA SPI bus is still busy updating and that software writes to update the gain control register will be ignored.  Only update the gain control register when this bit is 0!";
+                hw=w; sw=r;
+            } vga_busy [7:7];
+                        
+            field {
+                name="VGA Power Down";
+                desc="Amplifier power down control.  Set to 1 to power the amplifier down.";
+                hw=r; sw=w;
+                reset=1'b0;
+                swmod;
+            } vga_pwr_dwn [6:6];
+            
+            field {
+                name="VGA Gain Control";
+                desc="This field adjusts how much the gain of the VGA is backed off from its max of 26dB (e.g. setting to decimal 10 results in 16dB of gain instead of 26dB)";
+                hw=r; sw=w;
+                reset=6'b100000;
+                swmod;
+            } vga_gain_ctrl [5:0];
+            
+        } second_amp;
+        
+    
+    } rf2 @0x20000;
+    
+    regfile {
+    
+        reg { 
+            name="CHANNEL_SELECT";
+            desc="Select channel to receive adc data from";
+            
+            field {
+                name="channel";
+                desc="channel = 0 -> channel A is selected, channel = 1 -> channel B is selected";
+                hw=r; sw=w;
+                reset = 1'b0;
+            } recv_channel [0:0];
+        
+        } channel_select; 
+
+    } chan_sel @0x30000;
+    
+
+} REGS;

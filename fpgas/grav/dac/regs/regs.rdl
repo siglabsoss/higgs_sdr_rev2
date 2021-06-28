@@ -1,0 +1,94 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the this FPGA.
+Used in conjunction with Juniper Network's ORDT tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA on Graviton this is by providing the FPGA name as three ASCII characters.";
+            
+            field {
+                name="UID";
+                desc="The name of this FPGA as three ASCII characters (\"DAC\").";
+                hw=w; sw=r;
+                reset = 24'd0;
+            } uid[23:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+
+        reg {
+            name="GPMC Counter Lock Test Count";
+            desc="Used to test resetting of Graviton & CS FPGAs and the locking of counters in various FPGAs.  Software should issue a GPMC master reset followed by a GPMC counter lock and then read these counters in the ADC, DAC, and applicable CS FPGAs and compare their count values (hopefully they're the same).";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } mib_cntr_lock_test;            
+        
+        reg {
+            name="Tx Sample Parity Errors";
+            desc="Contains the number of Tx sample parity errors encountered since the last reset.";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } parity_errors[31:0];
+        } tx_sample_perrs;
+
+    } rf0 @0x00000;
+    
+    regfile {
+    
+        reg { 
+            name="CHANNEL_SELECT_A";
+            desc="Select channel A to transmit dac data";
+            
+            field {
+                name="channel_a";
+                desc="channel_a = 1 -> channel A is transmitting otherwise not";
+                hw=r; sw=w;
+                reset = 1'b0;
+            } transmit_channel_a [0:0];
+        
+        } channel_select_a; 
+        
+        reg { 
+            name="CHANNEL_SELECT_B";
+            desc="Select channel B to transmit dac data";
+            
+            field {
+                name="channel_b";
+                desc="channel_b = 1 -> channel B is transmitting otherwise not";
+                hw=r; sw=w;
+                reset = 1'b0;
+            } transmit_channel_b [0:0];
+        
+        } channel_select_b; 
+
+    } chan_sel @0x10000;
+    
+} REGS;

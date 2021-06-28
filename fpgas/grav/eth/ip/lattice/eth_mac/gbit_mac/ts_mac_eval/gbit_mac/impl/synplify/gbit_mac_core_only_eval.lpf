@@ -1,0 +1,29 @@
+COMMERCIAL ;
+
+# Period Constraints
+FREQUENCY NET "hclk_c" 100.0 MHz;
+FREQUENCY NET "rxmac_clk_c" 125.0 MHz PAR_ADJ 20;
+FREQUENCY NET "txmac_clk_c" 125.0 MHz PAR_ADJ 20;
+
+BLOCK ASYNCPATHS ;
+BLOCK INTERCLOCKDOMAIN PATHS;
+
+#Begin multicycle path from constraints
+MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_gmii/sync_rxd_m*" 2X;
+#MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_gmii/sync_rxer_m*" 2X;
+#MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_gmii/sync_rxdv_m*" 2X;
+#MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_gmii/sync_nibdrib_m*" 2X;
+MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_gmii/ipg_shrink_m*" 2X;
+MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_gmii/nib_alig*" 2X;
+#MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_gmii/enable_sfd_alig*" 2X;
+#MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/rd_ptr*" 2X;
+#MULTICYCLE FROM CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/rd_ptr*" 2X;
+#MULTICYCLE TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/wr_ptr*" 2X;
+#MULTICYCLE FROM CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_tx_mac/U1_tx_rfifo/wr_ptr*" 2X;
+#End multicycle path from constraints
+
+#Begin false path from constraints
+BLOCK PATH FROM CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_cpu_if*" TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_tx_mac*" ; 
+BLOCK PATH FROM CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_cpu_if*" TO CELL "U1_ts_mac_core_only_core/U1_LSC_ts_mac_core/U1_rx_mac*" ; 
+#End false path from constraints
+

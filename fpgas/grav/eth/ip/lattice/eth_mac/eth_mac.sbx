@@ -1,0 +1,2156 @@
+<!DOCTYPE eth_mac>
+<lattice:project>
+    <spirit:component>
+        <spirit:vendor>LATTICE</spirit:vendor>
+        <spirit:library>LOCAL</spirit:library>
+        <spirit:name>eth_mac</spirit:name>
+        <spirit:version>1.0</spirit:version>
+        <spirit:fileSets>
+            <spirit:fileset>
+                <spirit:name>Diamond_Synthesis</spirit:name>
+                <spirit:group>synthesis</spirit:group>
+                <spirit:file>
+                    <spirit:name>./eth_mac.v</spirit:name>
+                    <spirit:fileType>verilogSource</spirit:fileType>
+                </spirit:file>
+            </spirit:fileset>
+            <spirit:fileset>
+                <spirit:name>Diamond_Simulation</spirit:name>
+                <spirit:group>simulation</spirit:group>
+                <spirit:file>
+                    <spirit:name>./eth_mac.v</spirit:name>
+                    <spirit:fileType>verilogSource</spirit:fileType>
+                </spirit:file>
+            </spirit:fileset>
+        </spirit:fileSets>
+        <spirit:componentGenerators/>
+        <spirit:model>
+            <spirit:views/>
+            <spirit:ports>
+                <spirit:port>
+                    <spirit:name>gbit_mac_cpu_if_gbit_en</spirit:name>
+                    <spirit:displayName>gbit_mac_cpu_if_gbit_en</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.cpu_if_gbit_en</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hclk</spirit:name>
+                    <spirit:displayName>gbit_mac_hclk</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hclk</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hcs_n</spirit:name>
+                    <spirit:displayName>gbit_mac_hcs_n</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hcs_n</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hdataout_en_n</spirit:name>
+                    <spirit:displayName>gbit_mac_hdataout_en_n</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hdataout_en_n</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hread_n</spirit:name>
+                    <spirit:displayName>gbit_mac_hread_n</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hread_n</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hready_n</spirit:name>
+                    <spirit:displayName>gbit_mac_hready_n</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hready_n</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hwrite_n</spirit:name>
+                    <spirit:displayName>gbit_mac_hwrite_n</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hwrite_n</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_ignore_pkt</spirit:name>
+                    <spirit:displayName>gbit_mac_ignore_pkt</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.ignore_pkt</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_reset_n</spirit:name>
+                    <spirit:displayName>gbit_mac_reset_n</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.reset_n</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_dv</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_dv</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_dv</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_eof</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_eof</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_eof</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_er</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_er</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_er</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_error</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_error</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_error</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_fifo_error</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_fifo_error</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_fifo_error</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_fifo_full</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_fifo_full</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_fifo_full</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_stat_en</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_stat_en</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_stat_en</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_write</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_write</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_write</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rxmac_clk</spirit:name>
+                    <spirit:displayName>gbit_mac_rxmac_clk</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rxmac_clk</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_discfrm</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_discfrm</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_discfrm</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_done</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_done</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_done</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_en</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_en</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_en</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_er</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_er</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_er</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_fifoavail</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_fifoavail</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_fifoavail</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_fifoctrl</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_fifoctrl</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_fifoctrl</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_fifoempty</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_fifoempty</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_fifoempty</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_fifoeof</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_fifoeof</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_fifoeof</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_macread</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_macread</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_macread</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_sndpausreq</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_sndpausreq</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_sndpausreq</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_staten</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_staten</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_staten</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_txmac_clk</spirit:name>
+                    <spirit:displayName>gbit_mac_txmac_clk</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.txmac_clk</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_haddr</spirit:name>
+                    <spirit:displayName>gbit_mac_haddr</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>7</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.haddr</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hdatain</spirit:name>
+                    <spirit:displayName>gbit_mac_hdatain</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>7</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hdatain</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_hdataout</spirit:name>
+                    <spirit:displayName>gbit_mac_hdataout</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>7</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.hdataout</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_dbout</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_dbout</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>7</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_dbout</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rx_stat_vector</spirit:name>
+                    <spirit:displayName>gbit_mac_rx_stat_vector</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>31</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rx_stat_vector</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_rxd</spirit:name>
+                    <spirit:displayName>gbit_mac_rxd</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>7</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.rxd</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_fifodata</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_fifodata</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>7</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_fifodata</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_sndpaustim</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_sndpaustim</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>in</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>15</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_sndpaustim</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_tx_statvec</spirit:name>
+                    <spirit:displayName>gbit_mac_tx_statvec</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>30</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.tx_statvec</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+                <spirit:port>
+                    <spirit:name>gbit_mac_txd</spirit:name>
+                    <spirit:displayName>gbit_mac_txd</spirit:displayName>
+                    <spirit:wire>
+                        <spirit:direction>out</spirit:direction>
+                        <spirit:vector>
+                            <spirit:left>7</spirit:left>
+                            <spirit:right>0</spirit:right>
+                        </spirit:vector>
+                    </spirit:wire>
+                    <spirit:vendorExtensions>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="exportFrom">gbit_mac.txd</lattice:attribute>
+                        </lattice:attributes>
+                    </spirit:vendorExtensions>
+                </spirit:port>
+            </spirit:ports>
+        </spirit:model>
+        <spirit:vendorExtensions>
+            <lattice:device>LFE5U-85F-8BG756C</lattice:device>
+            <lattice:synthesis>synplify</lattice:synthesis>
+            <lattice:date>2017-03-01.15:46:12</lattice:date>
+            <lattice:modified>2017-03-01.20:41:19</lattice:modified>
+            <lattice:diamond>3.9.0.99.2</lattice:diamond>
+            <lattice:language>Verilog</lattice:language>
+            <lattice:attributes>
+                <lattice:attribute lattice:name="AddComponent">false</lattice:attribute>
+                <lattice:attribute lattice:name="Change4to5">false</lattice:attribute>
+                <lattice:attribute lattice:name="ChangeConfig">false</lattice:attribute>
+                <lattice:attribute lattice:name="ChangeConnect">false</lattice:attribute>
+                <lattice:attribute lattice:name="ChangeDevice">false</lattice:attribute>
+                <lattice:attribute lattice:name="ChangeLocate">false</lattice:attribute>
+                <lattice:attribute lattice:name="ChangePack">false</lattice:attribute>
+                <lattice:attribute lattice:name="ChangePart">false</lattice:attribute>
+                <lattice:attribute lattice:name="ChangeSynthesis">false</lattice:attribute>
+                <lattice:attribute lattice:name="Migrate">false</lattice:attribute>
+                <lattice:attribute lattice:name="RemovedComponent">false</lattice:attribute>
+            </lattice:attributes>
+            <lattice:elements/>
+            <lattice:lpc/>
+            <lattice:groups/>
+        </spirit:vendorExtensions>
+    </spirit:component>
+    <spirit:design>
+        <spirit:vendor>LATTICE</spirit:vendor>
+        <spirit:library>LOCAL</spirit:library>
+        <spirit:name>eth_mac</spirit:name>
+        <spirit:version>1.0</spirit:version>
+        <spirit:componentInstances>
+            <spirit:componentInstance>
+                <spirit:instanceName>gbit_mac</spirit:instanceName>
+                <spirit:componentRef>
+                    <spirit:vendor>Lattice Semiconductor Corporation</spirit:vendor>
+                    <spirit:library>LEGACY</spirit:library>
+                    <spirit:name>Tri-Speed Ethernet MAC</spirit:name>
+                    <spirit:version>4.1</spirit:version>
+                    <spirit:fileSets>
+                        <spirit:fileset>
+                            <spirit:name>Diamond_Simulation</spirit:name>
+                            <spirit:group>simulation</spirit:group>
+                            <spirit:file>
+                                <spirit:name>./gbit_mac/gbit_mac_beh.v</spirit:name>
+                                <spirit:fileType>verilogSource</spirit:fileType>
+                            </spirit:file>
+                        </spirit:fileset>
+                        <spirit:fileset>
+                            <spirit:name>Diamond_Synthesis</spirit:name>
+                            <spirit:group>synthesis</spirit:group>
+                            <spirit:file>
+                                <spirit:name>./gbit_mac/gbit_mac_bb.v</spirit:name>
+                                <spirit:fileType>verilogSource</spirit:fileType>
+                            </spirit:file>
+                            <spirit:file>
+                                <spirit:name>./gbit_mac/gbit_mac.ngo</spirit:name>
+                                <spirit:userFileType>NGO</spirit:userFileType>
+                            </spirit:file>
+                        </spirit:fileset>
+                    </spirit:fileSets>
+                    <spirit:componentGenerators>
+                        <spirit:componentGenerator spirit:hidden="true" spirit:scope="instance">
+                            <spirit:name>Configuration</spirit:name>
+                            <spirit:apiType>none</spirit:apiType>
+                            <spirit:generatorExe>${sbp_path}/${instance}/generate_core.tcl</spirit:generatorExe>
+                            <spirit:group>CONFIG</spirit:group>
+                        </spirit:componentGenerator>
+                        <spirit:componentGenerator spirit:hidden="true" spirit:scope="instance">
+                            <spirit:name>CreateNGD</spirit:name>
+                            <spirit:apiType>none</spirit:apiType>
+                            <spirit:generatorExe>${sbp_path}/${instance}/generate_ngd.tcl</spirit:generatorExe>
+                            <spirit:group>CONFIG</spirit:group>
+                        </spirit:componentGenerator>
+                    </spirit:componentGenerators>
+                    <spirit:model>
+                        <spirit:views/>
+                        <spirit:ports>
+                            <spirit:port>
+                                <spirit:name>cpu_if_gbit_en</spirit:name>
+                                <spirit:displayName>cpu_if_gbit_en</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hclk</spirit:name>
+                                <spirit:displayName>hclk</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hcs_n</spirit:name>
+                                <spirit:displayName>hcs_n</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hdataout_en_n</spirit:name>
+                                <spirit:displayName>hdataout_en_n</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hread_n</spirit:name>
+                                <spirit:displayName>hread_n</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hready_n</spirit:name>
+                                <spirit:displayName>hready_n</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hwrite_n</spirit:name>
+                                <spirit:displayName>hwrite_n</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>ignore_pkt</spirit:name>
+                                <spirit:displayName>ignore_pkt</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>reset_n</spirit:name>
+                                <spirit:displayName>reset_n</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_dv</spirit:name>
+                                <spirit:displayName>rx_dv</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_eof</spirit:name>
+                                <spirit:displayName>rx_eof</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_er</spirit:name>
+                                <spirit:displayName>rx_er</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_error</spirit:name>
+                                <spirit:displayName>rx_error</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_fifo_error</spirit:name>
+                                <spirit:displayName>rx_fifo_error</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_fifo_full</spirit:name>
+                                <spirit:displayName>rx_fifo_full</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_stat_en</spirit:name>
+                                <spirit:displayName>rx_stat_en</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_write</spirit:name>
+                                <spirit:displayName>rx_write</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rxmac_clk</spirit:name>
+                                <spirit:displayName>rxmac_clk</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_discfrm</spirit:name>
+                                <spirit:displayName>tx_discfrm</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_done</spirit:name>
+                                <spirit:displayName>tx_done</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_en</spirit:name>
+                                <spirit:displayName>tx_en</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_er</spirit:name>
+                                <spirit:displayName>tx_er</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_fifoavail</spirit:name>
+                                <spirit:displayName>tx_fifoavail</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_fifoctrl</spirit:name>
+                                <spirit:displayName>tx_fifoctrl</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_fifoempty</spirit:name>
+                                <spirit:displayName>tx_fifoempty</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_fifoeof</spirit:name>
+                                <spirit:displayName>tx_fifoeof</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_macread</spirit:name>
+                                <spirit:displayName>tx_macread</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_sndpausreq</spirit:name>
+                                <spirit:displayName>tx_sndpausreq</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_staten</spirit:name>
+                                <spirit:displayName>tx_staten</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>txmac_clk</spirit:name>
+                                <spirit:displayName>txmac_clk</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>haddr</spirit:name>
+                                <spirit:displayName>haddr</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>7</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hdatain</spirit:name>
+                                <spirit:displayName>hdatain</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>7</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>hdataout</spirit:name>
+                                <spirit:displayName>hdataout</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>7</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_dbout</spirit:name>
+                                <spirit:displayName>rx_dbout</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>7</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rx_stat_vector</spirit:name>
+                                <spirit:displayName>rx_stat_vector</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>31</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>rxd</spirit:name>
+                                <spirit:displayName>rxd</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>7</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_fifodata</spirit:name>
+                                <spirit:displayName>tx_fifodata</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>7</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_sndpaustim</spirit:name>
+                                <spirit:displayName>tx_sndpaustim</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>in</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>15</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>tx_statvec</spirit:name>
+                                <spirit:displayName>tx_statvec</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>30</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                            <spirit:port>
+                                <spirit:name>txd</spirit:name>
+                                <spirit:displayName>txd</spirit:displayName>
+                                <spirit:wire>
+                                    <spirit:direction>out</spirit:direction>
+                                    <spirit:vector>
+                                        <spirit:left>7</spirit:left>
+                                        <spirit:right>0</spirit:right>
+                                    </spirit:vector>
+                                </spirit:wire>
+                            </spirit:port>
+                        </spirit:ports>
+                    </spirit:model>
+                    <spirit:vendorExtensions>
+                        <lattice:synthesis>synplify</lattice:synthesis>
+                        <lattice:date>2013-08-08.14:14:33</lattice:date>
+                        <lattice:modified>2017-03-01.20:41:19</lattice:modified>
+                        <lattice:attributes>
+                            <lattice:attribute lattice:name="AddComponent">false</lattice:attribute>
+                            <lattice:attribute lattice:name="Change4to5">false</lattice:attribute>
+                            <lattice:attribute lattice:name="ChangeConfig">false</lattice:attribute>
+                            <lattice:attribute lattice:name="ChangeConnect">false</lattice:attribute>
+                            <lattice:attribute lattice:name="ChangeDevice">false</lattice:attribute>
+                            <lattice:attribute lattice:name="ChangeLocate">false</lattice:attribute>
+                            <lattice:attribute lattice:name="ChangePack">false</lattice:attribute>
+                            <lattice:attribute lattice:name="ChangePart">false</lattice:attribute>
+                            <lattice:attribute lattice:name="ChangeSynthesis">false</lattice:attribute>
+                            <lattice:attribute lattice:name="CoreType">IPCFG</lattice:attribute>
+                            <lattice:attribute lattice:name="DCU_RXREFCLK">PRIMARY</lattice:attribute>
+                            <lattice:attribute lattice:name="DCU_TXREFCLK">PRIMARY</lattice:attribute>
+                            <lattice:attribute lattice:name="Migrate">false</lattice:attribute>
+                            <lattice:attribute lattice:name="RemovedComponent">false</lattice:attribute>
+                        </lattice:attributes>
+                        <lattice:elements/>
+                        <lattice:lpc>
+                            <lattice:lpcsection lattice:name="Device"/>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Family</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">sa5p00</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>OperatingCondition</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">COM</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Package</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">CABGA756</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>PartName</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">LFE5U-85F-8BG756C</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>PartType</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">LFE5U-85F</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>SpeedGrade</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">8</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Status</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">S</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcsection lattice:name="IP"/>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>CoreName</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">Tri-Speed Ethernet MAC</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>CoreRevision</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">4.1</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>CoreStatus</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">Demo</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>CoreType</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">IPCFG</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Date</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">03/01/2017</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>ModuleName</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">gbit_mac</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>ParameterFileVersion</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">1.0</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>SourceFormat</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">verilog</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Time</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">15:46:23</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>VendorName</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">Lattice Semiconductor Corporation</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcsection lattice:name="Parameters"/>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>ALDC_TOOL</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">1</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>CORE_SYNP</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">1</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>LOOPBACK</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">NO</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>MIIM</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">No</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>MODE</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">Gbit MAC</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>MODS_TOOL</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">1</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>MULT_WB</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">NO</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>STAT_REGS</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant">NO</lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcsection lattice:name="Files"/>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Logical</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant"></lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Misc</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant"></lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Physical</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant"></lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Simulation</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant"></lattice:lpcvalue>
+                            </lattice:lpcentry>
+                            <lattice:lpcentry>
+                                <lattice:lpckey>Synthesis</lattice:lpckey>
+                                <lattice:lpcvalue lattice:resolve="constant"></lattice:lpcvalue>
+                            </lattice:lpcentry>
+                        </lattice:lpc>
+                        <lattice:groups/>
+                    </spirit:vendorExtensions>
+                </spirit:componentRef>
+            </spirit:componentInstance>
+        </spirit:componentInstances>
+        <spirit:adHocConnections>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_cpu_if_gbit_en</spirit:name>
+                <spirit:displayName>gbit_mac_cpu_if_gbit_en</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="cpu_if_gbit_en" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_cpu_if_gbit_en"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hclk</spirit:name>
+                <spirit:displayName>gbit_mac_hclk</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hclk" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hclk"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hcs_n</spirit:name>
+                <spirit:displayName>gbit_mac_hcs_n</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hcs_n" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hcs_n"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout_en_n</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout_en_n</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout_en_n" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout_en_n"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hread_n</spirit:name>
+                <spirit:displayName>gbit_mac_hread_n</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hread_n" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hread_n"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hready_n</spirit:name>
+                <spirit:displayName>gbit_mac_hready_n</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hready_n" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hready_n"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hwrite_n</spirit:name>
+                <spirit:displayName>gbit_mac_hwrite_n</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hwrite_n" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hwrite_n"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_ignore_pkt</spirit:name>
+                <spirit:displayName>gbit_mac_ignore_pkt</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="ignore_pkt" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_ignore_pkt"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_reset_n</spirit:name>
+                <spirit:displayName>gbit_mac_reset_n</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="reset_n" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_reset_n"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dv</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dv</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dv" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dv"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_eof</spirit:name>
+                <spirit:displayName>gbit_mac_rx_eof</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_eof" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_eof"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_er</spirit:name>
+                <spirit:displayName>gbit_mac_rx_er</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_er" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_er"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_error</spirit:name>
+                <spirit:displayName>gbit_mac_rx_error</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_error" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_error"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_fifo_error</spirit:name>
+                <spirit:displayName>gbit_mac_rx_fifo_error</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_fifo_error" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_fifo_error"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_fifo_full</spirit:name>
+                <spirit:displayName>gbit_mac_rx_fifo_full</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_fifo_full" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_fifo_full"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_en</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_en</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_en" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_en"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_write</spirit:name>
+                <spirit:displayName>gbit_mac_rx_write</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_write" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_write"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxmac_clk</spirit:name>
+                <spirit:displayName>gbit_mac_rxmac_clk</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rxmac_clk" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxmac_clk"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_discfrm</spirit:name>
+                <spirit:displayName>gbit_mac_tx_discfrm</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_discfrm" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_discfrm"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_done</spirit:name>
+                <spirit:displayName>gbit_mac_tx_done</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_done" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_done"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_en</spirit:name>
+                <spirit:displayName>gbit_mac_tx_en</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_en" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_en"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_er</spirit:name>
+                <spirit:displayName>gbit_mac_tx_er</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_er" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_er"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifoavail</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifoavail</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_fifoavail" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifoavail"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifoctrl</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifoctrl</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_fifoctrl" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifoctrl"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifoempty</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifoempty</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_fifoempty" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifoempty"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifoeof</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifoeof</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_fifoeof" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifoeof"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_macread</spirit:name>
+                <spirit:displayName>gbit_mac_tx_macread</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_macread" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_macread"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpausreq</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpausreq</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_sndpausreq" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpausreq"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_staten</spirit:name>
+                <spirit:displayName>gbit_mac_tx_staten</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_staten" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_staten"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txmac_clk</spirit:name>
+                <spirit:displayName>gbit_mac_txmac_clk</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txmac_clk" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txmac_clk"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr</spirit:name>
+                <spirit:displayName>gbit_mac_haddr</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="haddr" spirit:componentRef="gbit_mac" spirit:left="7"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_haddr" spirit:left="7"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[0]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[0]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[0]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[0]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[1]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[1]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[1]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[1]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[2]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[2]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[2]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[2]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[3]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[3]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[3]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[3]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[4]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[4]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[4]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[4]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[5]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[5]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[5]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[5]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[6]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[6]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[6]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[6]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_haddr[7]</spirit:name>
+                <spirit:displayName>gbit_mac_haddr[7]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_haddr[7]"/>
+                <spirit:internalPortReference spirit:portRef="haddr[7]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="hdatain" spirit:componentRef="gbit_mac" spirit:left="7"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_hdatain" spirit:left="7"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[0]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[0]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[0]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[0]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[1]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[1]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[1]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[1]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[2]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[2]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[2]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[2]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[3]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[3]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[3]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[3]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[4]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[4]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[4]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[4]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[5]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[5]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[5]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[5]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[6]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[6]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[6]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[6]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdatain[7]</spirit:name>
+                <spirit:displayName>gbit_mac_hdatain[7]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdatain[7]"/>
+                <spirit:internalPortReference spirit:portRef="hdatain[7]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="hdataout" spirit:componentRef="gbit_mac" spirit:left="7"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_hdataout" spirit:left="7"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[0]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[0]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[0]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[0]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[1]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[1]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[1]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[1]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[2]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[2]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[2]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[2]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[3]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[3]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[3]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[3]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[4]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[4]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[4]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[4]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[5]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[5]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[5]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[5]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[6]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[6]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[6]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[6]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_hdataout[7]</spirit:name>
+                <spirit:displayName>gbit_mac_hdataout[7]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="hdataout[7]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_hdataout[7]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="rx_dbout" spirit:componentRef="gbit_mac" spirit:left="7"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_rx_dbout" spirit:left="7"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[0]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[0]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[0]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[0]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[1]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[1]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[1]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[1]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[2]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[2]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[2]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[2]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[3]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[3]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[3]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[3]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[4]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[4]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[4]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[4]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[5]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[5]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[5]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[5]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[6]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[6]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[6]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[6]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_dbout[7]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_dbout[7]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_dbout[7]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_dbout[7]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="rx_stat_vector" spirit:componentRef="gbit_mac" spirit:left="31"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_rx_stat_vector" spirit:left="31"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[0]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[0]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[0]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[0]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[10]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[10]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[10]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[10]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[11]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[11]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[11]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[11]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[12]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[12]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[12]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[12]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[13]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[13]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[13]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[13]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[14]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[14]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[14]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[14]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[15]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[15]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[15]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[15]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[16]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[16]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[16]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[16]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[17]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[17]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[17]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[17]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[18]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[18]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[18]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[18]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[19]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[19]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[19]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[19]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[1]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[1]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[1]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[1]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[20]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[20]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[20]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[20]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[21]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[21]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[21]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[21]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[22]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[22]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[22]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[22]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[23]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[23]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[23]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[23]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[24]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[24]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[24]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[24]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[25]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[25]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[25]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[25]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[26]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[26]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[26]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[26]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[27]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[27]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[27]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[27]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[28]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[28]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[28]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[28]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[29]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[29]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[29]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[29]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[2]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[2]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[2]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[2]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[30]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[30]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[30]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[30]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[31]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[31]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[31]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[31]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[3]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[3]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[3]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[3]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[4]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[4]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[4]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[4]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[5]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[5]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[5]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[5]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[6]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[6]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[6]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[6]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[7]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[7]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[7]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[7]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[8]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[8]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[8]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[8]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rx_stat_vector[9]</spirit:name>
+                <spirit:displayName>gbit_mac_rx_stat_vector[9]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="rx_stat_vector[9]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rx_stat_vector[9]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd</spirit:name>
+                <spirit:displayName>gbit_mac_rxd</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="rxd" spirit:componentRef="gbit_mac" spirit:left="7"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_rxd" spirit:left="7"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[0]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[0]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[0]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[0]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[1]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[1]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[1]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[1]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[2]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[2]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[2]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[2]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[3]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[3]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[3]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[3]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[4]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[4]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[4]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[4]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[5]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[5]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[5]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[5]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[6]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[6]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[6]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[6]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_rxd[7]</spirit:name>
+                <spirit:displayName>gbit_mac_rxd[7]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_rxd[7]"/>
+                <spirit:internalPortReference spirit:portRef="rxd[7]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="tx_fifodata" spirit:componentRef="gbit_mac" spirit:left="7"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_tx_fifodata" spirit:left="7"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[0]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[0]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[0]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[0]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[1]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[1]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[1]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[1]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[2]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[2]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[2]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[2]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[3]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[3]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[3]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[3]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[4]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[4]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[4]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[4]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[5]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[5]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[5]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[5]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[6]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[6]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[6]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[6]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_fifodata[7]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_fifodata[7]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_fifodata[7]"/>
+                <spirit:internalPortReference spirit:portRef="tx_fifodata[7]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="tx_sndpaustim" spirit:componentRef="gbit_mac" spirit:left="15"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_tx_sndpaustim" spirit:left="15"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[0]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[0]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[0]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[0]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[10]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[10]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[10]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[10]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[11]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[11]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[11]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[11]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[12]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[12]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[12]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[12]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[13]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[13]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[13]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[13]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[14]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[14]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[14]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[14]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[15]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[15]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[15]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[15]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[1]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[1]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[1]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[1]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[2]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[2]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[2]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[2]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[3]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[3]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[3]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[3]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[4]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[4]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[4]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[4]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[5]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[5]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[5]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[5]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[6]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[6]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[6]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[6]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[7]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[7]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[7]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[7]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[8]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[8]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[8]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[8]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_sndpaustim[9]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_sndpaustim[9]</spirit:displayName>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_sndpaustim[9]"/>
+                <spirit:internalPortReference spirit:portRef="tx_sndpaustim[9]" spirit:componentRef="gbit_mac"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="tx_statvec" spirit:componentRef="gbit_mac" spirit:left="30"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_tx_statvec" spirit:left="30"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[0]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[0]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[0]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[0]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[10]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[10]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[10]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[10]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[11]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[11]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[11]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[11]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[12]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[12]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[12]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[12]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[13]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[13]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[13]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[13]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[14]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[14]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[14]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[14]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[15]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[15]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[15]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[15]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[16]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[16]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[16]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[16]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[17]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[17]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[17]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[17]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[18]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[18]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[18]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[18]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[19]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[19]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[19]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[19]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[1]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[1]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[1]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[1]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[20]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[20]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[20]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[20]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[21]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[21]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[21]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[21]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[22]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[22]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[22]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[22]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[23]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[23]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[23]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[23]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[24]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[24]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[24]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[24]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[25]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[25]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[25]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[25]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[26]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[26]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[26]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[26]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[27]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[27]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[27]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[27]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[28]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[28]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[28]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[28]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[29]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[29]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[29]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[29]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[2]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[2]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[2]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[2]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[30]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[30]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[30]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[30]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[3]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[3]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[3]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[3]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[4]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[4]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[4]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[4]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[5]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[5]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[5]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[5]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[6]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[6]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[6]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[6]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[7]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[7]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[7]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[7]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[8]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[8]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[8]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[8]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_tx_statvec[9]</spirit:name>
+                <spirit:displayName>gbit_mac_tx_statvec[9]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="tx_statvec[9]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_tx_statvec[9]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd</spirit:name>
+                <spirit:displayName>gbit_mac_txd</spirit:displayName>
+                <spirit:internalPortReference spirit:right="0" spirit:portRef="txd" spirit:componentRef="gbit_mac" spirit:left="7"/>
+                <spirit:externalPortReference spirit:right="0" spirit:portRef="gbit_mac_txd" spirit:left="7"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[0]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[0]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[0]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[0]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[1]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[1]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[1]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[1]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[2]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[2]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[2]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[2]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[3]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[3]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[3]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[3]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[4]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[4]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[4]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[4]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[5]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[5]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[5]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[5]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[6]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[6]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[6]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[6]"/>
+            </spirit:adHocConnection>
+            <spirit:adHocConnection>
+                <spirit:name>gbit_mac_txd[7]</spirit:name>
+                <spirit:displayName>gbit_mac_txd[7]</spirit:displayName>
+                <spirit:internalPortReference spirit:portRef="txd[7]" spirit:componentRef="gbit_mac"/>
+                <spirit:externalPortReference spirit:portRef="gbit_mac_txd[7]"/>
+            </spirit:adHocConnection>
+        </spirit:adHocConnections>
+    </spirit:design>
+</lattice:project>

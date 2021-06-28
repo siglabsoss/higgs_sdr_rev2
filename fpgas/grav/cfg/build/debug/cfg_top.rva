@@ -1,0 +1,169 @@
+<!DOCTYPE ispTLA>
+<ispTLA>
+ <CreationDate>Tue Nov 7 17:46:41 2017</CreationDate>
+ <XCFFileName>cfg_top.xcf</XCFFileName>
+ <CableSetting>
+  <IsTRSTConnected val="false"/>
+  <TRSTSetting val="0"/>
+  <IsBSCANConnected val="false"/>
+  <BSCANSetting val="0"/>
+  <CableType val="USB2"/>
+  <PortAddress val="1"/>
+  <PortSetting val="0"/>
+  <TCKDelay val="1"/>
+ </CableSetting>
+ <DeviceCount>4</DeviceCount>
+ <Device>
+  <DeviceIndex>0</DeviceIndex>
+  <DeviceName>1. LFE5U-85F</DeviceName>
+  <DeviceID>0x41113043</DeviceID>
+  <HasIspTRACY>true</HasIspTRACY>
+  <HasJTAG2WB>false</HasJTAG2WB>
+  <SERDES/>
+  <IRBypassLen>8</IRBypassLen>
+  <RVLFileName>cfg_top.rvl</RVLFileName>
+  <RVSFileName>cfg_top.rvs</RVSFileName>
+  <LACoreCount>1</LACoreCount>
+  <WinUI CoreIndex="0">
+   <TraceSigTreeData>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_5" NodeType="0" PortIndex="0"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt" NodeType="1" PortIndex="1">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[0]" NodeType="2" PortIndex="1"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[1]" NodeType="2" PortIndex="2"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[2]" NodeType="2" PortIndex="3"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[3]" NodeType="2" PortIndex="4"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[4]" NodeType="2" PortIndex="5"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[5]" NodeType="2" PortIndex="6"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[6]" NodeType="2" PortIndex="7"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[7]" NodeType="2" PortIndex="8"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[8]" NodeType="2" PortIndex="9"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[9]" NodeType="2" PortIndex="10"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[10]" NodeType="2" PortIndex="11"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[11]" NodeType="2" PortIndex="12"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[12]" NodeType="2" PortIndex="13"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[13]" NodeType="2" PortIndex="14"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[14]" NodeType="2" PortIndex="15"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[15]" NodeType="2" PortIndex="16"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[16]" NodeType="2" PortIndex="17"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[17]" NodeType="2" PortIndex="18"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[18]" NodeType="2" PortIndex="19"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[19]" NodeType="2" PortIndex="20"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[20]" NodeType="2" PortIndex="21"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[21]" NodeType="2" PortIndex="22"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[22]" NodeType="2" PortIndex="23"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[23]" NodeType="2" PortIndex="24"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[24]" NodeType="2" PortIndex="25"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[25]" NodeType="2" PortIndex="26"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[26]" NodeType="2" PortIndex="27"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[27]" NodeType="2" PortIndex="28"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[28]" NodeType="2" PortIndex="29"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[29]" NodeType="2" PortIndex="30"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[30]" NodeType="2" PortIndex="31"/>
+    <TraceSignal IsHidden="false" Name="gpmc_cntr_lock_strb_cnt[31]" NodeType="2" PortIndex="32"/>
+    <TraceSignal IsHidden="false" Name="clk125_srst" NodeType="0" PortIndex="33"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.sel" NodeType="0" PortIndex="34"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.ack" NodeType="0" PortIndex="35"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rd_wr_n" NodeType="0" PortIndex="36"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys_dword_addr" NodeType="1" PortIndex="37">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[2]" NodeType="2" PortIndex="37"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[3]" NodeType="2" PortIndex="38"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[4]" NodeType="2" PortIndex="39"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[5]" NodeType="2" PortIndex="40"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[6]" NodeType="2" PortIndex="41"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[7]" NodeType="2" PortIndex="42"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[8]" NodeType="2" PortIndex="43"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[9]" NodeType="2" PortIndex="44"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[10]" NodeType="2" PortIndex="45"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[11]" NodeType="2" PortIndex="46"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[12]" NodeType="2" PortIndex="47"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[13]" NodeType="2" PortIndex="48"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[14]" NodeType="2" PortIndex="49"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[15]" NodeType="2" PortIndex="50"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.byte_addr[16]" NodeType="2" PortIndex="51"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys_wdata" NodeType="1" PortIndex="52">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[0]" NodeType="2" PortIndex="52"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[1]" NodeType="2" PortIndex="53"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[2]" NodeType="2" PortIndex="54"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[3]" NodeType="2" PortIndex="55"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[4]" NodeType="2" PortIndex="56"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[5]" NodeType="2" PortIndex="57"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[6]" NodeType="2" PortIndex="58"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[7]" NodeType="2" PortIndex="59"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[8]" NodeType="2" PortIndex="60"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[9]" NodeType="2" PortIndex="61"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[10]" NodeType="2" PortIndex="62"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[11]" NodeType="2" PortIndex="63"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[12]" NodeType="2" PortIndex="64"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[13]" NodeType="2" PortIndex="65"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[14]" NodeType="2" PortIndex="66"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[15]" NodeType="2" PortIndex="67"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[16]" NodeType="2" PortIndex="68"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[17]" NodeType="2" PortIndex="69"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[18]" NodeType="2" PortIndex="70"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[19]" NodeType="2" PortIndex="71"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[20]" NodeType="2" PortIndex="72"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[21]" NodeType="2" PortIndex="73"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[22]" NodeType="2" PortIndex="74"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[23]" NodeType="2" PortIndex="75"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[24]" NodeType="2" PortIndex="76"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[25]" NodeType="2" PortIndex="77"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[26]" NodeType="2" PortIndex="78"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[27]" NodeType="2" PortIndex="79"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[28]" NodeType="2" PortIndex="80"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[29]" NodeType="2" PortIndex="81"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[30]" NodeType="2" PortIndex="82"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.wdata[31]" NodeType="2" PortIndex="83"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys_rdata" NodeType="1" PortIndex="84">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[0]" NodeType="2" PortIndex="84"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[1]" NodeType="2" PortIndex="85"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[2]" NodeType="2" PortIndex="86"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[3]" NodeType="2" PortIndex="87"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[4]" NodeType="2" PortIndex="88"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[5]" NodeType="2" PortIndex="89"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[6]" NodeType="2" PortIndex="90"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[7]" NodeType="2" PortIndex="91"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[8]" NodeType="2" PortIndex="92"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[9]" NodeType="2" PortIndex="93"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[10]" NodeType="2" PortIndex="94"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[11]" NodeType="2" PortIndex="95"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[12]" NodeType="2" PortIndex="96"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[13]" NodeType="2" PortIndex="97"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[14]" NodeType="2" PortIndex="98"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[15]" NodeType="2" PortIndex="99"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[16]" NodeType="2" PortIndex="100"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[17]" NodeType="2" PortIndex="101"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[18]" NodeType="2" PortIndex="102"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[19]" NodeType="2" PortIndex="103"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[20]" NodeType="2" PortIndex="104"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[21]" NodeType="2" PortIndex="105"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[22]" NodeType="2" PortIndex="106"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[23]" NodeType="2" PortIndex="107"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[24]" NodeType="2" PortIndex="108"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[25]" NodeType="2" PortIndex="109"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[26]" NodeType="2" PortIndex="110"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[27]" NodeType="2" PortIndex="111"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[28]" NodeType="2" PortIndex="112"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[29]" NodeType="2" PortIndex="113"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[30]" NodeType="2" PortIndex="114"/>
+    <TraceSignal IsHidden="false" Name="cmd_sys.rdata[31]" NodeType="2" PortIndex="115"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" PreSelectType="0" PreSelect="1" UserSelectPos="0"/>
+   <CoreRun Run="true"/>
+   <CoreWndUIData>
+    <ClockFrequency Unit="ns" Frequency="-1.0"/>
+   </CoreWndUIData>
+  </WinUI>
+ </Device>
+</ispTLA>

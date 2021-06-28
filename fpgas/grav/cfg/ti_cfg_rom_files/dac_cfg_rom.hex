@@ -1,0 +1,27 @@
+
+/*
+ * Power on config register settings for the TI DAC on Graviton (DAC3484)
+ *
+ * THE ORDER OF THESE CONFIG WORDS MIGHT MATTER.  REFER TO THE DATASHEET IF UNSURE.
+ */
+
+
+00019d // config0  - 2x interpolation
+028082 // config2  - Word-Wide Mode, SIF 4-wire, 2's complement data format
+07ffff // config7  - mask out all alarms for now
+1f4444 // config31 - set mixer AB, mixer CD, nco sync sources, and data formatter to SYNC input
+201100 // config32 - FIFO read and write pointers synchronized via SYNC input
+241c00 // config36 - set clkdly to 0b111 which corresponds to 350ps
+1b0800 // config27 - puts the fuses to sleep. MUST BE THE LAST CONFIG WORD WRITTEN!
+03f001 // config3  - set sif_txenable
+
+// FOR IO TESTING DURING GRAVITON DEBUG, REMOVE FOR ACTUAL IMAGE
+
+//028080 // config2  - Word-Wide Mode, SIF 4-wire
+//1f4440 // config31 - set mixer AB, mixer CD, and nco sync sources to SYNC sync
+//201100 // config32 - FIFO read and write pointers synchronized via SYNC sync
+//019000 // config1  - Enable IO Test and enable 64cnt_ena
+//07ff7f // config7  - Only unmask alarm_from_iotest
+//1b0800 // config27 - puts the fuses to sleep. MUST BE THE LAST CONFIG WORD WRITTEN!
+//040000 // config4  - Write to clear all IO Test Results
+//050000 // config5  - Write to clear all Alarm Bits
