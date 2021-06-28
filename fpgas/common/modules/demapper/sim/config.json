@@ -1,0 +1,18 @@
+{
+    "dut_file": "../demapper.sv",
+    "dut_name": "demapper",
+
+    "probe": [ "sig1", "sig2", "sig3"],
+    "sources": [ 
+      		 "cppsrc/main.cpp",
+		 "cppsrc/signals.cpp",
+		 "obj_dir/Vdemapper.cpp",
+		 "obj_dir/Vdemapper__Syms.cpp",
+		 "obj_dir/Vdemapper__Trace.cpp",
+		 "obj_dir/Vdemapper__Trace__Slow.cpp"
+    ],
+    "libraries": [ "/usr/local/share/verilator/include",
+		   "./obj_dir"
+		   ]
+
+}

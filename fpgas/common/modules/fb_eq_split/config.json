@@ -1,0 +1,7 @@
+{
+    "dut_file": "./rtl/fb_eq_split.sv",
+    "dut_name": "fb_eq_split",
+    "waveform_format": "vcd",
+
+    "probe": [ "sig1", "sig2", "sig3"]
+}

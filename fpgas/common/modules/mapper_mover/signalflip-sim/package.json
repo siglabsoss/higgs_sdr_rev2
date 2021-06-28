@@ -1,0 +1,26 @@
+{
+   "name": "veri-js",
+   "version": "1.0.0",
+   "main": "index.js",
+   "dependencies": {
+      "jsverify": "^0.8.4",
+      "lodash": "latest",
+      "mocha": "^5.2.0",
+      "mustache": "latest",
+      "node-addon-api": "latest"
+   },
+   "scripts": {
+      "compile": "make verilate && cd obj_dir && make -f ../Makefile_obj createlib",
+      "build": "node-gyp build",
+      "clean": "node-gyp clean && make clean",
+      "all": "npm run compile && npm run build && npm run test",
+      "test": "node index.js",
+      "gen": "node gensigs.js"
+   },
+   "gypfile": true,
+   "devDependencies": {
+      "node-gyp": "^3.8.0"
+   },
+   "author": "Ameet Gohil",
+   "license": "GPL-3.0"
+}

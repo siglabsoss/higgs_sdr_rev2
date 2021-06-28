@@ -1,0 +1,17 @@
+{
+    "dut_file": "./rtl/fb_eq_join.sv",
+    "dut_name": "fb_eq_join",
+    "waveform_format": "vcd",
+
+    "probe": [ "sig1", "sig2", "sig3"],
+    "sources": [ 
+      		 "cppsrc/main.cpp",
+	"cppsrc/signals.cpp"
+    ],
+    "libraries": [ "/usr/local/share/verilator/include",
+		   "/usr/local/share/verilator/include/vltstd",
+		   "/usr/local/share/verilator/include/gtkwave",
+		   "./obj_dir"
+		   ]
+
+}
