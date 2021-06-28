@@ -1,0 +1,137 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the this FPGA.
+Used in conjunction with Juniper Network's ORDT tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA in this Copper Suicide array this is by providing the Row and Column as two hex nibbles.";
+            
+            field {
+                name="UID";
+                desc="The Row and Column of this FPGA in the Copper Suicide array.";
+                hw=w; sw=r;
+                reset = 8'b00000000;
+            } uid[7:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+        
+        reg {
+            name="SFB Sample Parity Errors";
+            desc="Contains the number of SFB output sample parity errors encountered since the last reset.";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } parity_errors[31:0];
+        } sfb_sample_perrs;
+        
+    } rf0 @0x00000;
+    
+    
+    regfile {
+        
+        reg {
+            name="Tx Turnstile Master Mode";
+            desc="Contains the bit to enable or disable Tx Turnstile Master Mode.";
+            
+            field {
+                desc="Setting this bit to 1 enables master mode and setting to 0 disables master mode.";
+                hw=r; sw=w;
+                reset=1'b0;
+            } mode[0:0];
+        } tx_tstile_mstr;
+        
+        reg {
+            name="Tx Turnstile Next FIFO Write Start Frame";
+            desc="Writing to this register updates the next Tx Turnstile Starting Frame to be written into the Start Frame FIFO.  
+                  SOFTWARE MUST NEXT WRITE THE START SAMPLE REGISTER TO COMPLETE THE QUEUEING OF START FRAME AND START SAMPLE INTO THE FIFO.";
+            
+            field {
+                name="Start Frame";
+                hw=r; sw=w;
+                reset=32'd0;
+            } frame[31:0];
+        } tx_tstile_start_frame;
+        
+        reg {
+            name="Tx Turnstile Next FIFO Start Sample";
+            desc="Writing to this register updates the next Tx Turnstile Starting Sample to be written into the Start Sample FIFO.
+                  SOFTWARE MUST WRITE THE START FRAME REGISTER PRIOR TO THIS REGISTER IF IT WISHES TO CHANGE THE FRAME ASSOCIATED WITH
+                  THIS START SAMPLE.  OTHERWISE THE LAST FRAME WRITTEN INTO THE START FRAME REGISTER WILL BE USED FOR THIS NEW START SAMPLE.";
+            
+            field { 
+                name="Start Sample";
+                hw=r; sw=w;
+                swmod;
+                reset=25'd0;
+            } sample[24:0];
+        } tx_tstile_start_sample;
+        
+    } rf1 @0x10000;
+    
+    
+    regfile {
+    
+        reg {
+            name="VershaRepeat Read Enable";
+            desc="Controls reading of VershaRepeat module that provides TSLOT 0 samples to the Tx Turnstile module.";
+            
+            field {
+                name="VershaRepeat RdEn";
+                desc="Set to 1 to enable VershaRepeat playback, 0 to disable it.  Disable readback prior to loading new data samples.";
+                hw=r; sw=w;
+                reset=1'b0;
+            } en;
+        } versha_repeat_read;
+        
+        reg {
+            name="VershaRepeat New Data Set";
+            desc="Controls flushing of VershaRepeat output buffers to allow for new data samples to be loaded and used by VershaRepeat."; 
+            
+            field {
+                desc="After loading new samples to be played back by VershaRepeat a 1 should be written to this field (auto-clears after write).";
+                hw=r; sw=w;
+                singlepulse;
+                reset=1'b0;
+            } strobe;
+        } versha_repeat_new_data_set;
+                
+        reg {
+            name="TSLOT 0 Sample Write";
+            desc="Writing into this register will result in the value getting stored in the DDR SDRAM that buffers Time Slot 0 samples.";
+            
+            field {
+                name="TSLOT 0 Sample";
+                hw=r; sw=w;
+                swmod;
+                reset=32'd0;
+            } sample[31:0];
+        } tslot0_write;
+        
+    } rf2 @0x20000;
+    
+} REGS;

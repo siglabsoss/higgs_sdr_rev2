@@ -1,0 +1,99 @@
+<Project ModBy="Analyzer" Name="E:/higgs_sdr_rev2_master/fpgas/cs/cs31/build/debug/cs31_top.rvs" Date="2018-04-27">
+ <Core Name="cs00_top_LA0">
+  <Setting>
+   <Capture SamplesPerTrig="4096" NumTrigsCap="1"/>
+   <Event EventCnt="0" CntEnableRun="0"/>
+   <TrigSetting PreTrgSamples="" AND_ALL="0" PostTrgSamples="" TURadix="0"/>
+  </Setting>
+  <Dataset Name="Base">
+   <Trace>
+    <Bus Name="riscv_in_data" Radix="0">
+     <Sig Name="vex_machine_top_inst/riscv_in_data[0]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[1]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[2]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[3]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[4]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[5]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[6]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[7]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[8]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[9]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[10]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[11]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[12]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[13]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[14]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[15]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[16]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[17]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[18]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[19]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[20]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[21]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[22]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[23]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[24]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[25]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[26]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[27]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[28]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[29]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[30]"/>
+     <Sig Name="vex_machine_top_inst/riscv_in_data[31]"/>
+    </Bus>
+    <Sig Name="vex_machine_top_inst/riscv_in_valid"/>
+    <Sig Name="vex_machine_top_inst/riscv_in_ready"/>
+    <Bus Name="riscv_out_data" Radix="0">
+     <Sig Name="vex_machine_top_inst/riscv_out_data[0]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[1]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[2]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[3]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[4]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[5]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[6]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[7]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[8]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[9]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[10]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[11]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[12]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[13]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[14]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[15]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[16]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[17]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[18]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[19]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[20]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[21]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[22]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[23]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[24]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[25]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[26]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[27]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[28]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[29]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[30]"/>
+     <Sig Name="vex_machine_top_inst/riscv_out_data[31]"/>
+    </Bus>
+    <Sig Name="vex_machine_top_inst/riscv_out_valid"/>
+    <Sig Name="vex_machine_top_inst/riscv_out_ready"/>
+   </Trace>
+   <Trigger>
+    <TU Operator="0" Name="TU1" ID="1" Value="1" Radix="2"/>
+    <TU Operator="0" Name="TU2" ID="2" Value="0" Radix="2"/>
+    <TU Operator="0" Name="TU3" ID="3" Value="1" Radix="2"/>
+    <TU Operator="0" Name="TU4" ID="4" Value="0" Radix="2"/>
+    <TU Operator="0" Name="TU5" ID="5" Value="1" Radix="0"/>
+    <TU Operator="0" Name="TU6" ID="6" Value="1" Radix="0"/>
+    <TE Enable="0" Expression="TU1" Name="TE1" ID="1"/>
+    <TE Enable="0" Expression="TU2" Name="TE2" ID="2"/>
+    <TE Enable="0" Expression="TU3 &amp; TU6" Name="TE3" ID="3"/>
+    <TE Enable="0" Expression="TU4" Name="TE4" ID="4"/>
+    <TE Enable="1" Expression="TU5 &amp; TU1" Name="TE5" ID="5"/>
+    <TE Enable="0" Expression="TU6" Name="TE6" ID="6"/>
+   </Trigger>
+  </Dataset>
+ </Core>
+</Project>

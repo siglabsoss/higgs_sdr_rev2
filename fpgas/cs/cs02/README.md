@@ -1,0 +1,17 @@
+
+# CS02 fpga
+
+## Modules included
+
+* [core_top](https://github.com/siglabsoss/higgs_sdr_rev2/tree/master/fpgas/common/modules) - accepts FPGA_clk as input and gives 125 MHz and 12.5 MHz clock as output
+* [MIB Slave](https://github.com/siglabsoss/ip-library-core/tree/master/mib_bus) - to send and receive commands form MIB Master. It is encapsulated in `core_top`
+* [RX TURNSTILE](https://github.com/siglabsoss/ip-library-core/tree/master/rx_turnstile) - *** Complete it ***
+* [Analysis filter bank](https://github.com/siglabsoss/ip-library-core/tree/master/analysis_filter_bank/afb) - *** Update ***
+
+
+### Valid commands over the MIB
+```
+
+* Write in scratch register -> 0x0, 0x0, 0x1200004, data
+* Read from scratch register -> 0x0, 0x1, 0x1200004, 0x0
+```

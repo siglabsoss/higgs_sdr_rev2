@@ -1,0 +1,207 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the this FPGA.
+Used in conjunction with Juniper Network's ORDT tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA in this Copper Suicide array this is by providing the Row and Column as two hex nibbles.";
+            
+            field {
+                name="UID";
+                desc="The Row and Column of this FPGA in the Copper Suicide array.";
+                hw=w; sw=r;
+                reset = 8'b00000000;
+            } uid[7:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } dword[31:0];
+        } sw_scratch;
+
+        reg {
+            name="MIB Counter Lock Test Count";
+            desc="Used to test resetting of Graviton & CS FPGAs and the locking of counters in various FPGAs.  Software should issue a MIB master reset followed by a MIB counter lock and then read these counters in the ADC, DAC, and applicable CS FPGAs and compare their count values (hopefully they're the same).";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } mib_cntr_lock_test;            
+        
+        reg {
+            name="ADC Sample Parity Error Counter";
+            desc="Contains the number of ADC sample parity errors encountered since the last reset.";
+            
+            field {
+                hw=na; sw=r; 
+                counter;
+                reset=32'd0;
+            } cnt[31:0];
+        } adc_sample_perror; 
+
+    } rf0 @0x00000;
+
+
+    regfile {
+    
+        reg {
+            name="DSP Software Reset";
+            desc="Provides a software reset for the ADC DSP modules.";
+            
+            field {
+                name="DSP Software Reset Assert";
+                desc="Software sets this bit to start a reset of the DSP modules (auto clears after write).";
+                hw=r; sw=rw;
+                singlepulse=true; // this bit pulsed for one clock when software sets it
+                reset=1'b0;
+            } dsp_sw_rst_assert [0:0];
+            
+            field {
+                name="Local DSP Reset";
+                desc="Software reads this bit to determine if the DSP reset is still in progress (1 == still in progress).";
+                hw=w; sw=r;
+                reset=1'b0;
+            } dsp_sw_rst_status [1:1];
+                
+        } dsp_sw_rst;
+                
+        reg {
+            name="DSP Channel";
+            desc="Allows software to change the current narrowband channel being output by the hardware";
+
+            field {
+                name="Phase Increment";
+                hw=r; sw=rw;
+                swmod=true; // sideband signal pulsed whenever software writes to this field
+                reset=12'b0;
+            } phase_inc [11:0];
+
+        } dsp_chan;
+        
+        reg {
+            name="BB Overflow";
+            desc="Indicates an overflow condition occurred between the Rx Channel Modulator and the CIC Decimator in the adc_dsp block.";
+            
+            field {
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } happened;
+        } bb_overflow;
+             
+
+    } rf1 @0x10000;
+
+
+    regfile {
+        
+        reg {
+            name="Host MAC MSW";
+            desc="Upper 16-bits of the Host PC's MAC address";
+            
+            field {
+                hw=r; sw=w;
+                reset=16'hffff;
+            } bits[15:0];
+        } host_mac_msw;
+        
+        reg {
+            name="Host MAC LSW";
+            desc="Lower 32-bits of the Host PC's MAC address";
+            
+            field {
+                hw=r; sw=w;
+                reset = 32'hffffffff;
+            } bits[31:0];
+        } host_mac_lsw;
+
+    } rf2 @0x20000;
+    
+    regfile {
+        
+        reg {
+            name="Channel Select";
+            desc="Selects the channel to capture data from";
+            
+            field {
+                hw=r; sw=w;
+                reset=4'b0;
+            } bits[3:0];
+        } channel_select;
+        
+        reg {
+            name="Force trigger to start reading";
+            desc="Selects the channel to capture data from";
+            
+            field {
+                hw=r; sw=w;
+                reset=1'b0;
+            } bits[0:0];
+        } force_trigger;
+        
+        reg {
+            name="Read Delay";
+            desc="Number of clock cycles in between two reads";
+            
+            field {
+                hw=r; sw=w;
+                reset=32'b0;
+            } bits[31:0];
+        } read_delay;
+        
+        reg {
+            name="Number of samples";
+            desc="Number of samples to be captured";
+            
+            field {
+                hw=r; sw=w;
+                reset=28'b0;
+            } bits[27:0];
+        } number_samples;
+        
+        reg {
+            name="Trigger Start";
+            desc="Start reading from fifo";
+            
+            field {
+                hw=r; sw=w;
+                reset=1'b0;
+            } bits[0:0];
+        } trigger_start;
+        
+        reg {
+            name="Done reading";
+            desc="Done reading from fifo";
+            
+            field {
+                hw=w; sw=r;
+                reset=1'b0;
+            } bits[0:0];
+        } done_read;
+        
+        
+
+    } rf3 @0x30000;
+    
+} REGS;

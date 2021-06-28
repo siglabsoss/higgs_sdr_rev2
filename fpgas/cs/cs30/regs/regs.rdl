@@ -1,0 +1,155 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the this FPGA.
+Used in conjunction with Juniper Network's ORDT tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA in this Copper Suicide array this is by providing the Row and Column as two hex nibbles.";
+            
+            field {
+                name="UID";
+                desc="The Row and Column of this FPGA in the Copper Suicide array.";
+                hw=w; sw=r;
+                reset = 8'b00000000;
+            } uid[7:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+
+        reg {
+            name="MIB Counter Lock Test Count";
+            desc="Used to test resetting of Graviton & CS FPGAs and the locking of counters in various FPGAs.  Software should issue a MIB master reset followed by a MIB counter lock and then read these counters in the ADC, DAC, and applicable CS FPGAs and compare their count values (hopefully they're the same).";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } mib_cntr_lock_test;            
+        
+    } rf0 @0x00000;
+    
+    regfile {
+    
+        reg {
+            name="Tx Data Parity Errors";
+            desc="Number of parity errors encountered in the Tx Sample data coming down from Graviton since the last reset";
+            
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } num_errors[31:0];
+        } tx_data_parity;
+    
+    } rf1 @0x10000;
+    
+    
+    regfile {
+
+        reg {
+            name="SFB Subcarrier Mask Bits";
+            desc="Array of registers where the lowest addressed register contains SFB Subcarrier Mask Bits 31:0 and the highest contains bits 1023:992.";
+
+            field {
+                hw=r; sw=w;
+                reset=32'd0;
+            } bits[31:0];
+        } sc_mask[32];
+        
+        reg {
+            name="SFB IFFT Rounding";
+            desc="Controls the rounding at each stage of the SFB IFFT.";
+            
+            field {
+            hw=r; sw=w;
+            reset=20'd0;
+            } bits[19:0];
+        } sfb_ifft_rounding;
+            
+        reg {
+            name="SFB Buffer Overflow Count";
+            desc="The number of buffer overflows that have occurred in the SFB module since the last reset.";
+
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } sfb_buf_overflow;
+        
+        reg {
+            name="SFB Buffer Underflow Count";
+            desc="The number of buffer underflows that have occurred in the SFB module since the last reset.";
+
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } sfb_buf_underflow;
+        
+        reg {
+            name="SFB Synthesis Poly-phase Filter Saturation";
+            desc="Indicates that the SFB Synthesis Poly-phase Filter output has saturated since the last time this register was read or reset occurred.";
+
+            field {
+                hw=na; sw=r;
+                hwset; rclr;
+                reset=1'b0;
+            } occurred;
+        } sfb_sppf_sat;
+        
+        reg {
+            name="SFB Synthesis Poly-phase Filter Saturation Count";
+            desc="Number of times the SFB Synthesis Poly-phase Filter output has saturated since the last reset.";
+
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } sfb_sppf_sat_cnt;
+        
+        reg {
+            name="SFB Synthesis Poly-phase Filter IFFT Saturation";
+            desc="Indicates that the SFB IFFT filter stage has saturated.";
+
+            field {
+                hw=w; sw=r;
+                we; rclr;
+                reset=10'd0;
+            } occurred[9:0];
+        } sfb_ifft_sat;
+
+        reg {
+            name="SFB Synthesis IFFT Saturation Count";
+            desc="Number of times at least one of the SFB IFFT stages has saturated since the last reset.";
+
+            field {
+                hw=w; sw=r;
+                reset=32'd0;
+            } cnt[31:0];
+        } sfb_ifft_sat_cnt;
+    
+    } rf2 @0x20000;
+    
+} REGS;

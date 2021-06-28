@@ -1,0 +1,88 @@
+<Project ModBy="Inserter" SigType="1" Name="C:/FPGA/higgs_sdr_rev2-ryan/fpgas/cs/cs20/build/debug/cs20_eth_cmd.rvl" Date="2017-10-13">
+    <IP Version="1_5_062609"/>
+    <Design DesignEntry="EDIF" Synthesis="synplify" DeviceFamily="ECP5U" DesignName="cs20_top"/>
+    <Core InsertDataset="0" Insert="1" Reveal_sig="110824162" Name="cs20_top_LA0" ID="0">
+        <Setting>
+            <Clock SampleClk="clk125" SampleEnable="0" EnableClk="" EnableClk_Pri="0"/>
+            <TraceBuffer Implementation="0" BitTimeStamp="0" hasTimeStamp="0" IncTrigSig="0" BufferDepth="4096"/>
+            <Capture Mode="0" MinSamplesPerTrig="16"/>
+            <Event CntEnable="0" MaxEventCnt="8"/>
+            <TrigOut Polarity="0" MinPulseWidth="0" TrigOutNetType="1" EnableTrigOut="0" TrigOutNet="reveal_debug_cs20_top_LA0_net"/>
+            <DistRAM Disable="0"/>
+        </Setting>
+        <Dataset Name="Base">
+            <Trace>
+                <Sig Type="SIG" Name="udp_cmd_rx_byte_vld"/>
+                <Sig Type="SIG" Name="udp_cmd_rx_last_byte"/>
+                <Sig Type="SIG" Name="udp_cmd_rx_byte_parity"/>
+                <Bus Name="udp_cmd_rx_byte">
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[0]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[1]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[2]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[3]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[4]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[5]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[6]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte[7]"/>
+                </Bus>
+                <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_error"/>
+                <Bus Name="udp_cmd_rx_byte_parity_errors">
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[0]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[1]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[2]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[3]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[4]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[5]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[6]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[7]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[8]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[9]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[10]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[11]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[12]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[13]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[14]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[15]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[16]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[17]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[18]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[19]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[20]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[21]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[22]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[23]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[24]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[25]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[26]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[27]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[28]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[29]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[30]"/>
+                    <Sig Type="SIG" Name="udp_cmd_rx_byte_parity_errors[31]"/>
+                </Bus>
+                <Sig Type="SIG" Name="eth_fpga_clk125_srst_3"/>
+                <Sig Type="SIG" Name="eth_fifo/eth_fifo_afull"/>
+                <Sig Type="SIG" Name="eth_fifo/eth_fifo_rden"/>
+                <Bus Name="eth_fifo_rdata">
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[0]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[1]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[2]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[3]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[4]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[5]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[6]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[7]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[8]"/>
+                    <Sig Type="SIG" Name="eth_fifo/fifo_rdata_buf[9]"/>
+                </Bus>
+                <Sig Type="SIG" Name="eth_fifo/fifo_rdata_vld"/>
+            </Trace>
+            <Trigger>
+                <TU Serialbits="0" Type="0" ID="1" Sig="udp_cmd_rx_byte_vld,"/>
+                <TU Serialbits="0" Type="0" ID="2" Sig="udp_cmd_rx_byte_parity_error,"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="1" Resource="0"/>
+                <TE MaxSequence="2" MaxEvnCnt="1" ID="2" Resource="0"/>
+            </Trigger>
+        </Dataset>
+    </Core>
+</Project>

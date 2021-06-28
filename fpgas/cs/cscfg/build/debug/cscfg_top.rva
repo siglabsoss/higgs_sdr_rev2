@@ -1,0 +1,115 @@
+<!DOCTYPE ispTLA>
+<ispTLA>
+ <CreationDate>Mon Nov 13 17:18:46 2017</CreationDate>
+ <XCFFileName>cscfg_top.xcf</XCFFileName>
+ <CableSetting>
+  <IsTRSTConnected val="false"/>
+  <TRSTSetting val="0"/>
+  <IsBSCANConnected val="false"/>
+  <BSCANSetting val="0"/>
+  <CableType val="USB2"/>
+  <PortAddress val="0"/>
+  <PortSetting val="0"/>
+  <TCKDelay val="10"/>
+ </CableSetting>
+ <DeviceCount>17</DeviceCount>
+ <Device>
+  <DeviceIndex>0</DeviceIndex>
+  <DeviceName>1. LFE5U-85F</DeviceName>
+  <DeviceID>0x41113043</DeviceID>
+  <HasIspTRACY>true</HasIspTRACY>
+  <HasJTAG2WB>false</HasJTAG2WB>
+  <SERDES/>
+  <IRBypassLen>8</IRBypassLen>
+  <RVLFileName>cscfg_top.rvl</RVLFileName>
+  <RVSFileName>cscfg_top.rvs</RVSFileName>
+  <LACoreCount>1</LACoreCount>
+  <WinUI CoreIndex="0">
+   <TraceSigTreeData>
+    <TraceSignal IsHidden="false" Name="GRAV_MIB_COUNTER_LOCK_c" NodeType="0" PortIndex="0"/>
+    <TraceSignal IsHidden="false" Name="GRAV_MIB_MASTER_RESET_c" NodeType="0" PortIndex="1"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.ack" NodeType="0" PortIndex="2"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.byte_addr[2]" NodeType="0" PortIndex="3"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rd_wr_n" NodeType="0" PortIndex="4"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.sel" NodeType="0" PortIndex="5"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib_rdata" NodeType="1" PortIndex="6">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[0]" NodeType="2" PortIndex="6"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[1]" NodeType="2" PortIndex="7"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[2]" NodeType="2" PortIndex="8"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[3]" NodeType="2" PortIndex="9"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[4]" NodeType="2" PortIndex="10"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[5]" NodeType="2" PortIndex="11"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[6]" NodeType="2" PortIndex="12"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[7]" NodeType="2" PortIndex="13"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[8]" NodeType="2" PortIndex="14"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[9]" NodeType="2" PortIndex="15"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[10]" NodeType="2" PortIndex="16"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[11]" NodeType="2" PortIndex="17"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[12]" NodeType="2" PortIndex="18"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[13]" NodeType="2" PortIndex="19"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[14]" NodeType="2" PortIndex="20"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[15]" NodeType="2" PortIndex="21"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[16]" NodeType="2" PortIndex="22"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[17]" NodeType="2" PortIndex="23"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[18]" NodeType="2" PortIndex="24"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[19]" NodeType="2" PortIndex="25"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[20]" NodeType="2" PortIndex="26"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[21]" NodeType="2" PortIndex="27"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[22]" NodeType="2" PortIndex="28"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[23]" NodeType="2" PortIndex="29"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[24]" NodeType="2" PortIndex="30"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[25]" NodeType="2" PortIndex="31"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[26]" NodeType="2" PortIndex="32"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[27]" NodeType="2" PortIndex="33"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[28]" NodeType="2" PortIndex="34"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[29]" NodeType="2" PortIndex="35"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[30]" NodeType="2" PortIndex="36"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.rdata[31]" NodeType="2" PortIndex="37"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib_wdata" NodeType="1" PortIndex="38">
+     <BusRadix Radix="0"/>
+     <IsExpanded Expand="false"/>
+    </TraceSignal>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[0]" NodeType="2" PortIndex="38"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[1]" NodeType="2" PortIndex="39"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[2]" NodeType="2" PortIndex="40"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[3]" NodeType="2" PortIndex="41"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[4]" NodeType="2" PortIndex="42"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[5]" NodeType="2" PortIndex="43"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[6]" NodeType="2" PortIndex="44"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[7]" NodeType="2" PortIndex="45"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[8]" NodeType="2" PortIndex="46"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[9]" NodeType="2" PortIndex="47"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[10]" NodeType="2" PortIndex="48"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[11]" NodeType="2" PortIndex="49"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[12]" NodeType="2" PortIndex="50"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[13]" NodeType="2" PortIndex="51"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[14]" NodeType="2" PortIndex="52"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[15]" NodeType="2" PortIndex="53"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[16]" NodeType="2" PortIndex="54"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[17]" NodeType="2" PortIndex="55"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[18]" NodeType="2" PortIndex="56"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[19]" NodeType="2" PortIndex="57"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[20]" NodeType="2" PortIndex="58"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[21]" NodeType="2" PortIndex="59"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[22]" NodeType="2" PortIndex="60"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[23]" NodeType="2" PortIndex="61"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[24]" NodeType="2" PortIndex="62"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[25]" NodeType="2" PortIndex="63"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[26]" NodeType="2" PortIndex="64"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[27]" NodeType="2" PortIndex="65"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[28]" NodeType="2" PortIndex="66"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[29]" NodeType="2" PortIndex="67"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[30]" NodeType="2" PortIndex="68"/>
+    <TraceSignal IsHidden="false" Name="cmd_mib.wdata[31]" NodeType="2" PortIndex="69"/>
+   </TraceSigTreeData>
+   <TriggerUI UserSelect="0" PreSelectType="0" PreSelect="1" UserSelectPos="0"/>
+   <CoreRun Run="true"/>
+   <CoreWndUIData>
+    <ClockFrequency Unit="ns" Frequency="-1.0"/>
+   </CoreWndUIData>
+  </WinUI>
+ </Device>
+</ispTLA>

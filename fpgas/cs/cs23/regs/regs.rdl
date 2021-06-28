@@ -1,0 +1,55 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the this FPGA.
+Used in conjunction with Juniper Network's ORDT tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA in this Copper Suicide array this is by providing the Row and Column as two hex nibbles.";
+            
+            field {
+                name="UID";
+                desc="The Row and Column of this FPGA in the Copper Suicide array.";
+                hw=w; sw=r;
+                reset = 8'b00000000;
+            } uid[7:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } scratch[31:0];
+        } sw_scratch;
+        
+        reg {
+            name="Rx Sample UDP Byte Parity Errors";
+            desc="Contains the number of Rx sample UDP byte parity errors encountered since the last reset.";
+            
+            field {
+                hw=na; sw=r;
+                counter;
+                reset=32'd0;
+            } cnt[31:0];
+        } rx_sample_udp_byte_perrs;
+
+    } rf0 @0x00000;
+    
+} REGS;

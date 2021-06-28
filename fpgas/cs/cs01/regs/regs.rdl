@@ -1,0 +1,188 @@
+/*
+
+This file provides the SystemRDL descriptions for all registers used by the this FPGA.
+Used in conjunction with Juniper Network's ORDT tool it provides a central location for registers
+definitions and addresses that can be used to generate systemverilog for synthesis and documentation
+for software.
+
+Under the current command bus address break down each register file corresponds to a module select index
+in the address space.  The registers within the register file are located at dword byte address boundaries
+starting at the register file's base address.
+
+The register files are all named rf# where # corresponds to the module select index in the command bus address space.
+
+*/
+
+addrmap {
+
+    regfile {
+    
+        reg { 
+            name="FPGA UID";
+            desc="IDs which FPGA in this Copper Suicide array this is by providing the Row and Column as two hex nibbles.";
+            
+            field {
+                name="UID";
+                desc="The Row and Column of this FPGA in the Copper Suicide array.";
+                hw=w; sw=r;
+                reset = 8'b00000000;
+            } uid[7:0];
+        } fpga_uid; 
+        
+        reg {
+            name="Scratch";
+            desc="Scratch register to allow software to test UDP RD/WR commands.";
+            
+            field {
+                hw=na; sw=rw;
+                reset = 32'd0;
+            } dword[31:0];
+        } sw_scratch;
+        
+        reg {
+            name="ADC In System Parity Error Counter";
+            desc="Contains the number of UDP command byte parity errors encountered since the last reset.";
+            
+            field {
+                hw=na; sw=r; counter;
+                reset=32'd0;
+            } dword[31:0];
+        } sys_bit_perrs; 
+
+    } rf0 @0x00000;
+    
+    regfile {
+
+        name="APC & ARGMAX";
+        desc="Allows software to get status info and meta data out of APC and ARGMAX modules";
+
+        reg {
+            field {
+                name="APC Valid";
+                desc="When 1, indicates that the values in apc_re_lsw, apc_re_msw, apc_im_lsw, apc_im_msw, apc_pow_lsw, 
+                      apc_pow_msw, apc_mag_lsw, and apc_mag_msw Registers are valid.  Clears on software read.";
+                hw=na; sw=r;
+                reset=1'b0;
+                hwset;
+                rclr;
+            } apc_vld [0:0];
+        } apc_vld;
+        
+        reg {
+            field {
+                name="APC Real LSW";
+                desc="Least Significant 32-bits of APC Auto-Correlation Real output";
+                hw=w; sw=r;
+            } apc_re_lsw [31:0];
+        } apc_re_lsw;
+
+        reg {
+            field {
+                name="APC Real MSW";
+                desc="Most Significant 32-bits of APC Auto-Correlation Real output";
+                hw=w; sw=r;
+            } apc_re_msw [31:0];
+        } apc_re_msw;
+
+        reg {
+            field {
+                name="APC Imaginary LSW";
+                desc="Least Significant 32-bits of APC Auto-Correlation Imaginary output";
+                hw=w; sw=r;
+            } apc_im_lsw [31:0];
+        } apc_im_lsw;
+
+        reg {
+            field {
+                name="APC Imaginary MSW";
+                desc="Most Significant 32-bits of APC Auto-Correlation Imaginary output";
+                hw=w; sw=r;
+            } apc_im_msw [31:0];
+        } apc_im_msw;
+
+        reg {
+            field {
+                name="APC Power LSW";
+                desc="Least Significant 32-bits of APC Auto-Correlation Power output";
+                hw=w; sw=r;
+            } accor_pow_lsw [31:0];
+        } apc_pow_lsw;
+
+        reg {
+            field {
+                name="APC Power MSW";
+                desc="Most Significant 32-bits of APC Auto-Correlation Power output";
+                hw=w; sw=r;
+            } apc_pow_msw [31:0];
+        } apc_pow_msw;
+
+        reg {
+            field {
+                name="APC Mag Square LSW";
+                desc="Least Significant 32-bits of APC Magnitude (Real^2 + Imag^2)";
+                hw=w; sw=r;
+            } apc_mag_lsw [31:0];
+        } apc_mag_lsw;
+
+        reg {
+            field {
+                name="APC Mag Square MSW";
+                desc="Most Significant 32-bits of APC Magnitude (Real^2 + Imag^2)";
+                hw=w; sw=r;
+            } apc_mag_msw [31:0];
+        } apc_mag_msw;
+        
+        reg {
+            field {
+                name="ARGMAX Valid";
+                desc="When 1, indicates that the values in argmax_idx, argmax_meta_lsw, and argmax_meta_msw Registers are valid.  Clears on software read.";
+                hw=na; sw=r;
+                reset=1'b0;
+                hwset;
+                rclr;
+            } argmax_vld [0:0];
+        } argmax_vld;
+        
+        reg {
+            field {
+                name="ARGMAX Index";
+                desc="Most recent ARGMAX index output.  Valid only when argmax_vld Register bit 0 is 1";
+                hw=w; sw=r;
+            } argmax_idx [24:0];
+        } argmax_idx;
+
+        reg {
+            field {
+                name="ARGMAX Real Metadata LSW";
+                desc="Most recent ARGMAX Real Meta output Least Significant Word.  Valid only when argmax_vld Register bit 0 is 1";
+                hw=w; sw=r;
+            } argmax_meta_re_lsw [31:0];
+        } argmax_meta_re_lsw;
+
+        reg {
+            field {
+                name="ARGMAX Real Metadata MSW";
+                desc="Most recent ARGMAX Real Meta output Most Significant Word.  Valid only when argmax_vld Register bit 0 is 1";
+                hw=w; sw=r;
+            } argmax_meta_re_msw [31:0];
+        } argmax_meta_re_msw;
+
+        reg {
+            field {
+                name="ARGMAX Imaginary Metadata LSW";
+                desc="Most recent ARGMAX Imaginary Meta output Least Significant Word.  Valid only when argmax_vld Register bit 0 is 1";
+                hw=w; sw=r;
+            } argmax_meta_im_lsw [31:0];
+        } argmax_meta_im_lsw;
+
+        reg {
+            field {
+                name="ARGMAX Imaginary Metadata MSW";
+                desc="Most recent ARGMAX Imaginary Meta output Most Significant Word.  Valid only when argmax_vld Register bit 0 is 1";
+                hw=w; sw=r;
+            } argmax_meta_im_msw [31:0];
+        } argmax_meta_im_msw;
+    
+    } rf1 @0x10000;
+    
+} REGS;
