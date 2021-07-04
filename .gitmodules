@@ -19,3 +19,6 @@
 [submodule "libs/riscv-baseband"]
 	path = libs/riscv-baseband
 	url = git@github.com:siglabsoss/riscv-baseband.git
+[submodule "libs/s-modem"]
+	path = libs/s-modem
+	url = git@github.com:siglabsoss/s-modem.git
