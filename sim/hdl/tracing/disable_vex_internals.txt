@@ -1,0 +1,6 @@
+`verilator_config
+tracing_off -file "../../../libs/riscv-baseband/hdl/generated/XbbRiscv.v" -lines 0 - 1910
+tracing_off -file "../../../libs/riscv-baseband/hdl/generated/XbbRiscv.v" -lines 1930 - 2445
+tracing_off -file "../../../libs/riscv-baseband/hdl/generated/XbbRiscv.v" -lines 2447 - 7492
+tracing_off -file "../../../libs/riscv-baseband/hdl/generated/XbbRiscv.v" -lines 7603 - 8204
+`verilog

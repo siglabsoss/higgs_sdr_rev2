@@ -1,0 +1,6 @@
+`verilator_config
+tracing_off -file "../../../fpgas/grav/eth/hdl/eth_mega_wrapper.sv"
+tracing_off -file "../../../fpgas/grav/eth/hdl/eth_rx_wrapper.sv"
+tracing_off -file "../../../fpgas/grav/eth/hdl/mac_cfg.sv"
+tracing_off -file "../../../libs/ip-library/lattice_support/gbit_mac/*"
+`verilog

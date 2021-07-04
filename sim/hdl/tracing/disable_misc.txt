@@ -1,0 +1,7 @@
+`verilator_config
+tracing_off -file "../../../fpgas/common/modules/cmd_cdc.sv"
+tracing_off -file "../../../fpgas/common/modules/core_top.sv"
+tracing_off -file "../../../fpgas/grav/cfg/hdl/cfg_top.sv"
+tracing_off -file "../../../libs/ip-library/interfaces/cmd_interface/*"
+tracing_off -file "../../../libs/ip-library/mib_bus/*"
+`verilog
