@@ -1,0 +1,48 @@
+# Purpose
+
+Test how early an fpga can send a ring back to the testbench.  This was done to help verify partial_mampmov is working
+
+
+# Old Results
+
+With existing mapmov code, we drop the "first" 14 ring (note that 14 are overwritten, while the 0th is kept)
+
+0xde000000
+0xde000015
+0xde000016
+0xde000017
+0xde000018
+0xde000019
+
+# New Results
+
+0xde000000
+0xde000001
+0xde000002
+0xde000003
+0xde000004
+0xde000005
+0xde000006
+0xde000007
+0xde000008
+0xde000009
+0xde00000a
+0xde00000b
+0xde00000c
+0xde00000d
+0xde00000e
+0xde00000f
+0xde000010
+0xde000011
+0xde000013
+0xde000014
+0xde000015
+0xde000017
+0xde000018
+0xde000019
+0xde00001b
+0xde00001c
+0xde00001d
+0xde00001e
+0xde00001f
+0xde000020
