@@ -1,0 +1,239 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Mon Sep  3 08:32:15 2018
+[*]
+[dumpfile] "/home/x/insidework/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_feedback_bus/wave_dump.vcd"
+[dumpfile_mtime] "Mon Sep  3 08:30:40 2018"
+[dumpfile_size] 396802825
+[savefile] "/home/x/insidework/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_feedback_bus/dma_out.gtkw"
+[timestart] 1
+[size] 2560 1416
+[pos] -1 -1
+*-12.563634 16310 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.tb_higgs_top.
+[treeopen] TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.dma_out_0.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs20_top.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.
+[sst_width] 437
+[signals_width] 495
+[sst_expanded] 1
+[sst_vpaned_height] 958
+@28
+TOP.clk
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.reset
+TOP.tb_higgs_top.eth_top.cs20_srst
+@200
+---- Port 30000 ---
+@22
+TOP.tx_turnstile_data_in[31:0]
+@28
+TOP.tx_turnstile_data_valid
+@200
+---- Port 20000 ---
+@22
+TOP.ringbus_in_data[31:0]
+@28
+TOP.ringbus_in_data_vld
+@200
+---- Port 10000 ---
+@22
+TOP.ringbus_out_data[31:0]
+@28
+TOP.ringbus_out_data_vld
+@200
+---- Eth: FPGA ---
+---- Eth: PC ---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.VexRiscv.VexRiscv.system_cpu.writeBack_PC[31:0]
+@200
+---- Eth: REGS ---
+---- ETH: DMA in---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.i0_addr[31:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.t0_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.t0_ready
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.t0_valid
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.strobe_complete
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_0_interrupt
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_0_interrupt_clear
+@200
+---- ETH: DMA out---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.i0_addr[31:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.t0_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.t0_ready
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.t0_valid
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_1_interrupt
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_1_interrupt_clear
+@200
+---- CS20: PC---
+---- CS10: PC---
+@22
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.xbaseband_cmd_payload_instruction[31:0]
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.xbaseband_cmd_payload_rs1[31:0]
+@28
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.xbaseband_cmd_ready
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.xbaseband_cmd_valid
+@200
+---- CS30 OUT ---
+@28
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.i0_valid
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.i0_ready
+@22
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.i0_data[31:0]
+@200
+---- CS30 IN ---
+@28
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.t0_valid
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.t0_ready
+@22
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.t0_data[31:0]
+@200
+---- CS20 IN ---
+@28
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.t0_valid
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.t0_ready
+@22
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.t0_data[31:0]
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.gpio[21:0]
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(4)[31:0]
+@24
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.DmaCsrPlugin_configFifo.io_occupancy[2:0]
+@22
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.execute_PC[31:0]
+@200
+---- CS20 OUT ---
+@22
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.i0_ready
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.i0_valid
+@23
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(4)[31:0]
+@200
+---- CS10 IN ---
+@28
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.t0_valid
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.t0_ready
+@22
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.t0_data[31:0]
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.gpio[21:0]
+@200
+---- CS10 OUT ---
+@28
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.i0_valid
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.i0_ready
+@22
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.i0_data[31:0]
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(4)[31:0]
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.execute_PC[31:0]
+@200
+---- ADC OUT ---
+@22
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.t0_data[31:0]
+@28
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.t0_ready
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.t0_valid
+@200
+---- CS00 OUT ---
+@22
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.i0_ready
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.i0_valid
+@22
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.gpio[21:0]
+@200
+---- CS01 OUT ---
+@22
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.i0_valid
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.i0_ready
+@200
+---- CS11 OUT ---
+@22
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.i0_valid
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.i0_ready
+@200
+---- CS21 OUT ---
+@22
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.i0_valid
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.i0_ready
+@200
+---- CS31 OUT ---
+@22
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.i0_valid
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.i0_ready
+@200
+---- CS30 OUT ---
+@22
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.i0_valid
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.i0_ready
+@200
+---- Rings ---
+---- Rings Eth ---
+@28
+TOP.tb_higgs_top.eth_top.q_engine_inst.ring_bus_inst.o_done_wr
+TOP.tb_higgs_top.eth_top.i_ringbus
+TOP.tb_higgs_top.eth_top.o_ringbus
+@200
+---- Rings 20 ---
+@28
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 10 ---
+@28
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 00 ---
+@28
+>1
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.o_ringbus
+@200
+>0
+---- Rings 01 ---
+@28
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 11 ---
+@28
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 21 ---
+@28
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 31 ---
+@28
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 30 ---
+@28
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.o_ringbus
+[pattern_trace] 1
+[pattern_trace] 0
