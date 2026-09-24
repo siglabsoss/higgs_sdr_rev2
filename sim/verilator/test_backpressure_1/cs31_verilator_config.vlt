@@ -1,0 +1,21 @@
+`verilator_config
+tracing_off -file "../../../fpgas/grav/cfg/hdl/cfg_top.sv"
+tracing_off -file "../../../fpgas/grav/eth/hdl/eth_mega_wrapper.sv"
+tracing_off -file "../../../fpgas/grav/eth/hdl/eth_rx_wrapper.sv"
+tracing_off -file "../../../fpgas/grav/eth/hdl/mac_cfg.sv"
+tracing_off -file "../../../fpgas/common/modules/core_top.sv"
+tracing_off -file "../../../fpgas/common/modules/mapper_mover/*.sv"
+tracing_off -file "../../../fpgas/common/modules/cmd_cdc.sv"
+tracing_off -file "../../../fpgas/common/modules/demapper/demapper.sv"
+tracing_off -file "../../../libs/q-engine/piston/*"
+tracing_off -file "../../../libs/q-engine/hdl/nco/*.v"
+tracing_off -file "../../../libs/q-engine/hdl/slicer.v"
+tracing_off -file "../../../libs/q-engine/hdl/scalar_memory.v"
+tracing_off -file "../../../libs/datapath/rtl/muladdsub.v"
+tracing_off -file "../../../libs/ip-library/interfaces/cmd_interface/*"
+tracing_off -file "../../../libs/ip-library/lattice_support/gbit_mac/*"
+tracing_off -file "../../../libs/ip-library/mib_bus/*"
+tracing_off -file "../../../libs/riscv-baseband/hdl/generated/XbbRiscv.v" -lines 0 - 2445
+tracing_off -file "../../../libs/riscv-baseband/hdl/generated/XbbRiscv.v" -lines 2447 - 7492
+tracing_off -file "../../../libs/riscv-baseband/hdl/generated/XbbRiscv.v" -lines 7603 - 8204
+`verilog

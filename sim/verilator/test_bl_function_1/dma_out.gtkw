@@ -1,0 +1,185 @@
+[*]
+[*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
+[*] Sun Oct 13 10:24:47 2019
+[*]
+[dumpfile] "/mnt/overflow/work/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_bl_function_1/wave_dump.vcd"
+[dumpfile_mtime] "Sun Oct 13 04:58:16 2019"
+[dumpfile_size] 112464476
+[savefile] "/mnt/overflow/work/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_bl_function_1/dma_out.gtkw"
+[timestart] 1041
+[size] 2560 1350
+[pos] -1 -1
+*-7.589468 1937 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.tb_higgs_top.
+[treeopen] TOP.tb_higgs_top.cfg_top.
+[treeopen] TOP.tb_higgs_top.eth_top.
+[treeopen] TOP.tb_higgs_top.eth_top.core_top.
+[treeopen] TOP.tb_higgs_top.eth_top.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.
+[treeopen] TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.
+[treeopen] TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode28.mem_slice_0.
+[treeopen] TOP.tb_higgs_top.eth_top.q_engine_inst.VexRiscv.
+[treeopen] TOP.tb_higgs_top.eth_top.q_engine_inst.VexRiscv.VexRiscv.
+[sst_width] 289
+[signals_width] 368
+[sst_expanded] 1
+[sst_vpaned_height] 877
+@28
+TOP.clk
+TOP.tb_higgs_top.eth_top.cs20_srst
+@200
+---- Port 30000 ---
+@22
+TOP.tx_turnstile_data_in[31:0]
+@28
+TOP.tx_turnstile_data_valid
+@200
+---- Port 20000 ---
+@22
+TOP.ringbus_in_data[31:0]
+@28
+TOP.ringbus_in_data_vld
+@200
+---- Port 10000 ---
+@22
+TOP.ringbus_out_data[31:0]
+@28
+TOP.ringbus_out_data_vld
+@200
+---- Eth: FPGA ---
+---- Eth: PC ---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.VexRiscv.VexRiscv.system_cpu.writeBack_PC[31:0]
+@200
+---- Eth: REGS ---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(4)[31:0]
+@200
+---- ETH: DMA in---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.i0_addr[31:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.t0_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.t0_ready
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.t0_valid
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_in_0.strobe_complete
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_0_interrupt
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_0_interrupt_clear
+@200
+---- ETH: DMA out---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.i0_addr[31:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.t0_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.t0_ready
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_out_0.t0_valid
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_1_interrupt
+TOP.tb_higgs_top.eth_top.q_engine_inst.dma_1_interrupt_clear
+@200
+---- CS20 IN ---
+---- Rings ---
+---- Rings Eth ---
+@28
+TOP.tb_higgs_top.eth_top.q_engine_inst.ring_bus_inst.o_done_wr
+TOP.tb_higgs_top.eth_top.i_ringbus
+TOP.tb_higgs_top.eth_top.o_ringbus
+@200
+---- Ring CS11 ---
+---- Slice 0 ---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(0)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(1)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(2)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(3)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(4)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(5)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(6)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(7)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(8)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(9)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(10)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(11)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(12)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(13)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(14)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_0.vreg(15)[15:0]
+@200
+---- Slice 1 ---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(0)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(1)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(2)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(3)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(4)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(5)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(6)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(7)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(8)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(9)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(10)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(11)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(12)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(13)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(14)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_1.vreg(15)[15:0]
+@200
+---- Slice 2 ---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(0)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(1)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(2)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(3)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(4)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(5)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(6)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(7)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(8)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(9)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(10)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(11)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(12)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(13)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(14)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_2.vreg(15)[15:0]
+@200
+---- Slice 14 ---
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(0)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(1)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(2)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(3)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(4)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(5)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(6)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(7)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(8)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(9)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(10)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(11)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(12)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(13)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(14)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_14.vreg(15)[15:0]
+@200
+---- Slice 15 ---
+@23
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(0)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(1)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(2)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(3)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(4)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(5)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(6)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(7)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(8)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(9)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(10)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(11)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(12)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(13)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(14)[15:0]
+TOP.tb_higgs_top.eth_top.q_engine_inst.piston_inst.unode26.vector_slice_15.vreg(15)[15:0]
+[pattern_trace] 1
+[pattern_trace] 0
