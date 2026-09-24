@@ -22,3 +22,6 @@
 [submodule "libs/s-modem"]
 	path = libs/s-modem
 	url = git@github.com:siglabsoss/s-modem.git
+[submodule "libs/higgs-dashboard"]
+	path = libs/higgs-dashboard
+	url = git@github.com:siglabsoss/higgs-dashboard.git
