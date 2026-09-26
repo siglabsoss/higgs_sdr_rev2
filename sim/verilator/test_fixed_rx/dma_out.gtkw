@@ -1,0 +1,122 @@
+[*]
+[*] GTKWave Analyzer v3.3.79 (w)1999-2017 BSI
+[*] Tue May  8 02:01:17 2018
+[*]
+[dumpfile] "/home/daniel/FPGA/higgs_sdr_rev2/sim/verilator/test_fixed_rx/wave_dump.vcd"
+[dumpfile_mtime] "Tue May  8 01:29:46 2018"
+[dumpfile_size] 710410815
+[savefile] "/home/daniel/FPGA/higgs_sdr_rev2/sim/verilator/test_fixed_rx/dma_out.gtkw"
+[timestart] 1
+[size] 2560 1411
+[pos] 2559 -789
+*-14.616094 30300 30300 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.tb_higgs_top.
+[treeopen] TOP.tb_higgs_top.cs00_top.
+[treeopen] TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.q_engine_inst.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.
+[treeopen] TOP.tb_higgs_top.cs01_top.
+[treeopen] TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.q_engine_inst.dma_out_0.
+[sst_width] 437
+[signals_width] 495
+[sst_expanded] 1
+[sst_vpaned_height] 562
+@200
+---- CLK ---
+@28
+TOP.clk
+@200
+---- CS20 OUT ---
+@22
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.i0_ready
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.i0_valid
+@200
+---- CS10 OUT ---
+@22
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.i0_ready
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.i0_valid
+@200
+---- CS00 IN ---
+@22
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.t0_data[31:0]
+@28
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.t0_ready
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.t0_valid
+@200
+---- CS00 OUT ---
+@22
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.i0_ready
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.i0_valid
+@200
+---- CS01 IN ---
+@28
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.t0_valid
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.t0_ready
+@22
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.t0_data[31:0]
+@200
+---- CS01 OUT ---
+@22
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.i0_data[31:0]
+@28
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.i0_ready
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.i0_valid
+@200
+---- Rings 20 ---
+@28
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 10 ---
+@28
+TOP.tb_higgs_top.cs10_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 00 ---
+@28
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 01 ---
+@28
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 11 ---
+@28
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 21 ---
+@28
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 31 ---
+@28
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.o_ringbus
+@200
+---- Rings 30 ---
+@28
+TOP.tb_higgs_top.cs30_top.vex_machine_top_inst.o_ringbus
+@200
+---- CS00 CS01 --- X3 X4 ---
+@22
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@23
+TOP.tb_higgs_top.cs00_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(4)[31:0]
+@22
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@23
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(4)[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

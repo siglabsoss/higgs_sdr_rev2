@@ -1,0 +1,340 @@
+[*]
+[*] GTKWave Analyzer v3.3.98 (w)1999-2019 BSI
+[*] Thu May  9 04:26:13 2019
+[*]
+[dumpfile] "/home/zcfang/higgs_sdr_rev2/sim/verilator/test_grav3_verilator/wave_dump.vcd"
+[dumpfile_mtime] "Thu May  9 04:26:13 2019"
+[dumpfile_size] 815201065
+[savefile] "/home/zcfang/higgs_sdr_rev2/sim/verilator/test_grav3_verilator/dma_out.gtkw"
+[timestart] 1
+[size] 2560 1322
+[pos] -1 -1
+*-15.178970 57600 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.tb_higgs_top.
+[treeopen] TOP.tb_higgs_top.cs01_top.
+[treeopen] TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs02_top.
+[treeopen] TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs12_top.
+[treeopen] TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs20_top.
+[treeopen] TOP.tb_higgs_top.cs20_top.core_top.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.out_buffer.le_fifo_sc.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.
+[treeopen] TOP.tb_higgs_top.cs21_top.
+[treeopen] TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs22_top.
+[treeopen] TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs31_top.
+[treeopen] TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.cs32_top.
+[treeopen] TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.
+[treeopen] TOP.tb_higgs_top.eth_top.
+[treeopen] TOP.tb_higgs_top.eth_top.q_engine_inst.
+[sst_width] 437
+[signals_width] 495
+[sst_expanded] 1
+[sst_vpaned_height] 495
+@28
+TOP.clk
+@200
+- RX CS31
+@22
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@28
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs31_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+- RX CS32
+@22
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@28
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs32_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+- RX CS22
+@22
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@28
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs22_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+- RX CS21
+@22
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@28
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs21_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+- RX CS20
+@22
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@200
+-CS20 Ringbus
+@28
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs20_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+- TX CS11
+@22
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@200
+-CS11 Ringbus
+@28
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+-CS11 I/O DMA
+@22
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_in_data[31:0]
+@28
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_in_err
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_in_last
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_in_ready
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_in_valid
+@22
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_out_data[31:0]
+@28
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_out_err
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_out_last
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_out_ready
+TOP.tb_higgs_top.cs11_top.vex_machine_top_inst.riscv_out_valid
+@200
+-TX CS12
+@22
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@200
+-CS12 Ringbus
+@28
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+-CS12 I/O DMA
+@22
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_in_data[31:0]
+@28
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_in_err
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_in_last
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_in_ready
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_in_valid
+@22
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_out_data[31:0]
+@28
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_out_err
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_out_last
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_out_ready
+TOP.tb_higgs_top.cs12_top.vex_machine_top_inst.riscv_out_valid
+@200
+- TX CS02
+@22
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@200
+-CS02 Ringbus
+@28
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+-CS02 I/O DMA
+@22
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_in_data[31:0]
+@28
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_in_err
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_in_last
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_in_ready
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_in_valid
+@22
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_out_data[31:0]
+@28
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_out_err
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_out_last
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_out_ready
+TOP.tb_higgs_top.cs02_top.vex_machine_top_inst.riscv_out_valid
+@200
+- TX CS01
+@22
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.VexRiscv.VexRiscv.system_cpu.RegFilePlugin_regFile(3)[31:0]
+@200
+-CS01 Ringbus
+@28
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.i_ringbus
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.o_ringbus
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_buf_empty
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_interrupt_clear
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_rd_of
+@22
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_read_data[31:0]
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_addr[31:0]
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_data[31:0]
+@28
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_done
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_en
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.q_engine_inst.ringbus_0_write_ready
+@200
+-CS01 I/O DMA
+@23
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_in_data[31:0]
+@29
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_in_err
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_in_last
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_in_ready
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_in_valid
+@23
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_out_data[31:0]
+@29
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_out_err
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_out_last
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_out_ready
+TOP.tb_higgs_top.cs01_top.vex_machine_top_inst.riscv_out_valid
+@200
+- ETH
+@22
+TOP.tb_higgs_top.eth_top.ringbus_in_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.ringbus_in_data_ready
+TOP.tb_higgs_top.eth_top.ringbus_in_data_vld
+@22
+TOP.tb_higgs_top.eth_top.ringbus_out_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.i_ringbus
+TOP.tb_higgs_top.eth_top.o_ringbus
+@22
+TOP.tb_higgs_top.eth_top.riscv_in_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.riscv_in_ready
+TOP.tb_higgs_top.eth_top.riscv_in_valid
+@22
+TOP.tb_higgs_top.eth_top.riscv_out_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.riscv_out_ready
+TOP.tb_higgs_top.eth_top.riscv_out_valid
+@200
+-ETH Ringbus 2
+@22
+TOP.tb_higgs_top.eth_top.q_engine_inst.ring_bus_inst_2.o_rd_data[31:0]
+@28
+TOP.tb_higgs_top.eth_top.q_engine_inst.ring_bus_inst_2.o_serial_bus
+TOP.tb_higgs_top.eth_top.q_engine_inst.ring_bus_inst_2.i_serial_bus
+@200
+-UDP
+@22
+TOP.tb_higgs_top.tx_turnstile_data_in[31:0]
+@28
+TOP.tb_higgs_top.tx_turnstile_data_last
+TOP.tb_higgs_top.tx_turnstile_data_ready
+TOP.tb_higgs_top.tx_turnstile_data_valid
+@22
+TOP.tb_higgs_top.ringbus_in_data[31:0]
+@28
+TOP.tb_higgs_top.ringbus_in_data_ready
+TOP.tb_higgs_top.ringbus_in_data_vld
+@22
+TOP.tb_higgs_top.ringbus_out_data[31:0]
+@28
+TOP.tb_higgs_top.ringbus_out_data_vld
+[pattern_trace] 1
+[pattern_trace] 0

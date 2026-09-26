@@ -1,0 +1,133 @@
+#ifndef __DO_FORWARD_STREAM_H__
+#define __DO_FORWARD_STREAM_H__
+
+#include "fill.h"
+#include "xbaseband.h"
+#include "apb_bus.h"
+#include "csr_control.h"
+#include "vmem.h"
+#include "dma.h"
+#define OUR_RING_ENUM RING_ENUM_CS01
+
+#include "ringbus2_pre.h"
+#include "ringbus2_post.h"
+#include "ringbus.h"
+
+#define STREAM_CHUNK 1024
+
+#define STREAM_BUFFERS 2
+
+#define EXTRA_WORD_COUNT (16) 
+
+VMEM_SECTION unsigned int extra_words[EXTRA_WORD_COUNT] = {0xdead0f00, 0xdead0001, 0xdead0002, 0xdead0003, 0xdead0004, 0xdead0005, 0xdead0006, 0xdead0007, 0xdead0008, 0xdead0009, 0xdead000a, 0xdead000b, 0xdead000c, 0xdead000d, 0xdead000e, 0xdead000f};
+
+unsigned int counter = 0xdead0f00;
+
+// stream buffer
+VMEM_SECTION unsigned int stream_buffer[STREAM_CHUNK*STREAM_BUFFERS];
+
+unsigned int dma_in_dma_ptr;
+unsigned int dma_in_trig_next = 0;
+unsigned int dma_out_trig_next = 0;
+unsigned int in_expected_occupany = 2;
+unsigned int out_expected_occupany = 2;
+
+// this only works with buffers number = 2
+#define FLIP_BIT(x) ((x)^0x1)
+
+unsigned int dma_idx_to_ptr(unsigned int idx) {
+  return dma_in_dma_ptr + (idx * STREAM_CHUNK);
+}
+
+// convert a dma_ptr to an index
+unsigned int dma_ptr_to_idx(unsigned int ptr) {
+  return (ptr - dma_in_dma_ptr) / STREAM_CHUNK;
+}
+
+void trig_dma_in_next() {
+  dma_block_get(dma_idx_to_ptr(dma_in_trig_next), STREAM_CHUNK);
+
+  dma_in_trig_next = FLIP_BIT(dma_in_trig_next);
+}
+
+void trig_dma_in(unsigned int idx) {
+  dma_block_get(dma_idx_to_ptr(idx), STREAM_CHUNK);
+}
+
+void trig_dma_out(unsigned int idx) {
+  dma_block_send(dma_idx_to_ptr(idx), STREAM_CHUNK);
+
+
+  extra_words[0] = counter;
+  dma_block_send(VMEM_DMA_ADDRESS(extra_words), EXTRA_WORD_COUNT);
+  counter++;
+}
+
+
+void no_exit_stream(void) {
+  unsigned int mover_working_on = 0;
+
+  CSR_WRITE(DMA_0_FLUSH_SCHEDULE, 0);
+  CSR_WRITE(DMA_1_FLUSH_SCHEDULE, 0);
+  CSR_WRITE(DMA_2_FLUSH_SCHEDULE, 0);
+
+  CSR_WRITE(GPIO_WRITE_EN, LED_GPIO_BIT);
+  // CSR_SET_BITS(GPIO_WRITE, LED_GPIO_BIT);
+  CSR_CLEAR_BITS(GPIO_WRITE, LED_GPIO_BIT);
+
+  // ring_block_send_eth(mover_working_on);
+  // mover_working_on = FLIP_BIT(mover_working_on);
+  // ring_block_send_eth(mover_working_on);
+  // mover_working_on = FLIP_BIT(mover_working_on);
+  // ring_block_send_eth(mover_working_on);
+  // mover_working_on = FLIP_BIT(mover_working_on);
+  // ring_block_send_eth(mover_working_on);
+
+  dma_in_dma_ptr = VMEM_DMA_ADDRESS(stream_buffer);
+
+  unsigned int in_occupancy;
+  unsigned int out_occupancy;
+  unsigned int flip;
+
+  trig_dma_in(0);
+  trig_dma_in(1);
+  dma_in_trig_next = 0; // we did 0,1 so next is 0
+
+  Ringbus ringbus;
+
+  unsigned int forwards = 0;
+
+  while(1) {
+
+      CSR_READ(DMA_0_SCHEDULE_OCCUPANCY, in_occupancy);
+      CSR_READ(DMA_1_SCHEDULE_OCCUPANCY, out_occupancy);
+
+      if( in_occupancy != in_expected_occupany ) {
+        // flip = FLIP_BIT(dma_in_trig_next)
+        trig_dma_out(dma_in_trig_next);
+        trig_dma_in(dma_in_trig_next);
+
+        dma_in_trig_next = FLIP_BIT(dma_in_trig_next);
+
+        #ifdef FORWARD_REPORT_CHUNK
+        ring_block_send_eth(forwards);
+        forwards++;
+        #endif
+      }
+
+      SET_REG(x3, out_occupancy);
+
+      check_ring(&ringbus);
+
+  }
+
+}
+
+int main(void)
+{
+    no_exit_stream();
+}
+
+
+
+#endif

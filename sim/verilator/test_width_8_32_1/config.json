@@ -1,0 +1,17 @@
+{
+    "dut_file": "../../../fpgas/common/modules/width_convert/width_8_32.sv",
+    "dut_name": "width_8_32",
+    "waveform_format": "vcd",
+
+    "probe": [ "sig1", "sig2", "sig3"],
+    "sources": [ 
+      		 "cppsrc/main.cpp",
+	"cppsrc/signals.cpp"
+    ],
+    "libraries": [ "/usr/local/share/verilator/include",
+		   "/usr/local/share/verilator/include/vltstd",
+		   "/usr/local/share/verilator/include/gtkwave",
+		   "./obj_dir"
+		   ]
+
+}

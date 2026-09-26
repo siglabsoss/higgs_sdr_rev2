@@ -1,0 +1,41 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Tue Mar  5 01:37:00 2019
+[*]
+[dumpfile] "(null)"
+[savefile] "/mnt/overflow/work/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_eth_rx_wrapper_1/dma_out.gtkw"
+[timestart] 1
+[size] 2560 1416
+[pos] 5055 -1
+*-19.978779 207408 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.eth_rx_wrapper.
+[treeopen] TOP.eth_rx_wrapper.eth_frame_router.
+[treeopen] TOP.eth_rx_wrapper.ipv4_pkt_router.
+[treeopen] TOP.eth_rx_wrapper.udp_pkt_router.
+[treeopen] TOP.eth_rx_wrapper.udp_pkt_router.PORT_FIFOS(2).
+[treeopen] TOP.eth_rx_wrapper.udp_pkt_router.PORT_FIFOS(3).
+[sst_width] 225
+[signals_width] 678
+[sst_expanded] 1
+[sst_vpaned_height] 1021
+@200
+---- INPUTS ---
+---- INTERNALS ---
+---- CBUF ---
+---- ERRORS ---
+@20000
+-
+@200
+---- OUTPUTS ---
+@28
+TOP.o_port_byte_vld[0:3]
+@22
+TOP.o_port_fifo_overflow[3:0]
+TOP.o_port_last_byte[0:3]
+@20000
+-
+-
+-
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,57 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Tue Mar  5 20:51:49 2019
+[*]
+[dumpfile] "/mnt/overflow/work/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_width_8_32_1/logs/vlt_dump.vcd"
+[dumpfile_mtime] "Tue Mar  5 20:37:48 2019"
+[dumpfile_size] 245804
+[savefile] "/mnt/overflow/work/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_width_8_32_1/dma_out.gtkw"
+[timestart] 64
+[size] 2560 1416
+[pos] -1 -1
+*-2.385421 96 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.width_8_32.
+[treeopen] TOP.width_8_32.wrap_buffer.
+[sst_width] 225
+[signals_width] 230
+[sst_expanded] 1
+[sst_vpaned_height] 447
+@28
+TOP.reset
+@200
+---- INPUT ---
+@28
+TOP.t0_valid
+TOP.t0_ready
+@22
+TOP.t0_data[7:0]
+@200
+---- OUTPUT ---
+@28
+TOP.i0_valid
+TOP.i0_ready
+@22
+TOP.i0_data[31:0]
+@200
+---- OTHER ---
+@22
+TOP.fillcount[31:0]
+@28
+TOP.width_8_32.cnt[1:0]
+TOP.width_8_32.wrap_buffer.rdata_vld
+TOP.width_8_32.cnt[1:0]
+@22
+TOP.width_8_32.data[31:0]
+TOP.width_8_32.m_data[31:0]
+@28
+TOP.width_8_32.m_ready
+TOP.width_8_32.m_valid
+TOP.i0_ready
+TOP.width_8_32.clk
+@201
+---- LE FIFO ---
+@28
+TOP.width_8_32.wrap_buffer.le_fifo_sc.re
+[pattern_trace] 1
+[pattern_trace] 0

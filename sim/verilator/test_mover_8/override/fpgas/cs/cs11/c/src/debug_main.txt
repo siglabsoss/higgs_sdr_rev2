@@ -1,0 +1,64 @@
+#include "dma.h"
+#include "vmem.h"
+#include "csr_control.h"
+#include "vmalloc.h"
+#include "circular_buffer.h"
+#include "fill.h"
+#include "ringbus.h"
+#include "coarse_sync.h"
+#include "atan.h"
+#include "xvcordic.h"
+
+#include "flush_config_word_data.h"
+#include "fft_1024_3914.h"
+
+#include "ringbus2_pre.h"
+#include "ringbus2_post.h"
+#include "cs21buffers.h"
+
+unsigned int full_size = 1024+16;
+
+VMEM_SECTION unsigned int zero_pad[16] = {};
+VMEM_SECTION unsigned int junk[1024+16] = {};
+
+int main(void) {
+    for(unsigned i = 0; i < 1024; i++) {
+        STALL(5);
+    }
+    while(1) {
+        dma_block_send(VMEM_DMA_ADDRESS(vmem0), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem3), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem0), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem3), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem0), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem3), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem0), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem3), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem0), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem1), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem2), full_size);
+
+        dma_block_send(VMEM_DMA_ADDRESS(vmem3), full_size);
+        
+        // break;
+    }
+        // dma_block_send(VMEM_DMA_ADDRESS(vmem0), full_size);
+        // dma_block_send(VMEM_DMA_ADDRESS(vmem0), full_size);
+
+        // dma_block_send(VMEM_DMA_ADDRESS(vmem1), full_size);
+
+        // dma_block_send(VMEM_DMA_ADDRESS(vmem2), full_size);
+
+        // dma_block_send(VMEM_DMA_ADDRESS(vmem3), full_size);
+}
+

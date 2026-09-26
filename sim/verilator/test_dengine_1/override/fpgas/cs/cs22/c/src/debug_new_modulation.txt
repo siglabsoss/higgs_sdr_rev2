@@ -1,0 +1,42 @@
+#include "dma.h"
+#include "vmem.h"
+#include "csr_control.h"
+#include "vmalloc.h"
+#include "circular_buffer.h"
+#include "fill.h"
+#include "ringbus.h"
+#include "coarse_sync.h"
+#include "atan.h"
+#include "xvcordic.h"
+#include "ringbus2_pre.h"
+#include "ringbus2_post.h"
+#include "check_bootload.h"
+
+#include "corrupt_dma.h"
+#include "fast_inv_sqrt.h"
+#include "nco_data.h"
+#include "vmem_copy.h"
+#include "fixed_iir.h"
+#include "trunk_types.h"
+
+
+// #include "debug_640_lin.h"
+// #include "debug_640_lin2.h"
+// #include "debug_640_lin3.h"
+#include "debug_640_lin8.h"
+
+VMEM_SECTION unsigned int zeros[1040];
+
+
+int main(void) {
+
+   // ring_register_callback(fine_sync_callback, SYNCHRONIZATION_CMD);
+    unsigned sz = ARRAY_SIZE(cooked);
+
+    dma_block_send(VMEM_DMA_ADDRESS(cooked), sz);
+
+    dma_block_send(VMEM_DMA_ADDRESS(zeros), 1040);
+
+}
+
+

@@ -1,0 +1,80 @@
+[*]
+[*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
+[*] Fri Jun 22 20:31:18 2018
+[*]
+[dumpfile] "/home/daniel/FPGA/higgs_sdr_rev2/sim/verilator/test_eth_frame_router/wave_dump.vcd"
+[dumpfile_mtime] "Fri Jun 22 20:25:58 2018"
+[dumpfile_size] 944159213
+[savefile] "/home/daniel/FPGA/higgs_sdr_rev2/sim/verilator/test_eth_frame_router/dma_out.gtkw"
+[timestart] 21843900
+[size] 2560 1412
+[pos] 0 1439
+*-14.978778 21954300 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[sst_width] 223
+[signals_width] 407
+[sst_expanded] 1
+[sst_vpaned_height] 998
+@200
+---- INPUTS ---
+@28
+TOP.eth_frame_router.i_rxmac_clk
+TOP.eth_frame_router.i_rxmac_srst
+TOP.eth_frame_router.i_rx_write
+TOP.eth_frame_router.i_rx_eof
+@22
+TOP.eth_frame_router.i_rx_dbout[7:0]
+@200
+---- INTERNALS ---
+@22
+TOP.eth_frame_router.cbuf_rd_fsm_state[31:0]
+TOP.eth_frame_router.cbuf_wr_fsm_state[31:0]
+@200
+---- CBUF ---
+@22
+TOP.eth_frame_router.CBUF_ADDR_BITS[31:0]
+TOP.eth_frame_router.CBUF_BYTES[31:0]
+TOP.eth_frame_router.CBUF_BYTES_POW2[31:0]
+TOP.eth_frame_router.CBUF_MAX_ETH_FRAME_DEPTH[31:0]
+TOP.eth_frame_router.cbuf_din[8:0]
+TOP.eth_frame_router.cbuf_dout[8:0]
+@28
+TOP.eth_frame_router.cbuf_empty
+@24
+TOP.eth_frame_router.cbuf_head[13:0]
+TOP.eth_frame_router.cbuf_raddr[13:0]
+[color] 1
+TOP.eth_frame_router.cbuf_waddr[13:0]
+[color] 1
+TOP.eth_frame_router.cbuf_tail[13:0]
+TOP.eth_frame_router.cbuf_waddr_next[13:0]
+@28
+TOP.eth_frame_router.cbuf_wren
+@24
+TOP.eth_frame_router.cbuf_fill_level[13:0]
+@200
+---- ERRORS ---
+@28
+TOP.eth_frame_router.fatal_error
+TOP.eth_frame_router.i_rx_error
+TOP.eth_frame_router.o_eth_frame_crc_error
+TOP.eth_frame_router.o_eth_frame_ipg_error
+TOP.eth_frame_router.o_eth_frame_long_frame_error
+TOP.eth_frame_router.o_eth_frame_short_frame_error
+TOP.eth_frame_router.o_eth_frame_vlan_error
+TOP.eth_frame_router.o_unsupported_eth_type_error
+TOP.eth_frame_router.o_arp_pkt_fifo_overflow
+[color] 1
+TOP.eth_frame_router.o_eth_frame_circ_buf_overflow
+TOP.eth_frame_router.o_ipv4_pkt_fifo_overflow
+TOP.arp_pkt_fifo_afull
+TOP.ipv4_pkt_fifo_afull
+@8023
+TOP.eth_frame_router.cbuf_fill_level[13:0]
+@20000
+-
+-
+-
+-
+[pattern_trace] 1
+[pattern_trace] 0

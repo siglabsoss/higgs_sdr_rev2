@@ -1,0 +1,3 @@
+1527206951, Found the bug the first time (may 24, 2018)
+1560480798, original seed that failed at 275ed47
+1560481100, found recently

@@ -1,0 +1,1510 @@
+#include "dma.h"
+#include "vmem.h"
+#include "csr_control.h"
+#include "vmalloc.h"
+#include "circular_buffer.h"
+#include "fill.h"
+#include "ringbus.h"
+#include "coarse_sync.h"
+#include "atan.h"
+#include "xvcordic.h"
+#include "schedule.h"
+#include "duplex_schedule.h"
+
+// #include "flush_config_word_data.h"
+// #include "fft_1024_3914.h"
+
+#include "ringbus2_pre.h"
+#include "ringbus2_post.h"
+#include "nco_data.h"
+#include "corrupt_dma.h"
+#include "check_bootload.h"
+#include "subtract_timers.h"
+#include "trunk_types.h"
+#include "copy_config.h"
+#include "vmem_copy.h"
+#include "eq_random_rotation.h"
+#include "get_timer.h"
+#include "self_sync.h"
+#include "ook_modem.h"
+#include "handle_generic_op.h"
+
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdlib.h> // for abs()
+
+// #define ENABLE_TB_DEBUG
+
+#ifndef ENABLE_TB_DEBUG
+#define DISABLE_TB_DEBUG
+#endif
+#include "tb_debug.h"
+
+
+#define PING_PONG_BUFFER_SIZE (1024+TRUNK_LENGTH)
+
+#include "ping_pong_driver.h"
+
+
+
+
+///////////////////////////////////////
+//// for fine sync
+#include "config_word_add_eq_01.h"
+#include "config_word_cmul_rx4_0f.h"
+#include "config_word_cmul_rx4_00.h"
+#include "config_word_cmul_eq_0f.h"
+#include "config_word_conj_eq_11.h"
+#include "config_word_conj_eq_13.h"
+#include "config_word_conj_eq_14.h"
+#include "config_word_conj_eq_15.h"
+#include "config_word_conj_eq_0f.h"
+#include "config_word_conj_eq_0b.h"
+#include "config_word_conj_rx4_0f.h"
+#include "config_word_add_eq_00.h"
+#include "config_word_add_rx4_00.h"
+#include "config_word_add_rx4_01.h"
+#include "config_word_add_rx4_02.h"
+#include "config_word_add_rx4_03.h"
+#include "config_word_sub_eq_00.h"
+#include "config_word_magsquare_eq_00.h"
+
+
+VMEM_SECTION unsigned int nco_data[1024] = {0};
+VMEM_SECTION unsigned int nco_data_common_phase[16]={0};
+VMEM_SECTION unsigned int input_result[1024] = {0};
+VMEM_SECTION unsigned int output_result[1024] = {0};
+VMEM_SECTION unsigned int output_fine_sync[1024] = {0};
+
+VMEM_SECTION unsigned int input_pilot_conjmul[144] = {0};
+VMEM_SECTION unsigned int output_pilot_conjmul[64] = {0};
+
+VMEM_SECTION unsigned int output_common_phase[256] = {0};
+
+VMEM_SECTION unsigned int permutation_memcopy[16] = {0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000, 0xf000};
+VMEM_SECTION unsigned int permutation_pilot_conjmul_0[16] = {0x0000, 0x1000, 0x2000, 0x3000, 0x4000, 0x5000, 0x6000, 0x7000, 0x9000, 0xa000, 0xb000, 0xc000, 0xd000, 0xe000, 0xf000, 0x0000};
+VMEM_SECTION unsigned int permutation_pilot_conjmul_1[16] = {0x2000, 0x3000, 0x4000, 0x5000, 0x6000, 0x7000, 0x8000, 0xa000, 0xb000, 0xc000, 0xd000, 0xe000, 0xf000, 0x0000, 0x1000, 0x1000};
+VMEM_SECTION unsigned int bank_address_pilot_conjmul_0[16] = {0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1};
+VMEM_SECTION unsigned int bank_address_pilot_conjmul_1[16] = {0x2, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1, 0x0, 0x1};
+VMEM_SECTION unsigned int permutation_pilot_conjmul_add[16] = {0x0000, 0x3000, 0x6000, 0x9000, 0xd000, 0xd000, 0xd000, 0xe000, 0xe000, 0xe000, 0xf000, 0xf000, 0xf000, 0x0, 0x0, 0x0};
+VMEM_SECTION unsigned int bank_address_pilot_common_phase[16] = {0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+
+VMEM_SECTION unsigned int vmem_zeros[16];
+
+
+VMEM_SECTION unsigned short variable_eq_rotate[32];
+VMEM_SECTION unsigned short variable_r0_mul[32];
+VMEM_SECTION unsigned short variable_r0_add[32];
+VMEM_SECTION unsigned short variable_r1_mul[32];
+VMEM_SECTION unsigned short variable_r1_add[32];
+VMEM_SECTION unsigned short variable_eq_applied[32];
+
+//VMEM_SECTION unsigned int EQ_data_default[1024] = {0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff, 0x7fff};
+VMEM_SECTION unsigned int EQ_data_default[1024] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+
+VMEM_SECTION unsigned int EQ_data_pilot_frame[1024] = {0};
+VMEM_SECTION unsigned int EQ_data_applied[1024] = {0};
+
+unsigned int variable_eq_rotate_row;
+unsigned int variable_r0_mul_row;
+unsigned int variable_r0_add_row;
+unsigned int variable_r1_mul_row;
+unsigned int variable_r1_add_row;
+unsigned int variable_eq_applied_row;
+
+unsigned int sfo_correction_rx_flag = 0;
+unsigned int sfo_shift_rx_amount = 14;
+
+unsigned int EQ_data_rx_indi = 1;
+
+// #define MA_SIZE 16
+// #define MA_SIZE_LOG 4
+
+int ring_flag=0;
+// int sto_sfo_angle_flag = MA_SIZE;
+// short sto_sfo_angle[MA_SIZE];
+// unsigned int sto_sfo_angle_indi = 0;
+
+// unsigned int sorted_array[MA_SIZE];
+// unsigned int data_array[MA_SIZE];
+
+unsigned int datapath_saturation_flag = 0;
+unsigned int last_datapath_saturation_report = 0xffff0000; // should guarentee the first saturation gets reported
+unsigned int last_datapath_underflow_report = 0xffff0000; // should guarentee the first saturation gets reported
+
+
+unsigned int ook_subcarrier = 1003;
+OOKDemod demod;
+
+static uint32_t lifetime_32 = 0;
+uint32_t do_debug_ota_frame = 0;
+static uint32_t duplex_progress;
+// static uint32_t duplex_mode;
+duplex_timeslot_t duplex;
+
+static uint32_t duplex_mode_rx;
+duplex_timeslot_t duplex_rx;
+
+static unsigned cooked_data_type = 0;
+
+
+
+
+bool rx_fft_coarse_flag = false;
+
+
+#define FSM_STATE_IDLE (0)
+#define FSM_STATE_DUPLEX_SYNC (1)
+#define FSM_GOT_COUNTER_1 (2)
+#define FSM_GOT_COUNTER_2 (3)
+#define FSM_STATE_ADJUST (4)
+#define FSM_DEBUG_RESULT (5)
+#define FSM_STALL (99)
+
+uint32_t duplex_state = 0;
+uint32_t enter_duplex_sync = 0;
+
+bool ook_counter_valid = false;
+uint32_t ook_counter_delta = 0;
+
+void fsm_notify_coarse_sync(void) {
+    rx_fft_coarse_flag = true;
+}
+
+void fsm_notify_ook_counter(uint32_t counter) {
+    ook_counter_delta = counter;
+    ook_counter_valid = true;
+}
+
+void tick_duplex_fsm(void) {
+    uint32_t next_state = duplex_state;
+
+    switch(duplex_state) {
+        case FSM_STATE_IDLE:
+            if( rx_fft_coarse_flag ) {
+                enter_duplex_sync = lifetime_32; // time we entered can be used for
+                // timeout
+                next_state = FSM_STATE_DUPLEX_SYNC;
+            }
+            break;
+        
+        case FSM_STATE_DUPLEX_SYNC:
+            if( ook_counter_valid ) {
+                next_state = FSM_GOT_COUNTER_1;
+            }
+            break;
+
+        case FSM_GOT_COUNTER_1:
+            if( ook_counter_valid ) {
+                // we got a counter
+                // we will mark it "bad" at the end of this tick
+                // however we use it right away next tick so it's still good
+
+                next_state = FSM_GOT_COUNTER_2;
+                // next_state = FSM_DEBUG_RESULT;
+            }
+            break;
+
+        case FSM_DEBUG_RESULT: {
+                // DEBUG_OTA_FRAME2_PCCMD
+                ring_block_send_eth_u32(DEBUG_OTA_FRAME2_PCCMD, ook_counter_delta);
+                next_state = FSM_STALL;
+            }
+            break;
+
+        case FSM_GOT_COUNTER_2: {
+                uint32_t rb0, rb1;
+                // use generic op to build adjustment for countes
+                g_op(&rb0, &rb1, 'u', 0, ook_counter_delta, GENERIC_OPERATOR_CMD);
+
+                // send to cs31
+                CSR_WRITE(RINGBUS_WRITE_ADDR, RING_ADDR_RX_FFT);
+
+                CSR_WRITE(RINGBUS_WRITE_DATA, rb0);
+                CSR_WRITE_ZERO(RINGBUS_WRITE_EN);
+                CSR_WRITE(RINGBUS_WRITE_DATA, rb1);
+                CSR_WRITE_ZERO(RINGBUS_WRITE_EN);
+
+                // send to cs11
+                CSR_WRITE(RINGBUS_WRITE_ADDR, RING_ADDR_TX_PARSE);
+
+                CSR_WRITE(RINGBUS_WRITE_DATA, rb0);
+                CSR_WRITE_ZERO(RINGBUS_WRITE_EN);
+                CSR_WRITE(RINGBUS_WRITE_DATA, rb1);
+                CSR_WRITE_ZERO(RINGBUS_WRITE_EN);
+
+
+                // handles the adjust
+                // next_state = FSM_STALL;      // bad because we are locked and can't re-run
+                next_state = FSM_STATE_IDLE;
+
+            }
+            break;
+
+        case FSM_STALL:
+        default:
+            break;
+    }
+
+    duplex_state = next_state;
+
+    // clear flags every go
+    rx_fft_coarse_flag = false;
+    ook_counter_valid = false;
+}
+
+
+
+
+///
+/// Will send saturation ringbus to pc but with a rate limit
+/// Should be setup so that the first saturation always sends
+void saturation_report_slow(void) {
+    unsigned now;
+    CSR_READ(TIMER_VALUE, now);
+
+    //                       calculates a-b
+    const unsigned counter_delta = subtract_timers(now,last_datapath_saturation_report);
+
+    if( counter_delta > 0x7698000 ) {
+        last_datapath_saturation_report = now;
+        ring_block_send_eth(RX_FINE_SYNC_OVERFLOW_PCCMD | 0); // could put timer value or OFDM frame here
+    }
+}
+
+void underflow_report_slow(const unsigned int radio) {
+    unsigned now;
+    CSR_READ(TIMER_VALUE, now);
+
+    //                       calculates a-b
+    const unsigned counter_delta = subtract_timers(now,last_datapath_underflow_report);
+
+    if( counter_delta > 0x7698000 ) {
+        last_datapath_underflow_report = now;
+        ring_block_send_eth(RX_FINE_SYNC_OVERFLOW_PCCMD | (1+radio)); // could put timer value or OFDM frame here
+    }
+}
+
+unsigned int pre_sfo = 0;
+
+/////////////////////////////////////////////////////////////////////////////////////
+////////////// 4 gap
+VMEM_SECTION unsigned int permutation_pilot_conjmul_0_trial_4_0[16] = {0x2000, 0x5000, 0x8000, 0xb000, 0xf000, 0x2000, 0x5000, 0x8000, 0xc000, 0xf000, 0x2000, 0x5000, 0x9000, 0xc000, 0xf000, 0x2000};
+VMEM_SECTION unsigned int permutation_pilot_conjmul_1_trial_4_0[16] = {0x6000, 0x9000, 0xc000, 0x0000, 0x3000, 0x6000, 0x9000, 0xd000, 0x0000, 0x3000, 0x6000, 0xa000, 0xd000, 0x0000, 0x3000, 0x3000};
+VMEM_SECTION unsigned int bank_address_pilot_conjmul_0_trial_4_0[16] = {0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1};
+VMEM_SECTION unsigned int bank_address_pilot_conjmul_1_trial_4_0[16] = {0x2, 0x3, 0x4, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1};
+
+VMEM_SECTION unsigned int permutation_pilot_conjmul_add_trial_4_0[16] = {0x0000, 0x3000, 0x6000, 0x9000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+
+
+// estimate for every 4 subcarrier pattern.
+// This supports two radios at once.
+// Radio 0
+// 2,6,10,...
+inline void __attribute__((always_inline)) xbb_pilot_conj_multi_trial_4_0(
+    const unsigned int cfg_pilot_conj_multi_location,
+    const unsigned int cfg_pilot_conj_multi_add_location,
+    const unsigned int input_location,
+    const unsigned int input_pilot_conjmul_location,
+    const unsigned int output_pilot_conjmul_location) {
+    // memory copy and shift
+    MVXV_KNOP(V0, input_location);
+    MVXV_KNOP(V1, input_pilot_conjmul_location);
+    MVXV_KNOP(V2, 1);
+    MVXV_KNOP(V3, 1-(1<<12));
+    
+    for(int index=0; index<4; index++)
+    {
+        ADD_LK13(V0, V0, V2, 0);
+        ADD_SK13(V1, V1, V3, 0);
+    }
+
+    MVXV_KNOP(V0, input_location+4);
+    MVXV_KNOP(V1, input_pilot_conjmul_location+4);
+
+    for(int index=0; index<4; index++)
+    {
+        ADD_LK13(V0, V0, V2, 0);
+        ADD_SK13(V1, V1, V3, 0);
+    }
+
+    vmem_copy_rows(VMEM_ROW_ADDRESS(vmem_zeros), input_pilot_conjmul_location+8, 1);
+
+    // for(int index = 0; index<16; index++)
+    // {
+    //     vector_memory[input_pilot_conjmul_location*16+128+index] = 0;
+    // }
+
+    // STALL(50);
+
+    // pilot tone conjugate multiplication
+    MVXV_KNOP(V0, cfg_pilot_conj_multi_location);
+    VNOP_LK14(V0);
+
+    MVXV_KNOP(V0, input_pilot_conjmul_location);
+    MVXV_KNOP(V4, 4);
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+    MVXV_KNOP(V5, 1);
+
+    MVXV_KNOP(V12, VMEM_ADDRESS(permutation_pilot_conjmul_0_trial_4_0));
+    VNOP_LK15(V12);
+    MVK15V_KNOP(V12,0);
+
+    MVXV_KNOP(V13, VMEM_ADDRESS(bank_address_pilot_conjmul_0_trial_4_0));
+    VNOP_LK15(V13);
+    MVK15V_KNOP(V13,0);
+
+    MVXV_KNOP(V14, VMEM_ADDRESS(permutation_pilot_conjmul_1_trial_4_0));
+    VNOP_LK15(V14);
+    MVK15V_KNOP(V14,0);
+   
+    MVXV_KNOP(V15, VMEM_ADDRESS(bank_address_pilot_conjmul_1_trial_4_0));
+    VNOP_LK15(V15);
+    MVK15V_KNOP(V15,0);
+
+    for(int index=0; index<2; index++)
+    {
+        ADD_KNOP(V2, V0, V14, 0);
+        ADD_KNOP(V2, V2, V15, 0);
+        VNOP_LK8(V2);
+
+        ADD_KNOP(V1, V0, V12, 0);
+        ADD_KNOP(V1, V1, V13, 0);
+        VNOP_LK9(V1);
+
+        ADD_KNOP(V0, V0, V4, 0);
+
+    }
+
+    for(int index=0; index<2; index++)
+    {
+        ADD_SK1(V3, V3, V5, 0);
+
+    }
+
+    vmem_copy_rows(VMEM_ROW_ADDRESS(vmem_zeros), input_pilot_conjmul_location+8, 1);
+    // for(int index = 0; index<16; index++)
+    // {
+    //     vector_memory[input_pilot_conjmul_location*16+128+index] = 0;
+    // }
+
+    //get sum
+    MVXV_KNOP(V0, cfg_pilot_conj_multi_add_location);
+    VNOP_LK14(V0);
+
+    MVXV_KNOP(V1, output_pilot_conjmul_location);
+    MVXV_KNOP(V2, output_pilot_conjmul_location+1);
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+
+    VNOP_LK8(V1);
+    VNOP_LK9(V2);
+    VNOP_SK1(V3);
+
+
+    MVXV_KNOP(V1, output_pilot_conjmul_location);
+    MVXV_KNOP(V2, input_pilot_conjmul_location+8);
+
+
+    MVXV_KNOP(V15, VMEM_ADDRESS(permutation_pilot_conjmul_add_trial_4_0));
+    VNOP_LK15(V15);
+    MVK15V_KNOP(V15,0);
+    ADD_KNOP(V1, V1, V15, 0);
+
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+
+    VNOP_LK8(V1);
+    VNOP_LK9(V2);
+    VNOP_SK1(V3);
+
+    STALL(50);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+//////////////// 4 gap
+VMEM_SECTION unsigned int permutation_pilot_conjmul_0_trial_4_1[16] = {0x0000, 0x3000, 0x6000, 0x9000, 0xd000, 0x0000, 0x3000, 0x6000, 0xa000, 0xd000, 0x0000, 0x3000, 0x7000, 0xa000, 0xd000, 0x0000};
+VMEM_SECTION unsigned int permutation_pilot_conjmul_1_trial_4_1[16] = {0x4000, 0x7000, 0xa000, 0xe000, 0x1000, 0x4000, 0x7000, 0xb000, 0xe000, 0x1000, 0x4000, 0x8000, 0xb000, 0xe000, 0x1000, 0x1000};
+VMEM_SECTION unsigned int bank_address_pilot_conjmul_0_trial_4_1[16] = {0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3};
+VMEM_SECTION unsigned int bank_address_pilot_conjmul_1_trial_4_1[16] = {0x4, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3, 0x0, 0x1, 0x2, 0x3};
+
+VMEM_SECTION unsigned int permutation_pilot_conjmul_add_trial_4_1[16] = {0x0000, 0x3000, 0x6000, 0x9000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+
+
+// estimate for every 4 subcarrier pattern.
+// This supports two radios at once.
+// Radio 1
+// 4,8,12,...
+inline void __attribute__((always_inline)) xbb_pilot_conj_multi_trial_4_1(
+    const unsigned int cfg_pilot_conj_multi_location,
+    const unsigned int cfg_pilot_conj_multi_add_location,
+    const unsigned int input_location, 
+    const unsigned int input_pilot_conjmul_location,
+    const unsigned int output_pilot_conjmul_location)
+{
+    // memory copy and shift
+    MVXV_KNOP(V0, input_location);
+    MVXV_KNOP(V1, input_pilot_conjmul_location);
+    MVXV_KNOP(V2, 1);
+    MVXV_KNOP(V3, 1-(1<<12));
+    
+    for(int index=0; index<4; index++)
+    {
+        ADD_LK13(V0, V0, V2, 0);
+        ADD_SK13(V1, V1, V3, 0);
+    }
+
+    MVXV_KNOP(V0, input_location+4);
+    MVXV_KNOP(V1, input_pilot_conjmul_location+4);
+
+    for(int index=0; index<4; index++)
+    {
+        ADD_LK13(V0, V0, V2, 0);
+        ADD_SK13(V1, V1, V3, 0);
+    }
+
+    MVXV_KNOP(V0, input_location+8);
+    MVXV_KNOP(V1, input_pilot_conjmul_location+8);
+
+    VNOP_LK13(V0);
+    VNOP_SK13(V1);
+
+    vmem_copy_rows(VMEM_ROW_ADDRESS(vmem_zeros), input_pilot_conjmul_location+8, 1);
+    // for(int index = 1; index<16; index++)
+    // {
+    //     vector_memory[input_pilot_conjmul_location*16+128+index] = 0;
+    // }
+
+    // STALL(50);
+
+    //pilot tone conjugate multiplication
+    MVXV_KNOP(V0, cfg_pilot_conj_multi_location);
+    VNOP_LK14(V0);
+
+    MVXV_KNOP(V0, input_pilot_conjmul_location);
+    MVXV_KNOP(V4, 4);
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+    MVXV_KNOP(V5, 1);
+
+    MVXV_KNOP(V12, VMEM_ADDRESS(permutation_pilot_conjmul_0_trial_4_1));
+    VNOP_LK15(V12);
+    MVK15V_KNOP(V12,0);
+
+    MVXV_KNOP(V13, VMEM_ADDRESS(bank_address_pilot_conjmul_0_trial_4_1));
+    VNOP_LK15(V13);
+    MVK15V_KNOP(V13,0);
+
+    MVXV_KNOP(V14, VMEM_ADDRESS(permutation_pilot_conjmul_1_trial_4_1));
+    VNOP_LK15(V14);
+    MVK15V_KNOP(V14,0);
+   
+    MVXV_KNOP(V15, VMEM_ADDRESS(bank_address_pilot_conjmul_1_trial_4_1));
+    VNOP_LK15(V15);
+    MVK15V_KNOP(V15,0);
+
+    for(int index=0; index<2; index++)
+    {
+        ADD_KNOP(V2, V0, V14, 0);
+        ADD_KNOP(V2, V2, V15, 0);
+        VNOP_LK8(V2);
+
+        ADD_KNOP(V1, V0, V12, 0);
+        ADD_KNOP(V1, V1, V13, 0);
+        VNOP_LK9(V1);
+
+        ADD_KNOP(V0, V0, V4, 0);
+
+    }
+
+    for(int index=0; index<2; index++)
+    {
+        ADD_SK1(V3, V3, V5, 0);
+
+    }
+    
+    vmem_copy_rows(VMEM_ROW_ADDRESS(vmem_zeros), input_pilot_conjmul_location+8, 1);
+    // for(int index = 0; index<16; index++)
+    // {
+    //    vector_memory[input_pilot_conjmul_location*16+128+index] = 0; 
+    // }
+    
+
+    //get sum
+    MVXV_KNOP(V0, cfg_pilot_conj_multi_add_location);
+    VNOP_LK14(V0);
+
+    MVXV_KNOP(V1, output_pilot_conjmul_location);
+    MVXV_KNOP(V2, output_pilot_conjmul_location+1);
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+
+    VNOP_LK8(V1);
+    VNOP_LK9(V2);
+    VNOP_SK1(V3);
+
+
+    MVXV_KNOP(V1, output_pilot_conjmul_location);
+    MVXV_KNOP(V2, input_pilot_conjmul_location+8);
+
+
+    MVXV_KNOP(V15, VMEM_ADDRESS(permutation_pilot_conjmul_add_trial_4_1));
+    VNOP_LK15(V15);
+    MVK15V_KNOP(V15,0);
+    ADD_KNOP(V1, V1, V15, 0);
+
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+
+    VNOP_LK8(V1);
+    VNOP_LK9(V2);
+    VNOP_SK1(V3);
+
+    STALL(50);
+}
+////////////////////////////////////
+
+// For every 2 subcarriers, pilot pattern
+// (aka only 1 radio)
+inline void __attribute__((always_inline)) xbb_pilot_conj_multi(unsigned int cfg_pilot_conj_multi_location, unsigned int cfg_pilot_conj_multi_add_location, unsigned int input_location, 
+                          unsigned int input_pilot_conjmul_location, unsigned int output_pilot_conjmul_location)
+{
+    // memory copy and shift
+    MVXV_KNOP(V0, input_location);
+    MVXV_KNOP(V1, input_pilot_conjmul_location);
+    MVXV_KNOP(V2, 2);
+    
+    for(int index=0; index<5; index++)
+    {
+        ADD_LK13(V0, V0, V2, 0);
+        ADD_SK13(V1, V1, V2, 0);
+    }
+ 
+
+    MVXV_KNOP(V0, input_location+1);
+    MVXV_KNOP(V1, input_pilot_conjmul_location+1);
+    MVXV_KNOP(V12, VMEM_ADDRESS(permutation_memcopy));
+    VNOP_LK15(V12);
+    MVK15V_KNOP(V12,0);
+    ADD_KNOP(V1, V1, V12, 0);
+
+    MVXV_KNOP(V2, 2);
+    for(int index=0; index<4; index++)
+    {
+        ADD_LK13(V0, V0, V2, 0);
+        ADD_SK13(V1, V1, V2, 0);
+    }
+
+    // pilot tone conjugate multiplication
+    MVXV_KNOP(V0, cfg_pilot_conj_multi_location);
+    VNOP_LK14(V0);
+
+    MVXV_KNOP(V0, input_pilot_conjmul_location);
+    MVXV_KNOP(V4, 2);
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+    MVXV_KNOP(V5, 1);
+
+    MVXV_KNOP(V12, VMEM_ADDRESS(permutation_pilot_conjmul_0));
+    VNOP_LK15(V12);
+    MVK15V_KNOP(V12,0);
+
+    MVXV_KNOP(V13, VMEM_ADDRESS(bank_address_pilot_conjmul_0));
+    VNOP_LK15(V13);
+    MVK15V_KNOP(V13,0);
+
+    MVXV_KNOP(V14, VMEM_ADDRESS(permutation_pilot_conjmul_1));
+    VNOP_LK15(V14);
+    MVK15V_KNOP(V14,0);
+   
+    MVXV_KNOP(V15, VMEM_ADDRESS(bank_address_pilot_conjmul_1));
+    VNOP_LK15(V15);
+    MVK15V_KNOP(V15,0);
+
+    for(int index=0; index<4; index++)
+    {
+        ADD_KNOP(V2, V0, V14, 0);
+        ADD_KNOP(V2, V2, V15, 0);
+        VNOP_LK8(V2);
+
+        ADD_KNOP(V1, V0, V12, 0);
+        ADD_KNOP(V1, V1, V13, 0);
+        VNOP_LK9(V1);
+
+        ADD_KNOP(V0, V0, V4, 0);
+
+    }
+
+    for(int index=0; index<4; index++)
+    {
+        ADD_SK1(V3, V3, V5, 0);
+
+    }
+
+    // STALL(50);
+
+    vector_memory[output_pilot_conjmul_location*16] = 0x00000000;
+
+    STALL(50);
+
+    // check saturataion
+    unsigned int temp_check; 
+    // for(int index_check = 0; index_check<64; index_check++)
+    // {
+    //     temp_check = vector_memory[output_pilot_conjmul_location*16+index_check];
+
+    //     if (((temp_check & 0xffff) == 0x7fff) || ((temp_check & 0xffff)==0x8000))
+    //     {
+    //         datapath_saturation_flag = 0xffffffff;
+    //     }
+
+    //     if ((((temp_check>>16) & 0xffff) == 0x7fff) || (((temp_check>>16) & 0xffff)==0x8000))
+    //     {
+    //         datapath_saturation_flag = 0xffffffff;
+    //     }
+
+    // }
+
+    /// get sum
+    MVXV_KNOP(V0, cfg_pilot_conj_multi_add_location);
+    VNOP_LK14(V0);
+
+    MVXV_KNOP(V1, output_pilot_conjmul_location);
+    MVXV_KNOP(V2, output_pilot_conjmul_location+1);
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+   
+    MVXV_KNOP(V4, 2);
+    MVXV_KNOP(V5, 1);
+
+    for(int index = 0; index < 2; index++)
+    {
+        ADD_LK8(V1, V1, V4, 0);
+        ADD_LK9(V2, V2, V4, 0);
+    }
+
+    for(int index = 0; index <2; index++)
+    {
+        ADD_SK1(V3, V3, V4, 0);
+    }
+
+    STALL(50);
+
+    //check saturation
+    for(int index_check = 0; index_check<64; index_check++)
+    {
+        temp_check = vector_memory[output_pilot_conjmul_location*16+index_check];
+
+         if (((temp_check & 0xffff) == 0x7fff) || ((temp_check & 0xffff)==0x8000))
+         {
+             datapath_saturation_flag = 0xffffffff;
+         }
+
+         if ((((temp_check>>16) & 0xffff) == 0x7fff) || (((temp_check>>16) & 0xffff)==0x8000))
+         {
+             datapath_saturation_flag = 0xffffffff;
+         }
+
+     }
+
+
+    MVXV_KNOP(V1, output_pilot_conjmul_location);
+    MVXV_KNOP(V2, output_pilot_conjmul_location+2);
+
+    MVXV_KNOP(V12, VMEM_ADDRESS(permutation_pilot_conjmul_add));
+    VNOP_LK15(V12);
+    MVK15V_KNOP(V12,0);
+
+    ADD_KNOP(V1, V1, V12, 0);
+    ADD_KNOP(V2, V2, V12, 0);
+
+    MVXV_KNOP(V3, output_pilot_conjmul_location);
+
+    VNOP_LK8(V1);
+    VNOP_LK9(V2);
+
+    VNOP_SK1(V3);
+
+    
+    STALL(50);
+
+
+
+}
+
+uint32_t xbb_direct_algorithm(const unsigned int input_result_location)
+{
+
+   // unsigned int start_clk, end_clk;
+   // CSR_READ(TIMER_VALUE, start_clk);
+
+   int32_t data_real[15], data_imag[15];
+   for(int index=0; index<15; index++)
+   {
+    uint32_t n = vector_memory[input_result_location*16+index+1];
+
+    STALL(10);
+    
+    uint16_t n_u = n&0xffff;
+    int32_t n_s;
+    if(n_u>=0x8000)
+        n_s = n_u-0x10000;
+    else
+        n_s = n_u;
+
+    data_real[index] =n_s;
+    
+    n_u = (n>>16)&0xffff;
+
+    if(n_u>=0x8000)
+        n_s = n_u-0x10000;
+    else
+        n_s = n_u;
+
+    data_imag[index] = n_s;
+
+
+   }
+
+   int32_t results_real = 0;
+   int32_t results_imag = 0;
+
+    for(int index = 0; index<11; index++)
+   {
+    results_real += ((data_real[index]*data_real[index+4]+data_imag[index]*data_imag[index+4])>>8);
+
+
+    results_imag += ((data_real[index]*data_imag[index+4]-data_imag[index]*data_real[index+4])>>8);
+
+   }
+
+   while(1)
+   {
+    if((abs(results_real)>=0x7fff)||(abs(results_imag)>=0x7fff))
+    {
+        results_real = (results_real>>1);
+        results_imag = (results_imag>>1);
+    }
+    else 
+    {
+        break;
+    }
+   }
+
+   uint32_t final_results = ((results_imag<<16)&0xffff0000) | ((results_real)&0xffff);
+
+   return final_results;
+   // CSR_READ(TIMER_VALUE, end_clk);
+
+   // STALL(200)
+   // ring_block_send_eth(end_clk-start_clk);
+   // STALL(200);
+
+   //ring_block_send_eth(final_results);
+
+
+
+}
+
+
+
+// threshold for underflow message, units are magnitude squared
+const int64_t magnitude_underflow_thresh = (300*300);
+
+unsigned int one_pilot_observe = 0;
+unsigned int second_pilot_observe = 0;
+
+///
+/// @param : cfg word for inverse random rotation
+/// @param : cfg word for neighbor tone conj multiply
+/// @param : cfg word for sum results of previous
+static inline void __attribute__((always_inline)) xbb_fine_sync(
+                   const unsigned int input_fine_sync_location,
+                   const unsigned int input_random_location,
+                   const unsigned int input_result_location,
+                   const unsigned int input_pilot_conjmul_location,
+                   const unsigned int output_pilot_conjmul_location,
+                   const unsigned int output_fine_sync_location) {
+
+    datapath_saturation_flag = 0;
+    unsigned int start_clk, end_clk;
+    CSR_READ(TIMER_VALUE, start_clk);
+
+   // inverse random rotate all subcarriers
+    xbb_conj_multi(variable_eq_rotate_row, input_fine_sync_location, input_random_location, input_result_location);
+
+    vector_memory[input_result_location*16] = 0x00000000; // convert to dma addres and set 0 subcarrier to 0
+
+
+
+
+    // EQ_data_rx_indi
+    // 0:    keep existing eq state
+    // 1:    multiply by 0 degrees
+    // 2:    wait until first EQ Pilot from rx side, set to 3
+    // 3:    read second, add them together
+    //////apply EQ///////
+    if(EQ_data_rx_indi == 1) {
+        EQ_data_rx_indi = 0;
+    
+        vmem_copy_rows(VMEM_ROW_ADDRESS(EQ_data_default), VMEM_ROW_ADDRESS(EQ_data_applied), 64);
+
+    } else if(EQ_data_rx_indi == 2) {
+        if( (duplex_mode_rx == DUPLEX_SEND_UL_PILOT) || (cooked_data_type != 2) ) {
+            EQ_data_rx_indi = 3;
+            vmem_copy_rows(input_result_location, VMEM_ROW_ADDRESS(EQ_data_applied), 64);
+        }
+    } else if(EQ_data_rx_indi == 3) {
+        if(cooked_data_type != 2) {
+            EQ_data_rx_indi = 0;
+        } else {
+            EQ_data_rx_indi = 2;
+        }
+
+        xbb_add(VMEM_ROW_ADDRESS(config_word_add_eq_01), input_result_location, VMEM_ROW_ADDRESS(EQ_data_applied), VMEM_ROW_ADDRESS(EQ_data_applied));
+    }
+
+    if( cooked_data_type != 2 ) {
+        // normal order
+
+        xbb_conj_multi(variable_eq_applied_row, input_result_location, VMEM_ROW_ADDRESS(EQ_data_applied), input_result_location);
+
+        one_pilot_observe    = 0;
+        second_pilot_observe = 0;
+
+       // look at pilot tones, do conj multiply and then sum results
+        xbb_pilot_conj_multi_trial_4_0(
+            variable_r0_mul_row,
+            variable_r0_add_row,
+            input_result_location,
+            input_pilot_conjmul_location,
+            output_pilot_conjmul_location);
+
+    } else {
+        // run in reverse order so that xbb_pilot_conj_multi_trial_4_0() can operate on non corrected pilot tones
+
+       // look at pilot tones, do conj multiply and then sum results
+        xbb_pilot_conj_multi_trial_4_0(
+            variable_r0_mul_row,
+            variable_r0_add_row,
+            input_result_location,
+            input_pilot_conjmul_location,
+            output_pilot_conjmul_location);
+
+        one_pilot_observe    = vector_memory[VMEM_ROW_ADDRESS_TO_DMA(input_result_location)+2];
+        second_pilot_observe = vector_memory[VMEM_ROW_ADDRESS_TO_DMA(input_result_location)+4];
+
+        // EQ_data_applied[2] = 0xff; // disable eq for cfo tone
+
+        xbb_conj_multi(variable_eq_applied_row, input_result_location, VMEM_ROW_ADDRESS(EQ_data_applied), input_result_location);
+    }
+
+   // read result into imem
+   const unsigned int pilot_conjmul_add = vector_memory[output_pilot_conjmul_location*16];
+
+   // STALL(50);
+
+   // check for saturation
+   if (((pilot_conjmul_add & 0xffff) == 0x7fff) || ((pilot_conjmul_add & 0xffff)==0x8000))
+   {
+        datapath_saturation_flag = 0xffffffff;
+   }
+
+   if ((((pilot_conjmul_add>>16) & 0xffff) == 0x7fff) || (((pilot_conjmul_add>>16) & 0xffff)==0x8000))
+   {
+        datapath_saturation_flag = 0xffffffff;
+   }
+   
+   
+   unsigned int temp_angle_raw;
+   ATAN(temp_angle_raw,pilot_conjmul_add,15);
+   const unsigned int temp_angle = temp_angle_raw&0xffff;
+   // unsigned int temp_angle = fxpt_atan2(((pilot_conjmul_add>>16)&0xffff), (pilot_conjmul_add & 0xffff));
+
+   unsigned int freq_compensation_direction;
+   unsigned int nco_delta;
+   
+   if(temp_angle > 0x7fff)
+   {
+    nco_delta = ((0x10000-(temp_angle))<<sfo_shift_rx_amount);
+    freq_compensation_direction=0;
+
+   }
+   else
+   {
+    nco_delta = ((temp_angle)<<sfo_shift_rx_amount);
+    freq_compensation_direction=1;
+   }
+
+  // nco_delta = ((temp_angle)<<sfo_shift_rx_amount);
+
+  unsigned int nco_angle = 0;
+  if(sfo_correction_rx_flag == 1)
+  {
+  	make_nco(VMEM_DMA_ADDRESS(nco_data), 513, nco_angle, nco_delta);   // with sfo/sto correction at rx
+
+  }
+  else if(sfo_correction_rx_flag == 0)
+  {
+
+  	make_nco(VMEM_DMA_ADDRESS(nco_data), 513, 0, 0);   //without sfo/sto correction at rx
+  }
+
+
+ // make_nco(VMEM_DMA_ADDRESS(nco_data_for_test), 16, 0, nco_delta);
+
+  
+  
+
+   unsigned int temp_angle_init;
+   if(temp_angle > 0x7fff)
+   {
+     temp_angle_init = (((0x10000-temp_angle)>>2) *511)%65536;
+   }
+   else
+   {
+    temp_angle_init = ((temp_angle>>2) *511)%65536;
+   }
+   nco_angle = ((0x10000-temp_angle_init)<<16);
+   
+
+    if(sfo_correction_rx_flag == 1)
+  	{
+  		make_nco(VMEM_DMA_ADDRESS(nco_data)+513, 511, nco_angle, nco_delta); // with sfo/sto correction at rx
+  	}
+  	else if(sfo_correction_rx_flag == 0)
+  	{
+   
+   		make_nco(VMEM_DMA_ADDRESS(nco_data)+513, 511, 0, 0);  // without sfo/sto correction at rx
+
+  	}
+   
+
+   unsigned int occupancy;
+   while(1) {
+    CSR_READ(DMA_2_SCHEDULE_OCCUPANCY, occupancy);
+    if(occupancy == 0) {
+      break;
+    }
+  }
+
+   if(freq_compensation_direction == 1)
+    {
+        xbb_conj_multi(VMEM_ADDRESS(config_word_conj_eq_0f), VMEM_ADDRESS(input_result), VMEM_ADDRESS(nco_data), output_fine_sync_location);
+      
+    }
+    else if (freq_compensation_direction == 0)
+    {
+        xbb_conj_multi(VMEM_ADDRESS(config_word_cmul_eq_0f), VMEM_ADDRESS(input_result), VMEM_ADDRESS(nco_data), output_fine_sync_location);
+    }
+
+   // if(freq_compensation_direction == 0)
+   //  {
+   //      xbb_conj_multi(VMEM_ADDRESS(config_word_conj_eq_0f), VMEM_ADDRESS(input_result), VMEM_ADDRESS(nco_data), output_fine_sync_location);
+      
+   //  }
+   //  else if (freq_compensation_direction == 1)
+   //  {
+   //      xbb_conj_multi(VMEM_ADDRESS(config_word_cmul_eq_0f), VMEM_ADDRESS(input_result), VMEM_ADDRESS(nco_data), output_fine_sync_location);
+   //  }
+
+  //xbb_conj_multi(VMEM_ADDRESS(config_word_conj_eq_0f), VMEM_ADDRESS(input_result), VMEM_ADDRESS(nco_data), output_fine_sync_location);
+
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    ///// for the second tx
+    // FIXME
+    // Jansons code has a this here:
+    //
+    //  vector_memory[input_result_location*16] = 0x00000000;
+    //
+ 
+    // for(int index = 0; index<144; index++)
+    // {
+    //     vector_memory[input_pilot_conjmul_location*16+index]=0;
+    // }
+
+    // for(int index = 0; index<64; index++)
+    // {
+    //     vector_memory[output_pilot_conjmul_location*16+index]=0;
+    // }
+
+    // STALL(50);
+
+    // xbb_pilot_conj_multi_trial_4_1(variable_r1_mul_row,
+    //                                variable_r1_add_row,
+    //                                input_result_location,
+    //                                input_pilot_conjmul_location,
+    //                                output_pilot_conjmul_location);
+
+	// FIXME this overflow check can be removed for 2nd radio
+   const unsigned int pilot_conjmul_add_1 = vector_memory[output_pilot_conjmul_location*16];
+
+   // STALL(50);
+
+   if (((pilot_conjmul_add_1 & 0xffff) == 0x7fff) || ((pilot_conjmul_add_1 & 0xffff)==0x8000))
+   {
+        datapath_saturation_flag = 0xffffffff;
+   }
+
+   if ((((pilot_conjmul_add_1>>16) & 0xffff) == 0x7fff) || (((pilot_conjmul_add_1>>16) & 0xffff)==0x8000))
+   {
+        datapath_saturation_flag = 0xffffffff;
+   }
+   
+   
+   unsigned int temp_angle_1_raw;
+   ATAN(temp_angle_1_raw,pilot_conjmul_add_1,15);
+   const unsigned int temp_angle_1 = temp_angle_1_raw&0xffff;
+	// end FIXME
+   ///////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////
+
+   const unsigned output_dma = VMEM_ROW_ADDRESS_TO_DMA(output_fine_sync_location);
+
+   if(duplex_mode_rx == DUPLEX_SEND_UL_DATA || cooked_data_type != 2){
+	   vector_memory[output_dma+1024+TRUNK_R0_SFO] = temp_angle;     // trunk 0
+	   vector_memory[output_dma+1024+TRUNK_R1_SFO] = temp_angle_1;   // trunk 1
+   }else{
+   	   vector_memory[output_dma+1024+TRUNK_R0_SFO] = 0;     // trunk 0
+	   vector_memory[output_dma+1024+TRUNK_R1_SFO] = 0;   // trunk 1
+
+   }
+   
+
+
+   //for test
+
+   // vector_memory[output_dma+130] = temp_angle;     // trunk 0
+   // vector_memory[output_dma+134] = temp_angle_raw;
+   // vector_memory[output_dma+138] = pilot_conjmul_add;
+
+   
+   // const unsigned aaa = vector_memory[VMEM_DMA_ADDRESS(nco_data_for_test)];
+   // const unsigned bbb = vector_memory[VMEM_DMA_ADDRESS(nco_data_for_test)+2];
+   // const unsigned ccc = vector_memory[VMEM_DMA_ADDRESS(nco_data)+2];
+   // const unsigned ddd = vector_memory[VMEM_DMA_ADDRESS(nco_data)+1022];
+
+   // vector_memory[output_dma+142] = aaa;     // trunk 0
+   // vector_memory[output_dma+146] = bbb;
+   // vector_memory[output_dma+150] = ccc;
+   // vector_memory[output_dma+154] = ddd;
+
+
+
+   // STALL(50);
+
+   if(datapath_saturation_flag == 0xffffffff)
+   {
+     // report to PC / s-modem that we had an saturation event
+     saturation_report_slow();
+   }
+
+   CSR_READ(TIMER_VALUE, end_clk);
+
+}
+
+uint32_t debug_ota_sc = 1;
+
+void handle_debug_ota(const unsigned int* const cpu_in) {
+
+    if( do_debug_ota_frame == 0) {
+        return;
+    }
+
+    // counts how many duplex frames we've seen
+    uint32_t slow_counter = lifetime_32 / DUPLEX_FRAMES;
+
+    // if((slow_counter % 128) == 0) {
+    //     ring_block_send_eth(DEBUG_OTA_FRAME_PCCMD | 0xffffff);
+    // }
+
+    // if we are on a multiple of 128 duplex frames, and within the first 15 OFDM frames
+    // ringbus back the mag
+    if( (duplex_progress < 15) && ((slow_counter % 128) == 0) ) {
+        // load the subcarrier
+        const uint32_t channel_data = vector_memory[VMEM_DMA_ADDRESS(cpu_in) + debug_ota_sc];
+        const uint32_t mag2 = ook_mag2(channel_data);
+
+        const uint32_t rb = (mag2>>6)&0x0fffff;
+        ring_block_send_eth(DEBUG_OTA_FRAME_PCCMD | ((duplex_progress&0xf)<<20) | rb );
+    }
+
+
+    // lifetime_32
+
+}
+
+//////////////////////////////////////////////////////////
+
+
+
+#define MY_ASSERT(x) if(!(x)) { ring_block_send_eth(0xe0000000|__LINE__);}
+
+unsigned do_work(
+                const unsigned int index,
+                const unsigned int* const cpu_in,
+                      unsigned int* const cpu_out
+               ) {
+    (void)index;
+
+    const unsigned int* const cpu_ptr_from_dma = cpu_in;
+    const unsigned int* const cpu_ptr_fft = cpu_out;
+
+    lifetime_32 = vector_memory[VMEM_DMA_ADDRESS(cpu_ptr_from_dma) + 1024 + TRUNK_FRAME_COUNTER];
+    duplex_progress = lifetime_32 % DUPLEX_FRAMES;
+
+    duplex_mode_rx = get_duplex_mode(&duplex_rx, duplex_progress);
+
+    handle_debug_ota(cpu_in);
+
+
+    // CSR_WRITE(GPIO_WRITE, 0x30);
+
+    //fft_1024_run(&active_plan);
+    //just memory copy
+    // MVXV_KNOP(V0, VMEM_ROW_ADDRESS(cpu_ptr_from_dma));
+    // MVXV_KNOP(V1, VMEM_ROW_ADDRESS(cpu_ptr_fft));
+    // MVXV_KNOP(V2, 1);
+
+    // for(int index=0; index<64; index++)
+    // {
+    //  ADD_LK13(V0, V0, V2, 0);
+    //  ADD_SK13(V1, V1, V2, 0);
+    // }
+    //////////////////////////////////////////////////////////////////////
+    //// for fine sync --- basic version
+    // xbb_fine_sync(VMEM_ADDRESS(config_word_conj_eq_0f), VMEM_ADDRESS(config_word_conj_eq_11), 
+    //     VMEM_ADDRESS(config_word_add_rx4_00), VMEM_ADDRESS(config_word_add_rx4_03), 
+    //     VMEM_ROW_ADDRESS(cpu_ptr_from_dma), VMEM_ADDRESS(input_random), 
+    //     VMEM_ADDRESS(input_result), VMEM_ADDRESS(input_pilot_conjmul), 
+    //     VMEM_ADDRESS(output_pilot_conjmul), VMEM_ROW_ADDRESS(cpu_ptr_fft));
+    ///// the current version
+    // xbb_fine_sync(VMEM_ADDRESS(config_word_conj_eq_0f), VMEM_ADDRESS(config_word_conj_eq_11), 
+    //     VMEM_ADDRESS(config_word_add_rx4_00), VMEM_ADDRESS(config_word_add_rx4_03), 
+    //     VMEM_ROW_ADDRESS(cpu_ptr_from_dma), VMEM_ADDRESS(input_random), 
+    //     VMEM_ADDRESS(input_result), VMEM_ADDRESS(input_pilot_conjmul), 
+    //     VMEM_ADDRESS(output_pilot_conjmul), VMEM_ROW_ADDRESS(cpu_ptr_fft));
+    unsigned ta;
+    unsigned tb;
+    CSR_READ(TIMER_VALUE, ta);
+
+    xbb_fine_sync(
+        VMEM_ROW_ADDRESS(cpu_ptr_from_dma),
+        VMEM_ROW_ADDRESS(eq_random_rotation),
+        VMEM_ROW_ADDRESS(input_result),
+        VMEM_ROW_ADDRESS(input_pilot_conjmul),
+        VMEM_ROW_ADDRESS(output_pilot_conjmul),
+        VMEM_ROW_ADDRESS(cpu_ptr_fft));
+
+    // at this point xbb_fine_sync has already written trunk 0,1
+
+    vector_memory[VMEM_DMA_ADDRESS(cpu_ptr_fft) + 1024 + TRUNK_FRAME_COUNTER] = lifetime_32;
+    vector_memory[VMEM_DMA_ADDRESS(cpu_ptr_fft) + 1024 + TRUNK_R0_CFO] = one_pilot_observe;
+    vector_memory[VMEM_DMA_ADDRESS(cpu_ptr_fft) + 1024 + TRUNK_R1_CFO] = second_pilot_observe;
+
+
+    uint32_t ook_word = cpu_ptr_from_dma[ook_subcarrier];
+    ook_demodulate(&demod, ook_word);
+
+
+    tick_duplex_fsm();
+
+    CSR_READ(TIMER_VALUE, tb);
+    SET_REG(x3, 0);
+    SET_REG(x3, (tb-ta));
+
+    ////////////////////////////////////////////
+
+
+
+    return 1;
+}
+
+
+
+
+void setup_barrel_shift(void) {
+    variable_eq_rotate_row = VMEM_ROW_ADDRESS(variable_eq_rotate);
+    variable_r0_mul_row    = VMEM_ROW_ADDRESS(variable_r0_mul);
+    variable_r0_add_row    = VMEM_ROW_ADDRESS(variable_r0_add);
+    variable_r1_mul_row    = VMEM_ROW_ADDRESS(variable_r1_mul);
+    variable_r1_add_row    = VMEM_ROW_ADDRESS(variable_r1_add);
+    variable_eq_applied_row= VMEM_ROW_ADDRESS(variable_eq_applied);
+}
+
+        // VMEM_ROW_ADDRESS(config_word_conj_eq_0f),
+        // VMEM_ROW_ADDRESS(config_word_conj_eq_14),
+        // VMEM_ROW_ADDRESS(config_word_add_rx4_00),
+
+void app_barrel_shift_callback(const unsigned int data) {
+    // APP_BARREL_SHIFT_CMD
+    const unsigned int stage = ((data & 0x00FF0000) >> 16);
+    const unsigned int shift = ((data & 0xffff));
+
+    unsigned short* cpu_source;
+    unsigned short* cpu_dest;
+
+    // we need to set conj and non conj the same here
+    switch(stage) {
+        case 0:
+            cpu_source = config_word_conj_eq_0f;
+            cpu_dest   = variable_eq_rotate;
+            break;
+        case 1:
+            cpu_source = config_word_conj_eq_14;
+            cpu_dest   = variable_r0_mul;
+            break;
+        case 2:
+            cpu_source = config_word_add_rx4_00;
+            cpu_dest   = variable_r0_add;
+            break;
+        case 3:
+            cpu_source = config_word_conj_eq_14;
+            cpu_dest   = variable_r1_mul;
+            break;
+        case 4:
+            cpu_source = config_word_add_rx4_00;
+            cpu_dest   = variable_r1_add;
+            break;
+
+        case 5:
+            cpu_source = config_word_conj_eq_0f;
+            cpu_dest   = variable_eq_applied;
+            break;
+
+        default:
+            return; // exit the function
+            break;
+    }
+
+    copy_set_barrel(cpu_source, cpu_dest, shift);
+}
+
+void default_barrel_shift_callback(const unsigned int data) {
+    app_barrel_shift_callback(0x000000 | 0x0f);
+    app_barrel_shift_callback(0x010000 | 0x12);
+    app_barrel_shift_callback(0x020000 | 0x00);
+    app_barrel_shift_callback(0x030000 | 0x12);
+    app_barrel_shift_callback(0x040000 | 0x00);
+    app_barrel_shift_callback(0x050000 | 0x08);
+}
+
+
+void got_ook_counter(const uint32_t ook_counter) {
+
+    // our counter is this much behind of ota counter
+    // thus, adding this value to our counter will fix
+    // uint32_t our_behind = ook_counter - lifetime_32;
+
+    // our counter is this much ahead of ota counter
+    // thus, subtracting this value to our counter will fix
+    uint32_t our_ahead = lifetime_32 - ook_counter - OOK_DELTA_FRAMES;
+
+    fsm_notify_ook_counter(our_ahead);
+
+    ring_block_send_eth_u32(RX_COUNTER_SYNC_PCCMD, our_ahead);
+
+    // ring_block_send_eth( RX_COUNTER_SYNC_PCCMD | 0x00000 | (our_behind & 0x0000ffff)  );
+    // ring_block_send_eth( RX_COUNTER_SYNC_PCCMD | 0x10000 | (our_behind>>16 & 0x0000ffff)  );
+    
+    // cout << HEX32_STRING(our_behind) << "\n";
+    
+    // uint32_t corrected = counter + our_behind;
+    
+
+
+
+}
+
+
+void got_ook_message(const OOKMessage* const raw) {
+    // _printf("Got message 0x%x\n", message->data[0]);
+
+    const uint32_t word  =  raw->data[0];
+    const uint8_t  type  = (raw->data[1]     ) & 0xff;
+    const uint8_t  extra = (raw->data[1] >> 8) & 0xff;
+    (void)extra;
+
+    switch(type) {
+        case FRAME_COUNTER_OOK:
+            got_ook_counter(word);
+            break;
+    }
+    // ring_block_send_eth(raw->data[0]);
+}
+
+
+
+uint32_t* pointer_for_generic_op(const uint32_t sel) {
+    uint32_t *p = 0;
+    switch(sel) {
+        case 0:
+            p = &lifetime_32;
+            break;
+        case 1:
+            p = &demod.state;
+            break;
+        case 2:
+            // most significant
+            p = ((uint32_t*)&demod.off_filter_state) + 1;
+            break;
+        case 3:
+            // least significant
+            p = (uint32_t*)&demod.off_filter_state;
+            break;
+        case 4:
+            // most significant
+            p = ((uint32_t*)&demod.on_filter_state) + 1;
+            break;
+        case 5:
+            // least significant
+            p = (uint32_t*)&demod.on_filter_state;
+            break;
+        case 6:
+            p = &demod.filter_gain_off;
+            break;
+        case 7:
+            p = &demod.filter_gain_on;
+            break;
+        case 8:
+            p = &duplex_state;
+            break;
+        case 9:
+            p = &debug_ota_sc;
+            break;
+        case 10:
+            p = (uint32_t*) &duplex.role;
+            break;
+        case 11:
+            p = (uint32_t*) &duplex_mode_rx;
+            break;
+        case 12:
+            p = (uint32_t*) &EQ_data_rx_indi;
+            break;
+        case 13:
+            p = (uint32_t*) &sfo_correction_rx_flag;
+            break;
+
+        default:
+            break;
+    }
+    return p;
+}
+
+
+void set_ook_sc_callback(const unsigned int data) {
+    if( data < 1024 ) {
+        ook_subcarrier = data;
+    } else {
+        // error, do nothing
+    }
+}
+
+void sync_callback_duplex(const unsigned int data) {
+    (void)data;
+    fsm_notify_coarse_sync();
+}
+
+
+void debug_ota_frame_callback(const unsigned int data) {
+    do_debug_ota_frame = data;
+}
+
+void setup_duplex(void) {
+    duplex.role = DUPLEX_ROLE_RX;
+    duplex_rx.role = DUPLEX_ROLE_RX;
+}
+
+
+void sfo_correction_rx_callback(const unsigned int data)
+{
+	sfo_correction_rx_flag = data;
+	ring_block_send_eth(0x56780000|data);
+}
+
+void sfo_shift_rx_callback(const unsigned int data)
+{
+	sfo_shift_rx_amount = data;
+}
+
+void EQ_data_rx_callback(const unsigned int data)
+{
+	EQ_data_rx_indi = data;
+	ring_block_send_eth(0x87650000|data);
+}
+
+void cooked_data_type_callback(const unsigned int data) {
+    cooked_data_type = data;
+}
+
+
+int main2(void);
+int main(void)
+{
+    self_sync_block_boot();
+    main2();
+    return 0;
+}
+int main2(void) {
+
+    ping_pong_set_callback(&do_work);
+    setup_ping_pong();
+
+
+    // ring_register_callback(fine_sync_callback, SYNCHRONIZATION_CMD);
+    ring_register_callback(&corrupt_dma_callback, CORRUPT_DMA_OUT_CMD);
+    ring_register_callback(&check_bootload_status, CHECK_BOOTLOAD_CMD);
+    ring_register_callback(&app_barrel_shift_callback, APP_BARREL_SHIFT_CMD);
+    ring_register_callback(&default_barrel_shift_callback, DEFAULT_APP_BARREL_SHIFT_CMD);
+    ring_register_callback(&readback_timer_callback, GET_TIMER_CMD);
+    ring_register_callback(&handle_generic_callback_original, GENERIC_OPERATOR_CMD);
+    ring_register_callback(&set_ook_sc_callback, SET_TDMA_SC_CMD);
+    ring_register_callback(&sync_callback_duplex, DUPLEX_SYNCHRONIZATION_CMD);
+    ring_register_callback(&debug_ota_frame_callback, DEBUG_OTA_FRAME_CMD);
+    ring_register_callback(&sfo_correction_rx_callback, SFO_CORRECTION_RX_CMD);
+    ring_register_callback(&sfo_shift_rx_callback, SFO_SHIFT_RX_CMD);
+    ring_register_callback(&EQ_data_rx_callback, EQ_DATA_RX_CMD);
+    ring_register_callback(&cooked_data_type_callback, COOKED_DATA_TYPE_CMD);
+
+    setup_duplex();
+
+    ook_prep_demod(&demod);
+    ook_register_callback(&got_ook_message);
+
+    handle_generic_register_get_pointer(&pointer_for_generic_op);
+    handle_generic_register_ring(&ring_block_send_eth);
+  
+
+  CSR_WRITE(GPIO_WRITE_EN, 0xffffffff);
+
+  //xbb_coarse_sync(15);
+
+  setup_barrel_shift();
+  default_barrel_shift_callback(0);
+
+
+  CSR_WRITE(GPIO_WRITE, 0xdeadbeef);
+
+  // ring_block_send_eth(0xdead);
+  // ring_block_send_eth(VMEM_ROW_ADDRESS(dma_buffer_a));
+  // ring_block_send_eth(VMEM_ROW_ADDRESS(dma_buffer_b));
+
+  // ring_block_send_eth(dma_in_ptr[0]);
+  // ring_block_send_eth(dma_in_ptr[1]);
+  // ring_block_send_eth(fft_ptr[0]);
+  // ring_block_send_eth(fft_ptr[1]);
+
+  Ringbus ringbus;
+
+  while(1) {
+    execute_ping_pong();
+      check_ring(&ringbus);
+  }
+  return 0;
+}
+
+
+

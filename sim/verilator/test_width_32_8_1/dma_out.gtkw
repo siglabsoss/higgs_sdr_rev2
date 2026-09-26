@@ -1,0 +1,40 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Tue Mar  5 06:04:16 2019
+[*]
+[dumpfile] "/mnt/overflow/work/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_width_32_8_1/logs/vlt_dump.vcd"
+[dumpfile_mtime] "Tue Mar  5 06:03:35 2019"
+[dumpfile_size] 85544
+[savefile] "/mnt/overflow/work/software_parent_repo/higgs_sdr_rev2/sim/verilator/test_width_32_8_1/dma_out.gtkw"
+[timestart] 1
+[size] 2560 1416
+[pos] -1 -1
+*-6.385421 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[sst_width] 225
+[signals_width] 230
+[sst_expanded] 1
+[sst_vpaned_height] 447
+@28
+TOP.width_32_8.reset
+TOP.width_32_8.clk
+@200
+---- INPUT ---
+@28
+TOP.width_32_8.t0_valid
+TOP.width_32_8.t0_ready
+@22
+TOP.width_32_8.t0_data[31:0]
+@200
+---- OUTPUT ---
+@28
+TOP.width_32_8.i0_valid
+TOP.width_32_8.i0_ready
+@22
+TOP.width_32_8.i0_data[7:0]
+@200
+---- OTHER ---
+@22
+TOP.fillcount[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

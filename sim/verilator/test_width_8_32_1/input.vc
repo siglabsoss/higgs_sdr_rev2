@@ -1,0 +1,6 @@
+// This file typically lists flags required by a large project, e.g. include directories
++librescan +libext+.v+.sv+.vh+.svh -y ./src/
+-y ../../../libs/ip-library/fwft_fifos/sc_fifo/hdl
+-Wno-PINMISSING 
+-Wno-WIDTH
+-Wno-PINCONNECTEMPTY

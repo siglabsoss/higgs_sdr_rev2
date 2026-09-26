@@ -1,0 +1,37 @@
+#include "dma.h"
+#include "vmem.h"
+#include "csr_control.h"
+#include "vmalloc.h"
+#include "circular_buffer.h"
+#include "fill.h"
+#include "ringbus.h"
+#include "coarse_sync.h"
+#include "atan.h"
+#include "xvcordic.h"
+
+#include "flush_config_word_data.h"
+
+#include "ringbus2_pre.h"
+#include "ringbus2_post.h"
+#include "check_bootload.h"
+
+#include "cs21test_buffer.h"
+#include "corrupt_dma.h"
+#include "fast_inv_sqrt.h"
+#include "nco_data.h"
+#include "vmem_copy.h"
+#include "fixed_iir.h"
+#include "trunk_types.h"
+
+#define INCLUDE_COUNTER_AS counter
+#include "vmem_counter_8k.h"
+
+
+int main(void) {
+    Ringbus ringbus;
+
+    while(1) {
+        dma_block_send(VMEM_DMA_ADDRESS(counter), 8192);
+    }
+}
+
